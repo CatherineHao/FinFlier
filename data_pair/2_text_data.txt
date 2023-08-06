@@ -1,0 +1,9 @@
+data = [{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
+	{'Category':'Real Gross Output','Outdoor recreation':'21.8','U.S. economy':'6.3'},
+	{'Category':'Compensation','Outdoor recreation':'16.2','U.S. economy':'7.8'},
+	{'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}]
+
+'text':Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020. 
+data:
+
+title:Change in Outdoor Recreation, compared with U.S. Economy, 2021

@@ -1,0 +1,10 @@
+data = [{'Position':'United Kingdom','Billions of dollars':'59.9'},
+	{'Position':'Netherlands','Billions of dollars':'43.1'},
+        {'Position':'France','Billions of dollars':'35.3'},
+	{'Position':'Canada','Billions of dollars': '30'},
+        {'Position':'Japan','Billions of dollars':'29.6'}]
+
+'text': Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion).
+
+title:First-Year Expenditures by Country of Ultimate Beneficial Owner, 2021
+
