@@ -118,10 +118,15 @@ def chat_with_gpt(request):
         prompt = request,
         max_tokens=2000, # 设置生成的最大token数，可以根据需要调整
         temperature=0.2, # 设置温度,值越小越确认
-        stop = ["\n"],
+        #stop = ["\n"],
+        stop=None,
     )
-    print(response.choices[0].text.strip())
-    return response.choices[0].text
+    message = response.choices[0].text
+    # print(message)  # 带reason的文本
+    start_index = message.find('reason:')
+    result = message[0:start_index]
+    # print(result)  # 仅带result文本
+    return result
 
 # prompt:
 default_prompt = """Please think as an economic data analyst. Now I wish to complete the matching of tha data to text, identifying the subjects, trend in the text and their position in the data. For each pair, give me the matching result and the reason.
@@ -155,15 +160,15 @@ reason: "The phrase 'the mix of compact and midsize-to-large NEVs' suggests ther
 
 
 # 测试是否连通
-while True:
+if __name__ == '__main__':
     # user_input = input("you:")
     # if user_input.lower() in ["exit","quit","bye"]:
     #     print("system: Goodbye!")
     #     break
     # user_input = input("Enter the data and the text:")
     user_input = """[{"data":[{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},{'Category':'Real Gross Output','Outdoor recreation':'21.8','U.S. economy':'6.3'},{'Category':'Compensation','Outdoor recreation':'16.2','U.S. economy':'7.8'},{'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}] }], "text":Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."""
-    user_info = default_prompt + "\n" + user_input + "\n"
-    
+    user_info = default_prompt + user_input
+    # print(user_info)
     result = chat_with_gpt(user_info)
     print(result)
     
