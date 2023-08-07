@@ -3,6 +3,7 @@ Author: CatherineHao 1512769550@qq.com
 Date: 2023-07-12 21:37:31
 LastEditors: CatherineHao 1512769550@qq.com
 LastEditTime: 2023-07-26 20:49:44
+Authorization: Bearer "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"
 '''
 import json
 import os
@@ -108,8 +109,72 @@ def chart_info(data):
     }
     return result
     
-print(chart_info(data3))
+# print(chart_info(data3))
+            
+def chat_with_gpt(request):
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        #messages = generate_prompt(used_data,used_text),
+        prompt = request,
+        max_tokens=2000, # 设置生成的最大token数，可以根据需要调整
+        temperature=0.2, # 设置温度,值越小越确认
+        stop = ["\n"],
+    )
+    print(response.choices[0].text.strip())
+    return response.choices[0].text
+
+# prompt:
+default_prompt = """Please think as an economic data analyst. Now I wish to complete the matching of tha data to text, identifying the subjects, trend in the text and their position in the data. For each pair, give me the matching result and the reason.
+The matching result should be in the format of {"ObjectName":[object in the text and data], "BeginIndex":[the object/trend corresponds to the start index in data],"EndIndex":[the object/trend corresponds to the end index in data]}.
+Please refer to the example below for the desired format.
+
+data: [{'Position':'United Kingdom','Billions of dollars':'59.9'},
+	                {'Position':'Netherlands','Billions of dollars':'43.1'},
+                    {'Position':'France','Billions of dollars':'35.3'},
+	                {'Position':'Canada','Billions of dollars': '30'},
+                    {'Position':'Japan','Billions of dollars':'29.6'}]
+text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]
+result: [{"ObjectName":"Netherlands","BeginIndex":"1","EndIndex":"1"},{"ObjectName":"France","BeginIndex":"2","EndIndex":"2"}]
+reason: "According to the correspondence between data and text, there exist two subjects: "Netherlands" and "France", and their respective position index in the data are "1" and "2"."
+
+data: [{'Time':'2017/1/1','Mini- and subcompact size':'0.61','Compact size':'0.35', 'Midsize to large':'0.04'},
+	{'Time':'2018/1/1','Mini- and subcompact size':'0.49','Compact size':'0.41', 'Midsize to large':'0.10'},
+	{'Time':'2019/1/1','Mini- and subcompact size':'0.33','Compact size':'0.54', 'Midsize to large':'0.13'},
+	{'Time':'2020/1/1','Mini- and subcompact size':'0.35','Compact size':'0.33', 'Midsize to large':'0.32'},
+	{'Time':'2021/1/1','Mini- and subcompact size':'0.37','Compact size':'0.28', 'Midsize to large':'0.35'},
+	{'Time':'2022/1/1','Mini- and subcompact size':'0.37','Compact size':'0.31', 'Midsize to large':'0.32'},
+	{'Time':'2023/1/1','Mini- and subcompact size':'0.30','Compact size':'0.30', 'Midsize to large':'0.40'}]
+text: ["In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size."]
+result: [{"ObjectName":"Mini- and subcompact size","BeginIndex":"7","EndIndex":"7","Trend":"Declined","Number":"0.30"},
+{"ObjectName":"Mini- and subcompact size","BeginIndex":"0","EndIndex":"0","Trend":"None","Number":"0.61"},
+{"ObjectName":"Compact Size + Midsize to large","BeginIndex":"7","EndIndex":"7","Trend":"upgrade trend","Number":"0.30 + 0.40"},
+{"ObjectName":"Compact Size + Midsize to large","BeginIndex":"0","EndIndex":"0","Trend":"None","Number":"0.35 + 0.04"}]
+reason: "The phrase 'the mix of compact and midsize-to-large NEVs' suggests there are two subjects 'compact size' and 'Midsize to large' in the sentence. "
+
+"""
+
+
+# 测试是否连通
+while True:
+    # user_input = input("you:")
+    # if user_input.lower() in ["exit","quit","bye"]:
+    #     print("system: Goodbye!")
+    #     break
+    # user_input = input("Enter the data and the text:")
+    user_input = """[{"data":[{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},{'Category':'Real Gross Output','Outdoor recreation':'21.8','U.S. economy':'6.3'},{'Category':'Compensation','Outdoor recreation':'16.2','U.S. economy':'7.8'},{'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}] }], "text":Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."""
+    user_info = default_prompt + "\n" + user_input + "\n"
+    
+    result = chat_with_gpt(user_info)
+    print(result)
+    
+        
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
 
+# test data:
+# data = """[{"data":[{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
+#                     {'Category':'Real Gross Output','Outdoor recreation':'21.8','U.S. economy':'6.3'},
+#                     {'Category':'Compensation','Outdoor recreation':'16.2','U.S. economy':'7.8'},
+#                     {'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}] }]"""
+#     text = """'text':Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."""
