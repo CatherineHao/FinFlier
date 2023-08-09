@@ -9,3 +9,8 @@ data = [{'Time':'2017/1/1','Mini- and subcompact size':'0.61','Compact size':'0.
 text:In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size.
 
 title: sales mix by vehicle size
+
+result： [{"ObjectName":"Mini- and subcompact size","BeginIndex":"7","EndIndex":"7","Trend":"Declined","Number":"0.30"},
+{"ObjectName":"Mini- and subcompact size","BeginIndex":"0","EndIndex":"0","Trend":"None","Number":"0.61"}，
+{"ObjectName":"Compact Size + Midsize to large","BeginIndex":"7","EndIndex":"7","Trend":"upgrade trend","Number":"0.30 + 0.40"},
+{"ObjectName":"Compact Size + Midsize to large","BeginIndex":"0","EndIndex":"0","Trend":"None","Number":"0.35 + 0.04"}]
