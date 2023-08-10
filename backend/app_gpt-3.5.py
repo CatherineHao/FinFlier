@@ -130,9 +130,24 @@ def chart_info(data):
 
 
 """
-messages=[{"role": "system", "content": "You are a helpful assistant."}, # 告诉AI你的身份定位是啥 如果不填默认是"You are a helpful assistant."
+messages=[{"role": "system", "content": "You are a helpful assistant."}, # 告诉AI他的身份定位是啥 如果不填默认是"You are a helpful assistant."
         {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."}, # 模型have no memory of past requests 之前的上下文放在这
         {"role": "user", "content": "Where was it played?"}] # 用户的问题
+
+写法一、把default_prompt+user_input拼一起放进content,也就是现在代码中的写法
+
+写法二、另一种Few-shot prompting写法, source:https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb
+messages=[{"role": "system", "content": "You are a xxxxxxxxx assistant......"}, # tell AI his role
+        {"role": "system", "name": "example_user", "content": prompt_1},        # example_1 prompt
+        {"role": "system", "name": "example_assistant", "content": result_1}],  # example_1 result
+        {"role": "system", "name": "example_user", "content": prompt_2},        # example_2 prompt
+        {"role": "system", "name": "example_assistant", "content": result_2}],  # example_2 result
+        {"role": "system", "name": "example_user", "content": prompt_3},        # example_3 prompt
+        {"role": "system", "name": "example_assistant", "content": result_3}],  # example_3 result
+        {"role": "user", "content": user_input}]   # the prompt of user's input
+
+可以都跑一下试试哪种写法效果好一点
+
 """
 def chat_with_gpt(request):
     response = openai.ChatCompletion.create(
@@ -144,7 +159,7 @@ def chat_with_gpt(request):
         #stop = ["\n"],
         stop=None,
     )
-    # print(response)
+    print(response)
     reply = response['choices'][0]['message']['content']
     start_index = reply.find('reason:')
     result = reply[0:start_index]
