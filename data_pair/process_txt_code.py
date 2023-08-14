@@ -3,7 +3,7 @@ import csv
 
 data  = []
 
-file = pd.read_csv('./yuzhe_data/22_data_downtrend.csv')
+file = pd.read_csv('./yuzhe_data/23_data_uptrend.csv')
 # print(file.head())
 file = file.to_dict(orient='records')
 print(file)
