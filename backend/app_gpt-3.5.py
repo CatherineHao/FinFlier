@@ -176,7 +176,7 @@ data: [{'Position':'United Kingdom','Billions of dollars':'59.9'},
 	                {'Position':'Canada','Billions of dollars': '30'},
                     {'Position':'Japan','Billions of dollars':'29.6'}]
 text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]
-result: [{"ObjectName":"Netherlands","BeginIndex":"1","EndIndex":"1"},{"ObjectName":"France","BeginIndex":"2","EndIndex":"2"}]
+result: [{"ObjectName":"Netherlands","BeginIndex":"1","EndIndex":"1","Trend":"None","Number":"43.1"},{"ObjectName":"France","BeginIndex":"2","EndIndex":"2","Trend":"None","Number":"35.3"}]
 reason: "According to the correspondence between data and text, there exist two subjects: "Netherlands" and "France", and their respective position index in the data are "1" and "2"."
 
 data: [{'Time':'2017/1/1','Mini- and subcompact size':'0.61','Compact size':'0.35', 'Midsize to large':'0.04'},
@@ -189,7 +189,7 @@ data: [{'Time':'2017/1/1','Mini- and subcompact size':'0.61','Compact size':'0.3
 text: ["In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size."]
 result: [{"ObjectName":"Mini- and subcompact size","BeginIndex":"6","EndIndex":"6","Trend":"Declined","Number":"0.30"},
 {"ObjectName":"Mini- and subcompact size","BeginIndex":"0","EndIndex":"0","Trend":"None","Number":"0.61"},
-{"ObjectName":"Compact Size + Midsize to large","BeginIndex":"7","EndIndex":"7","Trend":"upgrade trend","Number":"0.30 + 0.40"},
+{"ObjectName":"Compact Size + Midsize to large","BeginIndex":"6","EndIndex":"6","Trend":"upgrade trend","Number":"0.30 + 0.40"},
 {"ObjectName":"Compact Size + Midsize to large","BeginIndex":"0","EndIndex":"0","Trend":"None","Number":"0.35 + 0.04"}]
 reason: "The phrase 'the mix of compact and midsize-to-large NEVs' suggests there are two subjects 'compact size' and 'Midsize to large' in the sentence. "
 
@@ -203,12 +203,27 @@ if __name__ == '__main__':
     #     print("system: Goodbye!")
     #     break
     # user_input = input("Enter the data and the text:")
-    user_input = """[{"data":[{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
+    user_input = """data:[{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
                         {'Category':'Real Gross Output','Outdoor recreation':'21.8','U.S. economy':'6.3'},
                         {'Category':'Compensation','Outdoor recreation':'16.2','U.S. economy':'7.8'},
-                        {'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}] }], 
-                    "text":Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."""
-    user_info = default_prompt + user_input
+                        {'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}]
+
+                    text:["Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, 
+                    compared with a 5.9 percent increase for the overall U.S. economy, 
+                    reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."]
+                """
+    test_1 = """data:[{'Time': '2022 Q1', 'Unemployment rate': 7.3}, {'Time': '2022 Q2', 'Unemployment rate': 7.4}, {'Time': '2022 Q3', 'Unemployment rate': 7.3}, {'Time': '2022 Q4', 'Unemployment rate': 7.1}, {'Time': '2023 Q1', 'Unemployment rate': 7.1}, {'Time': '2023 Q2', 'Unemployment rate': 7.2}]
+                text:["The unemployment rate in France inched up to 7.2% in the second quarter of 2023 from 7.1% in the previous quarter, and the highest since Q4 2022, as the number of unemployed people increased by 20 thousand to 2.2 million."]
+
+                """
+    test_2 = """data:[{'Year': 2017, 'Annual Revenue (billions of US $)': 11.7}, {'Year': 2018, 'Annual Revenue (billions of US $)': 21.4}, {'Year': 2019, 'Annual Revenue (billions of US $)': 24.5}, {'Year': 2020, 'Annual Revenue (billions of US $)': 31.5}, {'Year': 2021, 'Annual Revenue (billions of US $)': 53.8}, {'Year': 2022, 'Annual Revenue (billions of US $)': 81.4}]
+                text:["Tesla earned $53.8 billion in sales revenue in 2021. This was up from $31.5 billion earned in 2020, with a 70.64% growth in sales during 2021. In 2022, Tesla remains the largest EV manufacturer in terms of revenue and market share, followed by Volkswagen. "]
+
+            """
+    test_3 = """data:[{'Time': 'Aug 2022', 'Food inflation': 6.1}, {'Time': 'Sep 2022', 'Food inflation': 8.8}, {'Time': 'Oct 2022', 'Food inflation': 7.0}, {'Time': 'Nov 2022', 'Food inflation': 3.7}, {'Time': 'Dec 2022', 'Food inflation': 4.8}, {'Time': 'Jan 2023', 'Food inflation': 6.2}, {'Time': 'Feb 2023', 'Food inflation': 2.6}, {'Time': 'Mar 2023', 'Food inflation': 2.4}, {'Time': 'Apr 2023', 'Food inflation': 0.4}, {'Time': 'May 2023', 'Food inflation': 1.0}, {'Time': 'Jun 2023', 'Food inflation': 2.3}, {'Time': 'Jul 2023', 'Food inflation': -1.7}]
+                text:["Food prices in China declined by 1.7 percent year-on-year in July 2023, reversing from a 2.3 percent rise in the prior month while pointing to the first drop since March 2022."]
+            """
+    user_info = default_prompt + test_3
     # print(user_info)
     result = chat_with_gpt(user_info)
     print(result)
