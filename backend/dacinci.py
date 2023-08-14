@@ -1,4 +1,4 @@
- '''
+'''
 Author: CatherineHao 1512769550@qq.com
 Date: 2023-07-12 21:37:31
 LastEditors: CatherineHao 1512769550@qq.com
@@ -111,61 +111,22 @@ def chart_info(data):
     
 # print(chart_info(data3))
             
-# def chat_with_gpt(request):
-#     response = openai.Completion.create(
-#         engine="text-davinci-003",
-#         #messages = generate_prompt(used_data,used_text),
-#         prompt = request,
-#         max_tokens=2000, # 设置生成的最大token数，可以根据需要调整
-#         temperature=0.2, # 设置温度,值越小越确认
-#         #stop = ["\n"],
-#         stop=None,
-#     )
-#     message = response.choices[0].text
-#     # print(message)  # 带reason的文本
-#     start_index = message.find('reason:')
-#     result = message[0:start_index]
-#     # print(result)  # 仅带result文本
-#     return result
-
-
-"""
-messages=[{"role": "system", "content": "You are a helpful assistant."}, # 告诉AI他的身份定位是啥 如果不填默认是"You are a helpful assistant."
-        {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."}, # 模型have no memory of past requests 之前的上下文放在这
-        {"role": "user", "content": "Where was it played?"}] # 用户的问题
-
-写法一、把default_prompt+user_input拼一起放进content,也就是现在代码中的写法
-
-写法二、另一种Few-shot prompting写法, source:https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb
-messages=[{"role": "system", "content": "You are a xxxxxxxxx assistant......"}, # tell AI his role
-        {"role": "system", "name": "example_user", "content": prompt_1},        # example_1 prompt
-        {"role": "system", "name": "example_assistant", "content": result_1}],  # example_1 result
-        {"role": "system", "name": "example_user", "content": prompt_2},        # example_2 prompt
-        {"role": "system", "name": "example_assistant", "content": result_2}],  # example_2 result
-        {"role": "system", "name": "example_user", "content": prompt_3},        # example_3 prompt
-        {"role": "system", "name": "example_assistant", "content": result_3}],  # example_3 result
-        {"role": "user", "content": user_input}]   # the prompt of user's input
-
-可以都跑一下试试哪种写法效果好一点
-
-"""
-@app.route("get_result", methods = ("GET", "POST"))
 def chat_with_gpt(request):
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo-16k", # prompt+completion 最大16384 tokens
-        # messages=[{"role": "user", "content": 'Translate the following English text to French: "Have a nice day!"'}], # 测试一下把英语翻译成法语
-        messages=[{"role": "user", "content": f"{request}"}],
-        max_tokens=10000, # 设置生成的最大token数，可以根据需要调整
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        #messages = generate_prompt(used_data,used_text),
+        prompt = request,
+        max_tokens=2000, # 设置生成的最大token数，可以根据需要调整
         temperature=0.2, # 设置温度,值越小越确认
         #stop = ["\n"],
         stop=None,
     )
-    print(response)
-    reply = response['choices'][0]['message']['content']
-    start_index = reply.find('reason:')
-    result = reply[0:start_index]
-    reason = reply[start_index+1:]
-    return result, reason
+    message = response.choices[0].text
+    # print(message)  # 带reason的文本
+    start_index = message.find('reason:')
+    result = message[0:start_index]
+    # print(result)  # 仅带result文本
+    return result
 
 # prompt:
 default_prompt = """Please think as an economic data analyst. Now I wish to complete the matching of tha data to text, identifying the subjects, trend in the text and their position in the data. For each pair, give me the matching result and the reason.
@@ -189,7 +150,7 @@ data: [{'Time':'2017/1/1','Mini- and subcompact size':'0.61','Compact size':'0.3
 	{'Time':'2022/1/1','Mini- and subcompact size':'0.37','Compact size':'0.31', 'Midsize to large':'0.32'},
 	{'Time':'2023/1/1','Mini- and subcompact size':'0.30','Compact size':'0.30', 'Midsize to large':'0.40'}]
 text: ["In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size."]
-result: [{"ObjectName":"Mini- and subcompact size","BeginIndex":"6","EndIndex":"6","Trend":"Declined","Number":"0.30"},
+result: [{"ObjectName":"Mini- and subcompact size","BeginIndex":"7","EndIndex":"7","Trend":"Declined","Number":"0.30"},
 {"ObjectName":"Mini- and subcompact size","BeginIndex":"0","EndIndex":"0","Trend":"None","Number":"0.61"},
 {"ObjectName":"Compact Size + Midsize to large","BeginIndex":"7","EndIndex":"7","Trend":"upgrade trend","Number":"0.30 + 0.40"},
 {"ObjectName":"Compact Size + Midsize to large","BeginIndex":"0","EndIndex":"0","Trend":"None","Number":"0.35 + 0.04"}]
@@ -205,11 +166,7 @@ if __name__ == '__main__':
     #     print("system: Goodbye!")
     #     break
     # user_input = input("Enter the data and the text:")
-    user_input = """[{"data":[{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
-                        {'Category':'Real Gross Output','Outdoor recreation':'21.8','U.S. economy':'6.3'},
-                        {'Category':'Compensation','Outdoor recreation':'16.2','U.S. economy':'7.8'},
-                        {'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}] }], 
-                    "text":Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."""
+    user_input = """[{"data":[{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},{'Category':'Real Gross Output','Outdoor recreation':'21.8','U.S. economy':'6.3'},{'Category':'Compensation','Outdoor recreation':'16.2','U.S. economy':'7.8'},{'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}] }], "text":Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."""
     user_info = default_prompt + user_input
     # print(user_info)
     result = chat_with_gpt(user_info)
