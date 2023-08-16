@@ -1,9 +1,14 @@
 import pandas as pd
 import csv
+import json
 
 data  = []
 
-file = pd.read_csv('./used_data/13_data_triple_top.csv')
+pd.set_option("display.max_columns", None)
+pd.set_option("display.max_rows", None)
+file = pd.read_csv('./used_data/4_data.csv')
 # print(file.head())
 file = file.to_dict(orient='records')
+# with open("txt_7.txt","w") as f:
+#     f.write(json.dumps(file))
 print(file)
