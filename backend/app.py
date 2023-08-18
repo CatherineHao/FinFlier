@@ -1,4 +1,4 @@
- '''
+'''
 Author: CatherineHao 1512769550@qq.com
 Date: 2023-07-12 21:37:31
 LastEditors: CatherineHao 1512769550@qq.com
@@ -149,7 +149,7 @@ messages=[{"role": "system", "content": "You are a xxxxxxxxx assistant......"}, 
 可以都跑一下试试哪种写法效果好一点
 
 """
-@app.route("get_result", methods = ("GET", "POST"))
+# @app.route("get_result", methods = ("GET", "POST"))
 def chat_with_gpt(request):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo-16k", # prompt+completion 最大16384 tokens
