@@ -149,7 +149,7 @@ messages=[{"role": "system", "content": "You are a xxxxxxxxx assistant......"}, 
 可以都跑一下试试哪种写法效果好一点
 
 """
-@app.route("get_result", methods = ("GET", "POST"))
+# @app.route("get_result", methods = ("GET", "POST"))
 def chat_with_gpt(request):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo-16k", # prompt+completion 最大16384 tokens
