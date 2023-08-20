@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: Qing Shi
+ * @Date: 2023-08-19 14:38:25
+ * @LastEditors: Qing Shi
+ * @LastEditTime: 2023-08-19 14:42:22
+-->
 data1:
 
 
@@ -6,15 +13,19 @@ data1:
 
 data 3- group:
 gpt传给backend的结果有两个部分 result + reason
-
+```json
 result = [{"ObjectName":["Mini- and subcompact size"],"Position":[{"Begin":[1,6],"End":[1,6]}], "Trend":"declined","Num":[0.30],"Text":"the sales proportion of NEVs that were subcompact and below declined to 30%"},
 {"ObjectName":["Mini- and subcompact size"],"Position":[{"Begin":[1,0],"End":[1,0]}], "Trend":"None","Num":[0.61],"Text":"from 61% in 2017"},
 {"ObjectName":["Compact Size","Midsize to large"],"Position":[{"Begin":[2,6],"End":[2,6]},{"Begin":[3,6],"End":[3,6]}], "Trend":"upgrade trend","Num":[0.30,0.40],"Text":"the mix of compact and midsize-to-large NEVs increased to 70%"},
 {"ObjectName":["Compact Size","Midsize to large"],"Position":[{"Begin":[2,0],"End":[2,0]},{"Begin":[3,0],"End":[3,0]}], "Trend":"upgrade trend","Num":[0.35,0.04],"Text":"the mix of compact and midsize-to-large NEVs increased to 70% from 39%"}]
+```
 
+```js
 reason = "The object in unit 1 is "Mini- and subcompact size". Its compact size goes from '0.61' in 2017 to '0.30' in 2023. The subject in unit 2 is the combination of  "Compact Size" and  "Midsize to large". Its compact size goes from the combination from "0.35" and "0.04" in 2017 to "0.30" and "0.40" in 2023."
+```
 
 backend 直接将 reason返回，针对result处理成以下格式：
+```json
 {
     "Position": [{"Begin":[1,6],"End":[1,6]}],
     "ConversationInfo":[{
@@ -84,3 +95,4 @@ backend 直接将 reason返回，针对result处理成以下格式：
         }
     }]
 }
+```
