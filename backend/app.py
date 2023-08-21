@@ -169,32 +169,32 @@ def chat_with_gpt(request):
 
 # prompt:
 default_prompt = """Please think as an economic data analyst. Now I wish to complete the matching of tha data to text, identifying the subjects, trend in the text and their position in the data. For each pair, give me the matching result and the reason.
-The matching result should be in the format of {"ObjectName":[object in the text and data], "BeginIndex":[the object/trend corresponds to the start index in data],"EndIndex":[the object/trend corresponds to the end index in data]}.
+The matching result should be in the format of {"ObjectName":[object in the text and data], "Position":[{"Begin":[the object/trend corresponds to the row of start index in data,the object/trend corresponds to the column of start index in data],"End":[the object/trend corresponds to the row of end index in data,the object/trend corresponds to the column of end index in data]}],"Trend":"the corresponding trend","Num":[the corresponding data],"Text":"the corresponding textual description"}.
 Please refer to the example below for the desired format.
 
 data: [{'Position':'United Kingdom','Billions of dollars':'59.9'},
-	                {'Position':'Netherlands','Billions of dollars':'43.1'},
-                    {'Position':'France','Billions of dollars':'35.3'},
-	                {'Position':'Canada','Billions of dollars': '30'},
-                    {'Position':'Japan','Billions of dollars':'29.6'}]
+	    {'Position':'Netherlands','Billions of dollars':'43.1'},
+        {'Position':'France','Billions of dollars':'35.3'},
+	    {'Position':'Canada','Billions of dollars': '30'},
+        {'Position':'Japan','Billions of dollars':'29.6'}]
 text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]
-result: [{"ObjectName":"Netherlands","BeginIndex":"1","EndIndex":"1"},{"ObjectName":"France","BeginIndex":"2","EndIndex":"2"}]
-reason: "According to the correspondence between data and text, there exist two subjects: "Netherlands" and "France", and their respective position index in the data are "1" and "2"."
+result: [{"ObjectName":[“Netherlands"],"Position":[{"Begin":[1,1],"End":[1,1]}],"Trend":"None","Num":[43.1],"Text":"The Netherlands ($43.1 billion)"},
+        {"ObjectName":[“France"],"Position":[{"Begin":[2,1],"End":[2,1]}],"Trend":"None","Num":[35.3],"Text":"France ($35.3 billion)"}]
+reason: "The corresponding value for object "Netherlands" is "43.1", and its shortest descriptive phrase is "The Netherlands ($43.1 billion)". The corresponding value for object "France" is "35.3" and its shortest descriptive phrase is "France ($35.3 billion)""
 
 data: [{'Time':'2017/1/1','Mini- and subcompact size':'0.61','Compact size':'0.35', 'Midsize to large':'0.04'},
-	{'Time':'2018/1/1','Mini- and subcompact size':'0.49','Compact size':'0.41', 'Midsize to large':'0.10'},
-	{'Time':'2019/1/1','Mini- and subcompact size':'0.33','Compact size':'0.54', 'Midsize to large':'0.13'},
-	{'Time':'2020/1/1','Mini- and subcompact size':'0.35','Compact size':'0.33', 'Midsize to large':'0.32'},
-	{'Time':'2021/1/1','Mini- and subcompact size':'0.37','Compact size':'0.28', 'Midsize to large':'0.35'},
-	{'Time':'2022/1/1','Mini- and subcompact size':'0.37','Compact size':'0.31', 'Midsize to large':'0.32'},
-	{'Time':'2023/1/1','Mini- and subcompact size':'0.30','Compact size':'0.30', 'Midsize to large':'0.40'}]
+        {'Time':'2018/1/1','Mini- and subcompact size':'0.49','Compact size':'0.41', 'Midsize to large':'0.10'},
+	    {'Time':'2019/1/1','Mini- and subcompact size':'0.33','Compact size':'0.54', 'Midsize to large':'0.13'},
+        {'Time':'2020/1/1','Mini- and subcompact size':'0.35','Compact size':'0.33', 'Midsize to large':'0.32'},
+	    {'Time':'2021/1/1','Mini- and subcompact size':'0.37','Compact size':'0.28', 'Midsize to large':'0.35'},
+	    {'Time':'2022/1/1','Mini- and subcompact size':'0.37','Compact size':'0.31', 'Midsize to large':'0.32'},
+	    {'Time':'2023/1/1','Mini- and subcompact size':'0.30','Compact size':'0.30', 'Midsize to large':'0.40'}]
 text: ["In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size."]
-result: [{"ObjectName":"Mini- and subcompact size","BeginIndex":"6","EndIndex":"6","Trend":"Declined","Number":"0.30"},
-{"ObjectName":"Mini- and subcompact size","BeginIndex":"0","EndIndex":"0","Trend":"None","Number":"0.61"},
-{"ObjectName":"Compact Size + Midsize to large","BeginIndex":"7","EndIndex":"7","Trend":"upgrade trend","Number":"0.30 + 0.40"},
-{"ObjectName":"Compact Size + Midsize to large","BeginIndex":"0","EndIndex":"0","Trend":"None","Number":"0.35 + 0.04"}]
-reason: "The phrase 'the mix of compact and midsize-to-large NEVs' suggests there are two subjects 'compact size' and 'Midsize to large' in the sentence. "
-
+result: [{"ObjectName":["Mini- and subcompact size"],"Position":[{"Begin":[6,1],"End":[6,1]}], "Trend":"declined","Num":[0.30],"Text":"the sales proportion of NEVs that were subcompact and below declined to 30%"},
+        {"ObjectName":["Mini- and subcompact size"],"Position":[{"Begin":[0,1],"End":[0,1]}], "Trend":"None","Num":[0.61],"Text":"from 61% in 2017"},
+        {"ObjectName":["Compact Size","Midsize to large"],"Position":[{"Begin":[6,2],"End":[6,2]},{"Begin":[6,3],"End":[6,3]}], "Trend":"upgrade trend","Num":[0.30,0.40],"Text":"the mix of compact and midsize-to-large NEVs increased to 70%"},
+        {"ObjectName":["Compact Size","Midsize to large"],"Position":[{"Begin":[0,2],"End":[0,2]},{"Begin":[0,3],"End":[0,3]}], "Trend":"None","Num":[0.35,0.04],"Text":"the mix of compact and midsize-to-large NEVs increased to 70% from 39%"}]
+reason: "The object in unit 1 is ‘Mini- and subcompact size’. Its compact size goes from '0.61' in 2017 to '0.30' in 2023. The subject in unit 2 is the combination of ‘Compact Size’ and ‘Midsize to large’. Its compact size goes from the combination from ‘0.35’ and ‘0.04’ in 2017 to '0.30' and '0.40' in 2023."
 """
 
 
@@ -205,14 +205,51 @@ if __name__ == '__main__':
     #     print("system: Goodbye!")
     #     break
     # user_input = input("Enter the data and the text:")
-    user_input = """[{"data":[{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
+    user_input = """data:[{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
                         {'Category':'Real Gross Output','Outdoor recreation':'21.8','U.S. economy':'6.3'},
                         {'Category':'Compensation','Outdoor recreation':'16.2','U.S. economy':'7.8'},
-                        {'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}] }], 
-                    "text":Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."""
-    user_info = default_prompt + user_input
+                        {'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}]
+
+                    text:["Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, 
+                    compared with a 5.9 percent increase for the overall U.S. economy, 
+                    reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."]
+                """
+    test_1 = """data:[{'Time': '2022 Q1', 'Unemployment rate': 7.3}, 
+                        {'Time': '2022 Q2', 'Unemployment rate': 7.4}, 
+                        {'Time': '2022 Q3', 'Unemployment rate': 7.3},
+                        {'Time': '2022 Q4', 'Unemployment rate': 7.1}, 
+                        {'Time': '2023 Q1', 'Unemployment rate': 7.1}, 
+                        {'Time': '2023 Q2', 'Unemployment rate': 7.2}]
+                text:["The unemployment rate in France inched up to 7.2% in the second quarter of 2023 from 7.1% in the previous quarter, and the highest since Q4 2022, as the number of unemployed people increased by 20 thousand to 2.2 million."]
+            """
+    
+    test_2 = """data:[{'Year': 2017, 'Annual Revenue (billions of US $)': 11.7}, 
+                        {'Year': 2018, 'Annual Revenue (billions of US $)': 21.4}, 
+                        {'Year': 2019, 'Annual Revenue (billions of US $)': 24.5}, 
+                        {'Year': 2020, 'Annual Revenue (billions of US $)': 31.5}, 
+                        {'Year': 2021, 'Annual Revenue (billions of US $)': 53.8}, 
+                        {'Year': 2022, 'Annual Revenue (billions of US $)': 81.4}]
+                text:["Tesla earned $53.8 billion in sales revenue in 2021. This was up from $31.5 billion earned in 2020, with a 70.64% growth in sales during 2021. In 2022, Tesla remains the largest EV manufacturer in terms of revenue and market share, followed by Volkswagen. "]
+            """
+    
+    test_3 = """data:[{'Time': 'Aug 2022', 'Food inflation': 6.1}, 
+                        {'Time': 'Sep 2022', 'Food inflation': 8.8}, 
+                        {'Time': 'Oct 2022', 'Food inflation': 7.0}, 
+                        {'Time': 'Nov 2022', 'Food inflation': 3.7}, 
+                        {'Time': 'Dec 2022', 'Food inflation': 4.8}, 
+                        {'Time': 'Jan 2023', 'Food inflation': 6.2}, 
+                        {'Time': 'Feb 2023', 'Food inflation': 2.6}, 
+                        {'Time': 'Mar 2023', 'Food inflation': 2.4}, 
+                        {'Time': 'Apr 2023', 'Food inflation': 0.4}, 
+                        {'Time': 'May 2023', 'Food inflation': 1.0}, 
+                        {'Time': 'Jun 2023', 'Food inflation': 2.3}, 
+                        {'Time': 'Jul 2023', 'Food inflation': -1.7}]
+                text:["Food prices in China declined by 1.7 percent year-on-year in July 2023, reversing from a 2.3 percent rise in the prior month while pointing to the first drop since March 2022."]
+            """
+    
+    user_info = default_prompt + test_2
     # print(user_info)
-    result = chat_with_gpt(user_info)
+    result, reason = chat_with_gpt(user_info)
     print(result)
     
         
