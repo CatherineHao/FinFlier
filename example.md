@@ -13,7 +13,7 @@ data1:
 
 data 3- group:
 gpt传给backend的结果有两个部分 result + reason
-其中"Position":[{"Begin":[6,1],"End":[6,1]}] 先row后col
+### 0821 问题： 和gpt交互的时候，使用先列后行没办法识别，[row,col]可行！
 ```json
 result = [{"ObjectName":["Mini- and subcompact size"],"Position":[{"Begin":[6,1],"End":[6,1]}], "Trend":"declined","Num":[0.30],"Text":"the sales proportion of NEVs that were subcompact and below declined to 30%"},
 {"ObjectName":["Mini- and subcompact size"],"Position":[{"Begin":[0,1],"End":[0,1]}], "Trend":"None","Num":[0.61],"Text":"from 61% in 2017"},
