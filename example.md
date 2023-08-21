@@ -34,20 +34,20 @@ backend 直接将 reason返回，针对result处理成以下格式：
         "Trend": "declined",
         "TrendPosition": [69,76],
         "Num": [0.30],
-        "NumPosition": [81,83],
-        "ObjectName":"Mini- and subcompact size",
-        "ObjectPosition": [48,67]
+        "NumPosition": [[81,83]],
+        "ObjectName":["Mini- and subcompact size"],
+        "ObjectPosition": [[48,67]]
     }],
     "GraphicalOverlay":[{
         "Text": "the sales proportion of NEVs that were subcompact and below declined to 30%",
-        "Label": "0.30",
+        "Label": [0.30],
         "Marker": [{"Begin":["Mini- and subcompact size",6],"End":["Mini- and subcompact size",6]}],
         "Line": {
             "Begin":["Mini- and subcompact size",6],
             "End": ["Mini- and subcompact size",6],
-            "mean": "0.3",
-            "max" : "0.3",
-            "min" : "0.3"
+            "mean": 0.30,
+            "max" : 0.30,
+            "min" : 0.30
         }
     }]
 },
@@ -58,20 +58,20 @@ backend 直接将 reason返回，针对result处理成以下格式：
         "Trend": "None",
         "TrendPosition": None,
         "Num": [0.61],
-        "NumPosition": [91,93],
-        "ObjectName":"Mini- and subcompact size",
-        "ObjectPosition": [48,67]
+        "NumPosition": [[91,93]],
+        "ObjectName": ["Mini- and subcompact size"],
+        "ObjectPosition": [[48,67]]
     }],
     "GraphicalOverlay":[{
         "Text": "from 61% in 2017",
-        "Label": "0.61",
+        "Label": [0.61],
         "Marker": [{"Begin":["Mini- and subcompact size",0],"End":["Mini- and subcompact size",0]}],
         "Line": {
             "Begin":["Mini- and subcompact size",0],
             "End": ["Mini- and subcompact size",0],
-            "mean": "0.61",
-            "max" : "0.61",
-            "min" : "0.61"
+            "mean": 0.61,
+            "max" : 0.61,
+            "min" : 0.61
         }
     }]
 },
@@ -82,20 +82,20 @@ backend 直接将 reason返回，针对result处理成以下格式：
         "Trend": "upgrade trend",
         "TrendPosition": [230,242],
         "Num": [0.30, 0.40],
-        "NumPosition": [201,203], # 实际上原文中对应的是70%
-        "ObjectName":"Midsize to large", # 但实际上在原文中对应的是compact and midsize-to-large NEVs
-        "ObjectPosition": [154,186]
+        "NumPosition": [[201,203]], # 实际上原文中对应的是70%
+        "ObjectName": ["Compact size", "Midsize to large"], # 但实际上在原文中对应的是compact and midsize-to-large NEVs
+        "ObjectPosition": [[154,186]]
     }],
     "GraphicalOverlay":[{
         "Text": "the mix of compact and midsize-to-large NEVs increased to 70%",
-        "Label": "0.70",
+        "Label": [0.70],
         "Marker": [{"Begin":["Compact size",6],"End":["Compact size",6]},{"Begin":["Midsize to large",6],"End":["Midsize to large",6]}],
         "Line": {
             "Begin":["Compact size",6],
             "End": ["Midsize to large",6],
-            "mean": "0.35",
-            "max" : "0.40",
-            "min" : "0.30"
+            "mean": 0.35,
+            "max" : 0.40,
+            "min" : 0.30
         }
     }]
 },
@@ -106,20 +106,20 @@ backend 直接将 reason返回，针对result处理成以下格式：
         "Trend": "None",
         "TrendPosition": None,
         "Num": [0.35, 0.04],
-        "NumPosition": [210,212], 
-        "ObjectName":"Midsize to large", 
-        "ObjectPosition": [154,186]
+        "NumPosition": [[210,212]], 
+        "ObjectName": ["Compact size", "Midsize to large"], 
+        "ObjectPosition": [[154,186]]
     }],
     "GraphicalOverlay":[{
         "Text": "the mix of compact and midsize-to-large NEVs increased to 70% from 39%",
-        "Label": "0.39",
+        "Label": [0.39],
         "Marker": [{"Begin":["Compact size",0],"End":["Compact size",0]},{"Begin":["Midsize to large",0],"End":["Midsize to large",0]}],
         "Line": {
             "Begin":["Compact size",0],
             "End": ["Midsize to large",0],
-            "mean": "0.195",
-            "max" : "0.35",
-            "min" : "0.04"
+            "mean": 0.195,
+            "max" : 0.35,
+            "min" : 0.04
         }
     }]
 }
