@@ -13,11 +13,12 @@ data1:
 
 data 3- group:
 gpt传给backend的结果有两个部分 result + reason
+### 0821 问题： 和gpt交互的时候，使用先列后行没办法识别，[row,col]可行！
 ```json
-result = [{"ObjectName":["Mini- and subcompact size"],"Position":[{"Begin":[1,6],"End":[1,6]}], "Trend":"declined","Num":[0.30],"Text":"the sales proportion of NEVs that were subcompact and below declined to 30%"},
-{"ObjectName":["Mini- and subcompact size"],"Position":[{"Begin":[1,0],"End":[1,0]}], "Trend":"None","Num":[0.61],"Text":"from 61% in 2017"},
-{"ObjectName":["Compact Size","Midsize to large"],"Position":[{"Begin":[2,6],"End":[2,6]},{"Begin":[3,6],"End":[3,6]}], "Trend":"upgrade trend","Num":[0.30,0.40],"Text":"the mix of compact and midsize-to-large NEVs increased to 70%"},
-{"ObjectName":["Compact Size","Midsize to large"],"Position":[{"Begin":[2,0],"End":[2,0]},{"Begin":[3,0],"End":[3,0]}], "Trend":"None","Num":[0.35,0.04],"Text":"the mix of compact and midsize-to-large NEVs increased to 70% from 39%"}]
+result = [{"ObjectName":["Mini- and subcompact size"],"Position":[{"Begin":[6,1],"End":[6,1]}], "Trend":"declined","Num":[0.30],"Text":"the sales proportion of NEVs that were subcompact and below declined to 30%"},
+{"ObjectName":["Mini- and subcompact size"],"Position":[{"Begin":[0,1],"End":[0,1]}], "Trend":"None","Num":[0.61],"Text":"from 61% in 2017"},
+{"ObjectName":["Compact Size","Midsize to large"],"Position":[{"Begin":[6,2],"End":[6,2]},{"Begin":[6,3],"End":[6,3]}], "Trend":"upgrade trend","Num":[0.30,0.40],"Text":"the mix of compact and midsize-to-large NEVs increased to 70%"},
+{"ObjectName":["Compact Size","Midsize to large"],"Position":[{"Begin":[0,2],"End":[0,2]},{"Begin":[0,3],"End":[0,3]}], "Trend":"None","Num":[0.35,0.04],"Text":"the mix of compact and midsize-to-large NEVs increased to 70% from 39%"}]
 ```
 
 ```js
