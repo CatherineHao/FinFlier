@@ -1,4 +1,0 @@
-data = 
-
-
-text: A sideways trading pattern began in January 2018. The Dow hit a record closing high of 26,616.71 on January 26, 2018.1? It then plummeted into correction territory. Since then, it's traded in a sideways range of 23,000 to 25,700.
