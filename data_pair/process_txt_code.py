@@ -6,7 +6,7 @@ data  = []
 
 pd.set_option("display.max_columns", None)
 pd.set_option("display.max_rows", None)
-file = pd.read_csv('./used_data/4_data.csv')
+file = pd.read_csv('./used_data/14_data.csv')
 # print(file.head())
 file = file.to_dict(orient='records')
 # with open("txt_7.txt","w") as f:
