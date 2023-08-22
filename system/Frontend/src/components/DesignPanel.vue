@@ -13,10 +13,10 @@
                     <div class="EditInfo">
                         <div>Theme</div>
                     </div> -->
-                    <el-collapse accordion>
+                    <el-collapse v-model="activeIndex">
                         <el-collapse-item name="1">
                             <template #title>
-                                <el-checkbox v-model="checked1" label="Option 1" size="large" />
+                                <el-checkbox v-model="checked1" label="Option 1" size="large" />ZXKcjskd
                             </template>
                             <div>
                                 Consistent with real life: in line with the process and logic of real
@@ -76,6 +76,7 @@ export default {
         return {
             checked1: 1,
             msg1: "Hello, main!",
+            activeIndex: ['1', '2'],
             rawData: [],
             th: [],
             td: [],
