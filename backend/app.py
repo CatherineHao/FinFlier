@@ -105,7 +105,7 @@ def chart_info(data):
             },
             "y": {
                 "scaleType": 'linear',
-                "scaleName": ' '
+                "scaleName": ' ' # 给一个列名
             }
         }
     }
