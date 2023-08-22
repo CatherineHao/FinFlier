@@ -8,12 +8,12 @@
 <template>
     <div style="height: 100%; width: 100%;">
         <div style="font-family:KoHo; font-size: 22px; height: 40px; text-align: start; font-weight: bold;">
-            Data Chart
+            <img src="../assets/img/3.png" width="25" alt="">&nbsp; Data Chart
             <hr>
         </div>
         <div style="height: calc(100% - 40px); width: 100%;">
-            <div style="height: 60px;">
-                <v-sheet class="d-flex flex-wrap" style="height: 60px; margin: 0px; width: 100%;">
+            <div style="height: 0px;">
+                <!-- <v-sheet class="d-flex flex-wrap" style="height: 60px; margin: 0px; width: 100%;">
                     <v-sheet class="flex-1-0" style="padding: 0px 8px 0px; width: 25%;">
                         <v-select v-model="chartValue" :items="chartType" chips label="Chart Type"></v-select>
                     </v-sheet>
@@ -39,30 +39,12 @@
                             </template>
                         </v-select>
                     </v-sheet>
-                </v-sheet>
-                <!-- <v-sheet class="d-flex flex-wrap" style="height: 60px; margin: 0px; width: 100%;">
-                    <v-sheet class="flex-1-0" style="padding: 0px 8px 0px; width: 50%;">
-                        <v-select v-model="annotationValue" :items="annotationType" chips multiple
-                            label="Annotation"></v-select>
-                    </v-sheet>
-
-                    <v-sheet class="flex-1-0" style="padding: 0px 8px 0px; width: 50%;">
-                        <v-select v-model="otherValue" :items="othersType" multiple label="Others">
-                            <template v-slot:selection="{ item, index }">
-                                <v-chip v-if="index < 1" size="small">
-                                    <span>{{ item.title }}</span>
-                                </v-chip>
-                                <span v-if="index === 1" class="text-grey text-caption align-self-center">
-                                    (+{{ otherValue.length - 1 }} others)
-                                </span>
-                            </template>
-                        </v-select>
-                    </v-sheet>
                 </v-sheet> -->
             </div>
-            <div style="height: calc(100% - 60px); width: 100%;" v-loading="initChart">
+            <div style="height: calc(70%); width: 100%;" v-loading="initChart">
                 <component :is="tabs[chartData['chartType']]" :rawData="rawData" :chartData="chartData"></component>
             </div>
+            <hr>
         </div>
     </div>
 </template>
@@ -117,7 +99,7 @@ export default {
                 this.chartData = dataStore.chart_data;
                 this.rawData = dataStore.data;
                 this.initChart = false
-                this.chartValue = this.chartData.chartType;
+                this.chartValue = this.chartData.chartType; 
             }
         })
     },

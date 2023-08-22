@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-06-29 10:17:17
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-07-14 12:09:30
+ * @LastEditTime: 2023-08-22 14:36:13
 -->
 <!--
  *                        _oo0oo_
@@ -51,7 +51,7 @@
     <div style="height: calc(100vh - 50px ); width: 100%; display: flex;">
         <div style="height: calc((100% - 10px) / 2); width: calc(20% - 10px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; top: 0px;"
             class="boundary">
-            <DataDescription />
+            <DataTable />
         </div>
 
         <div style="height: calc((100% - 10px) / 2 - 10px); width: calc(20% - 10px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; bottom: 0px;"
@@ -60,11 +60,11 @@
         </div>
         <div style="height: calc(100% - 10px); width: calc(60% - 10px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; left: calc(20% - 0px);"
             class="boundary">
-            <!-- <Main /> -->
+            <Main />
         </div>
         <div style="height: calc(100% - 10px); width: calc(20% - 20px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; right: 10px;"
             class="boundary">
-            <!-- <DataTable /> -->
+            <DesignPanel />
         </div>
     </div>
 </template>
@@ -74,6 +74,7 @@ import Main from '../components/Main.vue';
 import { useDataStore } from "../stores/counter";
 import DataTable from '../components/DataTable.vue';
 import DataDescription from '../components/DataDescription.vue';
+import DesignPanel from '../components/DesignPanel.vue';
 
 export default {
     name: "home_view",
@@ -98,7 +99,7 @@ export default {
     methods: {
         fetchData () { }
     },
-    components: { Main, DataTable, Main, DataDescription }
+    components: { Main, DataTable, Main, DataDescription, DesignPanel }
 };
 </script>
 

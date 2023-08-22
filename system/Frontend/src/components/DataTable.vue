@@ -1,7 +1,8 @@
 <template>
     <div>
         <div style="font-family: KoHo, 'operator Mono Lig'; font-size: 22px;  height: 40px; text-align: start; font-weight: bold;">
-            Data Table
+            
+            <img src="../assets/img/1.png" width="25" alt="">&nbsp; Data Table
             <hr>
         </div>
         <v-expand-transition>
