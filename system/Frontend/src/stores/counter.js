@@ -59,18 +59,18 @@ export const useDataStore = defineStore("dataStore", {
         fetchBasicChart (param) {
             const st = new Date();
             fetchBasicChart(param, (resp) => {
-                setTimeout(() => {
+                // setTimeout(() => {
                     this.chart_data = resp.data;
-                }, 3000);
+                // }, 3000);
                 console.log("Fetch Data: ", new Date() - st);
             });
         },
         postQuery (param) {
             const st = new Date();
             postQuery(param, (resp) => {
-                setTimeout(() => {
+                // setTimeout(() => {
                     this.query_results.push(resp.data);
-                }, 1000);
+                // }, 1000);
                 console.log("Post Query: ", new Date() - st);
             })
         }
