@@ -26,10 +26,12 @@ result = "result: [{\"ObjectName\":[\"Food inflation\"],\"Position\":[{\"Begin\"
 
 
 def result_to_frontend(user_info, result):
-    user_info_data = json.loads(user_info[len("data")+2:user_info.find("text")].replace("\'", "\"")) # 从user_info中提取data，转成list
-    user_info_text = json.loads(user_info[user_info.find("text")+len("text")+2:])[0] # 从user_info中提取text，转成string
-    convert_result = json.loads(result[len("result")+2:]) # 把gpt返回的string转成list
+    # user_info_data = json.loads(user_info[len("data")+2:user_info.find("text")].replace("\'", "\"")) # 从user_info中提取data，转成list
+    user_info_data = json.loads(user_info[user_info.find("[{"):user_info.find("}]")+2].replace("\'", "\"")) # 从user_info中提取data，转成list
+    user_info_text = json.loads(user_info[user_info.find("[\""):])[0] # 从user_info中提取text，转成string
+    convert_result = json.loads(result[result.find("[{"):]) # 把gpt返回的string转成list
     # print(user_info_data)
+    # print(convert_result)
     # print(user_info_text)
     
     result_frontend = []
