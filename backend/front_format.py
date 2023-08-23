@@ -21,8 +21,8 @@ user_info = """data: [{'Time': 'Aug 2022', 'Food inflation': 6.1},
 result = "result: [{\"ObjectName\":[\"Food inflation\"],\"Position\":[{\"Begin\":[11,1],\"End\":[11,1]}],\"Trend\":\"declined\",\"Num\":[-1.7],\"Text\":\"Food prices in China declined by 1.7 percent year-on-year in July 2023\"},\n        {\"ObjectName\":[\"Food inflation\"],\"Position\":[{\"Begin\":[10,1],\"End\":[10,1]}],\"Trend\":\"None\",\"Num\":[2.3],\"Text\":\"a 2.3 percent rise in the prior month\"}]\n"
 
 # 经过转换以后的convert_result是如下格式
-# convert_result = [{"ObjectName":["Food inflation"],"Position":[{"Begin":[11,1],"End":[11,1]}],"Trend":"declined","Num":[-1.7],"Text":"Food prices in China declined by 1.7 percent year-on-year in July 2023"},
-                # {"ObjectName":["Food inflation"],"Position":[{"Begin":[6,1],"End":[6,1]}],"Trend":"None","Num":[2.6],"Text":"a 2.6 percent rise in the prior month"}]
+# convert_result = [{"ObjectName":["Food inflation"],"Position":[{"Begin":[11,1],"End":[11,1]}],"Trend":"declined","Num": "None","Text":"Food prices in China declined by 1.7 percent year-on-year in July 2023"},
+                # {"ObjectName":["Food inflation"],"Position":[{"Begin":[6,1],"End":[6,1]}],"Trend":"None","Num":[2.3],"Text":"a 2.3 percent rise in the prior month"}]
 
 
 def result_to_frontend(user_info, result):
@@ -63,7 +63,7 @@ def result_to_frontend(user_info, result):
                 "Trend": convert_result_item['Trend'],
                 "TrendPosition": find_position(user_info_text, convert_result_item['Trend']),
                 "Num": convert_result_item['Num'],
-                "NumPosition": [find_position(user_info_text, str(i)) for i in convert_result_item['Num']],  
+                "NumPosition": [find_position(user_info_text, str(i)) for i in convert_result_item['Num']] if convert_result_item['Num'] != "None" else None,  
                 "ObjectName": convert_result_item['ObjectName'],
                 "ObjectPosition": [find_position(user_info_text, i) for i in convert_result_item['ObjectName']]
             }],
