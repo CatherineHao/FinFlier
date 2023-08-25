@@ -1,0 +1,59 @@
+[{
+    "objectName": "object0",
+    "objectRange": [104, 135],
+    "tableIndex": [[1, 0], [1, 1], [1, 2]],
+    "objectIndex": 1,
+    "objectText": "The Netherlands ($43.1 billion)",
+    "color": {
+        "r": 255,
+        "g": 255,
+        "b": 153,
+        "a": 1
+    },
+    "overlay": {
+        "highlight": {
+            "background": 1,
+            "color": 1,
+            "area": 1,
+            "stroke": 1
+        },
+        "annotation":{
+            "marker": 1,
+            "label": "$43.1 billion",
+            "text": "$43.1 billion, the second-largest investing country"
+        },
+        "others": {
+            "Add line (with Arrow)": -1,
+            "Design Configuration": -1
+        }
+    }
+}, {
+    "objectName": "object1",
+    "objectRange": [178, 212],
+    "tableIndex": [[2, 0], [2, 1], [2, 2]],
+    "objectIndex": 2,
+    "objectText": "followed by France ($35.3 billion)",
+    "color": {
+        "r": 152,
+        "g": 251,
+        "b": 152,
+        "a": 1
+    },
+    "overlay": {
+        "highlight": {
+            "background": 1,
+            "color": 1,
+            "area": 1,
+            "stroke": 1
+        },
+        "annotation":{
+            "marker": 1,
+            "label": "$35.3 billion",
+            "text": "$35.3 billion, the third-largest investing country"
+        },
+        "others": {
+            "Add line (with Arrow)": -1,
+            "Design Configuration": -1
+        }
+    }
+}]

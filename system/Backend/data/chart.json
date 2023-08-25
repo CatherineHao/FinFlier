@@ -1,0 +1,21 @@
+{
+    "chartType": "Single bar chart",
+    "chartScale": {
+        "x": {
+            "scaleType": "categorical",
+            "scaleName": "Position"
+        }, 
+        "y": {
+            "scaleType": "quantitative",
+            "scaleName": "Billions of dollars"
+        }
+    },
+    "chartColor": {
+        "Billions of dollars": {
+            "r": 135,
+            "g": 206,
+            "b": 235,
+            "a": 1
+        }
+    }
+}

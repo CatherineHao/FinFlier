@@ -82,6 +82,8 @@ def determine_chart_type(input_data, x_type):
     if x_type == 'time' or x_type == 'linear':
         chart_type += 1
     
+    # 如果time[0]和time[1]差一天，用line，否则用bar
+    # TODO
     return chart_type
         
 @app.route('/chart-info', methods=['POST'])
@@ -223,7 +225,7 @@ if __name__ == '__main__':
     test_3 = """data:[{'Time': 'Aug 2022', 'Food inflation': 6.1}, {'Time': 'Sep 2022', 'Food inflation': 8.8}, {'Time': 'Oct 2022', 'Food inflation': 7.0}, {'Time': 'Nov 2022', 'Food inflation': 3.7}, {'Time': 'Dec 2022', 'Food inflation': 4.8}, {'Time': 'Jan 2023', 'Food inflation': 6.2}, {'Time': 'Feb 2023', 'Food inflation': 2.6}, {'Time': 'Mar 2023', 'Food inflation': 2.4}, {'Time': 'Apr 2023', 'Food inflation': 0.4}, {'Time': 'May 2023', 'Food inflation': 1.0}, {'Time': 'Jun 2023', 'Food inflation': 2.3}, {'Time': 'Jul 2023', 'Food inflation': -1.7}]
                 text:["Food prices in China declined by 1.7 percent year-on-year in July 2023, reversing from a 2.3 percent rise in the prior month while pointing to the first drop since March 2022."]
             """
-    user_info = default_prompt + test_3
+    user_info = default_prompt + test_1
     # print(user_info)
     result = chat_with_gpt(user_info)
     print(result)
