@@ -38,7 +38,109 @@ export const useDataStore = defineStore("dataStore", {
             },
             selectTable: null,
             objectTag: {},
-            query_results: []
+            query_results: [],
+            show_state: 0,
+            state_map: {
+                state0: {
+                    overlay_tag: [],
+                    chart_setting: {elWidth: 0,
+                        elHeight: 0,
+                        currentColor: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 1
+                        },
+                        size: {
+                            width: 100
+                        },
+                        axis: {
+                            x: 'Position',
+                            y: "Billions of dollars"
+                        }},
+                    overlay_setting: {
+                        object0: {},
+                        object1: {}
+                    }
+                }
+            },
+            type_chart_setting: {
+                'Single bar chart': {
+                    elWidth: 0,
+                    elHeight: 0,
+                    currentColor: {
+                        r: 0,
+                        g: 0,
+                        b: 0,
+                        a: 1
+                    },
+                    size: {
+                        width: 100
+                    },
+                    axis: {
+                        x: 'Position',
+                        y: "Billions of dollars"
+                    }
+                },
+                overlayFormat: {
+                    color: {
+                        currentColor: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 1
+                        }
+                    },
+                    'bounding box': {
+                        currentColor: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 1
+                        }
+                    },
+                    background: {
+                        currentColor: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 1
+                        }
+                    },
+                    marker: {
+                        currentColor: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 1
+                        }
+                    },
+                    label: {
+                        currentColor: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 1
+                        }
+                    },
+                    text: {
+                        currentColor: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 1
+                        }
+                    },
+                    
+                }
+            },
+            default_setting: {
+                chart_setting: {
+                },
+                overlay_setting: {
+
+                }
+            }
         };
     },
     actions: {
@@ -60,7 +162,7 @@ export const useDataStore = defineStore("dataStore", {
             const st = new Date();
             fetchBasicChart(param, (resp) => {
                 // setTimeout(() => {
-                    this.chart_data = resp.data;
+                this.chart_data = resp.data;
                 // }, 3000);
                 console.log("Fetch Data: ", new Date() - st);
             });
@@ -69,7 +171,7 @@ export const useDataStore = defineStore("dataStore", {
             const st = new Date();
             postQuery(param, (resp) => {
                 // setTimeout(() => {
-                    this.query_results.push(resp.data);
+                this.query_results.push(resp.data);
                 // }, 1000);
                 console.log("Post Query: ", new Date() - st);
             })

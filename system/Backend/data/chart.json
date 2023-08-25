@@ -11,6 +11,11 @@
         }
     },
     "chartColor": {
-        "Billions of dollars": "#4056A1"
+        "Billions of dollars": {
+            "r": 135,
+            "g": 206,
+            "b": 235,
+            "a": 1
+        }
     }
 }

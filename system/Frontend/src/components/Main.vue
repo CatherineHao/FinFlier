@@ -41,10 +41,16 @@
                     </v-sheet>
                 </v-sheet> -->
             </div>
-            <div style="height: calc(70%); width: 100%;" v-loading="initChart">
-                <component :is="tabs[chartData['chartType']]" :rawData="rawData" :chartData="chartData"></component>
+            <div style="height: calc(70%); width: 100%;" v-loading="initChart" ref="mainView">
+                <component :is="tabs[chartData['chartType']]" :rawData="rawData" :chartData="chartData" :defaultTag="1" :scaleTag="1"></component>
             </div>
             <hr>
+            <div style="height: calc(30% - 0px); width: 100%; background-color: white; display: flex; justify-content: space-between; align-items: center;">
+                <div style="height: 90%; width: 32%;">
+
+                <!-- <component :is="tabs[chartData['chartType']]" :rawData="rawData" :chartData="chartData" :defaultTag="0" :scaleTag=".3"></component> -->
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -104,22 +110,22 @@ export default {
         })
     },
     watch: {
-        highlightValue (newVal, oldVal) {
-            this.overlayTag.highlight = {};
-            const dataStore = useDataStore();
-            for (let i in this.highlightValue) {
-                this.overlayTag.highlight[this.highlightValue[i]] = 1;
-            }
-            dataStore.overlayTag = this.overlayTag;
-        },
-        annotationValue () {
-            this.overlayTag.annotation = {};
-            const dataStore = useDataStore();
-            for (let i in this.annotationValue) {
-                this.overlayTag.annotation[this.annotationValue[i]] = 1;
-            }
-            dataStore.overlayTag = this.overlayTag;
-        }
+        // highlightValue (newVal, oldVal) {
+        //     this.overlayTag.highlight = {};
+        //     const dataStore = useDataStore();
+        //     for (let i in this.highlightValue) {
+        //         this.overlayTag.highlight[this.highlightValue[i]] = 1;
+        //     }
+        //     dataStore.overlayTag = this.overlayTag;
+        // },
+        // annotationValue () {
+        //     this.overlayTag.annotation = {};
+        //     const dataStore = useDataStore();
+        //     for (let i in this.annotationValue) {
+        //         this.overlayTag.annotation[this.annotationValue[i]] = 1;
+        //     }
+        //     dataStore.overlayTag = this.overlayTag;
+        // }
     },
     components: { singleBar }
 }
