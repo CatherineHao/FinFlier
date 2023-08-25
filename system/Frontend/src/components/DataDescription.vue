@@ -12,10 +12,9 @@
             <img src="../assets/img/2.png" width="25" alt=""> &nbsp;Data Description
             <hr>
         </div>
-        <div style="height: calc(100% - 40px); widows: 100%;">
+        <div style="height: calc(100% - 40px); widows: 100%; overflow-y: auto;">
             <div style="height: 100%; width: 100%; padding-top: 40px;">
 
-                <!-- 'box-shadow': '0px 1px 1px 0px #bdbaba', -->
                 <div v-for="(item, item_i) in textGroup" :key="'group_' + item_i" :id="'group_' + item_i" :style="{
                     'transition': '1s', 'padding-top': '5px', 'padding-bottom': '5px', 'opacity': 1
                 }">
@@ -38,16 +37,14 @@
                         </div>
                         <div style="width: calc(100% - 40px);">
                             <div v-if="item.tag"
-                                style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230); border-radius:5px; min-height: 40px;" >
-                                <!-- <div v-html="outputText"></div> -->
+                                style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3);" >
                                 <span v-for="(o, i) in item.outputTextArray" :key="'res_' + i"
                                     :class="{ 'dataObject': o.tag == 1 }" :style="{
                                         backgroundColor: o.color
-                                    }" @mouseover="o.tag == 1 ? hoverObject(o) : ''"
-                                    @mouseout="o.tag == 1 ? outObject(o.objectName) : ''">{{ o.s }}</span>
+                                    }" @click="hoverObject(o)">{{ o.s }}</span>
                             </div>
                             <div v-else
-                                style="width: 100%; line-height:1lh; text-align: start; padding-right: 5px; background-color: rgb(173, 216, 230); padding: 8px; border-radius: 5px;">
+                                style="width: 100%; line-height:1lh; text-align: start; padding-right: 5px; background-color: rgb(173, 216, 230, 0); padding: 8px; border-radius: 5px; border: 1px solid rgba(0, 0, 0, .3);">
                                 {{ item.text }}
                             </div>
                         </div>
@@ -74,12 +71,12 @@
                 </div>
             </div>
             <div style="text-align: start; position: absolute; top: 0px; width: 100%;">
-                <v-row style="height: 100%;" no-gutters>
-                    <v-col cols="12" sm="11">
+                <div style="height: 100%; width: 100%; display: flex;">
+                    <div style="width: calc(100% - 40px)">
                         <el-input v-model="inputText" autosize type="textarea" placeholder="Send a message"
                             style="width: 100%;" :autosize="{ minRows: 1, maxRows: 4 }" @keydown.enter="submitText()" />
-                    </v-col>
-                    <v-col cols="12" sm="1">
+                    </div>
+                    <div style="width: 40px;">
                         <transition name="fade">
                             <button :class="['btn', { 'btn-green': hasInput }]" @click="submitText()">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none"
@@ -90,8 +87,8 @@
                                 </svg>
                             </button>
                         </transition>
-                    </v-col>
-                </v-row>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -107,10 +104,14 @@ export default {
             inputText: '',
             outputText: '',
             outputTextArray: [],
-            textGroup: []
+            textGroup: [],
+            objectTag: {}
         };
     },
     methods: {
+        colorTrans (color) {
+            return `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
+        },
         submitText () {
             this.inputText = this.inputText.trim();
             let inputText = this.inputText;
@@ -125,12 +126,14 @@ export default {
                 opacity: 0,
                 outputTextArray: []
             });
+            console.log(description_data)
             for (let i in description_data) {
+                // console.log(this.colorTrans(description_data[i].color), description_data[i].color);
                 let range = description_data[i].objectRange;
                 endPos = range[0];
                 let s = inputText.slice(startPos, endPos)
                 outputText += s;
-                outputText += `<span class="dataObject" style="background-color: ${description_data[i].color};">` + description_data[i].objectText + `</span>`;
+                outputText += `<span class="dataObject" style="background-color: ${this.colorTrans(description_data[i].color)};">` + description_data[i].objectText + `</span>`;
                 outputTextArray.push({
                     s: s,
                     tag: 0
@@ -138,7 +141,8 @@ export default {
                 outputTextArray.push({
                     s: description_data[i].objectText,
                     tag: 1,
-                    color: description_data[i].color,
+                    color: this.colorTrans(description_data[i].color),
+                    rawColor: description_data[i].color,
                     objectName: description_data[i].objectName,
                     tableIndex: description_data[i].tableIndex
                 })
@@ -158,11 +162,17 @@ export default {
             // console.log(this.outputTextArray)
         },
         hoverObject (o) {
+            // console.log(o, this.objectTag);
+            if (this.objectTag[o.objectName] == 1) {
+                this.outObject(o.objectName);
+                return
+            }
             // console.log(objectName);
             const dataStore = useDataStore();
             let objectTag = dataStore.objectTag;
             let tableTag = {};
             for (let i in o.tableIndex) {
+                console.log(o.color)
                 tableTag['cellR' + (o.tableIndex[i][0]).toString() + 'C' + (o.tableIndex[i][1]).toString()] = {
                     tag: 1,
                     color: o.color
@@ -172,8 +182,20 @@ export default {
             // console.log(tableTag)
             this.tableTag = tableTag;
             objectTag[o.objectName] = 1;
-            // dataStore.objectTag = objectTag;
-            console.log(objectTag, dataStore.objectTag)
+            dataStore.objectTag = objectTag;
+            this.objectTag = objectTag;
+
+            let tmp = dataStore.type_chart_setting.overlayFormat;
+
+            for (let i in tmp) {
+                tmp[i].currentColor = o.rawColor;
+            }
+            // console.log(dataStore.state_map['stage0']['overlay_setting'], o.objectName);
+
+
+            dataStore.state_map['state0']['overlay_setting'][o.objectName] = tmp;
+            console.log(dataStore.state_map['state0']['overlay_setting']);
+            // console.log(objectTag, dataStore.objectTag)
         },
         outObject (objectName) {
             const dataStore = useDataStore();
@@ -207,8 +229,8 @@ export default {
     created () {
     },
     mounted () {
-        // this.inputText = "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."
-        // this.submitText();
+        this.inputText = "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."
+        this.submitText();
 
     },
     computed: {

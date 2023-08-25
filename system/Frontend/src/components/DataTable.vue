@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: Qing Shi
+ * @Date: 2023-08-22 14:28:15
+ * @LastEditors: Qing Shi
+ * @LastEditTime: 2023-08-23 11:04:49
+-->
 <template>
     <div>
         <div style="font-family: KoHo, 'operator Mono Lig'; font-size: 22px;  height: 40px; text-align: start; font-weight: bold;">
@@ -5,7 +12,7 @@
             <img src="../assets/img/1.png" width="25" alt="">&nbsp; Data Table
             <hr>
         </div>
-        <v-expand-transition>
+        <!-- <v-expand-transition> -->
             <div v-show="expand" style="overflow-y: auto; overflow-x: auto;">
                 <table style="border-collapse:separate; border-spacing:0px 5px; width: 100%">
                     <thead style="height: 30px; border-radius: 10px;">
@@ -42,7 +49,7 @@
                     </tbody>
                 </table>
             </div>
-        </v-expand-transition>
+        <!-- </v-expand-transition> -->
     </div>
 </template>
 <script>
@@ -61,6 +68,9 @@ export default {
         };
     },
     methods: {
+        colorTrans (color) {
+            return `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
+        },
         calcTable (data) {
             let th = data.columns;
             return [th, data];
@@ -97,15 +107,15 @@ export default {
 </script>
 <style scoped>
 table {
-    /* border-collapse:collapse; */
+    border-collapse:collapse;
 }
 
 /* td {
     border: 1px solid black;
 } */
 .td_tr {
-    border-radius: 8px;
-    box-shadow: 0px 2px 3px 1px #bdbaba;
+    border-radius: 0px;
+    box-shadow: 0px 2px 1px 0px #bdbaba;
 }
 
 td {

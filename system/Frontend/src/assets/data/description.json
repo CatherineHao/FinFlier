@@ -4,7 +4,12 @@
     "tableIndex": [[1, 0], [1, 1], [1, 2]],
     "objectIndex": 1,
     "objectText": "The Netherlands ($43.1 billion)",
-    "color": "#e0c4d2",
+    "color": {
+        "r": 255,
+        "g": 255,
+        "b": 153,
+        "a": 1
+    },
     "overlay": {
         "highlight": {
             "background": 1,
@@ -28,7 +33,12 @@
     "tableIndex": [[2, 0], [2, 1], [2, 2]],
     "objectIndex": 2,
     "objectText": "followed by France ($35.3 billion)",
-    "color": "#9db3ec",
+    "color": {
+        "r": 152,
+        "g": 251,
+        "b": 152,
+        "a": 1
+    },
     "overlay": {
         "highlight": {
             "background": 1,
