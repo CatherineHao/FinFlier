@@ -350,16 +350,13 @@ if __name__ == '__main__':
     #     print("system: Goodbye!")
     #     break
     # user_input = input("Enter the data and the text:")
-    user_input = """data: [{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
+    test_0 = """data: [{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
                         {'Category':'Real Gross Output','Outdoor recreation':'21.8','U.S. economy':'6.3'},
                         {'Category':'Compensation','Outdoor recreation':'16.2','U.S. economy':'7.8'},
                         {'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}]
-
-                    text: ["Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, 
-                    compared with a 5.9 percent increase for the overall U.S. economy, 
-                    reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."]
-                    label: "start"
-                """
+                text: ["Inflation-adjusted ('real') GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."]
+                label: "start"
+            """
     test_1 = """data: [{'Time': '2022 Q1', 'Unemployment rate': 7.3}, 
                         {'Time': '2022 Q2', 'Unemployment rate': 7.4}, 
                         {'Time': '2022 Q3', 'Unemployment rate': 7.3},
@@ -376,7 +373,7 @@ if __name__ == '__main__':
                         {'Year': 2020, 'Annual Revenue (billions of US $)': 31.5}, 
                         {'Year': 2021, 'Annual Revenue (billions of US $)': 53.8}, 
                         {'Year': 2022, 'Annual Revenue (billions of US $)': 81.4}]
-                text: ["Tesla earned $53.8 billion in sales revenue in 2021. This was up from $31.5 billion earned in 2020, with a 70.64% growth in sales during 2021. In 2022, Tesla remains the largest EV manufacturer in terms of revenue and market share, followed by Volkswagen. "]
+                text: ["Tesla earned $53.8 billion in sales revenue in 2021. This was up from $31.5 billion earned in 2020, with a 70.64% growth in sales during 2021. In 2022, Tesla remains the largest EV manufacturer in terms of revenue and market share, followed by Volkswagen."]
                 label: "start"
             """
     
@@ -422,7 +419,7 @@ if __name__ == '__main__':
                 label: "start"
             """
 
-    user_info = test_5
+    user_info = test_0
     # print(user_info)
     result, reason, result_frontend = chat_with_gpt(user_info)
     print(result)
