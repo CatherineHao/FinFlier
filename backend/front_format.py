@@ -16,6 +16,7 @@ user_info = """data: [{'Time': 'Aug 2022', 'Food inflation': 6.1},
                         {'Time': 'Jun 2023', 'Food inflation': 2.3}, 
                         {'Time': 'Jul 2023', 'Food inflation': -1.7}]
                 text: ["Food prices in China declined by 1.7 percent year-on-year in July 2023, reversing from a 2.3 percent rise in the prior month while pointing to the first drop since March 2022."]
+                label: "start"
             """
 # result from gpt: a string 
 result = "result: [{\"ObjectName\":[\"Food inflation\"],\"Position\":[{\"Begin\":[11,1],\"End\":[11,1]}],\"Trend\":\"declined\",\"Num\":[-1.7],\"Text\":\"Food prices in China declined by 1.7 percent year-on-year in July 2023\"},\n        {\"ObjectName\":[\"Food inflation\"],\"Position\":[{\"Begin\":[10,1],\"End\":[10,1]}],\"Trend\":\"None\",\"Num\":[2.3],\"Text\":\"a 2.3 percent rise in the prior month\"}]\n"
@@ -28,7 +29,7 @@ result = "result: [{\"ObjectName\":[\"Food inflation\"],\"Position\":[{\"Begin\"
 def result_to_frontend(user_info, result):
     # user_info_data = json.loads(user_info[len("data")+2:user_info.find("text")].replace("\'", "\"")) # 从user_info中提取data，转成list
     user_info_data = json.loads(user_info[user_info.find("[{"):user_info.find("}]")+2].replace("\'", "\"")) # 从user_info中提取data，转成list
-    user_info_text = json.loads(user_info[user_info.find("[\""):])[0] # 从user_info中提取text，转成string
+    user_info_text = json.loads(user_info[user_info.find("[\""):user_info.find("\"]")+2])[0] # 从user_info中提取text，转成string
     convert_result = json.loads(result[result.find("[{"):]) # 把gpt返回的string转成list
     # print(user_info_data)
     # print(convert_result)
