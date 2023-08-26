@@ -169,7 +169,7 @@ def chat_with_gpt(user_info):
         #stop = ["\n"],
         stop=None,
     )
-    print(response)
+    # print(response)
     reply = response['choices'][0]['message']['content']
     start_index = reply.find('reason:')
     result = reply[0:start_index]
@@ -422,11 +422,11 @@ if __name__ == '__main__':
                 label: "start"
             """
 
-    user_info = test_5
+    user_info = test_3
     # print(user_info)
     result, reason, result_frontend = chat_with_gpt(user_info)
-    print(result)
-    print(reason)
+    # print(result)
+    # print(reason)
     print(result_frontend)
     
         
