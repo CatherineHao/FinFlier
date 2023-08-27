@@ -1,8 +1,8 @@
 '''
 Author: CatherineHao 1512769550@qq.com
 Date: 2023-07-12 21:37:31
-LastEditors: CatherineHao 1512769550@qq.com
-LastEditTime: 2023-07-26 20:49:44
+LastEditors: Qing Shi
+LastEditTime: 2023-08-25 14:53:32
 Authorization: Bearer "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"
 '''
 import json
@@ -85,7 +85,9 @@ def determine_chart_type(input_data, x_type):
         chart_type += 1
     
     return chart_type
-        
+
+
+#TODO: backend function 1
 @app.route('/chart-info', methods=['POST'])
 def chart_info(data):
     #data = request.get_json()   # 从前端获取数据
@@ -153,12 +155,10 @@ messages=[{"role": "system", "content": "You are a xxxxxxxxx assistant......"}, 
 """
 
 
-
-# @app.route("get_result", methods = ("GET", "POST"))
+# TODO: conversation view
+@app.route("get_result", methods = ("GET", "POST"))
 def chat_with_gpt(user_info):
-    user_data_text = user_info[:user_info.find("\"]")+2]
-    # print(user_data_text)
-    request = default_prompt + user_data_text
+    request = default_prompt + user_info
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo-16k", # prompt+completion 最大16384 tokens
         # model="gpt-4-32k",
@@ -169,11 +169,12 @@ def chat_with_gpt(user_info):
         #stop = ["\n"],
         stop=None,
     )
-    # print(response)
+    print(response)
     reply = response['choices'][0]['message']['content']
     start_index = reply.find('reason:')
     result = reply[0:start_index]
     reason = reply[start_index:]
+
     result_frontend = result_to_frontend(user_info, result)
     return result, reason, result_frontend
 
@@ -350,13 +351,15 @@ if __name__ == '__main__':
     #     print("system: Goodbye!")
     #     break
     # user_input = input("Enter the data and the text:")
-    test_0 = """data: [{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
+    user_input = """data: [{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
                         {'Category':'Real Gross Output','Outdoor recreation':'21.8','U.S. economy':'6.3'},
                         {'Category':'Compensation','Outdoor recreation':'16.2','U.S. economy':'7.8'},
                         {'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}]
-                text: ["Inflation-adjusted ('real') GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."]
-                label: "start"
-            """
+
+                    text: ["Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, 
+                    compared with a 5.9 percent increase for the overall U.S. economy, 
+                    reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."]
+                """
     test_1 = """data: [{'Time': '2022 Q1', 'Unemployment rate': 7.3}, 
                         {'Time': '2022 Q2', 'Unemployment rate': 7.4}, 
                         {'Time': '2022 Q3', 'Unemployment rate': 7.3},
@@ -364,7 +367,6 @@ if __name__ == '__main__':
                         {'Time': '2023 Q1', 'Unemployment rate': 7.1}, 
                        {'Time': '2023 Q2', 'Unemployment rate': 7.2}]
                 text: ["The unemployment rate in France inched up to 7.2% in the second quarter of 2023 from 7.1% in the previous quarter, and the highest since Q4 2022, as the number of unemployed people increased by 20 thousand to 2.2 million."]
-                label: "start"
             """
     
     test_2 = """data: [{'Year': 2017, 'Annual Revenue (billions of US $)': 11.7}, 
@@ -373,8 +375,7 @@ if __name__ == '__main__':
                         {'Year': 2020, 'Annual Revenue (billions of US $)': 31.5}, 
                         {'Year': 2021, 'Annual Revenue (billions of US $)': 53.8}, 
                         {'Year': 2022, 'Annual Revenue (billions of US $)': 81.4}]
-                text: ["Tesla earned $53.8 billion in sales revenue in 2021. This was up from $31.5 billion earned in 2020, with a 70.64% growth in sales during 2021. In 2022, Tesla remains the largest EV manufacturer in terms of revenue and market share, followed by Volkswagen."]
-                label: "start"
+                text: ["Tesla earned $53.8 billion in sales revenue in 2021. This was up from $31.5 billion earned in 2020, with a 70.64% growth in sales during 2021. In 2022, Tesla remains the largest EV manufacturer in terms of revenue and market share, followed by Volkswagen. "]
             """
     
     test_3 = """data: [{'Time': 'Aug 2022', 'Food inflation': 6.1}, 
@@ -390,7 +391,6 @@ if __name__ == '__main__':
                         {'Time': 'Jun 2023', 'Food inflation': 2.3}, 
                         {'Time': 'Jul 2023', 'Food inflation': -1.7}]
                 text: ["Food prices in China declined by 1.7 percent year-on-year in July 2023, reversing from a 2.3 percent rise in the prior month while pointing to the first drop since March 2022."]
-                label: "start"
             """
     
     test_4 = """data: [{'Time': 2018, 'Tesla': 19.8, 'BYD': 18.5}, 
@@ -399,7 +399,6 @@ if __name__ == '__main__':
                         {'Time': 2021, 'Tesla': 53.8, 'BYD': 30.8}, 
                         {'Time': 2022, 'Tesla': 81.4, 'BYD': 60.5}]
                 text: ["In 2018, Tesla's total revenue was US$19.8 billion, and BYD's total revenue was US$18.5 billion. In 2022, Tesla's total revenue was US$81.4 billion, and BYD's total revenue was US$60.5 billion. From the perspective of total revenue, Tesla and BYD are gradually widening the gap."]
-                label: "start"
             """
     
     test_5 = """data: [{'Time': 'Jul 2022', 'Banks Balance Sheet (CNY Billion)': 679.0}, 
@@ -416,14 +415,13 @@ if __name__ == '__main__':
                         {'Time': 'Jun 2023', 'Banks Balance Sheet (CNY Billion)': 3050.0}, 
                         {'Time': 'Jul 2023', 'Banks Balance Sheet (CNY Billion)': 345.9}]
                 text: ["China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter."]
-                label: "start"
             """
 
-    user_info = test_0
+    user_info = test_1
     # print(user_info)
     result, reason, result_frontend = chat_with_gpt(user_info)
-    # print(result)
-    # print(reason)
+    print(result)
+    print(reason)
     print(result_frontend)
     
         

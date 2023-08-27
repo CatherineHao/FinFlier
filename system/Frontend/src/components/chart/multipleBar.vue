@@ -1,9 +1,9 @@
 <!--
  * @Description: 
  * @Author: Qing Shi
- * @Date: 2023-07-10 13:45:50
+ * @Date: 2023-08-26 19:48:52
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-08-27 20:46:22
+ * @LastEditTime: 2023-08-27 20:46:06
 -->
 <template>
     <div ref="singleBarSvg" style="height: 100%; width: 100%;">
@@ -177,7 +177,7 @@ export default {
                 let dataDomain = extent(scale_data, d => parseFloat(d));
                 if (dataDomain[1] < 0) dataDomain[1] = 0;
                 if (dataDomain[0] > 0) dataDomain[0] = 0;
-                // console.log(dataDomain);
+                console.log(dataDomain);
                 return scaleLinear(dataDomain, range);
             }
             if (scaleType == 'time') {
@@ -223,7 +223,7 @@ export default {
             let yScale = this.scale(data, chart_info.chartScale.y.attributeName[0], chart_info.chartScale.y.scaleType, [height, 0]);
             console.log(xScale, yScale);
             this.axisPosition = {
-                xAxis: [width, yScale(0) + 30],
+                xAxis: [width, yScale(0) + 20],
                 yAxis: [-.05 * width, -20]
             }
             // console.log(yScale);
