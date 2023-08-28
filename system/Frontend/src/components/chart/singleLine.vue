@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-26 19:48:30
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-08-27 20:04:33
+ * @LastEditTime: 2023-08-27 21:45:34
 -->
 <template>
     <div ref="singleLineSvg" style="height: 100%; width: 100%;">
@@ -90,8 +90,8 @@ export default {
             }
             if (scaleType == 'linear') {
                 let dataDomain = extent(scale_data, d => parseFloat(d));
-                // if (dataDomain[1] < 0) dataDomain[1] = 0;
-                // if (dataDomain[0] > 0) dataDomain[0] = 0;
+                if (dataDomain[1] < 0) dataDomain[1] = 0;
+                if (dataDomain[0] > 0) dataDomain[0] = 0;
                 // console.log(dataDomain);
                 return scaleLinear(dataDomain, range);
             }
