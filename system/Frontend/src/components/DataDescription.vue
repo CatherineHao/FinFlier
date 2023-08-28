@@ -3,78 +3,21 @@
  * @Author: Qing Shi
  * @Date: 2023-07-10 18:18:22
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-07-17 10:59:11
+ * @LastEditTime: 2023-08-28 18:26:01
 -->
 <template>
     <div style="height: 100%; width: 100%;">
         <div style="font-family: KoHo; text-align: start; font-size: 22px;height: 40px; font-weight: bold;">
-            
+
             <img src="../assets/img/2.png" width="25" alt=""> &nbsp;Data Description
             <hr>
         </div>
-        <div style="height: calc(100% - 40px); widows: 100%; overflow-y: auto;">
-            <div style="height: 100%; width: 100%; padding-top: 40px;">
-
-                <div v-for="(item, item_i) in textGroup" :key="'group_' + item_i" :id="'group_' + item_i" :style="{
-                    'transition': '1s', 'padding-top': '5px', 'padding-bottom': '5px', 'opacity': 1
-                }">
-                    <div style="width: 100%; display: flex;">
-                        <div v-if="item.tag == 0" style=" width: 40px; padding-top: 3px; padding-left: 0px;">
-                            <div
-                                style="background-color: rgb(91, 155, 255); width: 35px; height: 35px; border-radius: 6px; padding: 4px;">
-                                <svg v-if="item.tag == 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                    fill="#FFF">
-                                    <path d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M19 4h-4L7.11 16.63 4.5 12 9 4H5L.5 12 5 20h4l7.89-12.63L19.5 12 15 20h4l4.5-8z" />
-                                </svg>
-                                <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFF">
-                                    <path d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div style="width: calc(100% - 40px);">
-                            <div v-if="item.tag"
-                                style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3);" >
-                                <span v-for="(o, i) in item.outputTextArray" :key="'res_' + i"
-                                    :class="{ 'dataObject': o.tag == 1 }" :style="{
-                                        backgroundColor: o.color
-                                    }" @click="hoverObject(o)">{{ o.s }}</span>
-                            </div>
-                            <div v-else
-                                style="width: 100%; line-height:1lh; text-align: start; padding-right: 5px; background-color: rgb(173, 216, 230, 0); padding: 8px; border-radius: 5px; border: 1px solid rgba(0, 0, 0, .3);">
-                                {{ item.text }}
-                            </div>
-                        </div>
-
-                        <div v-if="item.tag == 1" style="padding-top: 3px; padding-left: 0px; width: 40px;">
-                            <div
-                                style="background-color: rgb(91, 155, 255); width: 35px; height: 35px; border-radius: 6px; padding: 4px; float: right;">
-                                <svg v-if="item.tag == 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                    fill="#FFF">
-                                    <path d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M19 4h-4L7.11 16.63 4.5 12 9 4H5L.5 12 5 20h4l7.89-12.63L19.5 12 15 20h4l4.5-8z" />
-                                </svg>
-                                <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFF">
-                                    <path d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                                </svg>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div style="text-align: start; position: absolute; top: 0px; width: 100%;">
+        <div style="height: calc(100% - 40px); widows: 100%;">
+            <div style="text-align: start; position: absolute; top: 0px; width: 100%; height: 40px;">
                 <div style="height: 100%; width: 100%; display: flex;">
                     <div style="width: calc(100% - 40px)">
-                        <el-input v-model="inputText" autosize type="textarea" placeholder="Send a message"
-                            style="width: 100%;" :autosize="{ minRows: 1, maxRows: 4 }" @keydown.enter="submitText()" />
+                        <el-input v-model="inputText" type="textarea" placeholder="Send a message" style="width: 100%;"
+                            :autosize="{ minRows: 1, maxRows: 4 }" />
                     </div>
                     <div style="width: 40px;">
                         <transition name="fade">
@@ -90,12 +33,59 @@
                     </div>
                 </div>
             </div>
+            <div ref="scrollableDiv"
+                style="position: absolute; top: 40px; height: calc(100% - 40px); width: 100%; overflow-y: auto;">
+                <div v-for="(item, item_i) in textGroup" :key="'group_' + item_i" :id="'group_' + item_i" :style="{
+                    'transition': '1s', 'padding-top': '5px', 'padding-bottom': '5px', 'opacity': 1
+                }">
+                    <div style="width: 100%; display: flex;">
+                        <div v-if="item.tag == -1" style=" width: 40px; padding-top: 3px; padding-left: 0px;">
+                            <div
+                                style="background-color: rgb(91, 155, 255); width: 35px; height: 35px; border-radius: 6px; padding: 4px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFF">
+                                    <path d="M0 0h24v24H0z" fill="none" />
+                                    <path
+                                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div style="width: calc(100% - 40px);">
+                            <div v-if="item.tag == -1"
+                                style="width: 100%; line-height:1lh; text-align: start; padding-right: 5px; background-color: rgb(173, 216, 230, 0); padding: 8px; border-radius: 5px; border: 1px solid rgba(0, 0, 0, .3);">
+                                {{ item.text }}
+                            </div>
+                            <div v-else
+                                style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3);">
+                                <span v-for="(o, i) in item.outputTextGroup" :key="'res_' + i"
+                                    :class="{ 'dataObject': o.tag != -1 }" :style="{
+                                        backgroundColor: o.tag == 2 ? o.color + '4D' : 'white',
+                                        'border-bottom': o.tag == 0 || o.tag == 2 ? '3px solid ' + o.color : '0px',
+                                        'text-decoration-color': o.color
+                                    }" @click="hoverObject(o)">{{ o.text }}</span>
+                            </div>
+                        </div>
+
+                        <div v-if="item.tag == 1" style="padding-top: 3px; padding-left: 0px; width: 40px;">
+                            <div
+                                style="background-color: rgb(91, 155, 255); width: 35px; height: 35px; border-radius: 6px; padding: 4px; float: right;">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFF">
+                                    <path d="M0 0h24v24H0z" fill="none" />
+                                    <path
+                                        d="M19 4h-4L7.11 16.63 4.5 12 9 4H5L.5 12 5 20h4l7.89-12.63L19.5 12 15 20h4l4.5-8z" />
+                                </svg>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </template>
 <script>
 import { useDataStore } from "../stores/counter";
-import description_data from "@/assets/data/description.json"
+import description_data from "@/assets/data/test.json"
 export default {
     name: "DataTable",
     props: [],
@@ -112,54 +102,100 @@ export default {
         colorTrans (color) {
             return `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
         },
+        scrollToBottom () {
+            this.$refs.scrollableDiv.scrollTop = this.$refs.scrollableDiv.scrollHeight;
+        },
         submitText () {
             this.inputText = this.inputText.trim();
             let inputText = this.inputText;
-            let outputText = '';
-            let outputTextArray = [];
-            this.inputText = '';
+            console.log(description_data);
+            this.inputText = "";
+            let originalText = description_data[0]['OriginText'];
+            // console.log(originalText);
+            this.textGroup.push({
+                tag: -1,
+                text: originalText
+            })
+            this.$nextTick(() => {
+                this.scrollToBottom();
+            })
+            let outputTextGroup = [];
             let startPos = 0;
             let endPos = 0;
-            this.textGroup.push({
-                tag: 0,
-                text: inputText,
-                opacity: 0,
-                outputTextArray: []
-            });
-            console.log(description_data)
             for (let i in description_data) {
-                // console.log(this.colorTrans(description_data[i].color), description_data[i].color);
-                let range = description_data[i].objectRange;
-                endPos = range[0];
-                let s = inputText.slice(startPos, endPos)
-                outputText += s;
-                outputText += `<span class="dataObject" style="background-color: ${this.colorTrans(description_data[i].color)};">` + description_data[i].objectText + `</span>`;
-                outputTextArray.push({
-                    s: s,
-                    tag: 0
-                });
-                outputTextArray.push({
-                    s: description_data[i].objectText,
-                    tag: 1,
-                    color: this.colorTrans(description_data[i].color),
-                    rawColor: description_data[i].color,
-                    objectName: description_data[i].objectName,
-                    tableIndex: description_data[i].tableIndex
-                })
-                startPos = range[1];
+                for (let j in description_data[i].ConversationInfo) {
+                    let info = description_data[i].ConversationInfo[j];
+                    let pos = []
+                    if (typeof (info['Num']) == 'object') {
+                        for (let k in info['Num']) {
+                            pos.push({
+                                pos: info['NumPosition'][k],
+                                text: info['Num'][k],
+                                tag: 0
+                            })
+                        }
+                    }
+                    if (typeof (info['Trend']) == 'object') {
+                        for (let k in info['Trend']) {
+                            pos.push({
+                                pos: info['TrendPosition'][k],
+                                text: info['Trend'][k],
+                                tag: 1
+                            })
+                        }
+                    }
+                    if (typeof (info['ObjectName']) == 'object') {
+                        for (let k in info['ObjectName']) {
+                            pos.push({
+                                pos: info['ObjectPosition'][k],
+                                text: info['ObjectName'][k],
+                                tag: 2
+                            })
+                        }
+                    }
+                    pos.sort((a, b) => a.pos[0] - b.pos[0])
+                    for (let k in pos) {
+                        endPos = pos[k].pos[0];
+                        let s = originalText.slice(startPos, endPos);
+                        console.log(startPos, endPos, s, "0")
+                        if (startPos != endPos) {
+                            console.log(s)
+                            outputTextGroup.push({
+                                text: s,
+                                tag: -1,
+                            })
+                        }
+                        startPos = pos[k].pos[0];
+                        endPos = pos[k].pos[1] + 1;
+                        s = originalText.slice(startPos, endPos);
+                        console.log(startPos, endPos, s, "1")
+                        outputTextGroup.push({
+                            text: s,
+                            tag: pos[k].tag,
+                            color: description_data[i].color
+                        });
+                        startPos = endPos;
+                    }
+                }
+                // outputTextGroup.push({
+                //     tag: 
+                // })
+
             }
-            endPos = inputText.length;
-            let s = inputText.slice(startPos, endPos)
-            outputText += s;
-            this.outputText = outputText;
-            this.outputTextArray = outputTextArray;
+            outputTextGroup.push({
+                text: originalText.slice(startPos, originalText.length
+                ),
+                tag: -1,
+                color: description_data[0].color
+            });
+
             this.textGroup.push({
                 tag: 1,
-                text: '',
-                opacity: 0,
-                outputTextArray: outputTextArray
-            });
-            // console.log(this.outputTextArray)
+                outputTextGroup: outputTextGroup
+            })
+            this.$nextTick(() => {
+                this.scrollToBottom();
+            })
         },
         hoverObject (o) {
             // console.log(o, this.objectTag);
@@ -210,18 +246,18 @@ export default {
     },
     watch: {
         inputText (newVal, oleVal) {
-            this.inputText = this.inputText.trim();
+            // this.inputText = this.inputText.trim();
         },
         textGroup: {
             handler (newVal, oleVal) {
-                // console.log(this.textGroup.length);
-                setTimeout(() => {
-                    document.getElementById('group_' + (this.textGroup.length - 2)).style.opacity = 1;
-                }, 500);
+                // // console.log(this.textGroup.length);
+                // setTimeout(() => {
+                //     document.getElementById('group_' + (this.textGroup.length - 2)).style.opacity = 1;
+                // }, 500);
 
-                setTimeout(() => {
-                    document.getElementById('group_' + (this.textGroup.length - 1)).style.opacity = 1;
-                }, 2000);
+                // setTimeout(() => {
+                //     document.getElementById('group_' + (this.textGroup.length - 1)).style.opacity = 1;
+                // }, 2000);
             },
             deep: true
         }
@@ -229,7 +265,7 @@ export default {
     created () {
     },
     mounted () {
-        this.inputText = "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."
+        this.inputText = "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter."
         this.submitText();
 
     },

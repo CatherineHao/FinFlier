@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-22 14:28:15
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-08-27 20:02:20
+ * @LastEditTime: 2023-08-27 22:01:14
 -->
 <template>
     <div style="height: 100%;">
@@ -135,7 +135,7 @@ thead tr th {
 }
 
 td {
-    /* white-space: nowrap; */
+    white-space: nowrap;
     /* border-radius: 5px; */
     /* background-color: aquamarine; */
 }
