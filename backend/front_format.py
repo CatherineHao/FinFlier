@@ -24,7 +24,75 @@ result = "result: [{\"ObjectName\":[\"Food inflation\"],\"Position\":[{\"Begin\"
 # 经过转换以后的convert_result是如下格式
 # convert_result = [{"ObjectName":["Food inflation"],"Position":[{"Begin":[11,1],"End":[11,1]}],"Trend":"declined","Num": "None","Text":"Food prices in China declined by 1.7 percent year-on-year in July 2023"},
                 # {"ObjectName":["Food inflation"],"Position":[{"Begin":[6,1],"End":[6,1]}],"Trend":"None","Num":[2.3],"Text":"a 2.3 percent rise in the prior month"}]
+def transform_conversation_info(conversation_info):
+    transformed = []
+        
+    for convert_item in conversation_info:
+        trend = convert_item['Trend']
+        trend_position = convert_item['TrendPosition']
+        num = convert_item['Num']
+        num_position = convert_item['NumPosition']
+        object_name = convert_item['ObjectName']
+        object_pos = convert_item['ObjectPosition']
 
+        if trend:
+            transformed.append({
+                "Position": trend_position,
+                "Text": trend,
+                "OverTag": 1,
+                "Type": "Trend"
+            })
+
+        if num and num_position[0] is not None:
+            for i, n in enumerate(num):
+                if object_pos and num_position and num_position[i]:
+                    if object_pos != [None] and num_position[i][0] > object_pos[0][0] and num_position[i][1] < object_pos[0][1]:
+                        overtag = 2
+                    else: 
+                        overtag = 1
+                else:
+                    overtag = 1
+
+                transformed.append({
+                    "Position": num_position[i],
+                    "Text": str(n),
+                    "OverTag": overtag,
+                    "Type": "Num"
+                })
+
+        if object_name[0]:
+            if num and num_position[0] is not None:
+                if object_pos != [None] and num_position and num_position[0][0] > object_pos[0][0] and num_position[0][1] < object_pos[0][1]:
+                    object_pos_1 = [object_pos[0][0], num_position[0][0] - 1]
+                    object_pos_2 = [num_position[0][1] + 1, object_pos[0][1]]
+
+                    transformed.append({
+                        "Position": [object_pos_1,object_pos_2],
+                        "Text": object_name[0],
+                        "OverTag": 0,
+                        "Type": "ObjectName"
+                    })
+
+            else:
+                transformed.append({
+                    "Position": object_pos,
+                    "Text": object_name[0],
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                })
+
+    return transformed
+
+def transform_result(result):
+    transformed = []
+    for item in result:
+        conversation_info = item['ConversationInfo']
+        transformed_conversation = transform_conversation_info(conversation_info)
+
+        item_copy = item.copy()
+        item_copy['ConversationInfo'] = transformed_conversation
+        transformed.append(item_copy)
+    return transformed
 
 def result_to_frontend(user_info, result):
     # print(user_info.find("[\""))
@@ -62,6 +130,35 @@ def result_to_frontend(user_info, result):
 
         mean, max, min = line_calculate(user_info_data, position[0]["Begin"], position[-1]["End"])
 
+        # 0828 the new one:
+        # "ConversationInfo":
+        # [{
+        #     "Position": [],
+        #     "Text": "a",
+        #     "OverTag": 0 background, 1 underline, 2 both,
+        #     "Type": "ObjectName"/"Trend"/"Num"
+        # },{}]
+
+        # [{
+        #     "Position": [21,28],
+        #     "Text": "declined",
+        #     "OverTag": 0
+        #     "Type": "Trend"
+        # },
+        # {
+        #     "Position": [None],
+        #     "Text": "-1.7",
+        #     "OverTag": 0
+        #     "Type": "Num"
+        # },
+        # {
+        #     "Position": [None],
+        #     "Text": "Foof inflation",
+        #     "OverTag": 0
+        #     "Type": "OnjectName"
+        # }
+        # ]
+
         result_frontend.append({
             "OriginText": user_info_text,
             "Position": position,
@@ -86,6 +183,7 @@ def result_to_frontend(user_info, result):
                 }
             }]
         })
+
     return result_frontend
 
 def line_calculate(user_info_data, begin, end):
@@ -106,4 +204,25 @@ def line_calculate(user_info_data, begin, end):
 
 if __name__ == '__main__':
     result_frontend = result_to_frontend(user_info, result)
-    print(result_frontend)
+    # print(result_frontend)
+    format_new_result = transform_result(result_frontend)
+    print(format_new_result)
+
+# example = [{
+#         'ConversationInfo': 
+#         [{
+#         "Trend": "None",
+#         "TrendPosition": None,
+#         "Num": [15.73],
+#         "NumPosition": [[273, 277]],
+#         "ObjectName": ['a record CNY 15.73 trillion loans'],
+#         "ObjectPosition": [[260, 292]]
+#     }],
+#     'GraphicalOverlay': 
+#     [{'Text': 'after a record CNY 15.73 trillion loans in the first half of the year', 
+#     'Label': [15.73], 
+#     'Marker': [{'Begin': ['Banks Balance Sheet (CNY Billion)', 11], 'End': ['Banks Balance Sheet (CNY Billion)', 11]}], 
+#     'Line': {'Begin': ['Banks Balance Sheet (CNY Billion)', 11], 'End': ['Banks Balance Sheet (CNY Billion)', 11], 
+#     'mean': 3050.0, 
+#     'max': 3050.0, 
+#     'min': 3050.0}}]}]

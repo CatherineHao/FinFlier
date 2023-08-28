@@ -13,7 +13,7 @@ import openai
 from flask import Flask, redirect, render_template, request, jsonify
 from flask_cors import CORS, cross_origin
 
-from front_format import result_to_frontend
+from front_format import result_to_frontend, transform_result
 
 app = Flask(__name__)
 CORS(app)
@@ -175,7 +175,8 @@ def chat_with_gpt(user_info):
     result = reply[0:start_index]
     reason = reply[start_index:]
     result_frontend = result_to_frontend(user_info, result)
-    return result, reason, result_frontend
+    final_result = transform_result(result_frontend)
+    return result, reason, final_result
 
 # prompt: 一共14个example 9个normal/uptrend/downtrend + 5个超级长的head and shoulder/cup with handle/double top/triple top/rounding bottom
 default_prompt = """Please think as an financial data analyst. Now I wish to complete the matching of tha data to text, identifying the objects, trend in the text and their position in the data. For each pair, give me the matching result and the reason.
