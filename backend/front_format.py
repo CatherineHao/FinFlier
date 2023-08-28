@@ -203,26 +203,29 @@ def line_calculate(user_info_data, begin, end):
     return mean_num, max_num, min_num
 
 if __name__ == '__main__':
-    result_frontend = result_to_frontend(user_info, result)
+    # result_frontend = result_to_frontend(user_info, result)
     # print(result_frontend)
-    format_new_result = transform_result(result_frontend)
+    # format_new_result = transform_result(result_frontend)
+    example = [{'OriginText': 'Food prices in China declined by 1.7 percent year-on-year in July 2023, reversing from a 2.3 percent rise in the prior month while pointing to the first drop since March 2022.', 
+'Position': [{'Begin': ['Food inflation', 11], 'End': ['Food inflation', 11]}], 
+'ConversationInfo': 
+    [{'Trend': 'declined', 
+    'TrendPosition': [21, 28], 
+    'Num': [-1.7], 
+    'NumPosition': [None], 
+    'ObjectName': ['Food prices in China'], 
+    'ObjectPosition': [[0, 19]]}], 
+'GraphicalOverlay': 
+    [{'Text': 'Food prices in China declined by 1.7 percent year-on-year in July 2023', 
+    'Label': [-1.7], 
+    'Marker': [{'Begin': ['Food inflation', 11], 'End': ['Food inflation', 11]}], 
+    'Line': {'Begin': ['Food inflation', 11], 
+    'End': ['Food inflation', 11], 
+    'mean': -1.7, 
+    'max': -1.7, 
+    'min': -1.7}}]}]
+    
+    format_new_result = transform_result(example)
     print(format_new_result)
 
-# example = [{
-#         'ConversationInfo': 
-#         [{
-#         "Trend": "None",
-#         "TrendPosition": None,
-#         "Num": [15.73],
-#         "NumPosition": [[273, 277]],
-#         "ObjectName": ['a record CNY 15.73 trillion loans'],
-#         "ObjectPosition": [[260, 292]]
-#     }],
-#     'GraphicalOverlay': 
-#     [{'Text': 'after a record CNY 15.73 trillion loans in the first half of the year', 
-#     'Label': [15.73], 
-#     'Marker': [{'Begin': ['Banks Balance Sheet (CNY Billion)', 11], 'End': ['Banks Balance Sheet (CNY Billion)', 11]}], 
-#     'Line': {'Begin': ['Banks Balance Sheet (CNY Billion)', 11], 'End': ['Banks Balance Sheet (CNY Billion)', 11], 
-#     'mean': 3050.0, 
-#     'max': 3050.0, 
-#     'min': 3050.0}}]}]
+
