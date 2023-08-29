@@ -67,7 +67,7 @@
             'left': `${item.text.pos[0]}px`,
             'width': '150px',
             'transition': '0.4s',
-            'opacity': 1,
+            'opacity': item.tag != -1 && (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
             'padding': '3px',
             'border': '2px solid red',
             'border-radius': '10px',
@@ -78,11 +78,11 @@
         </div>
         <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
             'position': 'absolute',
-            'top': `${0}px`,
-            'left': `${item.text.pos[0]}px`,
+            'top': `${.1 * elHeight}px`,
+            'left': `${item.label.pos[0]}px`,
             'width': '150px',
             'transition': '0.4s',
-            'opacity': 1,
+            'opacity': item.tag != -1 && (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
             'padding': '3px',
             'border': '2px solid red',
             'border-radius': '10px',
