@@ -420,7 +420,10 @@ if __name__ == '__main__':
                 label: "start"
             """
 
-    user_info = test_0
+    test_0830 = """data: [{"Time":"2022-Jul","Banks Balance Sheet (CNY Billion)":"679"},{"Time":"2022-Aug","Banks Balance Sheet (CNY Billion)":"1250"},{"Time":"2022-Sep","Banks Balance Sheet (CNY Billion)":"2470"},{"Time":"2022-Oct","Banks Balance Sheet (CNY Billion)":"615.2"},{"Time":"2022-Nov","Banks Balance Sheet (CNY Billion)":"1210"},{"Time":"2022-Dec","Banks Balance Sheet (CNY Billion)":"1400"},{"Time":"2023-Jan","Banks Balance Sheet (CNY Billion)":"4900"},{"Time":"2023-Feb","Banks Balance Sheet (CNY Billion)":"1810"},{"Time":"2023-Mar","Banks Balance Sheet (CNY Billion)":"3890"},{"Time":"2023-Apr","Banks Balance Sheet (CNY Billion)":"718.8"},{"Time":"2023-May","Banks Balance Sheet (CNY Billion)":"1360"},{"Time":"2023-Jun","Banks Balance Sheet (CNY Billion)":"3050"},{"Time":"2023-Jul","Banks Balance Sheet (CNY Billion)":"345.9"}]text: ["China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter."]label: "start"
+"""
+
+    user_info = test_0830
     # print(user_info)
     result, reason, result_frontend = chat_with_gpt(user_info)
     # print(result)

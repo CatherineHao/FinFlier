@@ -84,12 +84,26 @@
     "OverTag": 2,
     "Type": "Num"
     },
-    {
+    <!-- {
     "Position": [[260,272],[278,292]],
     "Text": "a record CNY 15.73 trillion loans",
     "OverTag": 0,
     "Type": "ObjectName"
-    }]
+    }] -->
+    {
+    "Position": [[260,272]],
+    "Text": "a record CNY",
+    "OverTag": 0,
+    "Type": "ObjectName"
+    },
+    {
+    "Position": [[278,292]],
+    "Text": "trillion loans",
+    "OverTag": 0,
+    "Type": "ObjectName"
+    }
+    ]
+<!-- end -->
 'GraphicalOverlay': 
     [{'Text': 'after a record CNY 15.73 trillion loans in the first half of the year', 
     'Label': [15.73], 
