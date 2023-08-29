@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-07-10 18:18:22
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-08-28 18:26:01
+ * @LastEditTime: 2023-08-29 00:14:11
 -->
 <template>
     <div style="height: 100%; width: 100%;">
@@ -57,11 +57,13 @@
                             <div v-else
                                 style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3);">
                                 <span v-for="(o, i) in item.outputTextGroup" :key="'res_' + i"
-                                    :class="{ 'dataObject': o.tag != -1 }" :style="{
-                                        backgroundColor: o.tag == 2 ? o.color + '4D' : 'white',
-                                        'border-bottom': o.tag == 0 || o.tag == 2 ? '3px solid ' + o.color : '0px',
+                                    :class="{ 'dataObject': o.tag != -1 }" :id="o.id" :style="{
+                                        backgroundColor: o.tag == 2 ? o.back_color : 'white',
+                                        'border-bottom': o.tag == 0 || o.tag == 1 ? '3px solid ' + o.color : '0px',
                                         'text-decoration-color': o.color
-                                    }" @click="hoverObject(o)">{{ o.text }}</span>
+                                    }" @click="o.tag != -1 ? hoverObject(o) : ''"
+                                    @mouseenter="o.tag != -1 ? handleHover(o) : ''"
+                                    @mouseout="o.tag != -1 ? handleOut(o) : ''">{{ o.text }}</span>
                             </div>
                         </div>
 
@@ -84,6 +86,7 @@
     </div>
 </template>
 <script>
+import { selectAll } from "d3";
 import { useDataStore } from "../stores/counter";
 import description_data from "@/assets/data/test.json"
 export default {
@@ -105,6 +108,17 @@ export default {
         scrollToBottom () {
             this.$refs.scrollableDiv.scrollTop = this.$refs.scrollableDiv.scrollHeight;
         },
+        handleHover (o) {
+            selectAll("#" + o.id).style('border-top-color', 'black');
+            selectAll("#" + o.id).style('border-left-color', 'black');
+            selectAll("#" + o.id).style('border-right-color', 'black');
+        },
+        handleOut (o) {
+
+            selectAll("#" + o.id).style('border-top-color', 'white');
+            selectAll("#" + o.id).style('border-left-color', 'white');
+            selectAll("#" + o.id).style('border-right-color', 'white');
+        },
         submitText () {
             this.inputText = this.inputText.trim();
             let inputText = this.inputText;
@@ -122,6 +136,14 @@ export default {
             let outputTextGroup = [];
             let startPos = 0;
             let endPos = 0;
+            const dataStore = useDataStore();
+            // let overlay_set = d
+            for (let i in description_data) {
+                console.log(description_data[i]['ObjectName'])
+                dataStore.state_map.state0.overlay_setting[description_data[i]['ObjectName']] = dataStore.type_chart_setting.overlayFormat;
+            }
+            console.log(dataStore.state_map.state0.overlay_setting)
+            // for (let i in )
             for (let i in description_data) {
                 for (let j in description_data[i].ConversationInfo) {
                     let info = description_data[i].ConversationInfo[j];
@@ -157,7 +179,6 @@ export default {
                     for (let k in pos) {
                         endPos = pos[k].pos[0];
                         let s = originalText.slice(startPos, endPos);
-                        console.log(startPos, endPos, s, "0")
                         if (startPos != endPos) {
                             console.log(s)
                             outputTextGroup.push({
@@ -168,12 +189,19 @@ export default {
                         startPos = pos[k].pos[0];
                         endPos = pos[k].pos[1] + 1;
                         s = originalText.slice(startPos, endPos);
-                        console.log(startPos, endPos, s, "1")
+                        let bak_color = description_data[i].color;
+                        bak_color.a = 0.4;
                         outputTextGroup.push({
+                            id: description_data[i]['ObjectName'],
+                            objectName: description_data[i]['ObjectName'],
                             text: s,
                             tag: pos[k].tag,
-                            color: description_data[i].color
+                            position: description_data[i]['Position'],
+                            rawColor: description_data[i].color,
+                            color: this.colorTrans(description_data[i].color),
+                            back_color: this.colorTrans(bak_color)
                         });
+
                         startPos = endPos;
                     }
                 }
@@ -185,8 +213,7 @@ export default {
             outputTextGroup.push({
                 text: originalText.slice(startPos, originalText.length
                 ),
-                tag: -1,
-                color: description_data[0].color
+                tag: -1
             });
 
             this.textGroup.push({
@@ -206,14 +233,27 @@ export default {
             // console.log(objectName);
             const dataStore = useDataStore();
             let objectTag = dataStore.objectTag;
+            let rawData = dataStore.data;
+            let th = rawData.columns;
+            let t_cnt = 0;
+            console.log(o.position)
+            for (let i in th) {
+                if (th[i] == o.position[0]['Begin'][0]) {
+                    break;
+                } else {
+                    t_cnt++;
+                }
+            }
             let tableTag = {};
-            for (let i in o.tableIndex) {
-                console.log(o.color)
-                tableTag['cellR' + (o.tableIndex[i][0]).toString() + 'C' + (o.tableIndex[i][1]).toString()] = {
+            // console.log(t_cnt)
+            for (let i = parseInt(o.position[0]['Begin'][1]); i <= parseInt(o.position[0]['End'][1]); ++i) {
+                // console.log(o.color)
+                tableTag['cellR' + (i).toString() + 'C' + (t_cnt + 1).toString()] = {
                     tag: 1,
                     color: o.color
                 };
             }
+            // console.log(tableTag);
             dataStore.selectTable = tableTag;
             // console.log(tableTag)
             this.tableTag = tableTag;
@@ -284,14 +324,9 @@ export default {
     font-weight: bold;
     cursor: pointer;
     transition: 0.4s;
+    /* border-color: bal; */
 }
 
-@media (hover: hover) {
-    .dataObject:hover {
-
-        border: 1px solid rgba(0, 0, 0, 1);
-    }
-}
 
 .btn {
     height: 31px;
