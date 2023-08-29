@@ -59,8 +59,6 @@ export const useDataStore = defineStore("dataStore", {
                             y: "Billions of dollars"
                         }},
                     overlay_setting: {
-                        object0: {},
-                        object1: {}
                     }
                 }
             },

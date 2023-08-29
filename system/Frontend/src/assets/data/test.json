@@ -1,6 +1,8 @@
 [{
-        "ObjectName": "Object0",
-        "color": "#AECDEA",
+        "ObjectName": "object0",
+        "color": {
+            "r": 174, "g": 205,"b":234, "a": 1
+        },
         "OriginText": "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.",
         "Position": [
             {
@@ -73,8 +75,10 @@
         ]
     },
     {
-        "ObjectName": "Object1",
-        "color": "#F9CBDC",
+        "ObjectName": "object1",
+        "color": {
+            "r": 249, "g": 203,"b":220, "a": 1
+        },
         "OriginText": "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.",
         "Position": [
             {
@@ -147,8 +151,10 @@
         ]
     },
     {
-        "ObjectName": "Object2",
-        "color": "#C4DF9B",
+        "ObjectName": "object2",
+        "color": {
+            "r": 196, "g": 223,"b":155, "a": 1
+        },
         "OriginText": "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.",
         "Position": [
             {
@@ -216,8 +222,10 @@
         ]
     },
     {
-        "ObjectName": "Object3",
-        "color": "#FAF3D2",
+        "ObjectName": "object3",
+        "color": {
+            "r": 250, "g": 243,"b":210, "a": 1
+        },
         "OriginText": "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.",
         "Position": [
             {
