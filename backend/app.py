@@ -169,7 +169,7 @@ def chat_with_gpt(user_info):
         #stop = ["\n"],
         stop=None,
     )
-    # print(response)
+    print(response)
     reply = response['choices'][0]['message']['content']
     start_index = reply.find('reason:')
     result = reply[0:start_index]
@@ -350,10 +350,10 @@ if __name__ == '__main__':
     #     print("system: Goodbye!")
     #     break
     # user_input = input("Enter the data and the text:")
-    test_0 = """data: [{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
-                        {'Category':'Real Gross Output','Outdoor recreation':'21.8','U.S. economy':'6.3'},
-                        {'Category':'Compensation','Outdoor recreation':'16.2','U.S. economy':'7.8'},
-                        {'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}]
+    test_0 = """data: [{'Category':'Real GDP','Outdoor recreation': 18.9,'U.S. economy': 5.9},
+                        {'Category':'Real Gross Output','Outdoor recreation': 21.8,'U.S. economy': 6.3},
+                        {'Category':'Compensation','Outdoor recreation': 16.2,'U.S. economy': 7.8},
+                        {'Category':'Compensation','Outdoor recreation': 13.1,'U.S. economy': 2.7}]
                 text: ["Inflation-adjusted ('real') GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."]
                 label: "start"
             """
@@ -419,7 +419,7 @@ if __name__ == '__main__':
                 label: "start"
             """
 
-    user_info = test_0
+    user_info = test_1
     # print(user_info)
     result, reason, result_frontend = chat_with_gpt(user_info)
     # print(result)
@@ -438,5 +438,7 @@ if __name__ == '__main__':
 #                     {'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}] }]"""
 #     text = """'text':Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."""
 
-# TODO：动态prompt
-# TODO：time[0]和time[1]差一天用line 否则用bar。但是也不太对，怎么解决再想想。
+# TODO: 动态prompt
+# TODO: time[0]和time[1]差一天用line 否则用bar。但是也不太对，怎么解决再想想。
+# TODO: following对话
+# TODO: test_0 response没有reason
