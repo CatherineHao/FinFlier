@@ -56,7 +56,7 @@
 'ConversationInfo': 
     [{'Trend': 'None', 
     'TrendPosition': None, 
-    'Num': [3050], 
+    'Num': [3.05], 
     'NumPosition': [None], 
     'ObjectName': ['in June'], 
     'ObjectPosition': [[245, 251]]}], 
@@ -70,12 +70,26 @@
     'min': 3050.0}}]}, 
 {'OriginText': "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.", 
 'Position': [{'Begin': ['Banks Balance Sheet (CNY Billion)', 11], 'End': ['Banks Balance Sheet (CNY Billion)', 11]}], 
-'ConversationInfo': 
+<!-- 'ConversationInfo': 
     [{'Trend': 'None', 
     'TrendPosition': None, 
     'Num': [15.73], 
     'NumPosition': [[273, 277]], 
-'ObjectName': ['a record CNY 15.73 trillion loans'], 'ObjectPosition': [[260, 292]]}], 
+'ObjectName': ['a record CNY 15.73 trillion loans'], 'ObjectPosition': [[260, 292]]}],  -->
+<!-- 0828改成对应下面的状态： -->
+    'ConversationInfo': 
+    [{
+    "Position": [273,277],
+    "Text": "declined",
+    "OverTag": 2,
+    "Type": "Num"
+    },
+    {
+    "Position": [[260,272],[278,292]],
+    "Text": "a record CNY 15.73 trillion loans",
+    "OverTag": 0,
+    "Type": "ObjectName"
+    }]
 'GraphicalOverlay': 
     [{'Text': 'after a record CNY 15.73 trillion loans in the first half of the year', 
     'Label': [15.73], 
@@ -84,6 +98,34 @@
     'mean': 3050.0, 
     'max': 3050.0, 
     'min': 3050.0}}]}]
+
+# 0828 对应后端传来的数据：
+[{'OriginText': "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.", 
+'Position': 
+    [{'Begin': ['Banks Balance Sheet (CNY Billion)', 12], 'End': ['Banks Balance Sheet (CNY Billion)', 12]}], 'ConversationInfo': 
+    [{'Position': None, 'Text': 'None', 'OverTag': 1, 'Type': 'Trend'}, {'Position': [27, 31], 'Text': '345.9', 'OverTag': 1, 'Type': 'Num'}], 
+'GraphicalOverlay': 
+    [{'Text': "China's banks extended CNY 345.9 billion in new yuan loans in July 2023", 'Label': [345.9], 'Marker': [{'Begin': ['Banks Balance Sheet (CNY Billion)', 12], 'End': ['Banks Balance Sheet (CNY Billion)', 12]}], 'Line': {'Begin': ['Banks Balance Sheet (CNY Billion)', 12], 'End': ['Banks Balance Sheet (CNY Billion)', 12], 'mean': 345.9, 'max': 345.9, 'min': 345.9}}]}, {'OriginText': "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.", 
+'Position': 
+    [{'Begin': ['Banks Balance Sheet (CNY Billion)', 12], 'End': ['Banks Balance Sheet (CNY Billion)', 12]}], 
+'ConversationInfo': 
+    [{'Position': None, 'Text': 'None', 'OverTag': 1, 'Type': 'Trend'}, {'Position': [196, 198], 'Text': '679', 'OverTag': 1, 'Type': 'Num'}], 
+'GraphicalOverlay': 
+    [{'Text': 'The value is also much lower than CNY 679 billion a year earlier', 'Label': [679], 'Marker': [{'Begin': ['Banks Balance Sheet (CNY Billion)', 12], 'End': ['Banks Balance Sheet (CNY Billion)', 12]}], 'Line': {'Begin': ['Banks Balance Sheet (CNY Billion)', 12], 'End': ['Banks Balance Sheet (CNY Billion)', 12], 'mean': 345.9, 'max': 345.9, 'min': 345.9}}]}, 
+{'OriginText': "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.", 
+'Position': 
+    [{'Begin': ['Banks Balance Sheet (CNY Billion)', 11], 'End': ['Banks Balance Sheet (CNY Billion)', 11]}], 
+'ConversationInfo': 
+    [{'Position': None, 'Text': 'None', 'OverTag': 1, 'Type': 'Trend'}, {'Position': [[245, 251]], 'Text': 'in June', 'OverTag': 0, 'Type': 'ObjectName'}], 
+'GraphicalOverlay': 
+    [{'Text': 'CNY 3.05 trillion in June', 'Label': [3050], 'Marker': [{'Begin': ['Banks Balance Sheet (CNY Billion)', 11], 'End': ['Banks Balance Sheet (CNY Billion)', 11]}], 'Line': {'Begin': ['Banks Balance Sheet (CNY Billion)', 11], 'End': ['Banks Balance Sheet (CNY Billion)', 11], 'mean': 3050.0, 'max': 3050.0, 'min': 3050.0}}]}, 
+{'OriginText': "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.", 
+'Position': 
+    [{'Begin': ['Banks Balance Sheet (CNY Billion)', 11], 'End': ['Banks Balance Sheet (CNY Billion)', 11]}], 
+'ConversationInfo': 
+    [{'Position': None, 'Text': 'None', 'OverTag': 1, 'Type': 'Trend'}, {'Position': [273, 277], 'Text': '15.73', 'OverTag': 2, 'Type': 'Num'}, {'Position': [[260, 272], [278, 292]], 'Text': 'a record CNY 15.73 trillion loans', 'OverTag': 0, 'Type': 'ObjectName'}], 
+'GraphicalOverlay': 
+    [{'Text': 'after a record CNY 15.73 trillion loans in the first half of the year', 'Label': [15.73], 'Marker': [{'Begin': ['Banks Balance Sheet (CNY Billion)', 11], 'End': ['Banks Balance Sheet (CNY Billion)', 11]}], 'Line': {'Begin': ['Banks Balance Sheet (CNY Billion)', 11], 'End': ['Banks Balance Sheet (CNY Billion)', 11], 'mean': 3050.0, 'max': 3050.0, 'min': 3050.0}}]}]
 
 # 前端传来的数据：
 """data: [{'Time': 'Aug 2022', 'Food inflation': 6.1}, 
@@ -121,6 +163,14 @@
     'max': -1.7, 
     'min': -1.7}}]}]
 
+# 0828返回数据
+[{'OriginText': 'Food prices in China declined by 1.7 percent year-on-year in July 2023, reversing from a 2.3 percent rise in the prior month while pointing to the first drop since March 2022.', 
+'Position': 
+    [{'Begin': ['Food inflation', 11], 'End': ['Food inflation', 11]}], 
+'ConversationInfo': 
+    [{'Position': [21, 28], 'Text': 'declined', 'OverTag': 1, 'Type': 'Trend'}, {'Position': [[0, 19]], 'Text': 'Food prices in China', 'OverTag': 0, 'Type': 'ObjectName'}], 
+'GraphicalOverlay': 
+    [{'Text': 'Food prices in China declined by 1.7 percent year-on-year in July 2023', 'Label': [-1.7], 'Marker': [{'Begin': ['Food inflation', 11], 'End': ['Food inflation', 11]}], 'Line': {'Begin': ['Food inflation', 11], 'End': ['Food inflation', 11], 'mean': -1.7, 'max': -1.7, 'min': -1.7}}]}]
 
 """data: [{'Time': '2022 Q1', 'Unemployment rate': 7.3}, 
                         {'Time': '2022 Q2', 'Unemployment rate': 7.4}, 
@@ -168,3 +218,40 @@
     'mean': -1.7, 
     'max': -1.7, 
     'min': -1.7}}]}]
+
+# 0828返回数据
+[{'OriginText': 'Food prices in China declined by 1.7 percent year-on-year in July 2023, reversing from a 2.3 percent rise in the prior month while pointing to the first drop since March 2022.', 
+'Position': [{'Begin': ['Food inflation', 11], 'End': ['Food inflation', 11]}], 
+'ConversationInfo': 
+    [{'Position': [21, 28], 'Text': 'declined', 'OverTag': 1, 'Type': 'Trend'}, {'Position': [[0, 19]], 'Text': 'Food prices in China', 'OverTag': 0, 'Type': 'ObjectName'}], 
+'GraphicalOverlay': 
+    [{'Text': 'Food prices in China declined by 1.7 percent year-on-year in July 2023', 'Label': [-1.7], 'Marker': [{'Begin': ['Food inflation', 11], 'End': ['Food inflation', 11]}], 'Line': {'Begin': ['Food inflation', 11], 'End': ['Food inflation', 11], 'mean': -1.7, 'max': -1.7, 'min': -1.7}}]}]
+
+
+# 0828 the new one:
+# "ConversationInfo":
+# [{
+#     "Position": [],
+#     "Text": "a",
+#     "OverTag": 0 background, 1 underline, 2 both,
+#     "Type": "ObjectName"/"Trend"/"Num"
+# },{}]
+# [{
+#     "Position": [21,28],
+#     "Text": "declined",
+#     "OverTag": 0
+#     "Type": "Trend"
+# },
+# {
+#     "Position": [None],
+#     "Text": "-1.7",
+#     "OverTag": 0
+#     "Type": "Num"
+# },
+# {
+#     "Position": [None],
+#     "Text": "Foof inflation",
+#     "OverTag": 0
+#     "Type": "OnjectName"
+# }
+# ]

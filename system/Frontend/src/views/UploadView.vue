@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Qing Shi
  * @Date: 2022-09-17 23:36:36
- * @LastEditTime: 2023-02-13 11:02:16
+ * @LastEditTime: 2023-08-26 19:53:01
 -->
 <template>
     <div class="common-layout" style="width: 100%; height: 100vh; background-color: white;">
@@ -64,6 +64,7 @@ export default {
             dataStore.fetchBasicChart({
                 data: data
             })
+            console.log(data);
             this.jump('home');
         }
     },

@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-06-29 10:17:17
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-07-14 10:45:24
+ * @LastEditTime: 2023-08-27 19:15:10
 -->
 <template>
     <div style="height: 100%; width: 100%;">
@@ -42,7 +42,7 @@
                 </v-sheet> -->
             </div>
             <div style="height: calc(70%); width: 100%;" v-loading="initChart" ref="mainView">
-                <component :is="tabs[chartData['chartType']]" :rawData="rawData" :chartData="chartData" :defaultTag="1" :scaleTag="1"></component>
+                <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData" :defaultTag="1" :scaleTag="1"></component>
             </div>
             <hr>
             <div style="height: calc(30% - 0px); width: 100%; background-color: white; display: flex; justify-content: space-between; align-items: center;">
@@ -57,6 +57,9 @@
 <script>
 import { useDataStore } from "../stores/counter";
 import singleBar from "./chart/singleBar.vue";
+import singleLine from "./chart/singleLine.vue";
+import multipleBar from "./chart/multipleBar.vue";
+import multipleLine from "./chart/multipleLine.vue";
 import chart_data from "../assets/data/chart.json";
 export default {
     name: "DataChart",
@@ -67,7 +70,10 @@ export default {
             rawData: [],
             chartData: {},
             tabs: {
-                'Single bar chart': 'singleBar'
+                'Single bar chart': 'singleBar',
+                'Single line chart': 'singleLine',
+                'Multiple bar chart': 'multipleBar',
+                'Multiple line chart': 'multipleLine'
             },
             chartType: ['Single bar chart', 'Single line chart', 'Multiple bar chart', 'Multiple line chart'],
             chartValue: null,
@@ -105,7 +111,8 @@ export default {
                 this.chartData = dataStore.chart_data;
                 this.rawData = dataStore.data;
                 this.initChart = false
-                this.chartValue = this.chartData.chartType; 
+                this.chartValue = this.chartData.chartType;
+                console.log(this.tabs[this.chartType[this.chartData.chartType]]);
             }
         })
     },
@@ -127,7 +134,7 @@ export default {
         //     dataStore.overlayTag = this.overlayTag;
         // }
     },
-    components: { singleBar }
+    components: { singleBar, singleLine, multipleBar, multipleLine }
 }
 </script>
 <style scoped></style>

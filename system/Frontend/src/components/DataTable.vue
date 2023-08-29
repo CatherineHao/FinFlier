@@ -3,52 +3,54 @@
  * @Author: Qing Shi
  * @Date: 2023-08-22 14:28:15
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-08-23 11:04:49
+ * @LastEditTime: 2023-08-27 22:01:14
 -->
 <template>
-    <div>
-        <div style="font-family: KoHo, 'operator Mono Lig'; font-size: 22px;  height: 40px; text-align: start; font-weight: bold;">
-            
+    <div style="height: 100%;">
+        <div
+            style="font-family: KoHo, 'operator Mono Lig'; font-size: 22px;  height: 40px; text-align: start; font-weight: bold;">
+
             <img src="../assets/img/1.png" width="25" alt="">&nbsp; Data Table
             <hr>
         </div>
         <!-- <v-expand-transition> -->
-            <div v-show="expand" style="overflow-y: auto; overflow-x: auto;">
-                <table style="border-collapse:separate; border-spacing:0px 5px; width: 100%">
-                    <thead style="height: 30px; border-radius: 10px;">
-                        <tr style="border-radius: 0px; 
+        <div v-show="expand" style="overflow: auto; height: calc(100% - 40px); width: 100%;">
+            <table style="border-collapse:separate; border-spacing:0px 5px;height: 100%; width: 100%;">
+                <thead style="height: 30px; border-radius: 10px;">
+                    <tr style="border-radius: 0px; 
     box-shadow: 0px 1px 1px 0px #bdbaba;">
-                            <th style="text-align: center; width: 30px;">
-                                id
-                            </th>
-                            <th v-for="(item, i) in th" :key="'th' + i" style="text-align: center;">
-                                {{ item }}
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- #ddeff6 -->
-                        <tr v-for="(item, i) in td" :key="'td' + i" class="td_tr" style="height: 30px;">
-                            <td :style="{
-                                'text-align': 'center',
-                                'border-top-left-radius': '5px',
-                                'border-bottom-left-radius': '5px',
-                                'transition': '0.4s'
-                            }" :id="'cellR' + i + 'C' + '0'" :ref="'cellR' + i + 'C' + '0'">
-                                {{ i }}
-                            </td>
-                            <td v-for="(o, oi) in th" :key="'td_' + oi" :id="'cellR' + i + 'C' + (oi + 1)" :ref="'cellR' + i + 'C' + (oi + 1)" :style="{
+                        <th style="text-align: center; width: 30px;">
+                            id
+                        </th>
+                        <th v-for="(item, i) in th" :key="'th' + i" style="text-align: center;">
+                            {{ item }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody style="height: 100px;">
+                    <!-- #ddeff6 -->
+                    <tr v-for="(item, i) in td" :key="'td' + i" class="td_tr" style="height: 30px;">
+                        <td :style="{
+                            'text-align': 'center',
+                            'border-top-left-radius': '5px',
+                            'border-bottom-left-radius': '5px',
+                            'transition': '0.4s'
+                        }" :id="'cellR' + i + 'C' + '0'" :ref="'cellR' + i + 'C' + '0'">
+                            {{ i }}
+                        </td>
+                        <td v-for="(o, oi) in th" :key="'td_' + oi" :id="'cellR' + i + 'C' + (oi + 1)"
+                            :ref="'cellR' + i + 'C' + (oi + 1)" :style="{
                                 'text-align': 'center',
                                 'border-top-right-radius': oi == (th.length - 1) ? '5px' : '0px',
                                 'border-bottom-right-radius': oi == (th.length - 1) ? '5px' : '0px',
                                 'transition': '0.4s'
                             }">
-                                {{ item[o] }}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                            {{ item[o] }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <!-- </v-expand-transition> -->
     </div>
 </template>
@@ -92,7 +94,7 @@ export default {
             for (let i in this.tableTag) {
                 // console.log(this.);
                 const element = document.getElementById(i);
-                    // console.log(element.style);
+                // console.log(element.style);
                 if (this.tableTag[i].tag == 1) {
                     element.style.backgroundColor = this.tableTag[i].color;
                 } else {
@@ -107,7 +109,21 @@ export default {
 </script>
 <style scoped>
 table {
-    border-collapse:collapse;
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+}
+
+thead tr th {
+    position: sticky;
+    width: 90px;
+    top: 0;
+    background-color: white;
+    z-index: 10;
+    word-break: keep-all;
+    word-wrap: break-word;
+    height: 30px;
+    white-space: nowrap;
 }
 
 /* td {
@@ -119,6 +135,7 @@ table {
 }
 
 td {
+    white-space: nowrap;
     /* border-radius: 5px; */
     /* background-color: aquamarine; */
 }
