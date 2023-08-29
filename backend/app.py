@@ -191,7 +191,7 @@ data: [{'Position':'United Kingdom','Billions of dollars':'59.9'},
 text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]
 result: [{"ObjectName":["Netherlands"],"DataName":"Billions of dollars","Position":[{"Begin":[1,1],"End":[1,1]}],"Trend":"None","Num":[43.1],"Text":"The Netherlands ($43.1 billion)"},
         {"ObjectName":["France"],"DataName":"Billions of dollars","Position":[{"Begin":[2,1],"End":[2,1]}],"Trend":"None","Num":[35.3],"Text":"France ($35.3 billion)"}]
-reason: "The corresponding value for object "Netherlands" is "43.1", and its shortest descriptive phrase is "The Netherlands ($43.1 billion)". The corresponding value for object "France" is "35.3" and its shortest descriptive phrase is "France ($35.3 billion)""
+reason: "The text 'Netherlands' corresponds to the row 'Netherlands' in data, and its corresponding value is '43.1'. The text 'France' corresponds to the row 'France' in data, and its corresponding value is '35.3' in 'Billions of dollars' column."
 
 
 data: [{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
@@ -200,8 +200,8 @@ data: [{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
         {'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}]
 text: ["Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."]
 result: [{"ObjectName":["Inflation-adjusted ("real") GDP"],"DataName":"Outdoor recreation", "Position":[{"Begin":[0,1],"End":[0,1],"Trend":"increase","Num":[18.9],"Text":"Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021"},
-        {"ObjectName":["overall U.S. economy"],"DataName":"U.S. economy", "Position":["Begin":[0,2],"End":[0,2]，"Trend":"rebound","Num":[5.9],"Text":"compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation"}]
-reason: "The first object is "Inflation-adjusted ("real") GDP for the outdoor recreation economy"， its value is 18.9 and its descriptive phrase is "Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021". The second object is "U.S. economy", its value is 5.9 and its descriptive phrase is "compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation"."
+        {"ObjectName":["overall U.S. economy"],"DataName":"U.S. economy", "Position":["Begin":[0,2],"End":[0,2],"Trend":"rebound","Num":[5.9],"Text":"compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation"}]
+reason: "The text 'Inflation-adjusted ("real") GDP for the outdoor recreation economy' corresponds to the column 'Outdoor recreation' and the row 'Real GDP' in data. Its value is '18.9'. The text 'U.S. economy' corresponds to the column 'U.S. economy' and row 'Real GDP' in data and its value is '5.9', reflecting a rebound trend."
 
 
 data: [{'time': 2021, 'Installed wind + PV capacity (GW)': 615, 'energy consumption percentage': '13.80%'}, 
@@ -214,7 +214,7 @@ text: ["The China Lithium Industry Development Index white paper predicts a risi
 result: [{"ObjectName":["installed wind and PV capacity (GW)"],"DataName":"Installed wind + PV capacity (GW)","Position":[{"Begin":[0,1],"End":[5,1]}],"Trend":"rising","Num":"None","Text":"a rising trend for installed wind and PV capacity (GW)"},
         {"ObjectName":["It"],"DataName":"Installed wind + PV capacity (GW)","Position":[{"Begin":[5,1],"End":[5,1]}],"Trend":"None","Num":[1200],"Text":"It is expected to reach 1,200 GW"},
         {"ObjectName":"None","DataName":"energy consumption percentage","Position":[{"Begin":[5,2],"End":[5,2]}],"Trend":"None","Num":[25.00%],"Text":"reach a 25% energy percentage in 2030"}]
-reason: "'It' in text refers to 'installed wind + PV capacity (GW)'. The object in unit 1 is "installed wind and PV capacity (GW)". It has a "rising" trend from 2021 to 2030 and its descriptive phrase is 'a rising trend for installed wind and PV capacity (GW)'. The object in unit 2 is "installed wind and PV capacity (GW)". It reachs '1200' in 2030 and its descriptive phrase is 'It is expected to reach 1,200 GW'. The object in unit 3 is "energy percentage". It reaches '25%' in 2030 and its descriptive phrase is 'reach a 25% energy percentage in 2030'."
+reason: "'It' in text refers to the column 'installed wind + PV capacity (GW)' in data. It has a "rising" trend from 2021 to 2030. The text 'installed wind and PV capacity (GW)' corresponds to the column 'installed wind + PV capacity (GW)' in data. Its value reachs '1200' in 2030. The text 'energy percentage' corresponds to the column 'energy consumption percentage' and the value is '25%' in 2030."
 
 
 data: [{'time': 2010, 'coal': 290, 'natural gas ': 306, 'renewables ': 112, 'nuclear': 287, 'liquids': 103}, 
