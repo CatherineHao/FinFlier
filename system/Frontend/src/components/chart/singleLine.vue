@@ -48,11 +48,11 @@
                 </g>
                 <g>
                     <g v-for="(o, i) in overlayData" :key="'Marker_' + i">
-                        <g>
+                        <g v-if="o.tag != -1 && overlayTag[3] == 1 && objectTag[o.objectName] == 1">
                             <circle v-for="(m, m_i) in o.marker.pos" :key="'marker' + m_i" :r="5" :fill="'red'" :cx="m[0]"
                                 :cy="m[1]"></circle>
                         </g>
-                        <g>
+                        <g v-if="o.tag != -1 && (overlayTag[4] == 1 || overlayTag[5] == 1) && objectTag[o.objectName] == 1">
                             <path :d="'M' + o.text.pos[0] + ',' + o.text.pos[1] + 'L' + o.text.pos[0] + ',' + 0" fill="none"
                                 :stroke="'red'" :stroke-width="2"></path>
                         </g>
@@ -315,7 +315,7 @@ export default {
             for (let i in dataStore.objectTag)
                 if (dataStore.objectTag[i] == 1)
                     this.overlay_setting = dataStore.state_map['state0']['overlay_setting'][i];
-            // console.log(this.overlayTag, this.overlay_setting);
+            console.log(this.overlayTag, this.overlay_setting);
             this.objectTag = dataStore.objectTag;
         })
 
