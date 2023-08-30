@@ -199,7 +199,6 @@ def line_calculate(user_info_data, begin, end):
         for i in range(begin[1],end[1]+1):
             all_num.append(user_info_data[i][begin[0]])
             all_num.append(user_info_data[i][end[0]])
-
     mean_num = np.mean(all_num)   
     max_num = max(all_num)
     min_num = min(all_num)

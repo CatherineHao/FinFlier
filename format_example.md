@@ -1,3 +1,19 @@
+# question_2,question_3...后续对话，前端传给后端的格式如下
+# 只有data+text+result+reason需要继承给后续问答，question_2和answer_2不需要继承给question_3
+"""data: [{'Position':'United Kingdom','Billions of dollars':'59.9'},
+	    {'Position':'Netherlands','Billions of dollars':'43.1'},
+        {'Position':'France','Billions of dollars':'35.3'},
+	    {'Position':'Canada','Billions of dollars': '30'},
+        {'Position':'Japan','Billions of dollars':'29.6'}]
+text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]
+result: [{"ObjectName":["Netherlands"],"DataName":"Billions of dollars","Position":[{"Begin":[1,1],"End":[1,1]}],"Trend":"None","Num":[43.1],"Text":"The Netherlands ($43.1 billion)"},{"ObjectName":["France"],"DataName":"Billions of dollars","Position":[{"Begin":[2,1],"End":[2,1]}],"Trend":"None","Num":[35.3],"Text":"France ($35.3 billion)"}]
+reason: "The corresponding value for object "Netherlands" is "43.1", and its shortest descriptive phrase is "The Netherlands ($43.1 billion)". The corresponding value for object "France" is "35.3" and its shortest descriptive phrase is "France ($35.3 billion)""    
+question: ["This is a question"]                
+label: "following"
+"""
+
+
+
 # 前端传来的数据：
 """data: [{'Time': 'Jul 2022', 'Banks Balance Sheet (CNY Billion)': 679.0}, 
                         {'Time': 'Aug 2022', 'Banks Balance Sheet (CNY Billion)': 1250.0}, 
