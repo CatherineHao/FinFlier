@@ -1,4 +1,30 @@
 <!--
+ *                        _oo0oo_
+ *                       o8888888o
+ *                       88" . "88
+ *                       (| -_- |)
+ *                       0\  =  /0
+ *                     ___/`---'\___
+ *                   .' \\|     |// '.
+ *                  / \\|||  :  |||// \
+ *                 / _||||| -:- |||||- \
+ *                |   | \\\  - /// |   |
+ *                | \_|  ''\---/''  |_/ |
+ *                \  .-\__  '-'  ___/-. /
+ *              ___'. .'  /--.--\  `. .'___
+ *           ."" '<  `.___\_<|>_/___.' >' "".
+ *          | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+ *          \  \ `_.   \_ __\ /__ _/   .-` /  /
+ *      =====`-.____`.___ \_____/___.-`___.-'=====
+ *                        `=---='
+ * 
+ * 
+ *      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * 
+ *            佛祖保佑     永不宕机     永无BUG
+ -->
+
+<!--
  * @Description: 
  * @Author: Qing Shi
  * @Date: 2023-07-10 18:18:22
@@ -58,12 +84,18 @@
                                 style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3);">
                                 <span v-for="(o, i) in item.outputTextGroup" :key="'res_' + i"
                                     :class="{ 'dataObject': o.tag != -1 }" :id="o.id" :style="{
-                                        backgroundColor: o.tag == 2 ? o.back_color : 'white',
-                                        'border-bottom': o.tag == 0 || o.tag == 1 ? '3px solid ' + o.color : '0px',
+                                        backgroundColor: o.tag == 0 ? o.back_color : 'white',
+                                        'border-bottom': o.tag == 2 || o.tag == 1 ? '3px solid ' + o.color : '0px',
                                         'text-decoration-color': o.color
                                     }" @click="o.tag != -1 ? hoverObject(o) : ''"
                                     @mouseenter="o.tag != -1 ? handleHover(o) : ''"
                                     @mouseout="o.tag != -1 ? handleOut(o) : ''">{{ o.text }}</span>
+                                    <div>
+                                        Reason:
+                                        <div>
+                                            {{item.reason}}
+                                        </div>
+                                    </div>
                             </div>
                         </div>
 
@@ -88,7 +120,7 @@
 <script>
 import { selectAll } from "d3";
 import { useDataStore } from "../stores/counter";
-import description_data from "@/assets/data/test.json"
+// import description_data from "@/assets/data/test.json"
 export default {
     name: "DataTable",
     props: [],
@@ -98,7 +130,21 @@ export default {
             outputText: '',
             outputTextArray: [],
             textGroup: [],
-            objectTag: {}
+            objectTag: {},
+            postTag: 0,
+            objectCnt: 0,
+            store_data: [],
+            query_len: 0,
+            color_map: [{
+                "r": 174, "g": 205, "b": 234, "a": 1
+            },
+            {
+                "r": 249, "g": 203, "b": 220, "a": 1
+            }, {
+                "r": 196, "g": 223, "b": 155, "a": 1
+            }, {
+                "r": 250, "g": 243, "b": 210, "a": 1
+            }]
         };
     },
     methods: {
@@ -119,68 +165,120 @@ export default {
             selectAll("#" + o.id).style('border-left-color', 'white');
             selectAll("#" + o.id).style('border-right-color', 'white');
         },
-        submitText () {
+        async submitText () {
+            const dataStore = useDataStore();
+            let rawData = dataStore.data;
             this.inputText = this.inputText.trim();
-            let inputText = this.inputText;
-            console.log(description_data);
-            this.inputText = "";
-            let originalText = description_data[0]['OriginText'];
-            // console.log(originalText);
             this.textGroup.push({
                 tag: -1,
-                text: originalText
+                text: this.inputText
             })
             this.$nextTick(() => {
                 this.scrollToBottom();
             })
+            let inputText = this.inputText;
+            this.inputText = "";
+            let user_info = '';
+            let postTag = 'following';
+            if (this.postTag == 0) {
+                postTag = 'start'
+                this.postTag = 1;
+            }
+            for (let i = 0; i < rawData.length; ++i) {
+                for (let j in rawData[i]) {
+                    // console.log(j)
+                    if (!isNaN(rawData[i][j])) {
+                        rawData[i][j] = parseFloat(rawData[i][j]);
+                    }
+                }
+                // break
+            }
+            function stringifyArray (arr) {
+                // 递归函数，用于处理数组和对象
+                function stringify (obj) {
+                    if (typeof obj === 'object' && obj !== null) {
+                        if (Array.isArray(obj)) {
+                            // 处理数组
+                            const resultArray = obj.map(item => stringify(item));
+                            return `[${resultArray.join(',')}]`;
+                        } else {
+                            // 处理对象
+                            const resultObject = Object.keys(obj).map(key => {
+                                const value = obj[key];
+                                return `"${key}":${stringify(value)}`;
+                            });
+                            return `{${resultObject.join(',')}}`;
+                        }
+                    } else if (typeof obj === 'string') {
+                        return `"${obj}"`;
+                    } else {
+                        // 对于数字等其他类型，保持不变
+                        return String(obj);
+                    }
+                }
+
+                return stringify(arr);
+            }
+            // console.log(rawData[0], stringifyArray([rawData[0]]))
+            user_info = 'data: ' + stringifyArray(rawData) + 'text: ["' + inputText + '"]label: "' + postTag + '"';
+            // console.log(user_info);
+            dataStore.postQuery({
+                data: user_info
+            })
+            // console.log(dataStore.query_results)
+            // console.log(description_data);
+        },
+        gptFeedback (description_data, reason_data) {
+            // console.log(reason_data)
+            for (let i in description_data) {
+                description_data[i]['ObjectName'] = 'object' + this.objectCnt.toString();
+                description_data[i]['ObjectIndex'] = this.objectCnt;
+                description_data[i]['color'] = this.color_map[this.objectCnt]
+                this.objectCnt++;
+            }
+
+            // console.log(description_data)
+            let originalText = description_data[0]['OriginText'];
+            // console.log(originalText);
             let outputTextGroup = [];
             let startPos = 0;
             let endPos = 0;
-            const dataStore = useDataStore();
+            // const dataStore = useDataStore();
             // let overlay_set = d
+            const dataStore = useDataStore();
+            dataStore.graphicalOverlayData = description_data;
             for (let i in description_data) {
-                console.log(description_data[i]['ObjectName'])
+                // console.log(description_data[i]['ObjectName'])
                 dataStore.state_map.state0.overlay_setting[description_data[i]['ObjectName']] = dataStore.type_chart_setting.overlayFormat;
             }
-            console.log(dataStore.state_map.state0.overlay_setting)
+            // console.log(dataStore.state_map.state0.overlay_setting)
             // for (let i in )
             for (let i in description_data) {
                 for (let j in description_data[i].ConversationInfo) {
-                    let info = description_data[i].ConversationInfo[j];
                     let pos = []
-                    if (typeof (info['Num']) == 'object') {
-                        for (let k in info['Num']) {
+                    let info = description_data[i].ConversationInfo[j];
+                    if (info.Position == null) continue;
+                    if (typeof (info.Position[0]) == 'object') {
+                        for (let k in info.Position) {
                             pos.push({
-                                pos: info['NumPosition'][k],
-                                text: info['Num'][k],
-                                tag: 0
+                                pos: info.Position[k],
+                                tag: info.OverTag
                             })
                         }
+                    } else {
+                        pos.push({
+                            pos: info.Position,
+                            tag: info.OverTag
+                        })
                     }
-                    if (typeof (info['Trend']) == 'object') {
-                        for (let k in info['Trend']) {
-                            pos.push({
-                                pos: info['TrendPosition'][k],
-                                text: info['Trend'][k],
-                                tag: 1
-                            })
-                        }
-                    }
-                    if (typeof (info['ObjectName']) == 'object') {
-                        for (let k in info['ObjectName']) {
-                            pos.push({
-                                pos: info['ObjectPosition'][k],
-                                text: info['ObjectName'][k],
-                                tag: 2
-                            })
-                        }
-                    }
+                    // console.log(pos)
+
                     pos.sort((a, b) => a.pos[0] - b.pos[0])
                     for (let k in pos) {
                         endPos = pos[k].pos[0];
                         let s = originalText.slice(startPos, endPos);
                         if (startPos != endPos) {
-                            console.log(s)
+                            // console.log(s)
                             outputTextGroup.push({
                                 text: s,
                                 tag: -1,
@@ -189,8 +287,11 @@ export default {
                         startPos = pos[k].pos[0];
                         endPos = pos[k].pos[1] + 1;
                         s = originalText.slice(startPos, endPos);
-                        let bak_color = description_data[i].color;
-                        bak_color.a = 0.4;
+                        let bak_color = {}
+                        for (let j in description_data[i].color)
+                            bak_color[j] = description_data[i].color[j];
+                        bak_color['a'] = 0.4
+                        // console.log(description_data[i].color)
                         outputTextGroup.push({
                             id: description_data[i]['ObjectName'],
                             objectName: description_data[i]['ObjectName'],
@@ -218,8 +319,10 @@ export default {
 
             this.textGroup.push({
                 tag: 1,
-                outputTextGroup: outputTextGroup
+                outputTextGroup: outputTextGroup,
+                reason: reason_data.slice(7, reason_data.length)
             })
+            // console.log(this.textGroup)
             this.$nextTick(() => {
                 this.scrollToBottom();
             })
@@ -236,7 +339,6 @@ export default {
             let rawData = dataStore.data;
             let th = rawData.columns;
             let t_cnt = 0;
-            console.log(o.position)
             for (let i in th) {
                 if (th[i] == o.position[0]['Begin'][0]) {
                     break;
@@ -285,6 +387,14 @@ export default {
         }
     },
     watch: {
+        store_data: {
+            handler (newVal) {
+                // if (type)
+                console.log(newVal);
+                this.gptFeedback(newVal.final);
+            },
+            deep: true
+        },
         inputText (newVal, oleVal) {
             // this.inputText = this.inputText.trim();
         },
@@ -307,7 +417,18 @@ export default {
     mounted () {
         this.inputText = "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter."
         this.submitText();
-
+        const dataStore = useDataStore();
+        dataStore.$subscribe((mutations, state) => {
+            console.log(mutations.type)
+            if (this.query_len < state.query_results.length) {
+                let info_data = state.query_results[state.query_results.length - 1];
+                this.query_len = state.query_results.length;
+                // // console.log(info_data);
+                if (typeof (info_data) != 'undefined')
+                    this.gptFeedback(info_data.final, info_data.reason);
+                    // console.log(info_data.reason)
+            }
+        })
     },
     computed: {
         hasInput () {

@@ -97,7 +97,7 @@
 <script>
 import { axisBottom, axisLeft, extent, line, scaleLinear, scalePoint, scaleUtc, select, timeFormat } from "d3";
 import { useDataStore } from "@/stores/counter";
-import description_data from "@/assets/data/test.json"
+// import description_data from "@/assets/data/test.json"
 export default {
     name: "singleLine",
     props: ['rawData', 'chartData', 'defaultTag', 'scaleTag'],
@@ -303,11 +303,11 @@ export default {
         this.elWidth = this.$refs.singleLineSvg.offsetWidth;
         // console.log(this.rawData, this.chartData);
         this.lineData = this.calcLine(this.rawData, this.chartData);
-        this.overlayData = this.calcOverlay(this.lineData, description_data);
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations, state) => {
-            console.log(mutations, state);
+            // console.log(mutations, state);
             this.chart_setting = dataStore.state_map['state0']['chart_setting'];
+            this.overlayData = this.calcOverlay(this.lineData, dataStore.graphicalOverlayData);
             // console.log(this.chart_setting)
             this.overlayTag = dataStore.state_map['state0']['overlay_tag'];
             // console.log(this.overlayTag);
@@ -315,7 +315,7 @@ export default {
             for (let i in dataStore.objectTag)
                 if (dataStore.objectTag[i] == 1)
                     this.overlay_setting = dataStore.state_map['state0']['overlay_setting'][i];
-            console.log(this.overlayTag, this.overlay_setting);
+            // console.log(this.overlayTag, this.overlay_setting);
             this.objectTag = dataStore.objectTag;
         })
 
