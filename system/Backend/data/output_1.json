@@ -1,0 +1,283 @@
+{
+    "result": "result: [{\"ObjectName\":[\"new yuan loans\"],\"DataName\":\"Banks Balance Sheet (CNY Billion)\",\"Position\":[{\"Begin\":[12,1],\"End\":[12,1]}],\"Trend\":\"None\",\"Num\":[345.9],\"Text\":\"China's banks extended CNY 345.9 billion in new yuan loans in July 2023\"},\n        {\"ObjectName\":[\"a year earlier\"],\"DataName\":\"Banks Balance Sheet (CNY Billion)\",\"Position\":[{\"Begin\":[12,1],\"End\":[12,1]}],\"Trend\":\"None\",\"Num\":[679],\"Text\":\"The value is also much lower than CNY 679 billion a year earlier\"},\n        {\"ObjectName\":[\"in June\"],\"DataName\":\"Banks Balance Sheet (CNY Billion)\",\"Position\":[{\"Begin\":[12,1],\"End\":[12,1]}],\"Trend\":\"None\",\"Num\":[3050],\"Text\":\"and CNY 3.05 trillion in June\"},\n        {\"ObjectName\":[\"a record CNY 15.73 trillion loans\"],\"DataName\":\"Banks Balance Sheet (CNY Billion)\",\"Position\":[{\"Begin\":[12,1],\"End\":[12,1]}],\"Trend\":\"None\",\"Num\":[15.73],\"Text\":\"after a record CNY 15.73 trillion loans in the first half of the year\"}]\n",
+    "reason": "reason: \"The text 'new yuan loans' corresponds to the column 'Banks Balance Sheet (CNY Billion)' in data. The value is '345.9' in July 2023. The 'a year earlier' corresponds to the value '679' in July 2022. The 'in June' corresponds to the value '3050' in June 2023. The 'a record CNY 15.73 trillion loans' corresponds to the value '15.73' in the first half of the year.\"",
+    "final": [
+        {
+            "OriginText": "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Banks Balance Sheet (CNY Billion)",
+                        12
+                    ],
+                    "End": [
+                        "Banks Balance Sheet (CNY Billion)",
+                        12
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        27,
+                        31
+                    ],
+                    "Text": "345.9",
+                    "OverTag": 1,
+                    "Type": "Num"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "China's banks extended CNY 345.9 billion in new yuan loans in July 2023",
+                    "Label": [
+                        345.9
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Banks Balance Sheet (CNY Billion)",
+                                12
+                            ],
+                            "End": [
+                                "Banks Balance Sheet (CNY Billion)",
+                                12
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Banks Balance Sheet (CNY Billion)",
+                            12
+                        ],
+                        "End": [
+                            "Banks Balance Sheet (CNY Billion)",
+                            12
+                        ],
+                        "mean": 345.9,
+                        "max": 345.9,
+                        "min": 345.9
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Banks Balance Sheet (CNY Billion)",
+                        12
+                    ],
+                    "End": [
+                        "Banks Balance Sheet (CNY Billion)",
+                        12
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        196,
+                        198
+                    ],
+                    "Text": "679",
+                    "OverTag": 1,
+                    "Type": "Num"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "The value is also much lower than CNY 679 billion a year earlier",
+                    "Label": [
+                        679
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Banks Balance Sheet (CNY Billion)",
+                                12
+                            ],
+                            "End": [
+                                "Banks Balance Sheet (CNY Billion)",
+                                12
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Banks Balance Sheet (CNY Billion)",
+                            12
+                        ],
+                        "End": [
+                            "Banks Balance Sheet (CNY Billion)",
+                            12
+                        ],
+                        "mean": 345.9,
+                        "max": 345.9,
+                        "min": 345.9
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Banks Balance Sheet (CNY Billion)",
+                        12
+                    ],
+                    "End": [
+                        "Banks Balance Sheet (CNY Billion)",
+                        12
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        [
+                            245,
+                            251
+                        ]
+                    ],
+                    "Text": "in June",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "and CNY 3.05 trillion in June",
+                    "Label": [
+                        3050
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Banks Balance Sheet (CNY Billion)",
+                                12
+                            ],
+                            "End": [
+                                "Banks Balance Sheet (CNY Billion)",
+                                12
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Banks Balance Sheet (CNY Billion)",
+                            12
+                        ],
+                        "End": [
+                            "Banks Balance Sheet (CNY Billion)",
+                            12
+                        ],
+                        "mean": 345.9,
+                        "max": 345.9,
+                        "min": 345.9
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Banks Balance Sheet (CNY Billion)",
+                        12
+                    ],
+                    "End": [
+                        "Banks Balance Sheet (CNY Billion)",
+                        12
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        273,
+                        277
+                    ],
+                    "Text": "15.73",
+                    "OverTag": 2,
+                    "Type": "Num"
+                },
+                {
+                    "Position": [
+                        [
+                            260,
+                            272
+                        ],
+                        [
+                            278,
+                            292
+                        ]
+                    ],
+                    "Text": "a record CNY 15.73 trillion loans",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "after a record CNY 15.73 trillion loans in the first half of the year",
+                    "Label": [
+                        15.73
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Banks Balance Sheet (CNY Billion)",
+                                12
+                            ],
+                            "End": [
+                                "Banks Balance Sheet (CNY Billion)",
+                                12
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Banks Balance Sheet (CNY Billion)",
+                            12
+                        ],
+                        "End": [
+                            "Banks Balance Sheet (CNY Billion)",
+                            12
+                        ],
+                        "mean": 345.9,
+                        "max": 345.9,
+                        "min": 345.9
+                    }
+                }
+            ]
+        }
+    ]
+}

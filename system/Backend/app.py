@@ -337,7 +337,7 @@ def chart_info():
 @app.route('/api/test/postQuery/', methods=['POST'])
 def post_query():
     params = request.json
-    file_path = '{}/data/output.json'.format(FILE_ABS_PATH)
+    file_path = '{}/data/output_1.json'.format(FILE_ABS_PATH)
     data = read_json(file_path)
     return jsonify(data)
 

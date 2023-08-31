@@ -49,34 +49,37 @@
                 <g>
                     <g v-for="(o, i) in overlayData" :key="'Marker_' + i">
                         <g v-if="o.tag != -1 && overlayTag[3] == 1 && objectTag[o.objectName] == 1">
-                            <circle v-for="(m, m_i) in o.marker.pos" :key="'marker' + m_i" :r="5" :fill="'red'" :cx="m[0]"
+                            <circle v-for="(m, m_i) in o.marker.pos" :key="'marker' + m_i" :r="5" :fill="colorTrans(overlay_setting[overlay_map[3]].currentColor)" :cx="m[0]"
                                 :cy="m[1]"></circle>
                         </g>
                         <g v-if="o.tag != -1 && (overlayTag[4] == 1 || overlayTag[5] == 1) && objectTag[o.objectName] == 1">
                             <path :d="'M' + o.text.pos[0] + ',' + o.text.pos[1] + 'L' + o.text.pos[0] + ',' + 0" fill="none"
-                                :stroke="'red'" :stroke-width="2"></path>
+                                :stroke="colorTrans(overlay_setting[overlay_map[4]].currentColor)" :stroke-width="2"></path>
                         </g>
                     </g>
                 </g>
             </g>
         </svg>
         <!-- <div> -->
+            <!-- <div v-if=""> -->
         <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
             'position': 'absolute',
-            'top': `${0}px`,
+            'top': `${.1 * elHeight}px`,
             'left': `${item.text.pos[0]}px`,
             'width': '150px',
             'transition': '0.4s',
             'opacity': item.tag != -1 && (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
             'padding': '3px',
-            'border': '2px solid red',
+            'border': '2px solid',
+            'border-color': item.tag != -1 && (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'black',
             'border-radius': '10px',
             'background-color': 'white'
         }">
             <!-- 'border-color': colorTrans(overlay_setting[overlay_map[5]].currentColor), -->
             {{ item.text.text }}
-        </div>
-        <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
+        <!-- </div> -->
+    </div>
+        <div  v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
             'position': 'absolute',
             'top': `${.1 * elHeight}px`,
             'left': `${item.label.pos[0]}px`,
@@ -84,7 +87,8 @@
             'transition': '0.4s',
             'opacity': item.tag != -1 && (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
             'padding': '3px',
-            'border': '2px solid red',
+            'border': '2px solid',
+            'border-color': item.tag != -1 && (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? colorTrans(overlay_setting[overlay_map[4]].currentColor) : 'black',
             'border-radius': '10px',
             'background-color': 'white'
         }">
@@ -315,7 +319,7 @@ export default {
             for (let i in dataStore.objectTag)
                 if (dataStore.objectTag[i] == 1)
                     this.overlay_setting = dataStore.state_map['state0']['overlay_setting'][i];
-            // console.log(this.overlayTag, this.overlay_setting);
+            console.log(this.overlayTag, this.overlay_setting);
             this.objectTag = dataStore.objectTag;
         })
 
