@@ -452,28 +452,27 @@ if __name__ == '__main__':
                 label: "start"
             """
 
-    test_6 = """data: [{"Time":"2022-Jul","Banks Balance Sheet (CNY Billion)":"679"},{"Time":"2022-Aug","Banks Balance Sheet (CNY Billion)":"1250"},{"Time":"2022-Sep","Banks Balance Sheet (CNY Billion)":"2470"},{"Time":"2022-Oct","Banks Balance Sheet (CNY Billion)":"615.2"},{"Time":"2022-Nov","Banks Balance Sheet (CNY Billion)":"1210"},{"Time":"2022-Dec","Banks Balance Sheet (CNY Billion)":"1400"},{"Time":"2023-Jan","Banks Balance Sheet (CNY Billion)":"4900"},{"Time":"2023-Feb","Banks Balance Sheet (CNY Billion)":"1810"},{"Time":"2023-Mar","Banks Balance Sheet (CNY Billion)":"3890"},{"Time":"2023-Apr","Banks Balance Sheet (CNY Billion)":"718.8"},{"Time":"2023-May","Banks Balance Sheet (CNY Billion)":"1360"},{"Time":"2023-Jun","Banks Balance Sheet (CNY Billion)":"3050"},{"Time":"2023-Jul","Banks Balance Sheet (CNY Billion)":"345.9"}]text: ["China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter."]label: "start"
-"""
+
     test_7 = """data: [{'Position':'United Kingdom','Billions of dollars':59.9},
-	    {'Position':'Netherlands','Billions of dollars':43.1},
-        {'Position':'France','Billions of dollars':35.3},
-	    {'Position':'Canada','Billions of dollars': 30},
-        {'Position':'Japan','Billions of dollars':29.6}]
-text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]
-label: "start"
-"""
+	                    {'Position':'Netherlands','Billions of dollars':43.1},
+                        {'Position':'France','Billions of dollars':35.3},
+	                    {'Position':'Canada','Billions of dollars': 30},
+                        {'Position':'Japan','Billions of dollars':29.6}]
+                text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]
+                label: "start"
+            """
 
     question_1 = """data: [{'Position':'United Kingdom','Billions of dollars':59.9},
-	    {'Position':'Netherlands','Billions of dollars':43.1},
-        {'Position':'France','Billions of dollars':35.3},
-	    {'Position':'Canada','Billions of dollars': 30},
-        {'Position':'Japan','Billions of dollars':29.6}]
-text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]
-result: [{"ObjectName":["Netherlands"],"DataName":"Billions of dollars","Position":[{"Begin":[1,1],"End":[1,1]}],"Trend":"None","Num":[43.1],"Text":"The Netherlands ($43.1 billion)"},{"ObjectName":["France"],"DataName":"Billions of dollars","Position":[{"Begin":[2,1],"End":[2,1]}],"Trend":"None","Num":[35.3],"Text":"France ($35.3 billion)"}]
-reason: "The corresponding value for object "Netherlands" is "43.1", and its shortest descriptive phrase is "The Netherlands ($43.1 billion)". The corresponding value for object "France" is "35.3" and its shortest descriptive phrase is "France ($35.3 billion)""    
-question: ["Which contry has the highest value?"]                
-label: "following"
-"""
+	                        {'Position':'Netherlands','Billions of dollars':43.1},
+                            {'Position':'France','Billions of dollars':35.3},
+	                        {'Position':'Canada','Billions of dollars': 30},
+                            {'Position':'Japan','Billions of dollars':29.6}]
+                    text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]
+                    result: [{"ObjectName":["Netherlands"],"DataName":"Billions of dollars","Position":[{"Begin":[1,1],"End":[1,1]}],"Trend":"None","Num":[43.1],"Text":"The Netherlands ($43.1 billion)"},{"ObjectName":["France"],"DataName":"Billions of dollars","Position":[{"Begin":[2,1],"End":[2,1]}],"Trend":"None","Num":[35.3],"Text":"France ($35.3 billion)"}]
+                    reason: "The corresponding value for object "Netherlands" is "43.1", and its shortest descriptive phrase is "The Netherlands ($43.1 billion)". The corresponding value for object "France" is "35.3" and its shortest descriptive phrase is "France ($35.3 billion)""    
+                    question: ["Which contry has the highest value?"]                
+                    label: "following"
+                """
 
     user_info = test_7
     result, reason, final_result = chat_with_gpt(user_info)
