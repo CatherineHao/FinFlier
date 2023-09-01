@@ -52,9 +52,13 @@
                             <circle v-for="(m, m_i) in o.marker.pos" :key="'marker' + m_i" :r="5" :fill="colorTrans(overlay_setting[overlay_map[3]].currentColor)" :cx="m[0]"
                                 :cy="m[1]"></circle>
                         </g>
-                        <g v-if="o.tag != -1 && (overlayTag[4] == 1 || overlayTag[5] == 1) && objectTag[o.objectName] == 1">
+                        <g v-if="o.tag != -1 && (overlayTag[4] == 1) && objectTag[o.objectName] == 1">
                             <path :d="'M' + o.text.pos[0] + ',' + o.text.pos[1] + 'L' + o.text.pos[0] + ',' + 0" fill="none"
                                 :stroke="colorTrans(overlay_setting[overlay_map[4]].currentColor)" :stroke-width="2"></path>
+                        </g>
+                        <g v-if="o.tag != -1 && (overlayTag[5] == 1) && objectTag[o.objectName] == 1">
+                            <path :d="'M' + o.text.pos[0] + ',' + o.text.pos[1] + 'L' + o.text.pos[0] + ',' + 0" fill="none"
+                                :stroke="colorTrans(overlay_setting[overlay_map[5]].currentColor)" :stroke-width="2"></path>
                         </g>
                     </g>
                 </g>
@@ -88,7 +92,7 @@
             'opacity': item.tag != -1 && (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
             'padding': '3px',
             'border': '2px solid',
-            'border-color': item.tag != -1 && (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? colorTrans(overlay_setting[overlay_map[4]].currentColor) : 'black',
+            'border-color': item.tag != -1 && (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? colorTrans(overlay_setting[overlay_map[4]].currentColor) : 'white',
             'border-radius': '10px',
             'background-color': 'white'
         }">

@@ -103,7 +103,7 @@
                                 style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3);">
                                 <span v-for="(o, i) in item.outputTextGroup" :key="'res_' + i"
                                     :class="{ 'dataObject': o.tag != -1 }" :id="o.id" :style="{
-                                        backgroundColor: o.tag == 0 ? o.back_color : 'white',
+                                        backgroundColor: o.tag == 0 || o.tag == 2 ? o.back_color : 'white',
                                         'border-bottom': o.tag == 2 || o.tag == 1 ? '3px solid ' + o.color : '0px',
                                         'text-decoration-color': o.color
                                     }" @click="o.tag != -1 ? hoverObject(o) : ''"
@@ -183,9 +183,9 @@ export default {
             query_len: 0,
             color_map: [{
                 "r": 174, "g": 205, "b": 234, "a": 1
-            },{
+            }, {
                 "r": 196, "g": 223, "b": 155, "a": 1
-            },  {
+            }, {
                 "r": 250, "g": 243, "b": 210, "a": 1
             },
             {
@@ -300,8 +300,8 @@ export default {
             // console.log(dataStore.state_map.state0.overlay_setting)
             // for (let i in )
             for (let i in description_data) {
+            let pos = []
                 for (let j in description_data[i].ConversationInfo) {
-                    let pos = []
                     let info = description_data[i].ConversationInfo[j];
                     if (info.Position == null) continue;
                     if (typeof (info.Position[0]) == 'object') {
@@ -317,46 +317,48 @@ export default {
                             tag: info.OverTag
                         })
                     }
-                    // console.log(pos)
+                    console.log(pos)
 
-                    pos.sort((a, b) => a.pos[0] - b.pos[0])
-                    for (let k in pos) {
-                        endPos = pos[k].pos[0];
-                        let s = originalText.slice(startPos, endPos);
-                        if (startPos != endPos) {
-                            // console.log(s)
-                            outputTextGroup.push({
-                                text: s,
-                                tag: -1,
-                            })
-                        }
-                        startPos = pos[k].pos[0];
-                        endPos = pos[k].pos[1] + 1;
-                        s = originalText.slice(startPos, endPos);
-                        let bak_color = {}
-                        for (let j in description_data[i].color)
-                            bak_color[j] = description_data[i].color[j];
-                        bak_color['a'] = 0.4
-                        // console.log(description_data[i].color)
-                        outputTextGroup.push({
-                            id: description_data[i]['ObjectName'],
-                            objectName: description_data[i]['ObjectName'],
-                            text: s,
-                            tag: pos[k].tag,
-                            position: description_data[i]['Position'],
-                            rawColor: description_data[i].color,
-                            color: this.colorTrans(description_data[i].color),
-                            back_color: this.colorTrans(bak_color)
-                        });
-
-                        startPos = endPos;
-                    }
                 }
-                // outputTextGroup.push({
-                //     tag: 
-                // })
+                pos.sort((a, b) => a.pos[0] - b.pos[0])
+                for (let k in pos) {
+                    endPos = pos[k].pos[0];
+                    let s = originalText.slice(startPos, endPos);
+                    if (startPos != endPos) {
+                        // console.log(s)
+                        outputTextGroup.push({
+                            text: s,
+                            tag: -1,
+                        })
+                    }
+                    startPos = pos[k].pos[0];
+                    endPos = pos[k].pos[1] + 1;
+                    s = originalText.slice(startPos, endPos);
+                    let bak_color = {}
+                    for (let j in description_data[i].color)
+                        bak_color[j] = description_data[i].color[j];
+                    bak_color['a'] = 0.4
+                    // console.log(description_data[i].color)
+                    outputTextGroup.push({
+                        id: description_data[i]['ObjectName'],
+                        objectName: description_data[i]['ObjectName'],
+                        text: s,
+                        tag: pos[k].tag,
+                        position: description_data[i]['Position'],
+                        rawColor: description_data[i].color,
+                        color: this.colorTrans(description_data[i].color),
+                        back_color: this.colorTrans(bak_color)
+                    });
 
+                    startPos = endPos;
+                }
             }
+            // outputTextGroup.push({
+            //     tag: 
+            // })
+
+
+
             outputTextGroup.push({
                 text: originalText.slice(startPos, originalText.length
                 ),
@@ -461,8 +463,8 @@ export default {
     created () {
     },
     mounted () {
-        this.inputText = "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter."
-        this.submitText();
+        // this.inputText = "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter."
+        // this.submitText();
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations, state) => {
             console.log(mutations.type)
@@ -484,7 +486,8 @@ export default {
     components: {}
 }
 </script>
-<style>.dataObject {
+<style>
+.dataObject {
     border: 1px solid rgba(0, 0, 0, 0);
     border-radius: 3px;
     font-weight: bold;
@@ -516,4 +519,5 @@ export default {
 
 /* .el-loading-spinner {
     background-color: black;
-} */</style>
+} */
+</style>
