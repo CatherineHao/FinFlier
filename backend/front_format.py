@@ -76,8 +76,16 @@ def transform_conversation_info(conversation_info):
                         "OverTag": 0,
                         "Type": "ObjectName"
                     })
+                else:
+                    transformed.append({
+                    "Position": object_pos,
+                    "Text": object_name[0],
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                    })
 
             else:
+                print('1')
                 transformed.append({
                     "Position": object_pos,
                     "Text": object_name[0],
