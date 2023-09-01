@@ -21,9 +21,6 @@ user_info = """data: [{'Time': 'Aug 2022', 'Food inflation': 6.1},
 # result from gpt: a string 
 result = "result: [{\"ObjectName\":[\"Food inflation\"],\"Position\":[{\"Begin\":[11,1],\"End\":[11,1]}],\"Trend\":\"declined\",\"Num\":[-1.7],\"Text\":\"Food prices in China declined by 1.7 percent year-on-year in July 2023\"},\n        {\"ObjectName\":[\"Food inflation\"],\"Position\":[{\"Begin\":[10,1],\"End\":[10,1]}],\"Trend\":\"None\",\"Num\":[2.3],\"Text\":\"a 2.3 percent rise in the prior month\"}]\n"
 
-test_info = """data: [{"Time":"2022-Jul","Banks Balance Sheet (CNY Billion)":"679"},{"Time":"2022-Aug","Banks Balance Sheet (CNY Billion)":"1250"},{"Time":"2022-Sep","Banks Balance Sheet (CNY Billion)":"2470"},{"Time":"2022-Oct","Banks Balance Sheet (CNY Billion)":"615.2"},{"Time":"2022-Nov","Banks Balance Sheet (CNY Billion)":"1210"},{"Time":"2022-Dec","Banks Balance Sheet (CNY Billion)":"1400"},{"Time":"2023-Jan","Banks Balance Sheet (CNY Billion)":"4900"},{"Time":"2023-Feb","Banks Balance Sheet (CNY Billion)":"1810"},{"Time":"2023-Mar","Banks Balance Sheet (CNY Billion)":"3890"},{"Time":"2023-Apr","Banks Balance Sheet (CNY Billion)":"718.8"},{"Time":"2023-May","Banks Balance Sheet (CNY Billion)":"1360"},{"Time":"2023-Jun","Banks Balance Sheet (CNY Billion)":"3050"},{"Time":"2023-Jul","Banks Balance Sheet (CNY Billion)":"345.9"}]text: ["China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter."]label: "start"
-"""
-
 # 经过转换以后的convert_result是如下格式
 # convert_result = [{"ObjectName":["Food inflation"],"Position":[{"Begin":[11,1],"End":[11,1]}],"Trend":"declined","Num": "None","Text":"Food prices in China declined by 1.7 percent year-on-year in July 2023"},
                 # {"ObjectName":["Food inflation"],"Position":[{"Begin":[6,1],"End":[6,1]}],"Trend":"None","Num":[2.3],"Text":"a 2.3 percent rise in the prior month"}]
@@ -66,7 +63,6 @@ def transform_conversation_info(conversation_info):
         if object_name[0]:
             if num and num_position[0] is not None:
                 if object_pos != [None] and num_position and num_position[0][0] > object_pos[0][0] and num_position[0][1] < object_pos[0][1]:
-
                     object_pos_1 = [object_pos[0][0], num_position[0][0] - 1]
                     object_pos_2 = [num_position[0][1] + 1, object_pos[0][1]]
 
@@ -76,16 +72,8 @@ def transform_conversation_info(conversation_info):
                         "OverTag": 0,
                         "Type": "ObjectName"
                     })
-                else:
-                    transformed.append({
-                    "Position": object_pos,
-                    "Text": object_name[0],
-                    "OverTag": 0,
-                    "Type": "ObjectName"
-                    })
 
             else:
-                print('1')
                 transformed.append({
                     "Position": object_pos,
                     "Text": object_name[0],
@@ -207,6 +195,7 @@ def line_calculate(user_info_data, begin, end):
         for i in range(begin[1],end[1]+1):
             all_num.append(user_info_data[i][begin[0]])
             all_num.append(user_info_data[i][end[0]])
+
     mean_num = np.mean(all_num)   
     max_num = max(all_num)
     min_num = min(all_num)
@@ -214,27 +203,29 @@ def line_calculate(user_info_data, begin, end):
     return mean_num, max_num, min_num
 
 if __name__ == '__main__':
-    result_frontend = result_to_frontend(test_info, result)
-    print(result_frontend)
+    # result_frontend = result_to_frontend(user_info, result)
+    # print(result_frontend)
     # format_new_result = transform_result(result_frontend)
-#     example = [{'OriginText': "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.", 
-# 'Position': [{'Begin': ['Banks Balance Sheet (CNY Billion)', 12], 'End': ['Banks Balance Sheet (CNY Billion)', 12]}], 
-# 'ConversationInfo': 
-#     [{'Trend': 'None', 
-#     'TrendPosition': None, 
-#     'Num': [15.73], 
-#     'NumPosition': [[273, 277]], 
-# 'ObjectName': ['a record CNY 15.73 trillion loans'], 'ObjectPosition': [[260, 292]]}],
-# 'GraphicalOverlay': 
-#     [{'Text': 'The value is also much lower than CNY 679 billion a year earlier', 
-#     'Label': [679], 
-#     'Marker': [{'Begin': ['Banks Balance Sheet (CNY Billion)', 12], 'End': ['Banks Balance Sheet (CNY Billion)', 12]}], 
-#     'Line': {'Begin': ['Banks Balance Sheet (CNY Billion)', 12], 'End': ['Banks Balance Sheet (CNY Billion)', 12], 
-#     'mean': 345.9, 
-#     'max': 345.9, 
-#     'min': 345.9}}]}]
+    example = [{'OriginText': 'Food prices in China declined by 1.7 percent year-on-year in July 2023, reversing from a 2.3 percent rise in the prior month while pointing to the first drop since March 2022.', 
+'Position': [{'Begin': ['Food inflation', 11], 'End': ['Food inflation', 11]}], 
+'ConversationInfo': 
+    [{'Trend': 'declined', 
+    'TrendPosition': [21, 28], 
+    'Num': [-1.7], 
+    'NumPosition': [None], 
+    'ObjectName': ['Food prices in China'], 
+    'ObjectPosition': [[0, 19]]}], 
+'GraphicalOverlay': 
+    [{'Text': 'Food prices in China declined by 1.7 percent year-on-year in July 2023', 
+    'Label': [-1.7], 
+    'Marker': [{'Begin': ['Food inflation', 11], 'End': ['Food inflation', 11]}], 
+    'Line': {'Begin': ['Food inflation', 11], 
+    'End': ['Food inflation', 11], 
+    'mean': -1.7, 
+    'max': -1.7, 
+    'min': -1.7}}]}]
     
-#     format_new_result = transform_result(example)
-#     print(format_new_result)
+    format_new_result = transform_result(example)
+    print(format_new_result)
 
 
