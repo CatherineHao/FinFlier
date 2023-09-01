@@ -212,36 +212,36 @@ def chat_with_gpt(user_info):
 
 # prompt: 一共14个example 9个normal/uptrend/downtrend + 5个超级长的head and shoulder/cup with handle/double top/triple top/rounding bottom
 default_prompt = """Please think as an financial data analyst. Now I wish to complete the matching of tha data to text, identifying the objects, trend in the text and their position in the data. For each pair, give me the matching result and the reason.
-The matching result should be in the format of {"ObjectName":[object in the text], "DataName":"column name in the data", "Position":[{"Begin":[the object/trend corresponds to the row of start index in data,the object/trend corresponds to the column of start index in data],"End":[the object/trend corresponds to the row of end index in data,the object/trend corresponds to the column of end index in data]}],"Trend":"the corresponding trend","Num":[the corresponding data],"Text":"the corresponding textual description"}.
+The matching result should be in the format of result: [{"ObjectName":[object in the text], "DataName":"column name in the data", "Position":[{"Begin":[the object/trend corresponds to the row of start index in data,the object/trend corresponds to the column of start index in data],"End":[the object/trend corresponds to the row of end index in data,the object/trend corresponds to the column of end index in data]}],"Trend":"the corresponding trend","Num":[the corresponding data],"Text":"the corresponding textual description"}] reason: "the reason of the matching result".
 Please refer to the example below for the desired format.
 
-data: [{'Position':'United Kingdom','Billions of dollars':'59.9'},
-	    {'Position':'Netherlands','Billions of dollars':'43.1'},
-        {'Position':'France','Billions of dollars':'35.3'},
-	    {'Position':'Canada','Billions of dollars': '30'},
-        {'Position':'Japan','Billions of dollars':'29.6'}]
+data: [{'Position':'United Kingdom','Billions of dollars': 59.9},
+	    {'Position':'Netherlands','Billions of dollars': 43.1},
+        {'Position':'France','Billions of dollars': 35.3},
+	    {'Position':'Canada','Billions of dollars': 30},
+        {'Position':'Japan','Billions of dollars': 29.6}]
 text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]
 result: [{"ObjectName":["Netherlands"],"DataName":"Billions of dollars","Position":[{"Begin":[1,1],"End":[1,1]}],"Trend":"None","Num":[43.1],"Text":"The Netherlands ($43.1 billion)"},
         {"ObjectName":["France"],"DataName":"Billions of dollars","Position":[{"Begin":[2,1],"End":[2,1]}],"Trend":"None","Num":[35.3],"Text":"France ($35.3 billion)"}]
 reason: "The corresponding value for object "Netherlands" is "43.1", and its shortest descriptive phrase is "The Netherlands ($43.1 billion)". The corresponding value for object "France" is "35.3" and its shortest descriptive phrase is "France ($35.3 billion)""
 
 
-data: [{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
-        {'Category':'Real Gross Output','Outdoor recreation':'21.8','U.S. economy':'6.3'},
-        {'Category':'Compensation','Outdoor recreation':'16.2','U.S. economy':'7.8'},
-        {'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}]
+data: [{'Category':'Real GDP','Outdoor recreation': 18.9,'U.S. economy': 5.9},
+        {'Category':'Real Gross Output','Outdoor recreation': 21.8,'U.S. economy': 6.3},
+        {'Category':'Compensation','Outdoor recreation': 16.2,'U.S. economy': 7.8},
+        {'Category':'Compensation','Outdoor recreation': 13.1,'U.S. economy': 2.7}]
 text: ["Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."]
 result: [{"ObjectName":["Inflation-adjusted ("real") GDP"],"DataName":"Outdoor recreation", "Position":[{"Begin":[0,1],"End":[0,1],"Trend":"increase","Num":[18.9],"Text":"Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021"},
-        {"ObjectName":["overall U.S. economy"],"DataName":"U.S. economy", "Position":["Begin":[0,2],"End":[0,2]，"Trend":"rebound","Num":[5.9],"Text":"compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation"}]
-reason: "The first object is "Inflation-adjusted ("real") GDP for the outdoor recreation economy"， its value is 18.9 and its descriptive phrase is "Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021". The second object is "U.S. economy", its value is 5.9 and its descriptive phrase is "compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation"."
+        {"ObjectName":["overall U.S. economy"],"DataName":"U.S. economy", "Position":["Begin":[0,2],"End":[0,2],"Trend":"rebound","Num":[5.9],"Text":"compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation"}]
+reason: "The first object is "Inflation-adjusted ("real") GDP for the outdoor recreation economy", its value is 18.9 and its descriptive phrase is "Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021". The second object is "U.S. economy", its value is 5.9 and its descriptive phrase is "compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation"."
 
 
-data: [{'time': 2021, 'Installed wind + PV capacity (GW)': 615, 'energy consumption percentage': '13.80%'}, 
-        {'time': 2022, 'Installed wind + PV capacity (GW)': 695, 'energy consumption percentage': '15.10%'}, 
-        {'time': 2023, 'Installed wind + PV capacity (GW)': 775, 'energy consumption percentage': '16.60%'}, 
-        {'time': 2024, 'Installed wind + PV capacity (GW)': 855, 'energy consumption percentage': '18.30%'}, 
-        {'time': 2025, 'Installed wind + PV capacity (GW)': 935, 'energy consumption percentage': '20.00%'}, 
-        {'time': 2030, 'Installed wind + PV capacity (GW)': 1200, 'energy consumption percentage': '25.00%'}]
+data: [{'time': 2021, 'Installed wind + PV capacity (GW)': 615, 'energy consumption percentage': 13.80%}, 
+        {'time': 2022, 'Installed wind + PV capacity (GW)': 695, 'energy consumption percentage': 15.10%}, 
+        {'time': 2023, 'Installed wind + PV capacity (GW)': 775, 'energy consumption percentage': 16.60%}, 
+        {'time': 2024, 'Installed wind + PV capacity (GW)': 855, 'energy consumption percentage': 18.30%}, 
+        {'time': 2025, 'Installed wind + PV capacity (GW)': 935, 'energy consumption percentage': 20.00%}, 
+        {'time': 2030, 'Installed wind + PV capacity (GW)': 1200, 'energy consumption percentage': 25.00%}]
 text: ["The China Lithium Industry Development Index white paper predicts a rising trend for installed wind and PV capacity (GW). It is expected to reach 1,200 GW and reach a 25% energy percentage in 2030."]
 result: [{"ObjectName":["installed wind and PV capacity (GW)"],"DataName":"Installed wind + PV capacity (GW)","Position":[{"Begin":[0,1],"End":[5,1]}],"Trend":"rising","Num":"None","Text":"a rising trend for installed wind and PV capacity (GW)"},
         {"ObjectName":["It"],"DataName":"Installed wind + PV capacity (GW)","Position":[{"Begin":[5,1],"End":[5,1]}],"Trend":"None","Num":[1200],"Text":"It is expected to reach 1,200 GW"},
@@ -261,18 +261,18 @@ result: [{"ObjectName":["the renewables"],"DataName":"renewables","Position":[{"
 reason: "'The renewables' in text corresponds to 'renewables' column in data. In '2040', the corresponding value is '211'"
 
 
-data: [{'month': 'Jan', '2018': '29.70%', '2019': '37.60%', '2020': '37.60%'}, 
-        {'month': 'Feb', '2018': '25.30%', '2019': '18.65%', '2020': '28.50%'}, 
-        {'month': 'Mar', '2018': '35.10%', '2019': '35.10%', '2020': '50.10%'}, 
-        {'month': 'Apr', '2018': '37.90%', '2019': '38.40%', '2020': '54.20%'}, 
-        {'month': 'May', '2018': '37.10%', '2019': '37.60%', '2020': '49.40%'}, 
-        {'month': 'Jun', '2018': '37.30%', '2019': '40.20%', '2020': '54.50%'}, 
-        {'month': 'Jul', '2018': '31.90%', '2019': '43.40%', '2020': '56.50%'}, 
-        {'month': 'Aug', '2018': '20.60%', '2019': '32.40%', '2020': '62.80%'}, 
-        {'month': 'Sep', '2018': '22.20%', '2019': '34.60%', '2020': '59.80%'}, 
-        {'month': 'Oct', '2018': '19.30%', '2019': '36.40%', '2020': '61.00%'}, 
-        {'month': 'Nov', '2018': '22.70%', '2019': '30.20%', '2020': '56.70%'}, 
-        {'month': 'Dec', '2018': '21.30%', '2019': '23.80%', '2020': '53.50%'}]
+data: [{'month': 'Jan', '2018': 29.70%, '2019': 37.60%, '2020': 37.60%}, 
+        {'month': 'Feb', '2018': 25.30%, '2019': 18.65%, '2020': 28.50%}, 
+        {'month': 'Mar', '2018': 35.10%, '2019': 35.10%, '2020': 50.10%}, 
+        {'month': 'Apr', '2018': 37.90%, '2019': 38.40%, '2020': 54.20%}, 
+        {'month': 'May', '2018': 37.10%, '2019': 37.60%, '2020': 49.40%}, 
+        {'month': 'Jun', '2018': 37.30%, '2019': 40.20%, '2020': 54.50%}, 
+        {'month': 'Jul', '2018': 31.90%, '2019': 43.40%, '2020': 56.50%}, 
+        {'month': 'Aug', '2018': 20.60%, '2019': 32.40%, '2020': 62.80%}, 
+        {'month': 'Sep', '2018': 22.20%, '2019': 34.60%, '2020': 59.80%}, 
+        {'month': 'Oct', '2018': 19.30%, '2019': 36.40%, '2020': 61.00%}, 
+        {'month': 'Nov', '2018': 22.70%, '2019': 30.20%, '2020': 56.70%}, 
+        {'month': 'Dec', '2018': 21.30%, '2019': 23.80%, '2020': 53.50%}]
 text: ["According to the data from Amazon's US station released by marketplacepulse, the proportion of Chinese sellers among new sellers in 2020 has greatly increased compared with the previous two years, and the proportion of Chinese sellers has stabilized at more than 50% since June 2020. In August 2020, it reached its highest point, 62.8%, getting an increase of 93.83% year-on-year."]
 result: [{"ObjectName":["The proportion of Chinese sellers"],"DataName":"2020","Position":[{"Begin":[0,3],"End":[11,3]}],"Trend":"increased","Num":"None","Text":"the proportion of Chinese sellers among new sellers in 2020 has greatly increased compared with the previous two years"},
         {"ObjectName":["The proportion of Chinese sellers"],"DataName":"2020","Position":[{"Begin":[5,3],"End":[11,3]}],"Trend":"stabilized","Num":"None","Text":"the proportion of Chinese sellers has stabilized at more than 50% since June 2020"},
@@ -383,10 +383,10 @@ if __name__ == '__main__':
     #     print("system: Goodbye!")
     #     break
     # user_input = input("Enter the data and the text:")
-    test_0 = """data: [{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
-                        {'Category':'Real Gross Output','Outdoor recreation':'21.8','U.S. economy':'6.3'},
-                        {'Category':'Compensation','Outdoor recreation':'16.2','U.S. economy':'7.8'},
-                        {'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}]
+    test_0 = """data: [{'Category':'Real GDP','Outdoor recreation':18.9,'U.S. economy':5.9},
+                        {'Category':'Real Gross Output','Outdoor recreation':21.8,'U.S. economy':6.3},
+                        {'Category':'Compensation','Outdoor recreation':16.2,'U.S. economy':7.8},
+                        {'Category':'Compensation','Outdoor recreation':13.1,'U.S. economy':2.7}]
                 text: ["Inflation-adjusted ('real') GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."]
                 label: "start"
             """
