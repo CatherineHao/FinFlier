@@ -422,7 +422,7 @@ if __name__ == '__main__':
                 label: "start"
             """
 
-    user_info = test_3
+    user_info = user_input
     # print(user_info)
     result, reason, result_frontend = chat_with_gpt(user_info)
     # print(result)
