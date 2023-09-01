@@ -172,7 +172,7 @@ result: [{"ObjectName":["active China-focused hedge funds"],"DataName":"Active",
 reason: "There are three objects in data and text: active funds, liquidated funds and launched funds. The has a down trend in  active funds as its number keep increasing before 2023. The 'funds launched' corresponds to the column 'Launches', and the 'funds were liquidated' corresponds to the column 'Liquidation'."
 """
 
-@app.route("/api/test/postQuery_real/", methods=['POST'])
+@app.route("/api/test/postQuery/", methods=['POST'])
 def chat_with_gpt():
     params = request.json
     # print(params)
@@ -205,6 +205,15 @@ def chat_with_gpt():
         json.dump(data, file, indent=4)
         print("Saved to", output_file_path)
     return {"result":result, "reason": reason, "final": final_result}
+
+
+
+@app.route('/api/test/postQuery_fake/', methods=['POST'])
+def post_query():
+    params = request.json
+    file_path = '{}/data/output_1.json'.format(FILE_ABS_PATH)
+    data = read_json(file_path)
+    return jsonify(data)
 
 
 # 判断x轴属于什么类型，{time, category,linear}
@@ -333,13 +342,6 @@ def chart_info():
     return result
 
 
-
-@app.route('/api/test/postQuery/', methods=['POST'])
-def post_query():
-    params = request.json
-    file_path = '{}/data/output.json'.format(FILE_ABS_PATH)
-    data = read_json(file_path)
-    return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True)
