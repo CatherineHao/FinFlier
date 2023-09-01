@@ -1,10 +1,3 @@
-'''
-Description: 
-Author: Qing Shi
-Date: 2023-08-25 14:49:29
-LastEditors: Qing Shi
-LastEditTime: 2023-08-25 14:49:29
-'''
 def find_position(text, word):
     index = text.find(word)
     end_index = index + len(word) - 1 if index != -1 else -1
@@ -13,7 +6,7 @@ def find_position(text, word):
     else:
         return [index, end_index]
 
-input_text = "In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size."
-input_word = "2023"
+input_text = "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter."
+input_word = "3.05"
 start, end = find_position(input_text, input_word)
-# print("First occurrence of '{}' is at index: {} and end at {}".format(input_word, start, end))
+print("First occurrence of '{}' is at index: {} and end at {}".format(input_word, start, end))

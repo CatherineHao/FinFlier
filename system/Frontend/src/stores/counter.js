@@ -37,9 +37,11 @@ export const useDataStore = defineStore("dataStore", {
                 annotation: {},
             },
             selectTable: null,
+            graphicalOverlayData: null,
             objectTag: {},
             query_results: [],
             show_state: 0,
+            objectCnt: 0,
             state_map: {
                 state0: {
                     overlay_tag: [],
@@ -170,6 +172,14 @@ export const useDataStore = defineStore("dataStore", {
             postQuery(param, (resp) => {
                 // setTimeout(() => {
                 this.query_results.push(resp.data);
+                // for (let i in this.query_results[this.query_results.length - 1].final) {
+                //     this.query_results[this.query_results.length - 1].final[i]['ObjectName'] = 'object' + (this.objectCnt).toString();
+                //     this.query_results[this.query_results.length - 1].final[i]['ObjectIndex'] = (this.objectCnt);
+                //     this.query_results[this.query_results.length - 1].final[i]['ObjectIndex'] = ;
+                //     this.objectCnt++;
+                // }
+                // console.log(this.query_results);
+
                 // }, 1000);
                 console.log("Post Query: ", new Date() - st);
             })

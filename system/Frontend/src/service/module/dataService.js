@@ -49,3 +49,14 @@ export function postQuery(param, callback) {
         console.log(errResponse);
     });
 }
+
+export function getChat(param, callback) {
+    const url = `${TEST_URL_PREFIX}/get_chat/`;
+    axios.post(url, param)
+    .then(response => {
+        callback(response);
+    }, errResponse => {
+        console.log(errResponse);
+    });
+
+}
