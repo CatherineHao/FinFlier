@@ -178,7 +178,9 @@ def chat_with_gpt(user_info):
         result = reply[0:start_index]
         reason = reply[start_index:]
         result_frontend = result_to_frontend(user_info, result)
+        print(result_frontend)
         final_result = transform_result(result_frontend)
+        print(final_result)
         return result, reason, final_result
     
     if "following" in label:
@@ -394,7 +396,7 @@ if __name__ == '__main__':
                         {'Time': '2022 Q4', 'Unemployment rate': 7.1}, 
                         {'Time': '2023 Q1', 'Unemployment rate': 7.1}, 
                        {'Time': '2023 Q2', 'Unemployment rate': 7.2}]
-                text: ["The unemployment rate in France inched up to 7.2% in the second quarter of 2023 from 7.1% in the previous quarter, and the highest since Q4 2022, as the number of unemployed people increased by 20 thousand to 2.2 million."]
+                text: ["The unemployment rate in France inched up to 7.2% in the second quarter of 2023 from 7.1% in the previous quarter, and the highest since Q4 2022, as the number of unemployed people increased by 19 thousand to 2.2 million."]
                 label: "start"
             """
     
@@ -473,8 +475,7 @@ question: ["Which contry has the highest value?"]
 label: "following"
 """
 
-    # user_info = test_1
-    user_info = test_0
+    user_info = test_7
     result, reason, final_result = chat_with_gpt(user_info)
     # print(result)
     # print(reason)
