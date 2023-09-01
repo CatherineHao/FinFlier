@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-07-10 13:45:50
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-08-29 00:08:42
+ * @LastEditTime: 2023-09-02 00:21:59
 -->
 <template>
     <div ref="singleBarSvg" style="height: 100%; width: 100%;">
@@ -19,9 +19,9 @@
                         <g v-if="objectTag[item.objectName] == 1" style="transition: 0.4s;">
                             <g>
                                 <g v-if="overlayTag[2] == 1" class="animation-fade">
-                                    <rect :x="barData[item.objectIndex].x - 3 - barData[item.objectIndex].width / 2" :y="0"
+                                    <rect :x="item.background.rectInfo.x - 3 - chart_setting.size.width / 2" :y="0"
                                         :fill="colorTrans(overlay_setting[overlay_map[2]].currentColor)"
-                                        :width="barData[item.objectIndex].width + 6" :height="elHeight * .8" opacity="0.6">
+                                        :width="chart_setting.size.width + 6" :height="elHeight * .8" opacity="0.6">
                                     </rect>
                                 </g>
                             </g>
@@ -52,44 +52,44 @@
                             <g v-if="objectTag[item.objectName] == 1" style="transition: 0.4s;">
                                 <g>
                                     <g v-if="overlayTag[0] == 1">
-                                        <rect :x="barData[item.objectIndex].x - barData[item.objectIndex].width / 2"
-                                            :y="barData[item.objectIndex].y"
+                                        <rect :x="item.rectInfo.x - chart_setting.size.width / 2"
+                                            :y="item.rectInfo.y"
                                             :fill="colorTrans(overlay_setting[overlay_map[0]].currentColor)"
-                                            :width="barData[item.objectIndex].width"
-                                            :height="barData[item.objectIndex].height" opacity="1"></rect>
+                                            :width="chart_setting.size.width"
+                                            :height="item.rectInfo.height" opacity="1"></rect>
                                     </g>
                                     <g v-if="overlayTag[1] == 1">
-                                        <rect :x="barData[item.objectIndex].x - barData[item.objectIndex].width / 2"
-                                            :y="barData[item.objectIndex].y" :fill="'none'"
-                                            :width="barData[item.objectIndex].width"
-                                            :height="barData[item.objectIndex].height"
+                                        <rect :x="item.rectInfo.x -  chart_setting.size.width / 2"
+                                            :y="item.rectInfo.y" :fill="'none'"
+                                            :width=" chart_setting.size.width"
+                                            :height="item.rectInfo.height"
                                             :stroke="colorTrans(overlay_setting[overlay_map[1]].currentColor)"
                                             :stroke-width="3" :stroke-dasharray="5.5" opacity="1"></rect>
                                     </g>
                                 </g>
                                 <g>
                                     <g v-if="overlayTag[3] == 1">
-                                        <circle :cx="barData[item.objectIndex].x" :cy="barData[item.objectIndex].y" r="7"
+                                        <circle :cx="item.marker.pos.x" :cy="item.marker.pos.y" r="7"
                                             :fill="colorTrans(overlay_setting[overlay_map[3]].currentColor)"></circle>
                                     </g>
                                     <g v-if="overlayTag[4] == 1">
-                                        <circle :cx="barData[item.objectIndex].x"
+                                        <!-- <circle :cx="barData[item.objectIndex].x"
                                             :cy="barData[item.objectIndex].y + barData[item.objectIndex].height / 2" r="7"
-                                            :fill="colorTrans(overlay_setting[overlay_map[4]].currentColor)"></circle>
+                                            :fill="colorTrans(overlay_setting[overlay_map[4]].currentColor)"></circle> -->
                                         <path
-                                            :d="'M' + barData[item.objectIndex].x + ',' + (barData[item.objectIndex].y + barData[item.objectIndex].height / 2) + 'L' + barData[item.objectIndex].x + ',' + -10"
+                                            :d="'M' + item.label.pos.x + ',' + (item.label.pos.y) + 'L' + item.label.pos.x + ',' + -10"
                                             fill="none" :stroke="colorTrans(overlay_setting[overlay_map[4]].currentColor)"
                                             stroke-width="3"></path>
-                                        <text :x="barData[item.objectIndex].x" :y="-20" text-anchor="middle">
+                                        <text :x="item.label.pos.x" :y="-20" text-anchor="middle">
                                             {{ item.overlay.annotation.label }}
                                         </text>
                                     </g>
                                     <g v-if="overlayTag[5] == 1">
-                                        <circle :cx="barData[item.objectIndex].x"
+                                        <!-- <circle :cx="barData[item.objectIndex].x"
                                             :cy="barData[item.objectIndex].y + barData[item.objectIndex].height / 2" r="7"
-                                            :fill="colorTrans(overlay_setting[overlay_map[5]].currentColor)"></circle>
+                                            :fill="colorTrans(overlay_setting[overlay_map[5]].currentColor)"></circle> -->
                                         <path
-                                            :d="'M' + barData[item.objectIndex].x + ',' + (barData[item.objectIndex].y + barData[item.objectIndex].height / 2) + 'L' + barData[item.objectIndex].x + ',' + 0"
+                                            :d="'M' + item.text.pos.x + ',' + (item.text.pos.y) + 'L' + item.text.pos.x + ',' + 0"
                                             fill="none" :stroke="colorTrans(overlay_setting[overlay_map[5]].currentColor)"
                                             stroke-width="3"></path>
                                     </g>
@@ -120,7 +120,6 @@
 <script>
 import { axisBottom, axisLeft, extent, scaleLinear, scalePoint, select } from "d3";
 import { useDataStore } from "@/stores/counter";
-import description_data from "@/assets/data/description.json"
 export default {
     name: "singleBar",
     props: ['rawData', 'chartData', 'defaultTag', 'scaleTag'],
@@ -131,6 +130,7 @@ export default {
             isShow: false,
             barData: [],
             overlayData: [],
+            overlayData_test: [],
             overlayTag: {},
             objectTag: {},
             axisPosition: {
@@ -157,6 +157,68 @@ export default {
         };
     },
     methods: {
+        calcOverlay (barData, chartData) {
+            console.log(barData, chartData);
+            let over_all = [];
+            for (let c_i in chartData) {
+                let over_data = chartData[c_i];
+                // console.log(over_data);
+                let position = over_data.Position[0];
+                let overlayData = {
+                    'objectName': over_data['ObjectName'],
+                    'color': {
+                        tag: 1,
+                        rectInfo: null
+                    },
+                    'bounding_box': {
+                        tag: 1,
+                        rectInfo: null
+                    },
+                    'background': {
+                        tag: 1,
+                        rectInfo: null
+                    },
+                    'marker': { tag: 1, pos: [] },
+                    'label': { tag: 1, pos: [], text: '' },
+                    'text': { tag: 1, pos: [], text: '' },
+                    'trend_line': { tag: -1, pos: [] },
+                    'overall_indicator': { tag: -1, pos: [] },
+                    'special_time': { tag: -1, pos: [] }
+                }
+                if (position['Begin'][1] == position['End'][1]) {
+                    overlayData.label.text = over_data.GraphicalOverlay[0].Label[0];
+                    overlayData.text.text = over_data.GraphicalOverlay[0].Text;
+                    let cnt = parseInt(position['Begin'][1]);
+                    let rectInfo = barData[cnt];
+                    let pos = {
+                        x: barData[cnt].x,
+                        y: barData[cnt].y
+                    };
+                    overlayData.label.pos = pos;
+                    overlayData.text.pos = pos;
+                    overlayData.marker.pos = pos;
+                    overlayData.background.rectInfo = rectInfo;
+                    overlayData.color.rectInfo = rectInfo;
+                    overlayData["bounding_box"].rectInfo = rectInfo;
+                }
+
+                // overlayData.marker.tag = 1;
+                // for (let i = parseInt(position['Begin'][1]); i <= parseInt(position['End'][1]); ++i) {
+                //     let cnt = i;
+                //     let cnt_tag = 0;
+                //     if (i == barData.length) {
+                //         cnt--;
+                //         cnt_tag = 1;
+                //     }
+                //     if (cnt_tag == 0)
+                //         overlayData.marker.pos.push(barData[cnt]['pos1']);
+                //     else
+                //         overlayData.marker.pos.push(barData[cnt]['pos2']);
+                // }
+                over_all.push(overlayData)
+            }
+            return over_all;
+        },
         colorTrans (color) {
             return `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
         },
@@ -221,7 +283,7 @@ export default {
             let yName = chart_info.chartScale.y.scaleName;
             let xScale = this.scale(data, chart_info.chartScale.x.attributeName, chart_info.chartScale.x.scaleType, [0, width]);
             let yScale = this.scale(data, chart_info.chartScale.y.attributeName[0], chart_info.chartScale.y.scaleType, [height, 0]);
-            console.log(xScale, yScale);
+            // console.log(xScale, yScale);
             this.axisPosition = {
                 xAxis: [width, yScale(0) + 30],
                 yAxis: [-.05 * width, -20]
@@ -252,11 +314,11 @@ export default {
             }
             select("#xAxis").call(xAxis, xScale, height);
             select("#yAxis").call(yAxis, yScale);
-            console.log('log 1')
+            // console.log('log 1')
             let barData = new Array();
             for (let i in data) {
                 if (i == 'columns') continue;
-                console.log(data[i], data[i][chart_info.chartScale.x.attributeName], data[i][chart_info.chartScale.y.attributeName[0]])
+                // console.log(data[i], data[i][chart_info.chartScale.x.attributeName], data[i][chart_info.chartScale.y.attributeName[0]])
                 barData.push({
                     x: xScale(data[i][chart_info.chartScale.x.attributeName]),
                     y: yScale(data[i][chart_info.chartScale.y.attributeName[0]]),
@@ -278,13 +340,14 @@ export default {
 
         this.barData = this.calcBar(this.rawData, this.chartData)
         
-        this.overlayData = description_data;
+        // this.overlayData = description_data;
         // console.log(this.overlayData);
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations) => {
             this.chart_setting = dataStore.state_map['state0']['chart_setting'];
             this.overlayTag = dataStore.state_map['state0']['overlay_tag'];
-            console.log(dataStore.state_map['state0']['overlay_setting'])
+            // console.log(dataStore.state_map['state0']['overlay_setting'])
+            this.overlayData = this.calcOverlay(this.barData, dataStore.graphicalOverlayData);
             this.overlay_setting = dataStore.state_map['state0']['overlay_setting']['object0'];
             this.objectTag = dataStore.objectTag;
         })

@@ -1,4 +1,11 @@
 <!--
+ * @Description: 
+ * @Author: Qing Shi
+ * @Date: 2023-08-22 14:28:15
+ * @LastEditors: Qing Shi
+ * @LastEditTime: 2023-09-01 23:14:55
+-->
+<!--
  *                        _oo0oo_
  *                       o8888888o
  *                       88" . "88
@@ -463,8 +470,8 @@ export default {
     created () {
     },
     mounted () {
-        // this.inputText = "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter."
-        // this.submitText();
+        this.inputText = "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."
+        this.submitText();
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations, state) => {
             console.log(mutations.type)

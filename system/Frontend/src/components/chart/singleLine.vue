@@ -323,7 +323,7 @@ export default {
             for (let i in dataStore.objectTag)
                 if (dataStore.objectTag[i] == 1)
                     this.overlay_setting = dataStore.state_map['state0']['overlay_setting'][i];
-            console.log(this.overlayTag, this.overlay_setting);
+            // console.log(this.overlayTag, this.overlay_setting);
             this.objectTag = dataStore.objectTag;
         })
 
