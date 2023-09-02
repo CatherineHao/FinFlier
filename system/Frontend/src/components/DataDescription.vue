@@ -324,7 +324,7 @@ export default {
                             tag: info.OverTag
                         })
                     }
-                    console.log(pos)
+                    // console.log(pos)
 
                 }
                 pos.sort((a, b) => a.pos[0] - b.pos[0])
@@ -470,8 +470,8 @@ export default {
     created () {
     },
     mounted () {
-        // this.inputText = "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."
-        // this.submitText();
+        this.inputText = "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022."
+        this.submitText();
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations, state) => {
             console.log(mutations.type)

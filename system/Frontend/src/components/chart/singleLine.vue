@@ -123,7 +123,7 @@ export default {
                 yAxis: [0, 0]
             },
             overlay_setting: {},
-            overlay_map: ['color', 'bounding box', 'background', 'marker', 'label', 'text'],
+            overlay_map: ['color', 'bounding box', 'background', 'marker', 'label', 'text', 'trend', 'overall', 'special'],
             chart_setting: {
                 currentColor: {
                     r: 0,
@@ -150,7 +150,10 @@ export default {
                 let position = over_data.Position[0];
                 let overlayData = {
                     'objectName': over_data['ObjectName'],
-                    'color': -1,
+                    'color': {
+                        tag: -1,
+
+                    },
                     'bounding box': {
                         tag: -1,
                         pos1: [0, 0],
@@ -164,9 +167,9 @@ export default {
                     'marker': { tag: -1, pos: [] },
                     'label': { tag: -1, pos: [], text: '' },
                     'text': { tag: -1, pos: [], text: '' },
-                    'trend_line': { tag: -1, pos: [] },
-                    'overall_indicator': { tag: -1, pos: [] },
-                    'special_time': { tag: -1, pos: [] }
+                    'trend': { tag: -1, pos: [] },
+                    'overall': { tag: -1, pos: [] },
+                    'special': { tag: -1, pos: [] }
                 }
                 if (position['Begin'][1] == position['End'][1]) {
                     overlayData.label.tag = 1;
@@ -213,6 +216,14 @@ export default {
         },
         translate (x, y) {
             return `translate(${x}, ${y})`;
+        },
+        dataType(data, scaleType) {
+            if (scaleType == 'time') {
+                return new Date(data);
+            }
+            else {
+                return data;
+            }
         },
         scale (data, scaleName, scaleType, range) {
             let scale_data = [];
@@ -289,7 +300,7 @@ export default {
             }
             select("#xAxis").call(xAxis, xScale, height);
             select("#yAxis").call(yAxis, yScale);
-            let lineGenerator = line().x(d => xScale(new Date(d[chart_info.chartScale.x.attributeName]))).y(d => yScale(d[chart_info.chartScale.y.attributeName[0]]));
+            let lineGenerator = line().x(d => xScale(this.dataType(d[chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType))).y(d => yScale(d[chart_info.chartScale.y.attributeName[0]]));
             let lineData = new Array();
             for (let i in data) {
                 if (i == 0 || i == 'columns') continue;
@@ -297,8 +308,8 @@ export default {
                     path: lineGenerator([data[i], data[i - 1]]),
                     fill: chart_info.chartColor[chart_info.chartScale.y.attributeName[0]],
                     data: [data[i - 1], data[i]],
-                    pos1: [xScale(new Date(data[i - 1][chart_info.chartScale.x.attributeName])), yScale(data[i - 1][chart_info.chartScale.y.attributeName[0]])],
-                    pos2: [xScale(new Date(data[i][chart_info.chartScale.x.attributeName])), yScale(data[i][chart_info.chartScale.y.attributeName[0]])]
+                    pos1: [xScale(this.dataType(data[i - 1][chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType)), yScale(data[i - 1][chart_info.chartScale.y.attributeName[0]])],
+                    pos2: [xScale(this.dataType(data[i][chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType)), yScale(data[i][chart_info.chartScale.y.attributeName[0]])]
                 })
             }
             return lineData;
