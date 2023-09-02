@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-07-10 13:45:50
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-09-02 00:37:36
+ * @LastEditTime: 2023-09-02 21:40:58
 -->
 <template>
     <div ref="singleBarSvg" style="height: 100%; width: 100%;">
@@ -94,7 +94,7 @@
                                         </defs>
                                         <path
                                             :d="'M' + item.trend.pos.x1 + ',' + item.trend.pos.y1 + 'L' + item.trend.pos.x2 + ',' + item.trend.pos.y2"
-                                            :stroke-width="3" marker-end="url(#triangle)"
+                                            :stroke-width="2" marker-end="url(#triangle)"
                                             :stroke="colorTrans(overlay_setting[overlay_map[6]].currentColor)" fill="none">
                                         </path>
                                     </g>
@@ -121,7 +121,7 @@
         </svg>
         <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
             'position': 'absolute',
-            'top': `${.1 * elHeight}px`,
+            'top': `${0 * elHeight}px`,
             'left': `${item.text.pos.x + .05 * elWidth - 75}px`,
             'width': '150px',
             'transition': '0.4s',
@@ -137,7 +137,7 @@
         <div v-for="(item, i) in overlayData" :key="'overlay_' + i" style="position: absolute; top: 0px; left: 0px;">
             <div v-for="(o, oi) in item.label.pos" :key="'oi_' + oi" :style="{
                 'position': 'absolute',
-                'top': `${.1 * elHeight}px`,
+                'top': `${0 * elHeight}px`,
                 'left': `${o.x + .05 * elWidth - 75}px`,
                 'width': '150px',
                 'transition': '0.4s',

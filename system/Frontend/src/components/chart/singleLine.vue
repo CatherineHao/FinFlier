@@ -3,6 +3,39 @@
  * @Author: Qing Shi
  * @Date: 2023-08-26 19:48:30
  * @LastEditors: Qing Shi
+ * @LastEditTime: 2023-09-02 21:40:32
+-->
+<!--
+ *                        _oo0oo_
+ *                       o8888888o
+ *                       88" . "88
+ *                       (| -_- |)
+ *                       0\  =  /0
+ *                     ___/`---'\___
+ *                   .' \\|     |// '.
+ *                  / \\|||  :  |||// \
+ *                 / _||||| -:- |||||- \
+ *                |   | \\\  - /// |   |
+ *                | \_|  ''\---/''  |_/ |
+ *                \  .-\__  '-'  ___/-. /
+ *              ___'. .'  /--.--\  `. .'___
+ *           ."" '<  `.___\_<|>_/___.' >' "".
+ *          | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+ *          \  \ `_.   \_ __\ /__ _/   .-` /  /
+ *      =====`-.____`.___ \_____/___.-`___.-'=====
+ *                        `=---='
+ * 
+ * 
+ *      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * 
+ *            佛祖保佑     永不宕机     永无BUG
+ -->
+
+<!--
+ * @Description: 
+ * @Author: Qing Shi
+ * @Date: 2023-08-26 19:48:30
+ * @LastEditors: Qing Shi
  * @LastEditTime: 2023-08-29 00:10:20
 -->
 <template>
@@ -30,6 +63,16 @@
                 <!-- </Transition>
                 </g>
                 </g> -->
+                <g>
+                    <g v-for="(o, i) in overlayData" :key="'Marker_' + i">
+                        <g v-if="overlayTag[2] == 1 && objectTag[o.objectName] == 1">
+                            <rect :x="o.bounding_box.x1" :y="o.bounding_box.y1"
+                                :width="o.bounding_box.x2 - o.bounding_box.x1"
+                                :height="o.bounding_box.y2 - o.bounding_box.y1"
+                                :fill="colorTrans(overlay_setting[overlay_map[2]].currentColor)"></rect>
+                        </g>
+                    </g>
+                </g>
 
                 <g>
                     <g id="xAxis"></g>
@@ -46,30 +89,67 @@
                         </path>
                     </g>
                 </g>
+
                 <g>
                     <g v-for="(o, i) in overlayData" :key="'Marker_' + i">
-                        <g v-if="o.tag != -1 && overlayTag[3] == 1 && objectTag[o.objectName] == 1">
-                            <circle v-for="(m, m_i) in o.marker.pos" :key="'marker' + m_i" :r="5" :fill="colorTrans(overlay_setting[overlay_map[3]].currentColor)" :cx="m[0]"
-                                :cy="m[1]"></circle>
+                        <g v-if="overlayTag[0] == 1 && objectTag[o.objectName] == 1">
+                            <path v-for="(d, di) in o.color.lineInfo" :key="'path' + di" :d="d.path" fill="none"
+                                :stroke="colorTrans(overlay_setting[overlay_map[0]].currentColor)"
+                                :stroke-width="chart_setting.size.width">
+                            </path>
                         </g>
-                        <g v-if="o.tag != -1 && (overlayTag[4] == 1) && objectTag[o.objectName] == 1">
-                            <path :d="'M' + o.text.pos[0] + ',' + o.text.pos[1] + 'L' + o.text.pos[0] + ',' + 0" fill="none"
+                        <g v-if="overlayTag[1] == 1 && objectTag[o.objectName] == 1">
+                            <rect :x="o.bounding_box.x1" :y="o.bounding_box.y1"
+                                :width="o.bounding_box.x2 - o.bounding_box.x1"
+                                :height="o.bounding_box.y2 - o.bounding_box.y1" :stroke-width="3" fill="none"
+                                :stroke="colorTrans(overlay_setting[overlay_map[1]].currentColor)"></rect>
+                        </g>
+                        <g v-if="overlayTag[3] == 1 && objectTag[o.objectName] == 1">
+                            <circle v-for="(m, m_i) in o.marker.pos" :key="'marker' + m_i" :r="5"
+                                :fill="colorTrans(overlay_setting[overlay_map[3]].currentColor)" :cx="m[0]" :cy="m[1]">
+                            </circle>
+                        </g>
+                        <g v-if="(overlayTag[4] == 1) && objectTag[o.objectName] == 1">
+                            <path v-for="(d, d_i) in o.label.pos" :key="'dd_' + d_i" :d="'M' + d[0] + ',' + d[1] + 'L' + d[0] + ',' + 0" fill="none"
                                 :stroke="colorTrans(overlay_setting[overlay_map[4]].currentColor)" :stroke-width="2"></path>
                         </g>
-                        <g v-if="o.tag != -1 && (overlayTag[5] == 1) && objectTag[o.objectName] == 1">
-                            <path :d="'M' + o.text.pos[0] + ',' + o.text.pos[1] + 'L' + o.text.pos[0] + ',' + 0" fill="none"
+                        <g v-if="(overlayTag[5] == 1) && objectTag[o.objectName] == 1">
+                            <path v-if="o.text.lineTag == 1"
+                                :d="'M' + o.text.pos[0] + ',' + o.text.pos[1] + 'L' + o.text.pos[0] + ',' + 0" fill="none"
                                 :stroke="colorTrans(overlay_setting[overlay_map[5]].currentColor)" :stroke-width="2"></path>
+                        </g>
+
+                        <g v-if="overlayTag[6] == 1 && objectTag[o.objectName] == 1">
+                                        <defs>
+                                            <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5"
+                                                markerUnits="strokeWidth" markerWidth="10" markerHeight="10" orient="auto">
+                                                <path d="M 0 0 L 10 5 L 0 10 z" :fill="colorTrans(overlay_setting[overlay_map[6]].currentColor)" />
+                                            </marker>
+                                        </defs>
+                                        <path
+                                            :d="'M' + o.trend.pos.x1 + ',' + o.trend.pos.y1 + 'L' + o.trend.pos.x2 + ',' + o.trend.pos.y2"
+                                            :stroke-width="2" marker-end="url(#triangle)"
+                                            :stroke="colorTrans(overlay_setting[overlay_map[6]].currentColor)" fill="none">
+                                        </path>
+                                    </g>
+                        <g v-if="(overlayTag[7] == 1) && objectTag[o.objectName] == 1">
+                            <path :d="'M' + o.overall.pos.x1 + ',' + o.overall.pos.y + 'L' + o.overall.pos.x2 + ',' + o.overall.pos.y" fill="none"
+                                :stroke="colorTrans(overlay_setting[overlay_map[7]].currentColor)" :stroke-width="2"></path>
+                        </g>
+                        <g v-if="(overlayTag[8] == 1) && objectTag[o.objectName] == 1">
+                            <path :d="'M' + o.text.pos.x + ',' + 0 + 'L' + o.text.pos.x + ',' + (.8 * elHeight)" fill="none"
+                                :stroke="colorTrans(overlay_setting[overlay_map[8]].currentColor)" :stroke-width="2"></path>
                         </g>
                     </g>
                 </g>
             </g>
         </svg>
         <!-- <div> -->
-            <!-- <div v-if=""> -->
+        <!-- <div v-if=""> -->
         <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
             'position': 'absolute',
-            'top': `${.1 * elHeight}px`,
-            'left': `${item.text.pos[0]}px`,
+            'top': `${0 * elHeight}px`,
+            'left': `${item.text.pos.x}px`,
             'width': '150px',
             'transition': '0.4s',
             'opacity': item.tag != -1 && (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
@@ -81,12 +161,13 @@
         }">
             <!-- 'border-color': colorTrans(overlay_setting[overlay_map[5]].currentColor), -->
             {{ item.text.text }}
-        <!-- </div> -->
-    </div>
-        <div  v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
+            <!-- </div> -->
+        </div>
+        <div  v-for="(item, i) in overlayData" :key="'overlay_' + i" style="position: absolute; top: 0px; left: 0px;">
+        <div v-for="(d, d_i) in item.label.pos" :key="'dd_' + d_i" :style="{
             'position': 'absolute',
-            'top': `${.1 * elHeight}px`,
-            'left': `${item.label.pos[0]}px`,
+            'top': `${0 * elHeight}px`,
+            'left': `${d[0] - 75 + .05 * elWidth}px`,
             'width': '150px',
             'transition': '0.4s',
             'opacity': item.tag != -1 && (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
@@ -96,10 +177,8 @@
             'border-radius': '10px',
             'background-color': 'white'
         }">
-            <!-- 'border-color': colorTrans(overlay_setting[overlay_map[5]].currentColor), -->
-            {{ item.label.text }}
-        </div>
-        <!-- </div> -->
+            {{ item.label.text[d_i] }}
+        </div></div>
     </div>
 </template>
 <script>
@@ -122,6 +201,7 @@ export default {
                 xAxis: [0, 0],
                 yAxis: [0, 0]
             },
+            yScale: null,
             overlay_setting: {},
             overlay_map: ['color', 'bounding box', 'background', 'marker', 'label', 'text', 'trend', 'overall', 'special'],
             chart_setting: {
@@ -146,15 +226,15 @@ export default {
             let over_all = [];
             for (let c_i in chartData) {
                 let over_data = chartData[c_i];
-                // console.log(over_data);
+                console.log(over_data);
                 let position = over_data.Position[0];
                 let overlayData = {
                     'objectName': over_data['ObjectName'],
                     'color': {
                         tag: -1,
-
+                        lineInfo: []
                     },
-                    'bounding box': {
+                    'bounding_box': {
                         tag: -1,
                         pos1: [0, 0],
                         pos2: [0, 0]
@@ -165,8 +245,8 @@ export default {
                         pos2: [0, 0]
                     },
                     'marker': { tag: -1, pos: [] },
-                    'label': { tag: -1, pos: [], text: '' },
-                    'text': { tag: -1, pos: [], text: '' },
+                    'label': { tag: -1, pos: [], text: [] },
+                    'text': { tag: -1, lineTag: 1, pos: [], text: '' },
                     'trend': { tag: -1, pos: [] },
                     'overall': { tag: -1, pos: [] },
                     'special': { tag: -1, pos: [] }
@@ -174,40 +254,115 @@ export default {
                 if (position['Begin'][1] == position['End'][1]) {
                     overlayData.label.tag = 1;
                     overlayData.text.tag = 1;
-                    // console.log(over_data)
-                    overlayData.label.text = over_data.GraphicalOverlay[0].Label[0];
+                    overlayData.label.text = over_data.GraphicalOverlay[0].Label;
                     overlayData.text.text = over_data.GraphicalOverlay[0].Text;
                     let cnt = parseInt(position['Begin'][1]);
                     let cnt_tag = 0;
+                    let nodePos = [];
 
                     if (cnt == lineData.length) {
                         cnt--;
                         cnt_tag = 1;
                     }
                     if (cnt_tag == 0) {
-                        overlayData.label.pos = (lineData[cnt]['pos1']);
+                        overlayData.label.pos = [(lineData[cnt]['pos1'])];
                         overlayData.text.pos = (lineData[cnt]['pos1']);
+                        overlayData.marker.pos.push(lineData[cnt]['pos1']);
+                        nodePos = lineData[cnt]['pos1']
                     }
                     else {
-                        overlayData.label.pos = (lineData[cnt]['pos2']);
+                        overlayData.label.pos = [(lineData[cnt]['pos2'])];
                         overlayData.text.pos = (lineData[cnt]['pos2']);
-                    }
-                }
-
-                overlayData.marker.tag = 1;
-                for (let i = parseInt(position['Begin'][1]); i <= parseInt(position['End'][1]); ++i) {
-                    let cnt = i;
-                    let cnt_tag = 0;
-                    if (i == lineData.length) {
-                        cnt--;
-                        cnt_tag = 1;
-                    }
-                    if (cnt_tag == 0)
-                        overlayData.marker.pos.push(lineData[cnt]['pos1']);
-                    else
                         overlayData.marker.pos.push(lineData[cnt]['pos2']);
+                        nodePos = lineData[cnt]['pos2'];
+                    }
+                    overlayData.background.rectInfo = {
+                        x1: nodePos[0] - 10,
+                        x2: nodePos[1] - 10,
+                        y1: nodePos[0] + 10,
+                        y2: nodePos[1] + 10
+                    };
+                    overlayData["bounding_box"].pos = {
+                        x1: nodePos[0] - 10,
+                        x2: nodePos[1] - 10,
+                        y1: nodePos[0] + 10,
+                        y2: nodePos[1] + 10
+                    };
+                } else {
+                    let select_line = [];
+                    overlayData.marker.tag = 1;
+                    overlayData.label.tag = 1;
+                    overlayData.text.tag = 1;
+                    // console.log(over_data)
+                    let y_max = -9999999;
+                    let y_min = 99999999;
+                    let x_max = -9999999;
+                    let x_min = 99999999;
+
+                    overlayData.label.text = over_data.GraphicalOverlay[0].Label;
+                    overlayData.text.text = over_data.GraphicalOverlay[0].Text;
+                    let startNode = lineData[parseInt(position['Begin'][1])];
+                    let endNode = lineData[parseInt(position['End'][1]) < lineData.length ? parseInt(position['End'][1]) : parseInt(position['End'][1]) - 1];
+                    for (let i = parseInt(position['Begin'][1]); i <= parseInt(position['End'][1]); ++i) {
+                        if (i < lineData.length) {
+                            select_line.push(lineData[i]);
+                            x_min = Math.min(lineData[i].pos1[0], x_min);
+                            x_max = Math.max(lineData[i].pos2[0], x_max);
+                            y_max = Math.max(lineData[i].pos1[1], y_max);
+                            y_max = Math.max(lineData[i].pos2[1], y_max);
+                            y_min = Math.min(lineData[i].pos1[1], y_min);
+                            y_min = Math.min(lineData[i].pos2[1], y_min);
+                        }
+                        let cnt = i;
+                        let cnt_tag = 0;
+                        if (i == lineData.length) {
+                            cnt--;
+                            cnt_tag = 1;
+                        }
+                        if (cnt_tag == 0)
+                            overlayData.marker.pos.push(lineData[cnt]['pos1']);
+                        else
+                            overlayData.marker.pos.push(lineData[cnt]['pos2']);
+                    }
+                    overlayData.color.lineInfo = select_line;
+                    overlayData.background.rectInfo = {
+                        x1: x_min,
+                        x2: x_max,
+                        y1: y_min,
+                        y2: y_max
+                    };
+                    overlayData["bounding_box"].pos = {
+                        x1: x_min,
+                        x2: x_max,
+                        y1: y_min,
+                        y2: y_max
+                    };
+                    overlayData['text'].pos = {
+                        x: (x_max + x_min) / 2,
+                        y: (y_max + y_min) / 2
+                    }
+                    overlayData.special.pos = {
+                        x: startNode.pos1[0],
+                        y: startNode.pos2[1],
+                    };
+                    overlayData.label.pos = [
+                        startNode.pos1, endNode.pos2
+                    ]
+
+                    overlayData.trend.pos = {
+                        x1: startNode.pos1[0],
+                        y1: startNode.pos1[1],
+                        x2: endNode.pos2[0],
+                        y2: endNode.pos2[1],
+                    };
+                    overlayData.overall.pos = {
+                        x1: startNode.pos1[0],
+                        x2: endNode.pos2[0],
+                        y: this.yScale(parseFloat(over_data.GraphicalOverlay[0].Line.min))
+                    }
                 }
                 over_all.push(overlayData)
+                console.log(overlayData);
             }
             return over_all;
         },
@@ -217,7 +372,7 @@ export default {
         translate (x, y) {
             return `translate(${x}, ${y})`;
         },
-        dataType(data, scaleType) {
+        dataType (data, scaleType) {
             if (scaleType == 'time') {
                 return new Date(data);
             }
@@ -284,7 +439,7 @@ export default {
             let xScale = this.scale(data, chart_info.chartScale.x.attributeName, chart_info.chartScale.x.scaleType, [0, width]);
             let yScale = this.scale(data, chart_info.chartScale.y.attributeName[0], chart_info.chartScale.y.scaleType, [height, 0]);
             // console.log(xScale, yScale);
-
+            this.yScale = yScale;
             this.axisPosition = {
                 xAxis: [width, yScale(0) + 30],
                 yAxis: [-.05 * width, -20]

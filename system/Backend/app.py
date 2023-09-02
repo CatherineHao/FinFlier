@@ -2,7 +2,7 @@
 Description: 
 Author: Qing Shi
 Date: 2022-11-20 19:14:42
-LastEditTime: 2023-09-02 01:01:58
+LastEditTime: 2023-09-02 21:38:03
 '''
 import openai
 from flask import Flask, request, jsonify
@@ -302,7 +302,7 @@ reason: "There are three objects in data and text: active funds, liquidated fund
 """
 
 
-@app.route("/api/test/postQuery_real/", methods=['POST'])
+@app.route("/api/test/postQuery/", methods=['POST'])
 def chat_with_gpt():
     params = request.json
     # print(params)
@@ -338,7 +338,7 @@ def chat_with_gpt():
 
 
 
-@app.route('/api/test/postQuery/', methods=['POST'])
+@app.route('/api/test/postQuery_fake/', methods=['POST'])
 def post_query():
     params = request.json
     file_path = '{}/data/output_f_16.json'.format(FILE_ABS_PATH)
@@ -394,8 +394,8 @@ def determine_chart_type(input_data, x_type):
     if x_type == 'time' or x_type == 'linear':
         chart_type += 1
     
-    # return chart_type
-    return 1
+    return chart_type
+    # return 1
 #TODO: backend function 1
 # @app.route('/chart-info', methods=['POST'])
 @app.route('/api/test/fetchBasicChart/', methods=['POST'])
