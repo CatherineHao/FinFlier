@@ -473,12 +473,17 @@ if __name__ == '__main__':
                     question: ["Which contry has the highest value?"]                
                     label: "following"
                 """
+    
+    group_data = """data: [{'Time':'2017/1/1','Mini- and subcompact size':'0.61','Compact size':'0.35', 'Midsize to large':'0.04'},{'Time':'2018/1/1','Mini- and subcompact size':'0.49','Compact size':'0.41', 'Midsize to large':'0.10'},{'Time':'2019/1/1','Mini- and subcompact size':'0.33','Compact size':'0.54', 'Midsize to large':'0.13'},{'Time':'2020/1/1','Mini- and subcompact size':'0.35','Compact size':'0.33', 'Midsize to large':'0.32'},{'Time':'2021/1/1','Mini- and subcompact size':'0.37','Compact size':'0.28', 'Midsize to large':'0.35'},{'Time':'2022/1/1','Mini- and subcompact size':'0.37','Compact size':'0.31', 'Midsize to large':'0.32'},{'Time':'2023/1/1','Mini- and subcompact size':'0.30','Compact size':'0.30', 'Midsize to large':'0.40'}]
+    text: ["In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size."]
+    label: "start"
+                """
 
-    user_info = test_7
+    user_info = group_data
     result, reason, final_result = chat_with_gpt(user_info)
     # print(result)
     # print(reason)
-    print(final_result)
+    # print(final_result)
     
         
 
