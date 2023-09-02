@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-22 14:28:15
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-09-01 23:14:55
+ * @LastEditTime: 2023-09-02 01:02:20
 -->
 <!--
  *                        _oo0oo_
@@ -470,8 +470,8 @@ export default {
     created () {
     },
     mounted () {
-        this.inputText = "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."
-        this.submitText();
+        // this.inputText = "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."
+        // this.submitText();
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations, state) => {
             console.log(mutations.type)

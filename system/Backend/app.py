@@ -2,7 +2,7 @@
 Description: 
 Author: Qing Shi
 Date: 2022-11-20 19:14:42
-LastEditTime: 2023-09-01 23:13:30
+LastEditTime: 2023-09-02 01:01:58
 '''
 import openai
 from flask import Flask, request, jsonify
@@ -189,7 +189,7 @@ reason: "The corresponding value for object "Netherlands" is "43.1", and its sho
 data: [{'Category':'Real GDP','Outdoor recreation': 18.9,'U.S. economy': 5.9},
         {'Category':'Real Gross Output','Outdoor recreation': 21.8,'U.S. economy': 6.3},
         {'Category':'Compensation','Outdoor recreation': 16.2,'U.S. economy': 7.8},
-        {'Category':'Compensation','Outdoor recreation': 13.1,'U.S. economy': 2.7}]
+        {'Category':'Employment','Outdoor recreation': 13.1,'U.S. economy': 2.7}]
 text: ["Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."]
 result: [{"ObjectName":["Inflation-adjusted ("real") GDP"],"DataName":"Outdoor recreation", "Position":[{"Begin":[0,1],"End":[0,1],"Trend":"increase","Num":[18.9],"Text":"Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021"},
         {"ObjectName":["overall U.S. economy"],"DataName":"U.S. economy", "Position":["Begin":[0,2],"End":[0,2],"Trend":"rebound","Num":[5.9],"Text":"compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation"}]
@@ -302,7 +302,7 @@ reason: "There are three objects in data and text: active funds, liquidated fund
 """
 
 
-@app.route("/api/test/postQuery_real/", methods=['POST'])
+@app.route("/api/test/postQuery/", methods=['POST'])
 def chat_with_gpt():
     params = request.json
     # print(params)
@@ -338,7 +338,7 @@ def chat_with_gpt():
 
 
 
-@app.route('/api/test/postQuery/', methods=['POST'])
+@app.route('/api/test/postQuery_fake/', methods=['POST'])
 def post_query():
     params = request.json
     file_path = '{}/data/output_3.json'.format(FILE_ABS_PATH)

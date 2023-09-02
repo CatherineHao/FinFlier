@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-07-10 13:45:50
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-09-02 00:21:59
+ * @LastEditTime: 2023-09-02 00:37:36
 -->
 <template>
     <div ref="singleBarSvg" style="height: 100%; width: 100%;">
@@ -52,17 +52,17 @@
                             <g v-if="objectTag[item.objectName] == 1" style="transition: 0.4s;">
                                 <g>
                                     <g v-if="overlayTag[0] == 1">
-                                        <rect :x="item.rectInfo.x - chart_setting.size.width / 2"
-                                            :y="item.rectInfo.y"
+                                        <rect :x="item.color.rectInfo.x - chart_setting.size.width / 2"
+                                            :y="item.color.rectInfo.y"
                                             :fill="colorTrans(overlay_setting[overlay_map[0]].currentColor)"
                                             :width="chart_setting.size.width"
-                                            :height="item.rectInfo.height" opacity="1"></rect>
+                                            :height="item.color.rectInfo.height" opacity="1"></rect>
                                     </g>
                                     <g v-if="overlayTag[1] == 1">
-                                        <rect :x="item.rectInfo.x -  chart_setting.size.width / 2"
-                                            :y="item.rectInfo.y" :fill="'none'"
-                                            :width=" chart_setting.size.width"
-                                            :height="item.rectInfo.height"
+                                        <rect :x="item.bounding_box.rectInfo.x -  chart_setting.size.width / 2"
+                                            :y="item.bounding_box.rectInfo.y" :fill="'none'"
+                                            :width="chart_setting.size.width"
+                                            :height="item.bounding_box.rectInfo.height"
                                             :stroke="colorTrans(overlay_setting[overlay_map[1]].currentColor)"
                                             :stroke-width="3" :stroke-dasharray="5.5" opacity="1"></rect>
                                     </g>
@@ -73,21 +73,15 @@
                                             :fill="colorTrans(overlay_setting[overlay_map[3]].currentColor)"></circle>
                                     </g>
                                     <g v-if="overlayTag[4] == 1">
-                                        <!-- <circle :cx="barData[item.objectIndex].x"
-                                            :cy="barData[item.objectIndex].y + barData[item.objectIndex].height / 2" r="7"
-                                            :fill="colorTrans(overlay_setting[overlay_map[4]].currentColor)"></circle> -->
                                         <path
                                             :d="'M' + item.label.pos.x + ',' + (item.label.pos.y) + 'L' + item.label.pos.x + ',' + -10"
                                             fill="none" :stroke="colorTrans(overlay_setting[overlay_map[4]].currentColor)"
                                             stroke-width="3"></path>
-                                        <text :x="item.label.pos.x" :y="-20" text-anchor="middle">
-                                            {{ item.overlay.annotation.label }}
-                                        </text>
+                                        <!-- <text :x="item.label.pos.x" :y="-20" text-anchor="middle">
+                                            {{ item.label.text }}
+                                        </text> -->
                                     </g>
                                     <g v-if="overlayTag[5] == 1">
-                                        <!-- <circle :cx="barData[item.objectIndex].x"
-                                            :cy="barData[item.objectIndex].y + barData[item.objectIndex].height / 2" r="7"
-                                            :fill="colorTrans(overlay_setting[overlay_map[5]].currentColor)"></circle> -->
                                         <path
                                             :d="'M' + item.text.pos.x + ',' + (item.text.pos.y) + 'L' + item.text.pos.x + ',' + 0"
                                             fill="none" :stroke="colorTrans(overlay_setting[overlay_map[5]].currentColor)"
@@ -103,17 +97,32 @@
         <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
             'position': 'absolute',
             'top': `${.1 * elHeight}px`,
-            'left': `${barData[item.objectIndex].x + .05 * elWidth - 75}px`,
+            'left': `${item.text.pos.x + .05 * elWidth - 75}px`,
             'width': '150px',
             'transition': '0.4s',
             'opacity': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? '1' : '0',
             'padding': '3px',
             'border': '2px solid',
             'border-radius': '10px',
-            'background-color': 'white'
+            'background-color': 'white',
+            'border-color': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'color',
         }">
-            <!-- 'border-color': colorTrans(overlay_setting[overlay_map[5]].currentColor), -->
-            {{ item.overlay.annotation.text }}
+            {{ item.text.text }}
+        </div>
+        <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
+            'position': 'absolute',
+            'top': `${.1 * elHeight}px`,
+            'left': `${item.label.pos.x + .05 * elWidth - 75}px`,
+            'width': '150px',
+            'transition': '0.4s',
+            'opacity': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? '1' : '0',
+            'padding': '3px',
+            'border': '2px solid',
+            'border-radius': '10px',
+            'background-color': 'white',
+            'border-color': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'color',
+        }">
+            {{ item.label.text }}
         </div>
     </div>
 </template>
