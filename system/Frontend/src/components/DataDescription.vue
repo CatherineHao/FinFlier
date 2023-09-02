@@ -1,4 +1,11 @@
 <!--
+ * @Description: 
+ * @Author: Qing Shi
+ * @Date: 2023-08-22 14:28:15
+ * @LastEditors: Qing Shi
+ * @LastEditTime: 2023-09-02 01:02:20
+-->
+<!--
  *                        _oo0oo_
  *                       o8888888o
  *                       88" . "88
@@ -317,7 +324,7 @@ export default {
                             tag: info.OverTag
                         })
                     }
-                    console.log(pos)
+                    // console.log(pos)
 
                 }
                 pos.sort((a, b) => a.pos[0] - b.pos[0])
@@ -463,8 +470,8 @@ export default {
     created () {
     },
     mounted () {
-        // this.inputText = "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter."
-        // this.submitText();
+        this.inputText = "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022."
+        this.submitText();
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations, state) => {
             console.log(mutations.type)

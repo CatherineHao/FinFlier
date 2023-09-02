@@ -349,7 +349,7 @@ export default {
             },
             chartSetting: {},
             overlaySetting: {},
-            overlay_map: ['color', 'bounding box', 'background', 'marker', 'label', 'text'],
+            overlay_map: ['color', 'bounding box', 'background', 'marker', 'label', 'text', 'trend', 'overall', 'special'],
         };
     },
     methods: {},
