@@ -341,6 +341,14 @@ export default {
                 return scaleUtc(dataDomain, range);
             }
         },
+        dataType (data, scaleType) {
+            if (scaleType == 'time') {
+                return new Date(data);
+            }
+            else {
+                return data;
+            }
+        },
         // calcPath (center) {
 
         // },
@@ -416,7 +424,7 @@ export default {
                 if (i == 'columns') continue;
                 // console.log(data[i], data[i][chart_info.chartScale.x.attributeName], data[i][chart_info.chartScale.y.attributeName[0]])
                 barData.push({
-                    x: xScale(data[i][chart_info.chartScale.x.attributeName]),
+                    x: xScale(this.dataType(data[i][chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType)),
                     y: yScale(data[i][chart_info.chartScale.y.attributeName[0]]),
                     fill: chart_info.chartColor[chart_info.chartScale.y.attributeName[0]],
                     data: data[i],

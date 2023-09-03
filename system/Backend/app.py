@@ -302,7 +302,7 @@ reason: "There are three objects in data and text: active funds, liquidated fund
 """
 
 
-@app.route("/api/test/postQuery/", methods=['POST'])
+@app.route("/api/test/postQuery_real/", methods=['POST'])
 def chat_with_gpt():
     params = request.json
     # print(params)
@@ -338,10 +338,10 @@ def chat_with_gpt():
 
 
 
-@app.route('/api/test/postQuery_fake/', methods=['POST'])
+@app.route('/api/test/postQuery/', methods=['POST'])
 def post_query():
     params = request.json
-    file_path = '{}/data/output_f_16.json'.format(FILE_ABS_PATH)
+    file_path = '{}/data/output_group.json'.format(FILE_ABS_PATH)
     data = read_json(file_path)
     return jsonify(data)
 
@@ -353,6 +353,7 @@ def determine_x_axis_type(input_data):
     # if list(input_data[0].keys())[0] == 'time' or list(input_data[0].keys())[0] == 'Time':
     #     return 'time'
     # 检查是否包含数字和日期
+    return 'category'
     if re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
         return 'time'
     elif re.match(r'^[-+]?\d*\.?\d+$', x_values): # 正则表达式匹配整数/浮点数
@@ -394,8 +395,8 @@ def determine_chart_type(input_data, x_type):
     if x_type == 'time' or x_type == 'linear':
         chart_type += 1
     
-    return chart_type
-    # return 1
+    # return chart_type
+    return 2
 #TODO: backend function 1
 # @app.route('/chart-info', methods=['POST'])
 @app.route('/api/test/fetchBasicChart/', methods=['POST'])

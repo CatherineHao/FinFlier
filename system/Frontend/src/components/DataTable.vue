@@ -27,7 +27,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody style="height: 100px;">
+                <tbody>
                     <!-- #ddeff6 -->
                     <tr v-for="(item, i) in td" :key="'td' + i" class="td_tr" style="height: 30px;">
                         <td :style="{

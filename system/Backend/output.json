@@ -1,92 +1,524 @@
 {
-    "result": "result: [{\"ObjectName\":[\"Singapore's current account surplus\"],\"DataName\":\"Current account (billion)\",\"Position\":[{\"Begin\":[1,1],\"End\":[5,1]}],\"Trend\":\"declined\",\"Num\":[31.02,33.72],\"Text\":\"Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022\"}]\n",
-    "reason": "reason: \"The text 'Singapore's current account surplus' corresponds to the column 'Current account (billion)' in data. Its value is SGD 31.02 billion in the second quarter of 2023 and is SGD 33.72 in the second quarter of 2022, which shows a declined pattern.\"",
+    "result": "result: [{\"ObjectName\":[\"Soviet Union\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[0,1],\"End\":[0,1]}],\"Trend\":\"None\",\"Num\":[23.57],\"Text\":\"Soviet Union\"},\n        {\"ObjectName\":[\"China\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[1,1],\"End\":[1,1]}],\"Trend\":\"None\",\"Num\":[19.49],\"Text\":\"China\"},\n        {\"ObjectName\":[\"Germany\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[2,1],\"End\":[2,1]}],\"Trend\":\"None\",\"Num\":[7.43],\"Text\":\"Germany\"},\n        {\"ObjectName\":[\"Poland\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[3,1],\"End\":[3,1]}],\"Trend\":\"None\",\"Num\":[4.96],\"Text\":\"Poland\"},\n        {\"ObjectName\":[\"Indonesia\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[4,1],\"End\":[4,1]}],\"Trend\":\"None\",\"Num\":[3.99],\"Text\":\"Indonesia\"},\n        {\"ObjectName\":[\"Japan\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[5,1],\"End\":[5,1]}],\"Trend\":\"None\",\"Num\":[2.71],\"Text\":\"Japan\"},\n        {\"ObjectName\":[\"India\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[6,1],\"End\":[6,1]}],\"Trend\":\"None\",\"Num\":[1.48],\"Text\":\"India\"},\n        {\"ObjectName\":[\"Yugostavia\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[7,1],\"End\":[7,1]}],\"Trend\":\"None\",\"Num\":[1],\"Text\":\"Yugostavia\"}]\n",
+    "reason": "reason: \"The corresponding value for object \"Soviet Union\" is \"23.57\", and its shortest descriptive phrase is \"Soviet Union\". The corresponding value for object \"China\" is \"19.49\" and its shortest descriptive phrase is \"China\". The corresponding value for object \"Germany\" is \"7.43\" and its shortest descriptive phrase is \"Germany\". The corresponding value for object \"Poland\" is \"4.96\" and its shortest descriptive phrase is \"Poland\". The corresponding value for object \"Indonesia\" is \"3.99\" and its shortest descriptive phrase is \"Indonesia\". The corresponding value for object \"Japan\" is \"2.71\" and its shortest descriptive phrase is \"Japan\". The corresponding value for object \"India\" is \"1.48\" and its shortest descriptive phrase is \"India\". The corresponding value for object \"Yugostavia\" is \"1\" and its shortest descriptive phrase is \"Yugostavia\".",
     "final": [
         {
             "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
             "Position": [
                 {
                     "Begin": [
-                        "Current account (billion)",
-                        1
+                        "Human Losses of World War Two",
+                        0
                     ],
                     "End": [
-                        "Current account (billion)",
-                        5
+                        "Human Losses of World War Two",
+                        0
                     ]
                 }
             ],
             "ConversationInfo": [
                 {
-                    "Position": [
-                        36,
-                        43
-                    ],
-                    "Text": "declined",
+                    "Position": null,
+                    "Text": "None",
                     "OverTag": 1,
                     "Type": "Trend"
                 },
                 {
                     "Position": [
-                        52,
-                        56
+                        null
                     ],
-                    "Text": "31.02",
-                    "OverTag": 1,
-                    "Type": "Num"
-                },
-                {
-                    "Position": [
-                        105,
-                        109
-                    ],
-                    "Text": "33.72",
-                    "OverTag": 1,
-                    "Type": "Num"
-                },
-                {
-                    "Position": [
-                        [
-                            0,
-                            34
-                        ]
-                    ],
-                    "Text": "Singapore's current account surplus",
+                    "Text": "Soviet Union",
                     "OverTag": 0,
                     "Type": "ObjectName"
                 }
             ],
             "GraphicalOverlay": [
                 {
-                    "Text": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022",
+                    "Text": "Soviet Union",
                     "Label": [
-                        31.02,
-                        33.72
+                        23.57
                     ],
                     "Marker": [
                         {
                             "Begin": [
-                                "Current account (billion)",
+                                "Human Losses of World War Two",
+                                0
+                            ],
+                            "End": [
+                                "Human Losses of World War Two",
+                                0
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Human Losses of World War Two",
+                            0
+                        ],
+                        "End": [
+                            "Human Losses of World War Two",
+                            0
+                        ],
+                        "mean": 23.57,
+                        "max": 23.57,
+                        "min": 23.57
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Human Losses of World War Two",
+                        1
+                    ],
+                    "End": [
+                        "Human Losses of World War Two",
+                        1
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        null
+                    ],
+                    "Text": "China",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "China",
+                    "Label": [
+                        19.49
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Human Losses of World War Two",
                                 1
                             ],
                             "End": [
-                                "Current account (billion)",
+                                "Human Losses of World War Two",
+                                1
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Human Losses of World War Two",
+                            1
+                        ],
+                        "End": [
+                            "Human Losses of World War Two",
+                            1
+                        ],
+                        "mean": 19.49,
+                        "max": 19.49,
+                        "min": 19.49
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Human Losses of World War Two",
+                        2
+                    ],
+                    "End": [
+                        "Human Losses of World War Two",
+                        2
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        null
+                    ],
+                    "Text": "Germany",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "Germany",
+                    "Label": [
+                        7.43
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Human Losses of World War Two",
+                                2
+                            ],
+                            "End": [
+                                "Human Losses of World War Two",
+                                2
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Human Losses of World War Two",
+                            2
+                        ],
+                        "End": [
+                            "Human Losses of World War Two",
+                            2
+                        ],
+                        "mean": 7.43,
+                        "max": 7.43,
+                        "min": 7.43
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Human Losses of World War Two",
+                        3
+                    ],
+                    "End": [
+                        "Human Losses of World War Two",
+                        3
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        null
+                    ],
+                    "Text": "Poland",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "Poland",
+                    "Label": [
+                        4.96
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Human Losses of World War Two",
+                                3
+                            ],
+                            "End": [
+                                "Human Losses of World War Two",
+                                3
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Human Losses of World War Two",
+                            3
+                        ],
+                        "End": [
+                            "Human Losses of World War Two",
+                            3
+                        ],
+                        "mean": 4.96,
+                        "max": 4.96,
+                        "min": 4.96
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Human Losses of World War Two",
+                        4
+                    ],
+                    "End": [
+                        "Human Losses of World War Two",
+                        4
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        null
+                    ],
+                    "Text": "Indonesia",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "Indonesia",
+                    "Label": [
+                        3.99
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Human Losses of World War Two",
+                                4
+                            ],
+                            "End": [
+                                "Human Losses of World War Two",
+                                4
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Human Losses of World War Two",
+                            4
+                        ],
+                        "End": [
+                            "Human Losses of World War Two",
+                            4
+                        ],
+                        "mean": 3.99,
+                        "max": 3.99,
+                        "min": 3.99
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Human Losses of World War Two",
+                        5
+                    ],
+                    "End": [
+                        "Human Losses of World War Two",
+                        5
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        null
+                    ],
+                    "Text": "Japan",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "Japan",
+                    "Label": [
+                        2.71
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Human Losses of World War Two",
+                                5
+                            ],
+                            "End": [
+                                "Human Losses of World War Two",
                                 5
                             ]
                         }
                     ],
                     "Line": {
                         "Begin": [
-                            "Current account (billion)",
-                            1
-                        ],
-                        "End": [
-                            "Current account (billion)",
+                            "Human Losses of World War Two",
                             5
                         ],
-                        "mean": 30.306,
-                        "max": 33.72,
-                        "min": 23.52
+                        "End": [
+                            "Human Losses of World War Two",
+                            5
+                        ],
+                        "mean": 2.71,
+                        "max": 2.71,
+                        "min": 2.71
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Human Losses of World War Two",
+                        6
+                    ],
+                    "End": [
+                        "Human Losses of World War Two",
+                        6
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        null
+                    ],
+                    "Text": "India",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "India",
+                    "Label": [
+                        1.48
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Human Losses of World War Two",
+                                6
+                            ],
+                            "End": [
+                                "Human Losses of World War Two",
+                                6
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Human Losses of World War Two",
+                            6
+                        ],
+                        "End": [
+                            "Human Losses of World War Two",
+                            6
+                        ],
+                        "mean": 1.48,
+                        "max": 1.48,
+                        "min": 1.48
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Human Losses of World War Two",
+                        7
+                    ],
+                    "End": [
+                        "Human Losses of World War Two",
+                        7
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        53,
+                        53
+                    ],
+                    "Text": "1",
+                    "OverTag": 1,
+                    "Type": "Num"
+                },
+                {
+                    "Position": [
+                        null
+                    ],
+                    "Text": "Yugostavia",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "Yugostavia",
+                    "Label": [
+                        1
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Human Losses of World War Two",
+                                7
+                            ],
+                            "End": [
+                                "Human Losses of World War Two",
+                                7
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Human Losses of World War Two",
+                            7
+                        ],
+                        "End": [
+                            "Human Losses of World War Two",
+                            7
+                        ],
+                        "mean": 1.0,
+                        "max": 1,
+                        "min": 1
                     }
                 }
             ]
