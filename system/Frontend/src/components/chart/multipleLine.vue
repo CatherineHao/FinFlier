@@ -112,6 +112,14 @@ export default {
                 return scaleUtc(dataDomain, range);
             }
         },
+        dataType (data, scaleType) {
+            if (scaleType == 'time') {
+                return new Date(data);
+            }
+            else {
+                return data;
+            }
+        },
         // calcPath (center) {
 
         // },
@@ -186,7 +194,7 @@ export default {
             select("#xAxis").call(xAxis, xScale, height);
             select("#yAxis").call(yAxis, yScale);
             function lineGenerator (data, y_attr) {
-            return line().x(d => xScale(new Date(d[chart_info.chartScale.x.attributeName]))).y(d => yScale(d[y_attr]))(data);}
+            return line().x(d => xScale(this.dataType(d[chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType))).y(d => yScale(d[y_attr]))(data);}
             let lineData = new Array();
             for (let i in data) {
                 if (i == 0 || i == 'columns') continue;

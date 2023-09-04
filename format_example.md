@@ -13,7 +13,6 @@ label: "following"
 """
 
 
-
 # 前端传来的数据：
 """data: [{'Time': 'Jul 2022', 'Banks Balance Sheet (CNY Billion)': 679.0}, 
                         {'Time': 'Aug 2022', 'Banks Balance Sheet (CNY Billion)': 1250.0}, 

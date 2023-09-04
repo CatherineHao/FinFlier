@@ -132,6 +132,30 @@ export const useDataStore = defineStore("dataStore", {
                         }
                     },
                     
+                    trend: {
+                        currentColor: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 1
+                        }
+                    },
+                    overall: {
+                        currentColor: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 1
+                        }
+                    },
+                    special: {
+                        currentColor: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 1
+                        }
+                    },
                 }
             },
             default_setting: {

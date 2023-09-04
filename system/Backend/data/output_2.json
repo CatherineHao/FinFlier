@@ -1,0 +1,152 @@
+{
+    "result": "result: [{\"ObjectName\":[\"unemployment rate\"],\"DataName\":\"Unemployment rate\",\"Position\":[{\"Begin\":[5,1],\"End\":[5,1]}],\"Trend\":\"inched up\",\"Num\":[7.2,7.1],\"Text\":\"The unemployment rate in France inched up to 7.2% in the second quarter of 2023 from 7.1% in the previous quarter\"},\n        {\"ObjectName\":[\"the number of unemployed people\"],\"DataName\":\"None\",\"Position\":[{\"Begin\":[5,1],\"End\":[5,1]}],\"Trend\":\"increased\",\"Num\":[20],\"Text\":\"as the number of unemployed people increased by 20 thousand to 2.2 million\"}]\n",
+    "reason": "reason: \"The column 'Unemployment rate' corresponds to 'unemployment rate' in the text. The '7.2% in the second quarter of 2023' corresponds to row '2023 Q2' and the '7.1% in the previous quarter' corresponds to row '2023 Q1'. The 'the number of unemployed people increased by 20 thousand to 2.2 million' corresponds to the same row and column, but the object is not specified in the data.\"",
+    "final": [
+        {
+            "OriginText": "The unemployment rate in France inched up to 7.2% in the second quarter of 2023 from 7.1% in the previous quarter, and the highest since Q4 2022, as the number of unemployed people increased by 20 thousand to 2.2 million.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Unemployment rate",
+                        5
+                    ],
+                    "End": [
+                        "Unemployment rate",
+                        5
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": [
+                        32,
+                        40
+                    ],
+                    "Text": "inched up",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        45,
+                        47
+                    ],
+                    "Text": "7.2",
+                    "OverTag": 1,
+                    "Type": "Num"
+                },
+                {
+                    "Position": [
+                        85,
+                        87
+                    ],
+                    "Text": "7.1",
+                    "OverTag": 1,
+                    "Type": "Num"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "The unemployment rate in France inched up to 7.2% in the second quarter of 2023 from 7.1% in the previous quarter",
+                    "Label": [
+                        7.2,
+                        7.1
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Unemployment rate",
+                                5
+                            ],
+                            "End": [
+                                "Unemployment rate",
+                                5
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Unemployment rate",
+                            5
+                        ],
+                        "End": [
+                            "Unemployment rate",
+                            5
+                        ],
+                        "mean": 7.2,
+                        "max": 7.2,
+                        "min": 7.2
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "The unemployment rate in France inched up to 7.2% in the second quarter of 2023 from 7.1% in the previous quarter, and the highest since Q4 2022, as the number of unemployed people increased by 20 thousand to 2.2 million.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Unemployment rate",
+                        5
+                    ],
+                    "End": [
+                        "Unemployment rate",
+                        5
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": [
+                        181,
+                        189
+                    ],
+                    "Text": "increased",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        75,
+                        76
+                    ],
+                    "Text": "20",
+                    "OverTag": 1,
+                    "Type": "Num"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "as the number of unemployed people increased by 20 thousand to 2.2 million",
+                    "Label": [
+                        20
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Unemployment rate",
+                                5
+                            ],
+                            "End": [
+                                "Unemployment rate",
+                                5
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Unemployment rate",
+                            5
+                        ],
+                        "End": [
+                            "Unemployment rate",
+                            5
+                        ],
+                        "mean": 7.2,
+                        "max": 7.2,
+                        "min": 7.2
+                    }
+                }
+            ]
+        }
+    ]
+}

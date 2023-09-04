@@ -27,14 +27,15 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody style="height: 100px;">
+                <tbody>
                     <!-- #ddeff6 -->
                     <tr v-for="(item, i) in td" :key="'td' + i" class="td_tr" style="height: 30px;">
                         <td :style="{
                             'text-align': 'center',
                             'border-top-left-radius': '5px',
                             'border-bottom-left-radius': '5px',
-                            'transition': '0.4s'
+                            'transition': '0.4s',
+                            'height': '30px'
                         }" :id="'cellR' + i + 'C' + '0'" :ref="'cellR' + i + 'C' + '0'">
                             {{ i }}
                         </td>

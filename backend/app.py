@@ -1,8 +1,8 @@
 '''
 Author: CatherineHao 1512769550@qq.com
 Date: 2023-07-12 21:37:31
-LastEditors: CatherineHao 1512769550@qq.com
-LastEditTime: 2023-07-26 20:49:44
+LastEditors: Qing Shi
+LastEditTime: 2023-09-02 00:59:24
 Authorization: Bearer "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"
 '''
 import json
@@ -229,7 +229,7 @@ reason: "The corresponding value for object "Netherlands" is "43.1", and its sho
 data: [{'Category':'Real GDP','Outdoor recreation': 18.9,'U.S. economy': 5.9},
         {'Category':'Real Gross Output','Outdoor recreation': 21.8,'U.S. economy': 6.3},
         {'Category':'Compensation','Outdoor recreation': 16.2,'U.S. economy': 7.8},
-        {'Category':'Compensation','Outdoor recreation': 13.1,'U.S. economy': 2.7}]
+        {'Category':'Employment','Outdoor recreation': 13.1,'U.S. economy': 2.7}]
 text: ["Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."]
 result: [{"ObjectName":["Inflation-adjusted ("real") GDP"],"DataName":"Outdoor recreation", "Position":[{"Begin":[0,1],"End":[0,1],"Trend":"increase","Num":[18.9],"Text":"Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021"},
         {"ObjectName":["overall U.S. economy"],"DataName":"U.S. economy", "Position":["Begin":[0,2],"End":[0,2],"Trend":"rebound","Num":[5.9],"Text":"compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation"}]
@@ -473,12 +473,17 @@ if __name__ == '__main__':
                     question: ["Which contry has the highest value?"]                
                     label: "following"
                 """
+    
+    group_data = """data: [{'Time':'2017/1/1','Mini- and subcompact size':'0.61','Compact size':'0.35', 'Midsize to large':'0.04'},{'Time':'2018/1/1','Mini- and subcompact size':'0.49','Compact size':'0.41', 'Midsize to large':'0.10'},{'Time':'2019/1/1','Mini- and subcompact size':'0.33','Compact size':'0.54', 'Midsize to large':'0.13'},{'Time':'2020/1/1','Mini- and subcompact size':'0.35','Compact size':'0.33', 'Midsize to large':'0.32'},{'Time':'2021/1/1','Mini- and subcompact size':'0.37','Compact size':'0.28', 'Midsize to large':'0.35'},{'Time':'2022/1/1','Mini- and subcompact size':'0.37','Compact size':'0.31', 'Midsize to large':'0.32'},{'Time':'2023/1/1','Mini- and subcompact size':'0.30','Compact size':'0.30', 'Midsize to large':'0.40'}]
+    text: ["In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size."]
+    label: "start"
+                """
 
-    user_info = test_1
+    user_info = group_data
     result, reason, final_result = chat_with_gpt(user_info)
     # print(result)
     # print(reason)
-    print(final_result)
+    # print(final_result)
     
         
 

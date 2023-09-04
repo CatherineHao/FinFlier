@@ -1,3 +1,10 @@
+'''
+Description: 
+Author: Qing Shi
+Date: 2023-09-01 22:43:55
+LastEditors: Qing Shi
+LastEditTime: 2023-09-01 22:43:56
+'''
 import json
 import numpy as np
 from count_position import find_position
@@ -76,8 +83,16 @@ def transform_conversation_info(conversation_info):
                         "OverTag": 0,
                         "Type": "ObjectName"
                     })
+                else:
+                    transformed.append({
+                    "Position": object_pos,
+                    "Text": object_name[0],
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                    })
 
             else:
+                print('1')
                 transformed.append({
                     "Position": object_pos,
                     "Text": object_name[0],
@@ -206,7 +221,7 @@ def line_calculate(user_info_data, begin, end):
     return mean_num, max_num, min_num
 
 if __name__ == '__main__':
-    result_frontend = result_to_frontend(test_info, result)
+    result_frontend = result_to_frontend(user_info, result)
     print(result_frontend)
     # format_new_result = transform_result(result_frontend)
 #     example = [{'OriginText': "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.", 

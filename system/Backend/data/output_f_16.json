@@ -1,0 +1,95 @@
+{
+    "result": "result: [{\"ObjectName\":[\"Singapore's current account surplus\"],\"DataName\":\"Current account (billion)\",\"Position\":[{\"Begin\":[1,1],\"End\":[5,1]}],\"Trend\":\"declined\",\"Num\":[31.02,33.72],\"Text\":\"Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022\"}]\n",
+    "reason": "reason: \"The text 'Singapore's current account surplus' corresponds to the column 'Current account (billion)' in data. Its value is SGD 31.02 billion in the second quarter of 2023 and is SGD 33.72 in the second quarter of 2022, which shows a declined pattern.\"",
+    "final": [
+        {
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Current account (billion)",
+                        1
+                    ],
+                    "End": [
+                        "Current account (billion)",
+                        5
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": [
+                        36,
+                        43
+                    ],
+                    "Text": "declined",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        52,
+                        56
+                    ],
+                    "Text": "31.02",
+                    "OverTag": 1,
+                    "Type": "Num"
+                },
+                {
+                    "Position": [
+                        105,
+                        109
+                    ],
+                    "Text": "33.72",
+                    "OverTag": 1,
+                    "Type": "Num"
+                },
+                {
+                    "Position": [
+                        [
+                            0,
+                            34
+                        ]
+                    ],
+                    "Text": "Singapore's current account surplus",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022",
+                    "Label": [
+                        31.02,
+                        33.72
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Current account (billion)",
+                                1
+                            ],
+                            "End": [
+                                "Current account (billion)",
+                                5
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Current account (billion)",
+                            1
+                        ],
+                        "End": [
+                            "Current account (billion)",
+                            5
+                        ],
+                        "mean": 30.306,
+                        "max": 33.72,
+                        "min": 23.52
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,158 @@
+{
+    "result": "result: [{\"ObjectName\":[\"Netherlands\"],\"DataName\":\"Billions of dollars\",\"Position\":[{\"Begin\":[1,1],\"End\":[1,1]}],\"Trend\":\"None\",\"Num\":[43.1],\"Text\":\"The Netherlands ($43.1 billion)\"},\n        {\"ObjectName\":[\"France\"],\"DataName\":\"Billions of dollars\",\"Position\":[{\"Begin\":[2,1],\"End\":[2,1]}],\"Trend\":\"None\",\"Num\":[35.3],\"Text\":\"France ($35.3 billion)\"}]\n",
+    "reason": "reason: The corresponding value for object \"Netherlands\" is \"43.1\", and its shortest descriptive phrase is \"The Netherlands ($43.1 billion)\". The corresponding value for object \"France\" is \"35.3\" and its shortest descriptive phrase is \"France ($35.3 billion)\"",
+    "final": [
+        {
+            "OriginText": "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion).",
+            "Position": [
+                {
+                    "Begin": [
+                        "Billions of dollars",
+                        1
+                    ],
+                    "End": [
+                        "Billions of dollars",
+                        1
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        122,
+                        125
+                    ],
+                    "Text": "43.1",
+                    "OverTag": 1,
+                    "Type": "Num"
+                },
+                {
+                    "Position": [
+                        [
+                            108,
+                            118
+                        ]
+                    ],
+                    "Text": "Netherlands",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "The Netherlands ($43.1 billion)",
+                    "Label": [
+                        43.1
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Billions of dollars",
+                                1
+                            ],
+                            "End": [
+                                "Billions of dollars",
+                                1
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Billions of dollars",
+                            1
+                        ],
+                        "End": [
+                            "Billions of dollars",
+                            1
+                        ],
+                        "mean": 43.1,
+                        "max": 43.1,
+                        "min": 43.1
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion).",
+            "Position": [
+                {
+                    "Begin": [
+                        "Billions of dollars",
+                        2
+                    ],
+                    "End": [
+                        "Billions of dollars",
+                        2
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        199,
+                        202
+                    ],
+                    "Text": "35.3",
+                    "OverTag": 1,
+                    "Type": "Num"
+                },
+                {
+                    "Position": [
+                        [
+                            190,
+                            195
+                        ]
+                    ],
+                    "Text": "France",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "France ($35.3 billion)",
+                    "Label": [
+                        35.3
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Billions of dollars",
+                                2
+                            ],
+                            "End": [
+                                "Billions of dollars",
+                                2
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Billions of dollars",
+                            2
+                        ],
+                        "End": [
+                            "Billions of dollars",
+                            2
+                        ],
+                        "mean": 35.3,
+                        "max": 35.3,
+                        "min": 35.3
+                    }
+                }
+            ]
+        }
+    ]
+}

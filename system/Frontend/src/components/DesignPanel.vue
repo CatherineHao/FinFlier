@@ -23,7 +23,7 @@
                     <div class="sq_collapse">
                         <div class="sq_collapse_item">
                             <div class="sq_collapse_title">
-                                <span class="sq_collapse_text">Canvas</span>
+                                <span class="sq_collapse_text"><svg t="1693753372823" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4088" width="20" height="20"><path d="M938.666667 704a21.333333 21.333333 0 0 0-21.333334-21.333333H896V256a85.333333 85.333333 0 0 0-85.333333-85.333333h-256V106.666667a21.333333 21.333333 0 0 0-21.333334-21.333334h-42.666666a21.333333 21.333333 0 0 0-21.333334 21.333334V170.666667H213.333333a85.333333 85.333333 0 0 0-85.333333 85.333333v426.666667h-21.333333a21.333333 21.333333 0 0 0-21.333334 21.333333v42.666667a21.333333 21.333333 0 0 0 21.333334 21.333333h205.226666l-92.586666 132.266667a32.426667 32.426667 0 0 0-5.973334 18.346666v9.386667a10.666667 10.666667 0 0 0 10.666667 10.666667h50.346667a42.666667 42.666667 0 0 0 34.986666-18.346667L416 768h192l106.666667 152.32a42.666667 42.666667 0 0 0 34.986666 18.346667h50.346667a10.666667 10.666667 0 0 0 10.666667-10.666667v-9.386667a32.426667 32.426667 0 0 0-5.973334-18.346666L712.106667 768h205.226666a21.333333 21.333333 0 0 0 21.333334-21.333333z m-128-21.333333H213.333333V256h597.333334z" p-id="4089"></path></svg>&nbsp;Canvas</span>
                                 <!-- <i style="height: 12px; width: 12px;"> -->
                                 <div style="height: 20px; width: 30px; cursor: pointer; display: flex; justify-content: flex-end
                                 ; align-items: center;" @click="isExpand[0] = !isExpand[0]">
@@ -80,7 +80,7 @@
                                 <div style="display: flex;">
                                     <div style="padding-top: 1.5px; height: 10px;"><el-checkbox v-model="overlayTag[0]"
                                             label="" style="height: 14px; margin-top: 0px;" /> &nbsp;</div>
-                                    <span class="sq_collapse_text">Color</span>
+                                    <span class="sq_collapse_text"><svg t="1693753704635" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="12736" width="20" height="20"><path d="M766.4 744.3c43.7 0 79.4-36.2 79.4-80.5 0-53.5-79.4-140.8-79.4-140.8S687 610.3 687 663.8c0 44.3 35.7 80.5 79.4 80.5zM389.3 700.2c7.1 7.1 18.6 7.1 25.6 0l256.1-256c7.1-7.1 7.1-18.6 0-25.6l-256-256c-0.6-0.6-1.3-1.2-2-1.7l-78.2-78.2c-3.5-3.5-9.3-3.5-12.8 0l-48 48c-3.5 3.5-3.5 9.3 0 12.8l67.2 67.2-207.8 207.9c-7.1 7.1-7.1 18.6 0 25.6l255.9 256z m12.9-448.6l178.9 178.9H223.4l178.8-178.9zM904 816H120c-4.4 0-8 3.6-8 8v80c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-80c0-4.4-3.6-8-8-8z" p-id="12737"></path></svg>&nbsp;Color</span>
                                 </div>
                                 <div style="height: 20px; width: 30px; cursor: pointer; display: flex; justify-content: flex-end
                                 ; align-items: center;" @click="overlayExpand[0] = !overlayExpand[0]">
@@ -109,7 +109,7 @@
                                 <div style="display: flex;">
                                     <div style="padding-top: 1.5px; height: 10px;"><el-checkbox v-model="overlayTag[1]"
                                             label="" style="height: 14px; margin-top: 0px;" /> &nbsp;</div>
-                                    <span class="sq_collapse_text">Bounding Box</span>
+                                    <span class="sq_collapse_text"><svg t="1693753657778" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11647" width="20" height="20"><path d="M170.922667 127.573333a42.666667 42.666667 0 0 0-42.666667 42.666667v170.666667a42.666667 42.666667 0 0 0 42.666667 42.666666h42.666666v256h-42.666666a42.666667 42.666667 0 0 0-42.666667 42.666667v170.666667a42.666667 42.666667 0 0 0 42.666667 42.666666h170.666666a42.666667 42.666667 0 0 0 42.666667-42.666666v-42.666667h256v42.666667a42.666667 42.666667 0 0 0 42.666667 42.666666h170.666666a42.666667 42.666667 0 0 0 42.666667-42.666666v-170.666667a42.666667 42.666667 0 0 0-42.666667-42.666667h-42.666666v-256h42.666666a42.666667 42.666667 0 0 0 42.666667-42.666666v-170.666667a42.666667 42.666667 0 0 0-42.666667-42.666667h-170.666666a42.666667 42.666667 0 0 0-42.666667 42.666667v42.666667h-256v-42.666667a42.666667 42.666667 0 0 0-42.666667-42.666667h-170.666666z m42.666666 85.333334h85.333334v85.333333h-85.333334v-85.333333z m512 0h85.333334v85.333333h-85.333334v-85.333333z m-341.333333 85.333333h256v42.666667a42.666667 42.666667 0 0 0 42.666667 42.666666h42.666666v256h-42.666666a42.666667 42.666667 0 0 0-42.666667 42.666667v42.666667h-256v-42.666667a42.666667 42.666667 0 0 0-42.666667-42.666667h-42.666666v-256h42.666666a42.666667 42.666667 0 0 0 42.666667-42.666666v-42.666667z m-170.666667 426.666667h85.333334v85.333333h-85.333334v-85.333333z m512 0h85.333334v85.333333h-85.333334v-42.666667-42.666666z" fill="#000000" p-id="11648"></path></svg>&nbsp;Bounding Box</span>
                                 </div>
                                 <div style="height: 20px; width: 30px; cursor: pointer; display: flex; justify-content: flex-end
                                 ; align-items: center;" @click="overlayExpand[1] = !overlayExpand[1]">
@@ -136,7 +136,7 @@
                                 <div style="display: flex;">
                                     <div style="padding-top: 1.5px; height: 10px;"><el-checkbox v-model="overlayTag[2]"
                                             label="" style="height: 14px; margin-top: 0px;" /> &nbsp;</div>
-                                    <span class="sq_collapse_text">Background</span>
+                                    <span class="sq_collapse_text"><svg t="1693753616043" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10642" width="20" height="20"><path d="M902.095238 213.942857v103.424L317.318095 902.095238H213.894095L902.095238 213.942857z m0 277.942857v103.424L595.260952 902.095238h-103.448381L902.095238 491.885714z m0 277.942857v103.424L873.20381 902.095238h-103.424L902.095238 769.828571zM819.590095 121.904762L121.904762 819.614476v-103.424L716.190476 121.904762h103.424z m-277.942857 0L121.904762 541.671619v-103.424L438.223238 121.904762h103.448381z m-277.942857 0L121.904762 263.728762V160.304762L160.304762 121.904762h103.424z" p-id="10643"></path></svg>&nbsp;Background</span>
                                 </div>
                                 <div style="height: 20px; width: 30px; cursor: pointer; display: flex; justify-content: flex-end
                                 ; align-items: center;" @click="overlayExpand[2] = !overlayExpand[2]">
@@ -163,7 +163,7 @@
                                 <div style="display: flex;">
                                     <div style="padding-top: 1.5px; height: 10px;"><el-checkbox v-model="overlayTag[3]"
                                             label="" style="height: 14px; margin-top: 0px;" /> &nbsp;</div>
-                                    <span class="sq_collapse_text">Marker</span>
+                                    <span class="sq_collapse_text"><svg t="1693753751051" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13722" width="20" height="20"><path d="M512 0C299.2 0 128 179.2 128 404.8c0 192 264 507.2 345.6 601.6 8 12.8 25.6 17.6 38.4 17.6 17.6 0 30.4-8 38.4-17.6C632 913.6 896 593.6 896 404.8 896 179.2 724.8 0 512 0z m0 921.6c-145.6-171.2-299.2-396.8-299.2-516.8 0-179.2 132.8-320 299.2-320s299.2 145.6 299.2 320c0 120-153.6 345.6-299.2 516.8z" p-id="13723"></path><path d="M512 212.8c-94.4 0-171.2 76.8-171.2 171.2S417.6 555.2 512 555.2 683.2 478.4 683.2 384 606.4 212.8 512 212.8z m0 256c-46.4 0-84.8-38.4-84.8-84.8s38.4-84.8 84.8-84.8 84.8 38.4 84.8 84.8-38.4 84.8-84.8 84.8z" p-id="13724"></path></svg>&nbsp;Marker</span>
                                 </div>
                                 <div style="height: 20px; width: 30px; cursor: pointer; display: flex; justify-content: flex-end
                                 ; align-items: center;" @click="overlayExpand[3] = !overlayExpand[3]">
@@ -190,7 +190,7 @@
                                 <div style="display: flex;">
                                     <div style="padding-top: 1.5px; height: 10px;"><el-checkbox v-model="overlayTag[4]"
                                             label="" style="height: 14px; margin-top: 0px;" /> &nbsp;</div>
-                                    <span class="sq_collapse_text">Label</span>
+                                    <span class="sq_collapse_text"><svg t="1693795828843" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="24037" width="20" height="20"><path d="M562.873 99.366a31.976 31.976 0 0 1 27.132-9.044l276.973 39.567a31.976 31.976 0 0 1 27.133 27.133l39.567 276.973a31.976 31.976 0 0 1-9.044 27.132L461.127 924.635c-12.487 12.487-32.733 12.487-45.22 0L99.365 608.093c-12.487-12.487-12.487-32.733 0-45.22L562.873 99.366z m39.567 73.483L189.806 585.483l248.711 248.711L851.151 421.56l-31.088-217.623L602.44 172.85z m16.958 118.703c31.218-31.218 81.832-31.218 113.05 0 31.218 31.218 31.218 81.832 0 113.05-31.218 31.218-81.832 31.218-113.05 0-31.218-31.218-31.218-81.832 0-113.05z" fill="#2c2c2c" p-id="24038"></path></svg>&nbsp;Label</span>
                                 </div>
                                 <div style="height: 20px; width: 30px; cursor: pointer; display: flex; justify-content: flex-end
                                 ; align-items: center;" @click="overlayExpand[4] = !overlayExpand[4]">
@@ -217,7 +217,7 @@
                                 <div style="display: flex;">
                                     <div style="padding-top: 1.5px; height: 10px;"><el-checkbox v-model="overlayTag[5]"
                                             label="" style="height: 14px; margin-top: 0px;" /> &nbsp;</div>
-                                    <span class="sq_collapse_text">Text</span>
+                                    <span class="sq_collapse_text"><svg t="1693753854090" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="16686" width="20" height="20"><path d="M853.333333 1024 170.666667 1024c-93.866667 0-170.666667-76.8-170.666667-170.666667L0 170.666667c0-93.866667 76.8-170.666667 170.666667-170.666667l682.666667 0c93.866667 0 170.666667 76.8 170.666667 170.666667l0 682.666667C1024 947.2 947.2 1024 853.333333 1024zM170.666667 85.333333C123.733333 85.333333 85.333333 123.733333 85.333333 170.666667l0 682.666667c0 46.933333 38.4 85.333333 85.333333 85.333333l682.666667 0c46.933333 0 85.333333-38.4 85.333333-85.333333L938.666667 170.666667c0-46.933333-38.4-85.333333-85.333333-85.333333L170.666667 85.333333z" p-id="16687"></path><path d="M725.333333 341.333333 298.666667 341.333333C273.066667 341.333333 256 324.266667 256 298.666667s17.066667-42.666667 42.666667-42.666667l426.666667 0c25.6 0 42.666667 17.066667 42.666667 42.666667S750.933333 341.333333 725.333333 341.333333z" p-id="16688"></path><path d="M298.666667 384C273.066667 384 256 366.933333 256 341.333333L256 298.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 42.666667C341.333333 366.933333 324.266667 384 298.666667 384z" p-id="16689"></path><path d="M725.333333 384c-25.6 0-42.666667-17.066667-42.666667-42.666667L682.666667 298.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 42.666667C768 366.933333 750.933333 384 725.333333 384z" p-id="16690"></path><path d="M512 768c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 298.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 426.666667C554.666667 750.933333 537.6 768 512 768z" p-id="16691"></path><path d="M554.666667 768l-85.333333 0c-25.6 0-42.666667-17.066667-42.666667-42.666667s17.066667-42.666667 42.666667-42.666667l85.333333 0c25.6 0 42.666667 17.066667 42.666667 42.666667S580.266667 768 554.666667 768z" p-id="16692"></path></svg>&nbsp;Description</span>
                                 </div>
                                 <div style="height: 20px; width: 30px; cursor: pointer; display: flex; justify-content: flex-end
                                 ; align-items: center;" @click="overlayExpand[5] = !overlayExpand[5]">
@@ -244,7 +244,7 @@
                                 <div style="display: flex;">
                                     <div style="padding-top: 1.5px; height: 10px;"><el-checkbox v-model="overlayTag[6]"
                                             label="" style="height: 14px; margin-top: 0px;" /> &nbsp;</div>
-                                    <span class="sq_collapse_text">Trend Line</span>
+                                    <span class="sq_collapse_text"><svg t="1693753924575" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="17658" width="20" height="20"><path d="M891.733333 605.44c-26.624 0-46.976-20.352-46.976-46.933333V333.013333h-225.450666c-26.624 0-46.933333-20.352-46.933334-46.933333 0-26.666667 20.309333-47.018667 46.933334-47.018667H891.733333c26.624 0 46.976 20.352 46.976 46.976v272.384c0 25.045333-21.930667 46.976-46.933333 46.976z" fill="#172B4D" p-id="17659"></path><path d="M115.2 763.562667c-12.501333 0-23.466667-4.693333-32.853333-14.08-18.773333-18.773333-18.773333-48.554667 0-65.749334l283.349333-283.392c18.773333-18.773333 48.554667-18.773333 65.749333 0l137.770667 137.813334 266.112-264.576c18.773333-18.773333 48.554667-18.773333 65.749333 0 18.773333 18.773333 18.773333 48.512 0 65.706666l-297.386666 299.008c-18.816 18.773333-48.554667 18.773333-65.792 0l-137.770667-137.728-250.453333 250.453334a49.493333 49.493333 0 0 1-34.432 12.544z" fill="#172B4D" p-id="17660"></path></svg>&nbsp;Trend Line</span>
                                 </div>
                                 <div style="height: 20px; width: 30px; cursor: pointer; display: flex; justify-content: flex-end
                                 ; align-items: center;" @click="overlayExpand[6] = !overlayExpand[6]">
@@ -349,7 +349,7 @@ export default {
             },
             chartSetting: {},
             overlaySetting: {},
-            overlay_map: ['color', 'bounding box', 'background', 'marker', 'label', 'text'],
+            overlay_map: ['color', 'bounding box', 'background', 'marker', 'label', 'text', 'trend', 'overall', 'special'],
         };
     },
     methods: {},
@@ -490,6 +490,10 @@ h3 span {
 
 .sq_collapse_text {
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
 }
 
 .sq_collapse_content {

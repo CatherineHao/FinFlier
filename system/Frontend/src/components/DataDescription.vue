@@ -1,4 +1,11 @@
 <!--
+ * @Description: 
+ * @Author: Qing Shi
+ * @Date: 2023-08-22 14:28:15
+ * @LastEditors: Qing Shi
+ * @LastEditTime: 2023-09-02 01:02:20
+-->
+<!--
  *                        _oo0oo_
  *                       o8888888o
  *                       88" . "88
@@ -65,62 +72,10 @@
                     'transition': '1s', 'padding-top': '5px', 'padding-bottom': '5px', 'opacity': 1
                 }">
                     <div style="width: 100%; display: flex;">
-                        <div v-if="item.tag == -1" style=" width: 40px; padding-top: 3px; padding-left: 0px;">
+                        <div v-if="item.tag == 1" style=" width: 40px; padding-top: 3px; padding-left: 0px;">
                             <div
                                 style="background-color: rgb(91, 155, 255); width: 35px; height: 35px; border-radius: 6px; padding: 4px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFF">
-                                    <path d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                                </svg>
-                                <svg t="1693450336410" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                    xmlns="http://www.w3.org/2000/svg" p-id="4007" width="20" height="20">
-                                    <path
-                                        d="M853.333333 501.333333c-17.066667 0-32 14.933333-32 32v320c0 6.4-4.266667 10.666667-10.666666 10.666667H170.666667c-6.4 0-10.666667-4.266667-10.666667-10.666667V213.333333c0-6.4 4.266667-10.666667 10.666667-10.666666h320c17.066667 0 32-14.933333 32-32s-14.933333-32-32-32H170.666667c-40.533333 0-74.666667 34.133333-74.666667 74.666666v640c0 40.533333 34.133333 74.666667 74.666667 74.666667h640c40.533333 0 74.666667-34.133333 74.666666-74.666667V533.333333c0-17.066667-14.933333-32-32-32z"
-                                        fill="#666666" p-id="4008"></path>
-                                    <path
-                                        d="M405.333333 484.266667l-32 125.866666c-2.133333 10.666667 0 23.466667 8.533334 29.866667 6.4 6.4 14.933333 8.533333 23.466666 8.533333h8.533334l125.866666-32c6.4-2.133333 10.666667-4.266667 14.933334-8.533333l300.8-300.8c38.4-38.4 38.4-102.4 0-140.8-38.4-38.4-102.4-38.4-140.8 0L413.866667 469.333333c-4.266667 4.266667-6.4 8.533333-8.533334 14.933334z m59.733334 23.466666L761.6 213.333333c12.8-12.8 36.266667-12.8 49.066667 0 12.8 12.8 12.8 36.266667 0 49.066667L516.266667 558.933333l-66.133334 17.066667 14.933334-68.266667z"
-                                        fill="#666666" p-id="4009"></path>
-                                </svg>
-                                <svg t="1693453733613" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                    xmlns="http://www.w3.org/2000/svg" p-id="8200" width="20" height="20">
-                                    <path
-                                        d="M512 832c-176.448 0-320-143.552-320-320S335.552 192 512 192s320 143.552 320 320-143.552 320-320 320m0-704C300.256 128 128 300.256 128 512s172.256 384 384 384 384-172.256 384-384S723.744 128 512 128"
-                                        fill="#3E3A39" p-id="8201"></path>
-                                    <path
-                                        d="M649.824 361.376a31.968 31.968 0 0 0-45.248 0L505.6 460.352l-98.976-98.976a31.968 31.968 0 1 0-45.248 45.248l98.976 98.976-98.976 98.976a32 32 0 0 0 45.248 45.248l98.976-98.976 98.976 98.976a31.904 31.904 0 0 0 45.248 0 31.968 31.968 0 0 0 0-45.248L550.848 505.6l98.976-98.976a31.968 31.968 0 0 0 0-45.248"
-                                        fill="#3E3A39" p-id="8202"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div style="width: calc(100% - 40px);">
-                            <div v-if="item.tag == -1"
-                                style="width: 100%; line-height:1lh; text-align: start; padding-right: 5px; background-color: rgb(173, 216, 230, 0); padding: 8px; border-radius: 5px; border: 1px solid rgba(0, 0, 0, .3); display: flex;">
-                                <!-- <div style="width: 95%;">{{ item.text }}</div> -->
-                                {{ item.text }}
-                            </div>
-                            <div v-else
-                                style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3);">
-                                <span v-for="(o, i) in item.outputTextGroup" :key="'res_' + i"
-                                    :class="{ 'dataObject': o.tag != -1 }" :id="o.id" :style="{
-                                        backgroundColor: o.tag == 0 || o.tag == 2 ? o.back_color : 'white',
-                                        'border-bottom': o.tag == 2 || o.tag == 1 ? '3px solid ' + o.color : '0px',
-                                        'text-decoration-color': o.color
-                                    }" @click="o.tag != -1 ? hoverObject(o) : ''"
-                                    @mouseenter="o.tag != -1 ? handleHover(o) : ''"
-                                    @mouseout="o.tag != -1 ? handleOut(o) : ''">{{ o.text }}</span>
-                                <div>
-                                    Reason:
-                                    <div>
-                                        {{ item.reason }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div v-if="item.tag == 1" style="padding-top: 3px; padding-left: 0px; width: 40px;">
-                            <div
-                                style="background-color: rgb(91, 155, 255); width: 35px; height: 35px; border-radius: 6px; padding: 4px; float: right;">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFF">
                                     <path d="M0 0h24v24H0z" fill="none" />
                                     <path
@@ -152,6 +107,63 @@
                                     <path
                                         d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17">
                                     </path>
+                                </svg>
+
+                            </div>
+                        </div>
+                        <div style="width: calc(100% - 40px);">
+                            <div v-if="item.tag == -1"
+                                style="width: 100%; line-height:1lh; text-align: start; padding-right: 5px; background-color: rgb(173, 216, 230, 0); padding: 8px; border-radius: 5px; border: 1px solid rgba(0, 0, 0, .3); display: flex;">
+                                <!-- <div style="width: 95%;">{{ item.text }}</div> -->
+                                {{ item.text }}
+                            </div>
+                            <div v-else
+                                style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3);">
+                                <span v-for="(o, i) in item.outputTextGroup" :key="'res_' + i"
+                                    :class="{ 'dataObject': o.tag != -1 }" :id="o.id" :style="{
+                                        backgroundColor: o.tag == 0 || o.tag == 2 ? o.back_color : 'white',
+                                        'border-bottom': o.tag == 2 || o.tag == 1 ? '3px solid ' + o.color : '0px',
+                                        'text-decoration-color': o.color
+                                    }" @click="o.tag != -1 ? hoverObject(o) : ''"
+                                    @mouseenter="o.tag != -1 ? handleHover(o) : ''"
+                                    @mouseout="o.tag != -1 ? handleOut(o) : ''">{{ o.text }}</span>
+                                <hr>
+                                <div>
+                                    <div style="font-weight: 600;">
+                                    Reason:</div>
+                                    <div>
+                                        {{ item.reason }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-if="item.tag == -1" style="padding-top: 3px; padding-left: 0px; width: 40px;">
+                            <div
+                                style="background-color: rgb(91, 155, 255); width: 35px; height: 35px; border-radius: 6px; padding: 4px; float: right;">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFF">
+                                    <path d="M0 0h24v24H0z" fill="none" />
+                                    <path
+                                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                </svg>
+                                <svg t="1693450336410" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" p-id="4007" width="20" height="20">
+                                    <path
+                                        d="M853.333333 501.333333c-17.066667 0-32 14.933333-32 32v320c0 6.4-4.266667 10.666667-10.666666 10.666667H170.666667c-6.4 0-10.666667-4.266667-10.666667-10.666667V213.333333c0-6.4 4.266667-10.666667 10.666667-10.666666h320c17.066667 0 32-14.933333 32-32s-14.933333-32-32-32H170.666667c-40.533333 0-74.666667 34.133333-74.666667 74.666666v640c0 40.533333 34.133333 74.666667 74.666667 74.666667h640c40.533333 0 74.666667-34.133333 74.666666-74.666667V533.333333c0-17.066667-14.933333-32-32-32z"
+                                        fill="#666666" p-id="4008"></path>
+                                    <path
+                                        d="M405.333333 484.266667l-32 125.866666c-2.133333 10.666667 0 23.466667 8.533334 29.866667 6.4 6.4 14.933333 8.533333 23.466666 8.533333h8.533334l125.866666-32c6.4-2.133333 10.666667-4.266667 14.933334-8.533333l300.8-300.8c38.4-38.4 38.4-102.4 0-140.8-38.4-38.4-102.4-38.4-140.8 0L413.866667 469.333333c-4.266667 4.266667-6.4 8.533333-8.533334 14.933334z m59.733334 23.466666L761.6 213.333333c12.8-12.8 36.266667-12.8 49.066667 0 12.8 12.8 12.8 36.266667 0 49.066667L516.266667 558.933333l-66.133334 17.066667 14.933334-68.266667z"
+                                        fill="#666666" p-id="4009"></path>
+                                </svg>
+                                <svg t="1693453733613" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" p-id="8200" width="20" height="20">
+                                    <path
+                                        d="M512 832c-176.448 0-320-143.552-320-320S335.552 192 512 192s320 143.552 320 320-143.552 320-320 320m0-704C300.256 128 128 300.256 128 512s172.256 384 384 384 384-172.256 384-384S723.744 128 512 128"
+                                        fill="#3E3A39" p-id="8201"></path>
+                                    <path
+                                        d="M649.824 361.376a31.968 31.968 0 0 0-45.248 0L505.6 460.352l-98.976-98.976a31.968 31.968 0 1 0-45.248 45.248l98.976 98.976-98.976 98.976a32 32 0 0 0 45.248 45.248l98.976-98.976 98.976 98.976a31.904 31.904 0 0 0 45.248 0 31.968 31.968 0 0 0 0-45.248L550.848 505.6l98.976-98.976a31.968 31.968 0 0 0 0-45.248"
+                                        fill="#3E3A39" p-id="8202"></path>
                                 </svg>
                             </div>
 
@@ -300,7 +312,7 @@ export default {
             // console.log(dataStore.state_map.state0.overlay_setting)
             // for (let i in )
             for (let i in description_data) {
-            let pos = []
+                let pos = []
                 for (let j in description_data[i].ConversationInfo) {
                     let info = description_data[i].ConversationInfo[j];
                     if (info.Position == null) continue;
@@ -317,7 +329,7 @@ export default {
                             tag: info.OverTag
                         })
                     }
-                    console.log(pos)
+                    // console.log(pos)
 
                 }
                 pos.sort((a, b) => a.pos[0] - b.pos[0])
@@ -386,22 +398,28 @@ export default {
             let objectTag = dataStore.objectTag;
             let rawData = dataStore.data;
             let th = rawData.columns;
-            let t_cnt = 0;
-            for (let i in th) {
-                if (th[i] == o.position[0]['Begin'][0]) {
-                    break;
-                } else {
-                    t_cnt++;
+            let t_cnt = [];
+            for (let j in o.position) {
+                let tt_cnt = 0;
+                for (let i in th) {
+                    if (th[i] == o.position[j]['Begin'][0]) {
+                        break;
+                    } else {
+                        tt_cnt++;
+                    }
                 }
+                t_cnt.push(tt_cnt);
             }
             let tableTag = {};
             // console.log(t_cnt)
-            for (let i = parseInt(o.position[0]['Begin'][1]); i <= parseInt(o.position[0]['End'][1]); ++i) {
-                // console.log(o.color)
-                tableTag['cellR' + (i).toString() + 'C' + (t_cnt + 1).toString()] = {
-                    tag: 1,
-                    color: o.color
-                };
+            for (let j in t_cnt) {
+                for (let i = parseInt(o.position[j]['Begin'][1]); i <= parseInt(o.position[j]['End'][1]); ++i) {
+                    // console.log(o.color)
+                    tableTag['cellR' + (i).toString() + 'C' + (t_cnt[j] + 1).toString()] = {
+                        tag: 1,
+                        color: o.color
+                    };
+                }
             }
             // console.log(tableTag);
             dataStore.selectTable = tableTag;
@@ -463,8 +481,8 @@ export default {
     created () {
     },
     mounted () {
-        // this.inputText = "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter."
-        // this.submitText();
+        this.inputText = "In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size."
+        this.submitText();
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations, state) => {
             console.log(mutations.type)
