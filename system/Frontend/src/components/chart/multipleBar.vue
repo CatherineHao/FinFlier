@@ -29,7 +29,7 @@
                 <g>
                     <g id="xAxis"></g>
                     <g id="yAxis"></g>
-                    <g id="axis_name">
+                    <g id="axis_name"> 
                         <text class="title" text-anchor="end"
                             :transform="translate(axisPosition.xAxis[0], axisPosition.xAxis[1])">{{ chart_setting.axis.x }}</text>
                         <text class="title" text-anchor="start"
