@@ -53,20 +53,20 @@
         </div>
     </div>
     <div style="height: calc(100vh - 50px ); width: 100%; display: flex;">
-        <div style="height: calc((100% - 10px) / 2); width: calc(20% - 10px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; top: 0px;"
+        <div style="height: calc((40% - 10px)); width: calc(20% - 10px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; top: 0px;"
             class="boundary">
             <DataTable />
         </div>
 
-        <div style="height: calc((100% - 10px) / 2 - 10px); width: calc(20% - 10px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; bottom: 0px;"
+        <div style="height: calc((60% - 0px) - 10px); width: calc(20% - 10px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; bottom: 0px;"
             class="boundary">
             <DataDescription />
         </div>
-        <div style="height: calc(100% - 10px); width: calc(60% - 10px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; left: calc(20% - 0px);"
+        <div style="height: calc(100% - 10px); width: calc(80% - 10px - 370px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; left: calc(20% - 0px);"
             class="boundary">
             <Main />
         </div>
-        <div style="height: calc(100% - 10px); width: calc(20% - 20px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; right: 10px;"
+        <div style="height: calc(100% - 10px); width: calc(350px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; right: 10px;"
             class="boundary">
             <DesignPanel />
         </div>

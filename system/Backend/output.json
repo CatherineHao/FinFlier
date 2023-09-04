@@ -1,82 +1,17 @@
 {
-    "result": "result: [{\"ObjectName\":[\"new yuan loans\"],\"DataName\":\"Banks Balance Sheet (CNY Billion)\",\"Position\":[{\"Begin\":[12,1],\"End\":[12,1]}],\"Trend\":\"None\",\"Num\":[345.9],\"Text\":\"China's banks extended CNY 345.9 billion in new yuan loans in July 2023\"},\n        {\"ObjectName\":[\"CNY 679 billion\"],\"DataName\":\"Banks Balance Sheet (CNY Billion)\",\"Position\":[{\"Begin\":[0,1],\"End\":[0,1]}],\"Trend\":\"None\",\"Num\":[679],\"Text\":\"The value is also much lower than CNY 679 billion a year earlier\"},\n        {\"ObjectName\":[\"CNY 3.05 trillion\"],\"DataName\":\"Banks Balance Sheet (CNY Billion)\",\"Position\":[{\"Begin\":[11,1],\"End\":[11,1]}],\"Trend\":\"None\",\"Num\":[3050],\"Text\":\"CNY 3.05 trillion in June\"},\n        {\"ObjectName\":[\"CNY 15.73 trillion\"],\"DataName\":\"Banks Balance Sheet (CNY Billion)\",\"Position\":[{\"Begin\":[12,1],\"End\":[12,1]}],\"Trend\":\"None\",\"Num\":[15.73],\"Text\":\"after a record CNY 15.73 trillion loans in the first half of the year\"}]\n",
-    "reason": "reason: \"The text 'new yuan loans' corresponds to the column 'Banks Balance Sheet (CNY Billion)' in data. The value is '345.9' in July 2023. The text 'CNY 679 billion' corresponds to the row '2022-Jul' in data. The text 'CNY 3.05 trillion' corresponds to the row '2023-Jun' in data. The text 'CNY 15.73 trillion' corresponds to the row '2023-Jun' in data, which indicates a record value in the first half of the year.\"",
+    "result": "result: [{\"ObjectName\":[\"Soviet Union\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[0,1],\"End\":[0,1]}],\"Trend\":\"None\",\"Num\":[23.57],\"Text\":\"Soviet Union\"},\n        {\"ObjectName\":[\"China\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[1,1],\"End\":[1,1]}],\"Trend\":\"None\",\"Num\":[19.49],\"Text\":\"China\"},\n        {\"ObjectName\":[\"Germany\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[2,1],\"End\":[2,1]}],\"Trend\":\"None\",\"Num\":[7.43],\"Text\":\"Germany\"},\n        {\"ObjectName\":[\"Poland\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[3,1],\"End\":[3,1]}],\"Trend\":\"None\",\"Num\":[4.96],\"Text\":\"Poland\"},\n        {\"ObjectName\":[\"Indonesia\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[4,1],\"End\":[4,1]}],\"Trend\":\"None\",\"Num\":[3.99],\"Text\":\"Indonesia\"},\n        {\"ObjectName\":[\"Japan\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[5,1],\"End\":[5,1]}],\"Trend\":\"None\",\"Num\":[2.71],\"Text\":\"Japan\"},\n        {\"ObjectName\":[\"India\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[6,1],\"End\":[6,1]}],\"Trend\":\"None\",\"Num\":[1.48],\"Text\":\"India\"},\n        {\"ObjectName\":[\"Yugostavia\"],\"DataName\":\"Human Losses of World War Two\",\"Position\":[{\"Begin\":[7,1],\"End\":[7,1]}],\"Trend\":\"None\",\"Num\":[1],\"Text\":\"Yugostavia\"}]\n",
+    "reason": "reason: \"The corresponding value for object \"Soviet Union\" is \"23.57\", and its shortest descriptive phrase is \"Soviet Union\". The corresponding value for object \"China\" is \"19.49\" and its shortest descriptive phrase is \"China\". The corresponding value for object \"Germany\" is \"7.43\" and its shortest descriptive phrase is \"Germany\". The corresponding value for object \"Poland\" is \"4.96\" and its shortest descriptive phrase is \"Poland\". The corresponding value for object \"Indonesia\" is \"3.99\" and its shortest descriptive phrase is \"Indonesia\". The corresponding value for object \"Japan\" is \"2.71\" and its shortest descriptive phrase is \"Japan\". The corresponding value for object \"India\" is \"1.48\" and its shortest descriptive phrase is \"India\". The corresponding value for object \"Yugostavia\" is \"1\" and its shortest descriptive phrase is \"Yugostavia\".",
     "final": [
         {
-            "OriginText": "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.",
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
             "Position": [
                 {
                     "Begin": [
-                        "Banks Balance Sheet (CNY Billion)",
-                        12
-                    ],
-                    "End": [
-                        "Banks Balance Sheet (CNY Billion)",
-                        12
-                    ]
-                }
-            ],
-            "ConversationInfo": [
-                {
-                    "Position": null,
-                    "Text": "None",
-                    "OverTag": 1,
-                    "Type": "Trend"
-                },
-                {
-                    "Position": [
-                        27,
-                        31
-                    ],
-                    "Text": "345.9",
-                    "OverTag": 1,
-                    "Type": "Num"
-                }
-            ],
-            "GraphicalOverlay": [
-                {
-                    "Text": "China's banks extended CNY 345.9 billion in new yuan loans in July 2023",
-                    "Label": [
-                        345.9
-                    ],
-                    "Marker": [
-                        {
-                            "Begin": [
-                                "Banks Balance Sheet (CNY Billion)",
-                                12
-                            ],
-                            "End": [
-                                "Banks Balance Sheet (CNY Billion)",
-                                12
-                            ]
-                        }
-                    ],
-                    "Line": {
-                        "Begin": [
-                            "Banks Balance Sheet (CNY Billion)",
-                            12
-                        ],
-                        "End": [
-                            "Banks Balance Sheet (CNY Billion)",
-                            12
-                        ],
-                        "mean": 345.9,
-                        "max": 345.9,
-                        "min": 345.9
-                    }
-                }
-            ]
-        },
-        {
-            "OriginText": "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.",
-            "Position": [
-                {
-                    "Begin": [
-                        "Banks Balance Sheet (CNY Billion)",
+                        "Human Losses of World War Two",
                         0
                     ],
                     "End": [
-                        "Banks Balance Sheet (CNY Billion)",
+                        "Human Losses of World War Two",
                         0
                     ]
                 }
@@ -90,74 +25,58 @@
                 },
                 {
                     "Position": [
-                        196,
-                        198
+                        null
                     ],
-                    "Text": "679",
-                    "OverTag": 2,
-                    "Type": "Num"
-                },
-                {
-                    "Position": [
-                        [
-                            192,
-                            195
-                        ],
-                        [
-                            199,
-                            206
-                        ]
-                    ],
-                    "Text": "CNY 679 billion",
+                    "Text": "Soviet Union",
                     "OverTag": 0,
                     "Type": "ObjectName"
                 }
             ],
             "GraphicalOverlay": [
                 {
-                    "Text": "The value is also much lower than CNY 679 billion a year earlier",
+                    "Text": "Soviet Union",
                     "Label": [
-                        679
+                        23.57
                     ],
                     "Marker": [
                         {
                             "Begin": [
-                                "Banks Balance Sheet (CNY Billion)",
+                                "Human Losses of World War Two",
                                 0
                             ],
                             "End": [
-                                "Banks Balance Sheet (CNY Billion)",
+                                "Human Losses of World War Two",
                                 0
                             ]
                         }
                     ],
                     "Line": {
                         "Begin": [
-                            "Banks Balance Sheet (CNY Billion)",
+                            "Human Losses of World War Two",
                             0
                         ],
                         "End": [
-                            "Banks Balance Sheet (CNY Billion)",
+                            "Human Losses of World War Two",
                             0
                         ],
-                        "mean": 679.0,
-                        "max": 679,
-                        "min": 679
+                        "mean": 23.57,
+                        "max": 23.57,
+                        "min": 23.57
                     }
                 }
             ]
         },
         {
-            "OriginText": "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.",
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
             "Position": [
                 {
                     "Begin": [
-                        "Banks Balance Sheet (CNY Billion)",
-                        11
+                        "Human Losses of World War Two",
+                        1
                     ],
                     "End": [
-                        "Banks Balance Sheet (CNY Billion)",
-                        11
+                        "Human Losses of World War Two",
+                        1
                     ]
                 }
             ],
@@ -170,61 +89,58 @@
                 },
                 {
                     "Position": [
-                        [
-                            227,
-                            243
-                        ]
+                        null
                     ],
-                    "Text": "CNY 3.05 trillion",
+                    "Text": "China",
                     "OverTag": 0,
                     "Type": "ObjectName"
                 }
             ],
             "GraphicalOverlay": [
                 {
-                    "Text": "CNY 3.05 trillion in June",
+                    "Text": "China",
                     "Label": [
-                        3050
+                        19.49
                     ],
                     "Marker": [
                         {
                             "Begin": [
-                                "Banks Balance Sheet (CNY Billion)",
-                                11
+                                "Human Losses of World War Two",
+                                1
                             ],
                             "End": [
-                                "Banks Balance Sheet (CNY Billion)",
-                                11
+                                "Human Losses of World War Two",
+                                1
                             ]
                         }
                     ],
                     "Line": {
                         "Begin": [
-                            "Banks Balance Sheet (CNY Billion)",
-                            11
+                            "Human Losses of World War Two",
+                            1
                         ],
                         "End": [
-                            "Banks Balance Sheet (CNY Billion)",
-                            11
+                            "Human Losses of World War Two",
+                            1
                         ],
-                        "mean": 3050.0,
-                        "max": 3050,
-                        "min": 3050
+                        "mean": 19.49,
+                        "max": 19.49,
+                        "min": 19.49
                     }
                 }
             ]
         },
         {
-            "OriginText": "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.",
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
             "Position": [
                 {
                     "Begin": [
-                        "Banks Balance Sheet (CNY Billion)",
-                        12
+                        "Human Losses of World War Two",
+                        2
                     ],
                     "End": [
-                        "Banks Balance Sheet (CNY Billion)",
-                        12
+                        "Human Losses of World War Two",
+                        2
                     ]
                 }
             ],
@@ -237,59 +153,372 @@
                 },
                 {
                     "Position": [
-                        273,
-                        277
+                        null
                     ],
-                    "Text": "15.73",
-                    "OverTag": 2,
-                    "Type": "Num"
-                },
-                {
-                    "Position": [
-                        [
-                            269,
-                            272
-                        ],
-                        [
-                            278,
-                            286
-                        ]
-                    ],
-                    "Text": "CNY 15.73 trillion",
+                    "Text": "Germany",
                     "OverTag": 0,
                     "Type": "ObjectName"
                 }
             ],
             "GraphicalOverlay": [
                 {
-                    "Text": "after a record CNY 15.73 trillion loans in the first half of the year",
+                    "Text": "Germany",
                     "Label": [
-                        15.73
+                        7.43
                     ],
                     "Marker": [
                         {
                             "Begin": [
-                                "Banks Balance Sheet (CNY Billion)",
-                                12
+                                "Human Losses of World War Two",
+                                2
                             ],
                             "End": [
-                                "Banks Balance Sheet (CNY Billion)",
-                                12
+                                "Human Losses of World War Two",
+                                2
                             ]
                         }
                     ],
                     "Line": {
                         "Begin": [
-                            "Banks Balance Sheet (CNY Billion)",
-                            12
+                            "Human Losses of World War Two",
+                            2
                         ],
                         "End": [
-                            "Banks Balance Sheet (CNY Billion)",
-                            12
+                            "Human Losses of World War Two",
+                            2
                         ],
-                        "mean": 345.9,
-                        "max": 345.9,
-                        "min": 345.9
+                        "mean": 7.43,
+                        "max": 7.43,
+                        "min": 7.43
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Human Losses of World War Two",
+                        3
+                    ],
+                    "End": [
+                        "Human Losses of World War Two",
+                        3
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        null
+                    ],
+                    "Text": "Poland",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "Poland",
+                    "Label": [
+                        4.96
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Human Losses of World War Two",
+                                3
+                            ],
+                            "End": [
+                                "Human Losses of World War Two",
+                                3
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Human Losses of World War Two",
+                            3
+                        ],
+                        "End": [
+                            "Human Losses of World War Two",
+                            3
+                        ],
+                        "mean": 4.96,
+                        "max": 4.96,
+                        "min": 4.96
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Human Losses of World War Two",
+                        4
+                    ],
+                    "End": [
+                        "Human Losses of World War Two",
+                        4
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        null
+                    ],
+                    "Text": "Indonesia",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "Indonesia",
+                    "Label": [
+                        3.99
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Human Losses of World War Two",
+                                4
+                            ],
+                            "End": [
+                                "Human Losses of World War Two",
+                                4
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Human Losses of World War Two",
+                            4
+                        ],
+                        "End": [
+                            "Human Losses of World War Two",
+                            4
+                        ],
+                        "mean": 3.99,
+                        "max": 3.99,
+                        "min": 3.99
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Human Losses of World War Two",
+                        5
+                    ],
+                    "End": [
+                        "Human Losses of World War Two",
+                        5
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        null
+                    ],
+                    "Text": "Japan",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "Japan",
+                    "Label": [
+                        2.71
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Human Losses of World War Two",
+                                5
+                            ],
+                            "End": [
+                                "Human Losses of World War Two",
+                                5
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Human Losses of World War Two",
+                            5
+                        ],
+                        "End": [
+                            "Human Losses of World War Two",
+                            5
+                        ],
+                        "mean": 2.71,
+                        "max": 2.71,
+                        "min": 2.71
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Human Losses of World War Two",
+                        6
+                    ],
+                    "End": [
+                        "Human Losses of World War Two",
+                        6
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        null
+                    ],
+                    "Text": "India",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "India",
+                    "Label": [
+                        1.48
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Human Losses of World War Two",
+                                6
+                            ],
+                            "End": [
+                                "Human Losses of World War Two",
+                                6
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Human Losses of World War Two",
+                            6
+                        ],
+                        "End": [
+                            "Human Losses of World War Two",
+                            6
+                        ],
+                        "mean": 1.48,
+                        "max": 1.48,
+                        "min": 1.48
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Singapore's current account surplus declined to SGD 31.02 billion in the second quarter of 2023 from SGD 33.72 billion in the same period of 2022.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Human Losses of World War Two",
+                        7
+                    ],
+                    "End": [
+                        "Human Losses of World War Two",
+                        7
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        53,
+                        53
+                    ],
+                    "Text": "1",
+                    "OverTag": 1,
+                    "Type": "Num"
+                },
+                {
+                    "Position": [
+                        null
+                    ],
+                    "Text": "Yugostavia",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "Yugostavia",
+                    "Label": [
+                        1
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Human Losses of World War Two",
+                                7
+                            ],
+                            "End": [
+                                "Human Losses of World War Two",
+                                7
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Human Losses of World War Two",
+                            7
+                        ],
+                        "End": [
+                            "Human Losses of World War Two",
+                            7
+                        ],
+                        "mean": 1.0,
+                        "max": 1,
+                        "min": 1
                     }
                 }
             ]
