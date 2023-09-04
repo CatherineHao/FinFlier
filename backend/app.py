@@ -168,7 +168,7 @@ def chat_with_gpt(user_info):
             # messages=[{"role": "user", "content": 'Translate the following English text to French: "Have a nice day!"'}], # 测试一下把英语翻译成法语
             messages=[{"role": "user", "content": request}],
             max_tokens=2000, # 设置生成的最大token数，可以根据需要调整
-            temperature=0.2, # 设置温度,值越小越确认
+            temperature=0.4, # 设置温度,值越小越确认
             #stop = ["\n"],
             stop=None,
         )
@@ -474,7 +474,7 @@ if __name__ == '__main__':
                     label: "following"
                 """
 
-    user_info = test_7
+    user_info = test_1
     result, reason, final_result = chat_with_gpt(user_info)
     # print(result)
     # print(reason)
