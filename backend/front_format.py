@@ -53,25 +53,26 @@ def transform_conversation_info(conversation_info):
                 "Type": "Trend"
             })
 
-        if num and num_position[0] is not None:
-            for i, n in enumerate(num):
-                if object_pos and num_position and num_position[i]:
-                    if object_pos != [None] and num_position[i][0] > object_pos[0][0] and num_position[i][1] < object_pos[0][1]:
-                        overtag = 2
-                    else: 
+        if num != "None":
+            if num_position[0] is not None:
+                for i, n in enumerate(num):
+                    if object_pos and num_position and num_position[i]:
+                        if object_pos != [None] and num_position[i][0] > object_pos[0][0] and num_position[i][1] < object_pos[0][1]:
+                            overtag = 2
+                        else: 
+                            overtag = 1
+                    else:
                         overtag = 1
-                else:
-                    overtag = 1
 
-                transformed.append({
-                    "Position": num_position[i],
-                    "Text": str(n),
-                    "OverTag": overtag,
-                    "Type": "Num"
-                })
+                    transformed.append({
+                        "Position": num_position[i],
+                        "Text": str(n),
+                        "OverTag": overtag,
+                        "Type": "Num"
+                    })
 
         if object_name[0]:
-            if num and num_position[0] is not None:
+            if num != "None" and num_position[0] is not None:
                 if object_pos != [None] and num_position and num_position[0][0] > object_pos[0][0] and num_position[0][1] < object_pos[0][1]:
 
                     object_pos_1 = [object_pos[0][0], num_position[0][0] - 1]
@@ -92,7 +93,7 @@ def transform_conversation_info(conversation_info):
                     })
 
             else:
-                print('1')
+                # print('1')
                 transformed.append({
                     "Position": object_pos,
                     "Text": object_name[0],
