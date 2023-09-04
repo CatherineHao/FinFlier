@@ -34,7 +34,8 @@
                             'text-align': 'center',
                             'border-top-left-radius': '5px',
                             'border-bottom-left-radius': '5px',
-                            'transition': '0.4s'
+                            'transition': '0.4s',
+                            'height': '30px'
                         }" :id="'cellR' + i + 'C' + '0'" :ref="'cellR' + i + 'C' + '0'">
                             {{ i }}
                         </td>

@@ -110,7 +110,8 @@
                             </circle>
                         </g>
                         <g v-if="(overlayTag[4] == 1) && objectTag[o.objectName] == 1">
-                            <path v-for="(d, d_i) in o.label.pos" :key="'dd_' + d_i" :d="'M' + d[0] + ',' + d[1] + 'L' + d[0] + ',' + 0" fill="none"
+                            <path v-for="(d, d_i) in o.label.pos" :key="'dd_' + d_i"
+                                :d="'M' + d[0] + ',' + d[1] + 'L' + d[0] + ',' + 0" fill="none"
                                 :stroke="colorTrans(overlay_setting[overlay_map[4]].currentColor)" :stroke-width="2"></path>
                         </g>
                         <g v-if="(overlayTag[5] == 1) && objectTag[o.objectName] == 1">
@@ -120,21 +121,24 @@
                         </g>
 
                         <g v-if="overlayTag[6] == 1 && objectTag[o.objectName] == 1">
-                                        <defs>
-                                            <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5"
-                                                markerUnits="strokeWidth" markerWidth="10" markerHeight="10" orient="auto">
-                                                <path d="M 0 0 L 10 5 L 0 10 z" :fill="colorTrans(overlay_setting[overlay_map[6]].currentColor)" />
-                                            </marker>
-                                        </defs>
-                                        <path
-                                            :d="'M' + o.trend.pos.x1 + ',' + o.trend.pos.y1 + 'L' + o.trend.pos.x2 + ',' + o.trend.pos.y2"
-                                            :stroke-width="2" marker-end="url(#triangle)"
-                                            :stroke="colorTrans(overlay_setting[overlay_map[6]].currentColor)" fill="none">
-                                        </path>
-                                    </g>
+                            <defs>
+                                <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth"
+                                    markerWidth="10" markerHeight="10" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z"
+                                        :fill="colorTrans(overlay_setting[overlay_map[6]].currentColor)" />
+                                </marker>
+                            </defs>
+                            <path
+                                :d="'M' + o.trend.pos.x1 + ',' + o.trend.pos.y1 + 'L' + o.trend.pos.x2 + ',' + o.trend.pos.y2"
+                                :stroke-width="2" marker-end="url(#triangle)"
+                                :stroke="colorTrans(overlay_setting[overlay_map[6]].currentColor)" fill="none">
+                            </path>
+                        </g>
                         <g v-if="(overlayTag[7] == 1) && objectTag[o.objectName] == 1">
-                            <path :d="'M' + o.overall.pos.x1 + ',' + o.overall.pos.y + 'L' + o.overall.pos.x2 + ',' + o.overall.pos.y" fill="none"
-                                :stroke="colorTrans(overlay_setting[overlay_map[7]].currentColor)" :stroke-width="2"></path>
+                            <path
+                                :d="'M' + o.overall.pos.x1 + ',' + o.overall.pos.y + 'L' + o.overall.pos.x2 + ',' + o.overall.pos.y"
+                                fill="none" :stroke="colorTrans(overlay_setting[overlay_map[7]].currentColor)"
+                                :stroke-width="2"></path>
                         </g>
                         <g v-if="(overlayTag[8] == 1) && objectTag[o.objectName] == 1">
                             <path :d="'M' + o.text.pos.x + ',' + 0 + 'L' + o.text.pos.x + ',' + (.8 * elHeight)" fill="none"
@@ -163,22 +167,23 @@
             {{ item.text.text }}
             <!-- </div> -->
         </div>
-        <div  v-for="(item, i) in overlayData" :key="'overlay_' + i" style="position: absolute; top: 0px; left: 0px;">
-        <div v-for="(d, d_i) in item.label.pos" :key="'dd_' + d_i" :style="{
-            'position': 'absolute',
-            'top': `${0 * elHeight}px`,
-            'left': `${d[0] - 75 + .05 * elWidth}px`,
-            'width': '150px',
-            'transition': '0.4s',
-            'opacity': item.tag != -1 && (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
-            'padding': '3px',
-            'border': '2px solid',
-            'border-color': item.tag != -1 && (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? colorTrans(overlay_setting[overlay_map[4]].currentColor) : 'white',
-            'border-radius': '10px',
-            'background-color': 'white'
-        }">
-            {{ item.label.text[d_i] }}
-        </div></div>
+        <div v-for="(item, i) in overlayData" :key="'overlay_' + i" style="position: absolute; top: 0px; left: 0px;">
+            <div v-for="(d, d_i) in item.label.pos" :key="'dd_' + d_i" :style="{
+                'position': 'absolute',
+                'top': `${0 * elHeight}px`,
+                'left': `${d[0] - 75 + .05 * elWidth}px`,
+                'width': '150px',
+                'transition': '0.4s',
+                'opacity': item.tag != -1 && (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
+                'padding': '3px',
+                'border': '2px solid',
+                'border-color': item.tag != -1 && (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? colorTrans(overlay_setting[overlay_map[4]].currentColor) : 'white',
+                'border-radius': '10px',
+                'background-color': 'white'
+            }">
+                {{ item.label.text[d_i] }}
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -514,5 +519,4 @@ export default {
 .v-enter-from,
 .v-leave-to {
     opacity: 0;
-}
-</style>
+}</style>

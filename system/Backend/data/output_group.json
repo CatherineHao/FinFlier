@@ -34,8 +34,10 @@
             [{
                 "Text": "the sales proportion of NEVs that were subcompact and below declined to 30%", 
                 "Label": ["declined"], 
+                "LabelPos": [{"x": "2017/1/1", "y": 0.61, "text": "declined"}],
                 "Marker": [{"Begin": ["Mini- and subcompact size", 0], "End": ["Mini- and subcompact size", 6]}], 
-                "Line": {"Begin": ["Mini- and subcompact size", 0], "End": ["Mini- and subcompact size", 6], "mean": 0.403, "max": 0.61, "min": 0.30}}]
+                "transTag": -1,
+                "Line": {"Begin": ["Mini- and subcompact size", 0], "End": ["Mini- and subcompact size", 6], "range": [0.61, 0.3], "mean": 0.403, "max": 0.61, "min": 0.30, "pos": [{"x": "2017/1/1", "y": 0.61, "text": "39%"}, {"x": "2023/1/1", "y": 0.3, "text": "70%"}]}}]
         },
         {
             "OriginText": "In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size.",
@@ -69,8 +71,10 @@
             [{
                 "Text": "the mix of compact and midsize-to-large NEVs increased to 70% from 39%", 
                 "Label": ["39%", "70%"], 
+                "LabelPos": [{"x": "2017/1/1", "y": 0.39, "text": "39%"}, {"x": "2023/1/1", "y": 0.7, "text": "70%"}],
                 "Marker": [{"Begin": [2, 0], "End": [3, 6]}],
-                "Line": {"Begin": [2, 0], "End": [3, 6], "mean": 0.597, "max": 0.70, "min": 0.39}}]
+                "transTag": 0.5,
+                "Line": {"Begin": ["Midsize to large", 0], "End": ["Midsize to large", 6], "trans_tag": 1, "range": [0.39, 0.7], "mean": 0.597, "max": 0.70, "min": 0.39, "pos": [{"x": "2017/1/1", "y": 0.39, "text": "39%"}, {"x": "2023/1/1", "y": 0.7, "text": "70%"}]}}]
         }
     ]
     

@@ -62,11 +62,11 @@
             class="boundary">
             <DataDescription />
         </div>
-        <div style="height: calc(100% - 10px); width: calc(60% - 10px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; left: calc(20% - 0px);"
+        <div style="height: calc(100% - 10px); width: calc(80% - 10px - 370px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; left: calc(20% - 0px);"
             class="boundary">
             <Main />
         </div>
-        <div style="height: calc(100% - 10px); width: calc(20% - 20px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; right: 10px;"
+        <div style="height: calc(100% - 10px); width: calc(350px); margin-left: 10px; margin-bottom: 10px; padding: 8px; position: absolute; right: 10px;"
             class="boundary">
             <DesignPanel />
         </div>

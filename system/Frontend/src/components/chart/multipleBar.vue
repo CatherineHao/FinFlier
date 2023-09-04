@@ -69,17 +69,78 @@
                                     stroke="none" opacity="1">
                                 </circle>
                             </g>
+                            <g v-if="overlayTag[4] == 1" class="animation-fade">
+                                <path v-for="(o, oi) in item.label" :key="'oi_' + oi"
+                                    :d="'M' + (o.x + o.transTag * chart_setting.size.width / o.length) + ',' + (o.y) + 'L' + (o.x + o.transTag * chart_setting.size.width / o.length) + ',' + -(.1 * elHeight)"
+                                    fill="none" :stroke="colorTrans(overlay_setting[overlay_map[4]].currentColor)"
+                                    stroke-width="3">
+                                </path>
+                            </g>
+
+                            <g v-if="overlayTag[5] == 1" class="animation-fade">
+                                <path
+                                    :d="'M' + (item.text.x + item.transTag * chart_setting.size.width / item.text.length) + ',' + (item.text.y) + 'L' + (item.text.x + item.transTag * chart_setting.size.width / item.text.length) + ',' + -(.1 * elHeight)"
+                                    fill="none" :stroke="colorTrans(overlay_setting[overlay_map[5]].currentColor)"
+                                    stroke-width="3"></path>
+                            </g>
+                            <g v-if="overlayTag[6] == 1" class="animation-fade">
+                                
+                            <defs>
+                                <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth"
+                                    markerWidth="10" markerHeight="10" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z"
+                                        :fill="colorTrans(overlay_setting[overlay_map[6]].currentColor)" />
+                                </marker>
+                            </defs>
+                                <path
+                                    :d="'M' + (item.trend[0].x + item.transTag * chart_setting.size.width / item.trend[0].length) + ',' + (item.trend[0].y) + 'L' + (item.trend[1].x + item.transTag * chart_setting.size.width / item.trend[1].length) + ',' + item.trend[1].y"
+                                    fill="none" :stroke="colorTrans(overlay_setting[overlay_map[6]].currentColor)"
+                                    stroke-width="3" marker-end="url(#triangle)"></path>
+                            </g>
                         </g>
                     </Transition>
                 </g>
             </g>
         </svg>
+
+        <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
+            'position': 'absolute',
+            'top': `${0 * elHeight}px`,
+            'left': `${item.text.x + item.transTag * chart_setting.size.width / item.text.length + .05 * elWidth - 75}px`,
+            'width': '150px',
+            'transition': '0.4s',
+            'opacity': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? '1' : '0',
+            'padding': '3px',
+            'border': '2px solid',
+            'border-radius': '10px',
+            'background-color': 'white',
+            'border-color': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'color',
+        }">
+            {{ item.text.text }}
+        </div>
+        <div v-for="(item, i) in overlayData" :key="'overlay_' + i" style="position: absolute; top: 0px; left: 0px;">
+            <div v-for="(o, oi) in item.label" :key="'oi_' + oi" :style="{
+                'position': 'absolute',
+                'top': `${0 * elHeight}px`,
+                'left': `${o.x + o.transTag * chart_setting.size.width / o.length + .05 * elWidth - 75}px`,
+                'width': '150px',
+                'transition': '0.4s',
+                'opacity': objectTag[item.objectName] == 1 && overlayTag[4] == 1 ? '1' : '0',
+                'padding': '3px',
+                'border': '2px solid',
+                'border-radius': '10px',
+                'background-color': 'white',
+                'border-color': objectTag[item.objectName] == 1 && overlayTag[4] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'white',
+            }">
+                {{ item.label[oi].text }}
+            </div>
+        </div>
     </div>
 </template>
+
 <script>
 import { axisBottom, axisLeft, extent, scaleLinear, scalePoint, scaleUtc, select } from "d3";
 import { useDataStore } from "@/stores/counter";
-import description_data from "@/assets/data/description.json"
 export default {
     name: "singleBar",
     props: ['rawData', 'chartData', 'defaultTag', 'scaleTag'],
@@ -96,8 +157,10 @@ export default {
                 xAxis: [0, 0],
                 yAxis: [0, 0]
             },
+            xScale: null,
+            yScale: null,
             overlay_setting: {},
-            overlay_map: ['color', 'bounding box', 'background', 'marker', 'label', 'text'],
+            overlay_map: ['color', 'bounding box', 'background', 'marker', 'label', 'text', 'trend', 'overall', 'special'],
             chart_setting: {
                 currentColor: {
                     r: 0,
@@ -119,8 +182,7 @@ export default {
         colorTrans (color) {
             return `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
         },
-        calcOverlay (barData, chartData) {
-            console.log(barData, chartData);
+        calcOverlay (barData, chartData, scaleType) {
             let overall_data = [];
             for (let c_i in chartData) {
                 let over_data = chartData[c_i];
@@ -128,7 +190,11 @@ export default {
                 let selectBar = [];
                 let overlayData = {
                     'objectName': over_data['ObjectName'],
-                    selectBar: []
+                    transTag: parseFloat(over_data['GraphicalOverlay'][0]['transTag']),
+                    selectBar: [],
+                    label: [],
+                    text: [],
+                    trend: []
                 }
                 for (let j in chartData[c_i].Position) {
                     let t_pos = chartData[c_i].Position[j];
@@ -142,8 +208,42 @@ export default {
                         selectBar.push(barData[i]);
                     }
                 }
-                // console.log(selectBar);
+                let labelData = [];
+                let textData = [];
+                let trendData = [];
+                for (let i in over_data['GraphicalOverlay'][0]['LabelPos']) {
+                    let t_d = over_data['GraphicalOverlay'][0]['LabelPos'][i];
+                    labelData.push({
+                        x: this.xScale(this.dataType(t_d.x, scaleType)),
+                        y: this.yScale(t_d.y),
+                        text: t_d.text,
+                        transTag: parseFloat(over_data['GraphicalOverlay'][0]['transTag']),
+                        length: barData[0].length
+                    });
+                    if (i == 0) {
+                        textData = {
+                            x: this.xScale(this.dataType(t_d.x, scaleType)),
+                            y: this.yScale(t_d.y),
+                            text: over_data['GraphicalOverlay'][0]['Text'],
+                            transTag: parseFloat(over_data['GraphicalOverlay'][0]['transTag']),
+                            length: barData[0].length
+                        };
+                    }
+                }
+                for (let i in over_data['GraphicalOverlay'][0]['Line']['pos']) {
+                    let t_d = over_data['GraphicalOverlay'][0]['Line']['pos'][i];
+                    trendData.push({
+                        x: this.xScale(this.dataType(t_d.x, scaleType)),
+                        y: this.yScale(t_d.y),
+                        text: t_d.text,
+                        transTag: parseFloat(over_data['GraphicalOverlay'][0]['transTag']),
+                        length: barData[0].length
+                    })
+                }
                 overlayData.selectBar = selectBar;
+                overlayData.label = labelData;
+                overlayData.text = textData;
+                overlayData.trend = trendData;
                 overall_data.push(overlayData);
             }
             return overall_data;
@@ -176,8 +276,7 @@ export default {
         dataType (data, scaleType) {
             if (scaleType == 'time') {
                 return new Date(data);
-            }
-            else {
+            } else {
                 return data;
             }
         },
@@ -207,8 +306,7 @@ export default {
                 const dataStore = useDataStore();
                 dataStore.default_setting.chart_setting = this.chart_setting;
                 dataStore.state_map['state' + dataStore.show_state]['chart_setting'] = this.chart_setting;
-            }
-            else {
+            } else {
                 const dataStore = useDataStore();
                 this.chart_setting = dataStore.defaultTag.chart_setting;
             }
@@ -217,7 +315,9 @@ export default {
             let xName = chart_info.chartScale.x.scaleName;
             let yName = chart_info.chartScale.y.scaleName;
             let xScale = this.scale(data, chart_info.chartScale.x.attributeName, chart_info.chartScale.x.scaleType, [0, width]);
+            this.xScale = xScale;
             let yScale = this.scale(data, chart_info.chartScale.y.attributeName[0], chart_info.chartScale.y.scaleType, [height, 0]);
+            this.yScale = yScale;
             this.axisPosition = {
                 xAxis: [width, yScale(0) + 20],
                 yAxis: [-.05 * width, -20]
@@ -226,25 +326,10 @@ export default {
             let xAxis = (g, x, height) => {
                 g.attr("transform", `translate(0, ${height})`)
                     .call(axisBottom(x))
-                // .call(g => g.selectAll(".title").data([title]).join("text")
-                //     .attr("class", "title")
-                //     .attr("x", width - 10)
-                //     .attr("y", 18)
-                //     .attr("fill", "currentColor")
-                //     .attr("text-anchor", "start")
-                //     .text(title))
             }
             let yAxis = (g, y) => {
                 g.attr("transform", `translate(${0}, 0)`)
                     .call(axisLeft(y).ticks(5).tickSizeOuter(0))
-                // .call(g => g.select(".domain").remove())
-                // .call(g => g.selectAll(".title").data([title]).join("text")
-                //     .attr("class", "title")
-                //     .attr("x", -.05 * width)
-                //     .attr("y", -20)
-                //     .attr("fill", "currentColor")
-                //     .attr("text-anchor", "start")
-                //     .text(title))
             }
             select("#xAxis").call(xAxis, xScale, height);
             select("#yAxis").call(yAxis, yScale);
@@ -272,11 +357,15 @@ export default {
             return barData;
         }
     },
-    created () {
-    },
+    created () { },
     mounted () {
         this.elHeight = this.$refs.singleBarSvg.offsetHeight;
         this.elWidth = this.$refs.singleBarSvg.offsetWidth;
+        if (this.elHeight / 9 * 16 < this.elWidth) {
+            this.elWidth = this.elHeight / 9 * 16;
+        } else {
+            this.elHeight = this.elWidth / 16 * 9;
+        }
 
         this.barData = this.calcBar(this.rawData, this.chartData)
 
@@ -287,9 +376,9 @@ export default {
             // if (mutations.events.key == "overlayTag") {
             //     console.log(this.overlayTag);
             this.chart_setting = dataStore.state_map['state0']['chart_setting'];
-            this.overlayData = this.calcOverlay(this.barData, dataStore.graphicalOverlayData);
             // console.log(this.overlayData);
             this.overlayTag = dataStore.state_map['state0']['overlay_tag'];
+            this.overlayData = this.calcOverlay(this.barData, dataStore.graphicalOverlayData, this.chartData.chartScale.x.scaleType);
             // console.log(dataStore.state_map['state0']['overlay_setting'])
             this.overlay_setting = dataStore.state_map['state0']['overlay_setting']['object0'];
             // console.log(this.overlay_setting[this.overlay_map[2]], this.overlay_map[2]);
@@ -305,6 +394,7 @@ export default {
     components: {}
 }
 </script>
+
 <style>
 .title {
     font-family: 'operator Mono Lig';
@@ -313,6 +403,7 @@ export default {
 }
 
 /* we will explain what these classes do next! */
+
 .v-enter-active,
 .v-leave-active {
     transition: opacity 0.4s ease;
