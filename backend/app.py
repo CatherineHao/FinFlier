@@ -186,8 +186,8 @@ def chat_with_gpt(user_info):
             # model="gpt-4-32k",
             # messages=[{"role": "user", "content": 'Translate the following English text to French: "Have a nice day!"'}], # 测试一下把英语翻译成法语
             messages=[{"role": "user", "content": request}],
-            max_tokens=2000, # 设置生成的最大token数，可以根据需要调整
-            temperature=0.4, # 设置温度,值越小越确认
+            max_tokens=500, # 设置生成的最大token数，可以根据需要调整
+            temperature=0.2, # 设置温度,值越小越确认
             #stop = ["\n"],
             stop=None,
         )
@@ -223,7 +223,10 @@ def chat_with_gpt(user_info):
         start_index = reply.find('reason:')
         result = reply[0:start_index]
         reason = reply[start_index:]
-        result_frontend = result_to_frontend(user_data_text, result)
+
+        data_reason = user_info[:user_info.find("text")] + "text: [" + reason[8:] + "]"
+        # print(data_reason)
+        result_frontend = result_to_frontend(data_reason, result)
         print(result_frontend)
         final_result = transform_result(result_frontend)
         print(final_result)
@@ -251,7 +254,7 @@ data: [{'Category':'Real GDP','Outdoor recreation': 18.9,'U.S. economy': 5.9},
         {'Category':'Real Gross Output','Outdoor recreation': 21.8,'U.S. economy': 6.3},
         {'Category':'Compensation','Outdoor recreation': 16.2,'U.S. economy': 7.8},
         {'Category':'Employment','Outdoor recreation': 13.1,'U.S. economy': 2.7}]
-text: ["Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."]
+text: ["Inflation-adjusted ('real') GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."]
 result: [{"ObjectName":["Inflation-adjusted ("real") GDP"],"DataName":"Outdoor recreation", "Position":[{"Begin":[0,1],"End":[0,1],"Trend":"increase","Num":[18.9],"Text":"Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021"},
         {"ObjectName":["overall U.S. economy"],"DataName":"U.S. economy", "Position":["Begin":[0,2],"End":[0,2],"Trend":"rebound","Num":[5.9],"Text":"compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation"}]
 reason: "The first object is "Inflation-adjusted ("real") GDP for the outdoor recreation economy", its value is 18.9 and its descriptive phrase is "Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021". The second object is "U.S. economy", its value is 5.9 and its descriptive phrase is "compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation"."
@@ -503,7 +506,7 @@ if __name__ == '__main__':
                     text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]
                     result: [{"ObjectName":["Netherlands"],"DataName":"Billions of dollars","Position":[{"Begin":[1,1],"End":[1,1]}],"Trend":"None","Num":[43.1],"Text":"The Netherlands ($43.1 billion)"},{"ObjectName":["France"],"DataName":"Billions of dollars","Position":[{"Begin":[2,1],"End":[2,1]}],"Trend":"None","Num":[35.3],"Text":"France ($35.3 billion)"}]
                     reason: "The text 'Netherlands' corresponds to the row 'Netherlands' in data, and its corresponding value is '43.1'. The text 'France' corresponds to the row 'France' in data, and its corresponding value is '35.3' in 'Billions of dollars' column."
-                    question: ["Which contry has the highest value?"]                
+                    question: ["Which contry has the lowest value?"]                
                     label: "following"
                 """
     
@@ -552,22 +555,8 @@ if __name__ == '__main__':
 
 
 
-    user_info = test_0
+    user_info = question_1
     result, reason, final_result = chat_with_gpt(user_info)
     # print(result)
     # print(reason)
     # print(final_result)
-    
-        
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
-
-# test data:
-# data = """[{"data":[{'Category':'Real GDP','Outdoor recreation':'18.9','U.S. economy':'5.9'},
-#                     {'Category':'Real Gross Output','Outdoor recreation':'21.8','U.S. economy':'6.3'},
-#                     {'Category':'Compensation','Outdoor recreation':'16.2','U.S. economy':'7.8'},
-#                     {'Category':'Compensation','Outdoor recreation':'13.1','U.S. economy':'2.7'}] }]"""
-#     text = """'text':Inflation-adjusted ("real") GDP for the outdoor recreation economy increased 18.9 percent in 2021, compared with a 5.9 percent increase for the overall U.S. economy, reflecting a rebound in outdoor recreation after the decrease of 21.6 percent in 2020."""
-
-# TODO：time[0]和time[1]差一天用line 否则用bar。但是也不太对，怎么解决再想想。
