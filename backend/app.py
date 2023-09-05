@@ -219,7 +219,9 @@ def chat_with_gpt(user_info):
         result = reply[0:start_index]
         reason = reply[start_index:]
         result_frontend = result_to_frontend(user_data_text, result)
+        print(result_frontend)
         final_result = transform_result(result_frontend)
+        print(final_result)
         return result, reason, final_result
 
    
@@ -537,7 +539,7 @@ if __name__ == '__main__':
 
 
 
-    user_info = test_triple_top
+    user_info = question_1
     result, reason, final_result = chat_with_gpt(user_info)
     # print(result)
     # print(reason)
