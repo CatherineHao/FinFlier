@@ -6,13 +6,15 @@
  * @LastEditTime: 2023-09-02 21:40:58
 -->
 <template>
-    <div ref="singleBarSvg" style="height: 100%; width: 100%;">
-        <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" :style="{
+    <!-- translate(${-0 * (realWidth - scaleTag * realWidth) / 2}px, ${-0 * (realHeight - scaleTag * realHeight) / 2}px)  -->
+    <div ref="singleBarSvg"
+        :style="{ height: realHeight + 'px', width: realWidth + 'px', 'transform': `scale(${scaleTag})`, }">
+        <svg :height="realHeight" :width="realWidth" xmlns="http://www.w3.org/2000/svg" :style="{
             'transition': '0.4s',
-            'opacity': isShow == true ? '1' : '0',
-            'transform': `scale(${scaleTag})`
+            'opacity': isShow == true ? '1' : '0', 'transition': '0.4s'
         }">
-            <g id="mainSingleBar_g" :transform="translate(.05 * elWidth, .1 * elHeight)">
+            <g id="mainSingleBar_g"
+                :transform="translate((.05 * elWidth + (realWidth - elWidth) / 2), (.1 * elHeight + (realHeight - elHeight) / 2))">
 
                 <g v-for="(item, i) in overlayData" :key="'overlay_' + i">
                     <Transition>
@@ -32,8 +34,8 @@
                     </Transition>
                 </g>
                 <g>
-                    <g id="xAxis"></g>
-                    <g id="yAxis"></g>
+                    <g :id="'xAxis' + stateTag"></g>
+                    <g :id="'yAxis' + stateTag"></g>
                     <g id="axis_name">
                         <text class="title" text-anchor="end"
                             :transform="translate(axisPosition.xAxis[0], axisPosition.xAxis[1])">{{ chart_setting.axis.x }}</text>
@@ -43,7 +45,7 @@
                     <g id="bar">
                         <g v-for="(item, i) in barData" :key="'single_bar_' + i">
                             <rect :x="item.x - chart_setting.size.width / 2" :y="item.y"
-                                :fill="colorTrans(chart_setting.currentColor)" :width="chart_setting.size.width"
+                                :fill="overlayTag[0] == 1 ? colorTrans(overlay_setting[overlay_map[0]].currentColor) : colorTrans(chart_setting.currentColor)" :width="chart_setting.size.width"
                                 :height="item.height"></rect>
                         </g>
                     </g>
@@ -57,7 +59,7 @@
                                     <g v-if="overlayTag[0] == 1">
                                         <rect v-for="(o, oi) in item.color.rectInfo" :key="'oi_' + oi"
                                             :x="o.x - chart_setting.size.width / 2" :y="o.y"
-                                            :fill="colorTrans(overlay_setting[overlay_map[0]].currentColor)"
+                                            :fill="colorTrans(chart_setting.currentColor)"
                                             :width="chart_setting.size.width" :height="o.height" opacity="1"></rect>
                                     </g>
                                     <g v-if="overlayTag[1] == 1">
@@ -75,13 +77,13 @@
                                     </g>
                                     <g v-if="overlayTag[4] == 1">
                                         <path v-for="(o, oi) in item.label.pos" :key="'oi_' + oi"
-                                            :d="'M' + o.x + ',' + (o.y) + 'L' + o.x + ',' + -10" fill="none"
+                                            :d="'M' + o.x + ',' + (o.y) + 'L' + o.x + ',' + -.1*elHeight" fill="none"
                                             :stroke="colorTrans(overlay_setting[overlay_map[4]].currentColor)"
                                             stroke-width="3"></path>
                                     </g>
                                     <g v-if="overlayTag[5] == 1">
                                         <path v-if="item.text.lineTag == 1"
-                                            :d="'M' + item.text.pos.x + ',' + (item.text.pos.y) + 'L' + item.text.pos.x + ',' + 0"
+                                            :d="'M' + item.text.pos.x + ',' + (item.text.pos.y) + 'L' + item.text.pos.x + ',' + -.1*elHeight"
                                             fill="none" :stroke="colorTrans(overlay_setting[overlay_map[5]].currentColor)"
                                             stroke-width="3"></path>
                                     </g>
@@ -89,7 +91,8 @@
                                         <defs>
                                             <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5"
                                                 markerUnits="strokeWidth" markerWidth="10" markerHeight="10" orient="auto">
-                                                <path d="M 0 0 L 10 5 L 0 10 z" :fill="colorTrans(overlay_setting[overlay_map[6]].currentColor)" />
+                                                <path d="M 0 0 L 10 5 L 0 10 z"
+                                                    :fill="colorTrans(overlay_setting[overlay_map[6]].currentColor)" />
                                             </marker>
                                         </defs>
                                         <path
@@ -100,7 +103,7 @@
                                     </g>
                                     <g v-if="overlayTag[7] == 1">
                                         <path
-                                            :d="'M' + (item.overall.pos.x1 - chart_setting.size.width / 2 - 10) + ',' + item.overall.pos.y + 'L' +( item.overall.pos.x2 + chart_setting.size.width / 2 + 10)+ ',' + item.overall.pos.y"
+                                            :d="'M' + (item.overall.pos.x1 - chart_setting.size.width / 2 - 10) + ',' + item.overall.pos.y + 'L' + (item.overall.pos.x2 + chart_setting.size.width / 2 + 10) + ',' + item.overall.pos.y"
                                             :stroke-width="3"
                                             :stroke="colorTrans(overlay_setting[overlay_map[7]].currentColor)" fill="none">
                                         </path>
@@ -122,7 +125,7 @@
         <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
             'position': 'absolute',
             'top': `${0 * elHeight}px`,
-            'left': `${item.text.pos.x + .05 * elWidth - 75}px`,
+            'left': `${item.text.pos.x +.05 * elWidth - 75 + (realWidth - elWidth) / 2 }px`,
             'width': '150px',
             'transition': '0.4s',
             'opacity': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? '1' : '0',
@@ -138,7 +141,7 @@
             <div v-for="(o, oi) in item.label.pos" :key="'oi_' + oi" :style="{
                 'position': 'absolute',
                 'top': `${0 * elHeight}px`,
-                'left': `${o.x + .05 * elWidth - 75}px`,
+                'left': `${o.x + .05 * elWidth - 75 + (realWidth - elWidth) / 2 }px`,
                 'width': '150px',
                 'transition': '0.4s',
                 'opacity': objectTag[item.objectName] == 1 && overlayTag[4] == 1 ? '1' : '0',
@@ -158,9 +161,11 @@ import { axisBottom, axisLeft, extent, scaleLinear, scalePoint, select } from "d
 import { useDataStore } from "@/stores/counter";
 export default {
     name: "singleBar",
-    props: ['rawData', 'chartData', 'defaultTag', 'scaleTag'],
+    props: ['rawData', 'chartData', 'defaultTag', 'scaleTag', 'stateTag'],
     data () {
         return {
+            realHeight: 100,
+            realWidth: 100,
             elHeight: 100,
             elWidth: 100,
             isShow: false,
@@ -224,7 +229,7 @@ export default {
                     'special': { tag: 1, pos: [] }
                 }
                 if (position['Begin'][1] == position['End'][1]) {
-                    overlayData.label.text = over_data.GraphicalOverlay[0].Label[0];
+                    overlayData.label.text = over_data.GraphicalOverlay[0].Label;
                     overlayData.text.text = over_data.GraphicalOverlay[0].Text;
                     let cnt = parseInt(position['Begin'][1]);
                     let rectInfo = barData[cnt];
@@ -341,40 +346,48 @@ export default {
                 return scaleUtc(dataDomain, range);
             }
         },
+        dataType (data, scaleType) {
+            if (scaleType == 'time') {
+                return new Date(data);
+            }
+            else {
+                return data;
+            }
+        },
         // calcPath (center) {
 
         // },
         calcBar (data, chart_info) {
-            if (this.defaultTag == 1) {
-                let width = this.elWidth * .9;
-                let xName = chart_info.chartScale.x.scaleName;
-                let yName = chart_info.chartScale.y.scaleName;
-                console.log(chart_info);
-                this.chart_setting = {
-                    elWidth: this.elWidth,
-                    elHeight: this.elHeight,
-                    currentColor: chart_info.chartColor[chart_info.chartScale.y.attributeName[0]],
-                    size: {
-                        width: (width / data.length > 20) ? .5 * (width / data.length) : (width / data.length)
-                    },
-                    axis: {
-                        x: xName,
-                        y: yName
-                    }
-                }
-                // console.log(this.chart_setting);
-                const dataStore = useDataStore();
-                dataStore.default_setting.chart_setting = this.chart_setting;
-                dataStore.state_map['state' + dataStore.show_state]['chart_setting'] = this.chart_setting;
-            }
-            else {
-                const dataStore = useDataStore();
-                this.chart_setting = dataStore.defaultTag.chart_setting;
-            }
-            let width = this.chart_setting.elWidth * .9;
-            let height = this.chart_setting.elHeight * .8;
+            // if (this.defaultTag == 1) {
+            let width = this.elWidth * .9;
             let xName = chart_info.chartScale.x.scaleName;
             let yName = chart_info.chartScale.y.scaleName;
+            // console.log(chart_info);
+            this.chart_setting = {
+                elWidth: this.elWidth,
+                elHeight: this.elHeight,
+                currentColor: chart_info.chartColor[chart_info.chartScale.y.attributeName[0]],
+                size: {
+                    width: (width / data.length > 20) ? .5 * (width / data.length) : (width / data.length)
+                },
+                axis: {
+                    x: xName,
+                    y: yName
+                }
+            }
+            // console.log(this.chart_setting);
+            const dataStore = useDataStore();
+            dataStore.default_setting.chart_setting = this.chart_setting;
+            dataStore.state_map['state' + dataStore.show_state]['chart_setting'] = this.chart_setting;
+            // }
+            // else {
+            //     const dataStore = useDataStore();
+            //     this.chart_setting = dataStore.defaultTag.chart_setting;
+            // }
+            // let width = this.chart_setting.elWidth * .9;
+            let height = this.chart_setting.elHeight * .8;
+            // let xName = chart_info.chartScale.x.scaleName;
+            // let yName = chart_info.chartScale.y.scaleName;
             let xScale = this.scale(data, chart_info.chartScale.x.attributeName, chart_info.chartScale.x.scaleType, [0, width]);
             let yScale = this.scale(data, chart_info.chartScale.y.attributeName[0], chart_info.chartScale.y.scaleType, [height, 0]);
             this.xScale = xScale;
@@ -388,35 +401,20 @@ export default {
             let xAxis = (g, x, height) => {
                 g.attr("transform", `translate(0, ${height})`)
                     .call(axisBottom(x))
-                // .call(g => g.selectAll(".title").data([title]).join("text")
-                //     .attr("class", "title")
-                //     .attr("x", width - 10)
-                //     .attr("y", 18)
-                //     .attr("fill", "currentColor")
-                //     .attr("text-anchor", "start")
-                //     .text(title))
             }
             let yAxis = (g, y) => {
                 g.attr("transform", `translate(${0}, 0)`)
                     .call(axisLeft(y).ticks(5).tickSizeOuter(0))
-                // .call(g => g.select(".domain").remove())
-                // .call(g => g.selectAll(".title").data([title]).join("text")
-                //     .attr("class", "title")
-                //     .attr("x", -.05 * width)
-                //     .attr("y", -20)
-                //     .attr("fill", "currentColor")
-                //     .attr("text-anchor", "start")
-                //     .text(title))
             }
-            select("#xAxis").call(xAxis, xScale, height);
-            select("#yAxis").call(yAxis, yScale);
+            select("#xAxis" + this.stateTag).call(xAxis, xScale, height);
+            select("#yAxis" + this.stateTag).call(yAxis, yScale);
             // console.log('log 1')
             let barData = new Array();
             for (let i in data) {
                 if (i == 'columns') continue;
                 // console.log(data[i], data[i][chart_info.chartScale.x.attributeName], data[i][chart_info.chartScale.y.attributeName[0]])
                 barData.push({
-                    x: xScale(data[i][chart_info.chartScale.x.attributeName]),
+                    x: xScale(this.dataType(data[i][chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType)),
                     y: yScale(data[i][chart_info.chartScale.y.attributeName[0]]),
                     fill: chart_info.chartColor[chart_info.chartScale.y.attributeName[0]],
                     data: data[i],
@@ -424,15 +422,24 @@ export default {
                     height: height - yScale(data[i][chart_info.chartScale.y.attributeName[0]])
                 });
             }
-            console.log(barData)
+            // console.log(barData)
             return barData;
         }
     },
     created () {
     },
     mounted () {
-        this.elHeight = this.$refs.singleBarSvg.offsetHeight;
-        this.elWidth = this.$refs.singleBarSvg.offsetWidth;
+        // this.elHeight = this.$refs.singleBarSvg.offsetHeight;
+        // this.elWidth = this.$refs.singleBarSvg.offsetWidth;
+        this.realHeight = document.getElementById('mainView').offsetHeight;
+        this.realWidth = document.getElementById('mainView').offsetWidth;
+        this.elHeight = document.getElementById('mainView').offsetHeight;
+        this.elWidth = document.getElementById('mainView').offsetWidth;
+        if (this.elHeight / 9 * 16 < this.elWidth) {
+            this.elWidth = this.elHeight / 9 * 16;
+        } else {
+            this.elHeight = this.elWidth / 16 * 9;
+        }
 
         this.barData = this.calcBar(this.rawData, this.chartData)
 
@@ -440,12 +447,19 @@ export default {
         // console.log(this.overlayData);
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations) => {
-            this.chart_setting = dataStore.state_map['state0']['chart_setting'];
-            this.overlayTag = dataStore.state_map['state0']['overlay_tag'];
-            // console.log(dataStore.state_map['state0']['overlay_setting'])
+            if (this.defaultTag == 1) {
+                this.chart_setting = dataStore.state_map[this.stateTag]['chart_setting'];
+            }
+            let selObj = dataStore.selectObject;
             this.overlayData = this.calcOverlay(this.barData, dataStore.graphicalOverlayData);
-            this.overlay_setting = dataStore.state_map['state0']['overlay_setting']['object0'];
-            console.log(this.overlay_setting)
+            if (selObj != '') {
+                if (selObj == -1) {
+                this.overlayTag = [0, 0, 0, 0 ,0,0,0,0,0];
+                } else {
+                this.overlay_setting = dataStore.state_map[this.stateTag]['overlay_setting'][selObj];
+                this.overlayTag = dataStore.state_map[this.stateTag]['overlay_setting'][selObj]['overlay_tag'];}
+            }
+            // console.log(dataStore.state_map['state0']['overlay_setting'])
             this.objectTag = dataStore.objectTag;
         })
         setTimeout(() => this.isShow = !this.isShow, 100);
@@ -469,5 +483,4 @@ export default {
 .v-enter-from,
 .v-leave-to {
     opacity: 0;
-}
-</style>
+}</style>
