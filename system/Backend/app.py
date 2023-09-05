@@ -44,7 +44,7 @@ def fetch_basic_chart():
 
 
 # @app.route("get_result", methods = ("GET", "POST"))
-@app.route('/api/test/postQuery/', methods=['POST'])
+@app.route('/api/test/postQuery_real/', methods=['POST'])
 def chat_with_gpt():
     params = request.json
     # print(params)
@@ -75,7 +75,7 @@ def chat_with_gpt():
             # model="gpt-4-32k",
             # messages=[{"role": "user", "content": 'Translate the following English text to French: "Have a nice day!"'}], # 测试一下把英语翻译成法语
             messages=[{"role": "user", "content": t_request}],
-            max_tokens=2000, # 设置生成的最大token数，可以根据需要调整
+            max_tokens=500, # 设置生成的最大token数，可以根据需要调整
             temperature=0.4, # 设置温度,值越小越确认
             #stop = ["\n"],
             stop=None,
@@ -107,7 +107,7 @@ def chat_with_gpt():
                         {"role": "user", "content": user_data_text}, # 用户上传的data+text
                         {"role": "assistant", "content": result_reason}, # gpt回答的result+reason
                         {"role": "user", "content": user_data_text+question}], # follow_question
-            max_tokens=2000, # 设置生成的最大token数，可以根据需要调整
+            max_tokens=500, # 设置生成的最大token数，可以根据需要调整
             temperature=0.2, # 设置温度,值越小越确认
             #stop = ["\n"],
             stop=None,
@@ -117,7 +117,11 @@ def chat_with_gpt():
         start_index = reply.find('reason:')
         result = reply[0:start_index]
         reason = reply[start_index:]
-        result_frontend = result_to_frontend(user_data_text, result)
+        # result_frontend = result_to_frontend(user_data_text, result)
+        data_reason = user_info[:user_info.find("text")] + "text: [" + reason[8:] + "]"
+        # print(data_reason)
+        result_frontend = result_to_frontend(data_reason, result)
+        print(result_frontend)
         final_result = transform_result(result_frontend)
         output_file_path = 'output1.json'
         data = {"result":result, "reason": reason, "final": final_result}
@@ -240,6 +244,10 @@ text: ["The British economy expanded 0.2% on quarter in Q2 2023, following a 0.1
 result: [{"ObjectName":["The British economy"],"DataName":"GDP Growth Rate","Position":[{"Begin":[7,1],"End":[6,1]}],"Trend":"expanded","Num":[0.2,0.1],"Text":"The British economy expanded 0.2% on quarter in Q2 2023, following a 0.1% growth in Q1"}]
 reason: "The column 'GDP Growth Rate' corresponds to 'The British economy' in the text. The '0.2% on quarter in Q2 2023' corresponds to row '2023 Q2' and the '0.1% growth in Q1' corresponds to row '2023 Q1'."
 
+data: [{'Time': '2019-Jan', 'All items': 1.6, 'Food': 1.6, 'Energy': -4.8, 'Shelter': 3.2}, {'Time': '2019-Feb', 'All items': 1.5, 'Food': 2.0, 'Energy': -5.0, 'Shelter': 3.4}, {'Time': '2019-Mar', 'All items': 1.9, 'Food': 2.1, 'Energy': -0.4, 'Shelter': 3.4}, {'Time': '2019-Apr', 'All items': 2.0, 'Food': 1.8, 'Energy': 1.7, 'Shelter': 3.4}, {'Time': '2019-May', 'All items': 1.8, 'Food': 2.0, 'Energy': -0.5, 'Shelter': 3.3}, {'Time': '2019-Jun', 'All items': 1.6, 'Food': 1.9, 'Energy': -3.4, 'Shelter': 3.5}, {'Time': '2019-Jul', 'All items': 1.8, 'Food': 1.8, 'Energy': -2.0, 'Shelter': 3.5}, {'Time': '2019-Aug', 'All items': 1.7, 'Food': 1.7, 'Energy': -4.4, 'Shelter': 3.4}, {'Time': '2019-Sep', 'All items': 1.7, 'Food': 1.8, 'Energy': -4.8, 'Shelter': 3.5}, {'Time': '2019-Oct', 'All items': 1.8, 'Food': 2.1, 'Energy': -4.2, 'Shelter': 3.3}, {'Time': '2019-Nov', 'All items': 2.1, 'Food': 2.0, 'Energy': -0.6, 'Shelter': 3.3}, {'Time': '2019-Dec', 'All items': 2.3, 'Food': 1.8, 'Energy': 3.4, 'Shelter': 3.2}, {'Time': '2020-Jan', 'All items': 2.5, 'Food': 1.8, 'Energy': 6.2, 'Shelter': 3.3}, {'Time': '2020-Feb', 'All items': 2.3, 'Food': 1.8, 'Energy': 2.8, 'Shelter': 3.3}, {'Time': '2020-Mar', 'All items': 1.5, 'Food': 1.9, 'Energy': -5.7, 'Shelter': 3.0}, {'Time': '2020-Apr', 'All items': 0.3, 'Food': 3.5, 'Energy': -17.7, 'Shelter': 2.6}, {'Time': '2020-May', 'All items': 0.1, 'Food': 4.0, 'Energy': -18.9, 'Shelter': 2.5}, {'Time': '2020-Jun', 'All items': 0.6, 'Food': 4.5, 'Energy': -12.6, 'Shelter': 2.4}, {'Time': '2020-Jul', 'All items': 1.0, 'Food': 4.1, 'Energy': -11.2, 'Shelter': 2.3}, {'Time': '2020-Aug', 'All items': 1.3, 'Food': 4.1, 'Energy': -9.0, 'Shelter': 2.3}, {'Time': '2020-Sep', 'All items': 1.4, 'Food': 3.9, 'Energy': -7.7, 'Shelter': 2.0}, {'Time': '2020-Oct', 'All items': 1.2, 'Food': 3.9, 'Energy': -9.2, 'Shelter': 2.0}, {'Time': '2020-Nov', 'All items': 1.2, 'Food': 3.7, 'Energy': -9.4, 'Shelter': 1.9}, {'Time': '2020-Dec', 'All items': 1.4, 'Food': 3.9, 'Energy': -7.0, 'Shelter': 1.8}, {'Time': '2021-Jan', 'All items': 1.4, 'Food': 3.8, 'Energy': -3.6, 'Shelter': 1.6}, {'Time': '2021-Feb', 'All items': 1.7, 'Food': 3.6, 'Energy': 2.4, 'Shelter': 1.5}, {'Time': '2021-Mar', 'All items': 2.6, 'Food': 3.5, 'Energy': 13.2, 'Shelter': 1.7}, {'Time': '2021-Apr', 'All items': 4.2, 'Food': 2.4, 'Energy': 25.1, 'Shelter': 2.1}, {'Time': '2021-May', 'All items': 5.0, 'Food': 2.2, 'Energy': 28.5, 'Shelter': 2.2}, {'Time': '2021-Jun', 'All items': 5.4, 'Food': 2.4, 'Energy': 24.5, 'Shelter': 2.6}, {'Time': '2021-Jul', 'All items': 5.4, 'Food': 3.4, 'Energy': 23.8, 'Shelter': 2.8}, {'Time': '2021-Aug', 'All items': 5.3, 'Food': 3.7, 'Energy': 25.0, 'Shelter': 2.8}, {'Time': '2021-Sep', 'All items': 5.4, 'Food': 4.6, 'Energy': 24.8, 'Shelter': 3.2}, {'Time': '2021-Oct', 'All items': 6.2, 'Food': 5.3, 'Energy': 30.0, 'Shelter': 3.5}, {'Time': '2021-Nov', 'All items': 6.8, 'Food': 6.1, 'Energy': 33.3, 'Shelter': 3.8}, {'Time': '2021-Dec', 'All items': 7.0, 'Food': 6.3, 'Energy': 29.3, 'Shelter': 4.1}, {'Time': '2022-Jan', 'All items': 7.5, 'Food': 7.0, 'Energy': 27.0, 'Shelter': 4.4}, {'Time': '2022-Feb', 'All items': 7.9, 'Food': 7.9, 'Energy': 25.6, 'Shelter': 4.7}, {'Time': '2022-Mar', 'All items': 8.5, 'Food': 8.8, 'Energy': 32.0, 'Shelter': 5.0}, {'Time': '2022-Apr', 'All items': 8.3, 'Food': 9.4, 'Energy': 30.3, 'Shelter': 5.1}, {'Time': '2022-May', 'All items': 8.6, 'Food': 10.1, 'Energy': 34.6, 'Shelter': 5.5}, {'Time': '2022-Jun', 'All items': 9.1, 'Food': 10.4, 'Energy': 41.6, 'Shelter': 5.6}, {'Time': '2022-Jul', 'All items': 8.5, 'Food': 10.9, 'Energy': 32.9, 'Shelter': 5.7}, {'Time': '2022-Aug', 'All items': 8.3, 'Food': 11.4, 'Energy': 23.8, 'Shelter': 6.2}, {'Time': '2022-Sep', 'All items': 8.2, 'Food': 11.2, 'Energy': 19.8, 'Shelter': 6.6}, {'Time': '2022-Oct', 'All items': 7.7, 'Food': 10.9, 'Energy': 17.6, 'Shelter': 6.9}, {'Time': '2022-Nov', 'All items': 7.1, 'Food': 10.6, 'Energy': 13.1, 'Shelter': 7.1}, {'Time': '2022-Dec', 'All items': 6.5, 'Food': 10.4, 'Energy': 7.3, 'Shelter': 7.5}, {'Time': '2023-Jan', 'All items': 6.4, 'Food': 10.1, 'Energy': 8.7, 'Shelter': 7.9}, {'Time': '2023-Feb', 'All items': 6.0, 'Food': 9.5, 'Energy': 5.2, 'Shelter': 8.1}, {'Time': '2023-Mar', 'All items': 5.0, 'Food': 8.5, 'Energy': -6.4, 'Shelter': 8.2}, {'Time': '2023-Apr', 'All items': 4.9, 'Food': 7.7, 'Energy': -5.1, 'Shelter': 8.1}]
+text: ["The 12-month percentage change in Consumer Price Index for all items increased 4.9 percentage in 2023 April. Consumer Price Index for food rose 7.7 percent in the same month, while consumer prices for energy fell 5.1 percentage."]
+result: [{"ObjectName": ["Consumer Price Index for all items"], "DataName": "All items","Position": [{"Begin": [51, 1],"End": [51, 1]}],"Trend": "increased”,”Num": [4.9],"Text": "The 12-month percentage change in Consumer Price Index for all items increased 4.9 percentage in 2023 April."},{"ObjectName": ["Consumer Price Index for food"],"DataName": "Food","Position": [{ "Begin": [51, 2],"End": [51, 2]}],"Trend": "rose","Num": [7.7],"Text": "Consumer Price Index for food rose 7.7 percent in the same month."},{"ObjectName": ["consumer prices for energy"],"DataName": "Energy","Position": [{"Begin": [51, 3],"End": [51, 3]}],”Trend": "fell","Num": [-5.1],"Text": "while consumer prices for energy fell 5.1 percentage."}]
+reason: "The text 'consumer price index for all items' corresponds to the column 'All items' in data and the test '2023 April' corresponds to the row '2023-Apr' in data. The test 'fell 5.1 percentage'  refer to '-5.1' in data."
 
 data: [{'Time': 2012, 'Launches': 46, 'Liquidations': 14, 'Active': 271}, 
         {'Time': 2013, 'Launches': 50, 'Liquidations': 18, 'Active': 303}, 
@@ -299,10 +307,10 @@ reason: "The 'Amazon stock moving averages' corresponds to the column 'price' in
 
 
 
-@app.route('/api/test/postQuery_fake/', methods=['POST'])
+@app.route('/api/test/postQuery/', methods=['POST'])
 def post_query():
     params = request.json
-    file_path = '{}/output.json'.format(FILE_ABS_PATH)
+    file_path = '{}/data/output_group.json'.format(FILE_ABS_PATH)
     data = read_json(file_path)
     print(data)
     return jsonify(data)
@@ -315,7 +323,7 @@ def determine_x_axis_type(input_data):
     # if list(input_data[0].keys())[0] == 'time' or list(input_data[0].keys())[0] == 'Time':
     #     return 'time'
     # 检查是否包含数字和日期
-    # return 'category'
+    return 'category'
     if re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
         return 'time'
     elif re.match(r'^[-+]?\d*\.?\d+$', x_values): # 正则表达式匹配整数/浮点数
@@ -335,7 +343,7 @@ def get_x_axis_name(x_type, data):
     elif x_type == 'linear':
         x_name =  list(data[0].keys())[0]
     else:
-        x_name = ' '
+        x_name = 'Value'
     return [x_name, x_attribute]
 
 """
@@ -358,7 +366,7 @@ def determine_chart_type(input_data, x_type):
         chart_type += 1
     
     # return chart_type
-    return 3
+    return 2
 #TODO: backend function 1
 # @app.route('/chart-info', methods=['POST'])
 @app.route('/api/test/fetchBasicChart/', methods=['POST'])
@@ -386,7 +394,7 @@ def chart_info():
             },
             "y": {
                 "scaleType": 'linear',
-                "scaleName": ' ', # 给一个列名
+                "scaleName": 'Value', # 给一个列名
                 "attributeName": y_attribute
             }
         }
