@@ -42,7 +42,7 @@
     <div style="height: 100%; width: 100%;">
         <div style="font-family: KoHo; text-align: start; font-size: 22px;height: 40px; font-weight: bold;">
 
-            <img src="../assets/img/2.png" width="25" alt=""> &nbsp;Data Description
+            <img src="../assets/img/2.png" width="25" alt=""> &nbsp;Conversation Panel
             <hr>
         </div>
         <div style="height: calc(100% - 40px); widows: 100%;">
@@ -113,12 +113,12 @@
                         </div>
                         <div style="width: calc(100% - 40px);">
                             <div v-if="item.tag == -1"
-                                style="width: 100%; line-height:1lh; text-align: start; padding-right: 5px; background-color: rgb(173, 216, 230, 0); padding: 8px; border-radius: 5px; border: 1px solid rgba(0, 0, 0, .3); display: flex;">
+                                style="width: 100%; line-height:1lh; text-align: start; padding-right: 5px; background-color: rgb(173, 216, 230, 0); padding: 8px; border-radius: 5px; border: 1px solid rgba(0, 0, 0, .3); display: flex;min-height: 100px;">
                                 <!-- <div style="width: 95%;">{{ item.text }}</div> -->
                                 {{ item.text }}
                             </div>
-                            <div v-else
-                                style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3);">
+                            <div v-else v-loading="item.loading"
+                                style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3); min-height: 160px;">
                                 <span v-for="(o, i) in item.outputTextGroup" :key="'res_' + i"
                                     :class="{ 'dataObject': o.tag != -1 }" :id="o.id" :style="{
                                         backgroundColor: o.tag == 0 || o.tag == 2 ? o.back_color : 'white',
@@ -127,10 +127,12 @@
                                     }" @click="o.tag != -1 ? hoverObject(o) : ''"
                                     @mouseenter="o.tag != -1 ? handleHover(o) : ''"
                                     @mouseout="o.tag != -1 ? handleOut(o) : ''">{{ o.text }}</span>
-                                <hr>
-                                <div>
+                                <!-- <br>
+                                <br> -->
+                                <hr style="margin-top: 10px; margin-bottom: 5px;">
+                                <div v-if="item.loading != 1">
                                     <div style="font-weight: 600;">
-                                    Reason:</div>
+                                        Reason:</div>
                                     <div>
                                         {{ item.reason }}
                                     </div>
@@ -186,6 +188,7 @@ export default {
         return {
             inputText: '',
             outputText: '',
+            firstInput: '',
             outputTextArray: [],
             textGroup: [],
             objectTag: {},
@@ -202,7 +205,7 @@ export default {
             },
             {
                 "r": 249, "g": 203, "b": 220, "a": 1
-            }]
+            }],
         };
     },
     methods: {
@@ -223,7 +226,7 @@ export default {
             selectAll("#" + o.id).style('border-left-color', 'white');
             selectAll("#" + o.id).style('border-right-color', 'white');
         },
-        async submitText () {
+        submitText () {
             const dataStore = useDataStore();
             let rawData = dataStore.data;
             this.inputText = this.inputText.trim();
@@ -240,6 +243,7 @@ export default {
             let postTag = 'following';
             if (this.postTag == 0) {
                 postTag = 'start'
+                this.firstInput = inputText;
                 this.postTag = 1;
             }
             for (let i = 0; i < rawData.length; ++i) {
@@ -277,9 +281,21 @@ export default {
 
                 return stringify(arr);
             }
+            this.textGroup.push({
+                tag: 1,
+                outputTextGroup: {},
+                reason: '',
+                loading: 1
+            })
             // console.log(rawData[0], stringifyArray([rawData[0]]))
-            user_info = 'data: ' + stringifyArray(rawData) + 'text: ["' + inputText + '"]label: "' + postTag + '"';
+            if (postTag == 'start') {
+                user_info = 'data: ' + stringifyArray(rawData) + 'text: ["' + inputText + '"]label: "' + postTag + '"';
+            } else {
+                user_info = 'data: ' + stringifyArray(rawData) + 'text: ["' + this.firstInput + '"]' + dataStore.query_results[0].result + dataStore.query_results[0].reason + 'question: ["' + inputText + '"]label: "' + postTag + '"';
+                // console.log(user_info);
+            }
             // console.log(user_info);
+            // if (postTag == 'start')
             dataStore.postQuery({
                 data: user_info
             })
@@ -288,6 +304,7 @@ export default {
         },
         gptFeedback (description_data, reason_data) {
             // console.log(reason_data)
+            // console.log(description_data)
             for (let i in description_data) {
                 description_data[i]['ObjectName'] = 'object' + this.objectCnt.toString();
                 description_data[i]['ObjectIndex'] = this.objectCnt;
@@ -307,7 +324,33 @@ export default {
             dataStore.graphicalOverlayData = description_data;
             for (let i in description_data) {
                 // console.log(description_data[i]['ObjectName'])
-                dataStore.state_map.state0.overlay_setting[description_data[i]['ObjectName']] = dataStore.type_chart_setting.overlayFormat;
+                let tmp = {}, tmp1 = {}, tmp2 = {}, tmp3 = {};
+                tmp['overlay_tag'] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+                tmp1['overlay_tag'] = [0, 0, 0, 1, 0, 0, 0, 0, 0];
+                tmp2['overlay_tag'] = [0, 0, 0, 0, 1, 0, 0, 0, 0];
+                tmp3['overlay_tag'] = [0, 0, 0, 0, 0, 1, 0, 0, 0];
+                for (let j in dataStore.type_chart_setting.overlayFormat) {
+                    tmp[j] = {};
+                    tmp1[j] = {};
+                    tmp2[j] = {};
+                    tmp3[j] = {};
+                    
+                    for (let k in dataStore.type_chart_setting.overlayFormat[j]) {
+                        tmp[j][k] = dataStore.type_chart_setting.overlayFormat[j][k];
+                        tmp1[j][k] = dataStore.type_chart_setting.overlayFormat[j][k];
+                        tmp2[j][k] = dataStore.type_chart_setting.overlayFormat[j][k];
+                        tmp3[j][k] = dataStore.type_chart_setting.overlayFormat[j][k];
+                        console.log(tmp[j][k], k)
+                    }
+                }
+                // for (let j in tmp) {
+                //     tmp[j].currentColor = description_data[i]['color'];
+                // }
+                dataStore.state_map.state0.overlay_setting[description_data[i]['ObjectName']] = tmp;
+                dataStore.state_map.state1.overlay_setting[description_data[i]['ObjectName']] = tmp1;
+                dataStore.state_map.state2.overlay_setting[description_data[i]['ObjectName']] = tmp2;
+                dataStore.state_map.state3.overlay_setting[description_data[i]['ObjectName']] = tmp3;
+                // console.log(description_data[i]['ObjectName'], description_data[i]['color'], tmp)
             }
             // console.log(dataStore.state_map.state0.overlay_setting)
             // for (let i in )
@@ -376,12 +419,12 @@ export default {
                 ),
                 tag: -1
             });
-
-            this.textGroup.push({
+            this.textGroup[this.textGroup.length - 1] = {
                 tag: 1,
+                loading: 0,
                 outputTextGroup: outputTextGroup,
                 reason: reason_data.slice(7, reason_data.length)
-            })
+            }
             // console.log(this.textGroup)
             this.$nextTick(() => {
                 this.scrollToBottom();
@@ -423,22 +466,23 @@ export default {
             }
             // console.log(tableTag);
             dataStore.selectTable = tableTag;
-            // console.log(tableTag)
+            console.log(tableTag)
             this.tableTag = tableTag;
             objectTag[o.objectName] = 1;
+            dataStore.selectObject = o.objectName;
             dataStore.objectTag = objectTag;
             this.objectTag = objectTag;
 
-            let tmp = dataStore.type_chart_setting.overlayFormat;
+            // let tmp = dataStore.type_chart_setting.overlayFormat;
 
-            for (let i in tmp) {
-                tmp[i].currentColor = o.rawColor;
-            }
-            // console.log(dataStore.state_map['stage0']['overlay_setting'], o.objectName);
+            // for (let i in tmp) {
+            //     tmp[i].currentColor = o.rawColor;
+            // }
+            // // console.log(dataStore.state_map['stage0']['overlay_setting'], o.objectName);
 
 
-            dataStore.state_map['state0']['overlay_setting'][o.objectName] = tmp;
-            console.log(dataStore.state_map['state0']['overlay_setting']);
+            // dataStore.state_map['state0']['overlay_setting'][o.objectName] = tmp;
+            // console.log(dataStore.state_map['state0']['overlay_setting']);
             // console.log(objectTag, dataStore.objectTag)
         },
         outObject (objectName) {
@@ -450,6 +494,7 @@ export default {
             }
             dataStore.selectTable = this.tableTag;
             dataStore.objectTag = objectTag;
+            dataStore.selectObject = -1
         }
     },
     watch: {
@@ -481,7 +526,7 @@ export default {
     created () {
     },
     mounted () {
-        this.inputText = "In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size."
+        this.inputText = "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."
         this.submitText();
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations, state) => {

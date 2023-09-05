@@ -98,4 +98,5 @@ export default {
     padding-left: 3px;
     padding-right: 3px;
 }
+
 </style>
