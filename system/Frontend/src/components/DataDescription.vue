@@ -526,8 +526,8 @@ export default {
     created () {
     },
     mounted () {
-        this.inputText = "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."
-        this.submitText();
+        // this.inputText = "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."
+        // this.submitText();
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations, state) => {
             console.log(mutations.type)

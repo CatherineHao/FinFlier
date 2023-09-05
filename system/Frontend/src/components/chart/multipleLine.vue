@@ -246,7 +246,7 @@ export default {
             // console.log(xScale, yScale);
 
             this.axisPosition = {
-                xAxis: [width, yScale(0) + 30],
+                xAxis: [width, .8* this.elHeight + 30],
                 yAxis: [-.05 * width, -20]
             }
             // console.log(yScale);

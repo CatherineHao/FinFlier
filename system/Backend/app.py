@@ -44,7 +44,7 @@ def fetch_basic_chart():
 
 
 # @app.route("get_result", methods = ("GET", "POST"))
-@app.route('/api/test/postQuery_real/', methods=['POST'])
+@app.route('/api/test/postQuery/', methods=['POST'])
 def chat_with_gpt():
     params = request.json
     # print(params)
@@ -299,7 +299,7 @@ reason: "The 'Amazon stock moving averages' corresponds to the column 'price' in
 
 
 
-@app.route('/api/test/postQuery/', methods=['POST'])
+@app.route('/api/test/postQuery_fake/', methods=['POST'])
 def post_query():
     params = request.json
     file_path = '{}/output.json'.format(FILE_ABS_PATH)
@@ -357,8 +357,8 @@ def determine_chart_type(input_data, x_type):
     if x_type == 'time' or x_type == 'linear':
         chart_type += 1
     
-    return chart_type
-    # return 2
+    # return chart_type
+    return 3
 #TODO: backend function 1
 # @app.route('/chart-info', methods=['POST'])
 @app.route('/api/test/fetchBasicChart/', methods=['POST'])
