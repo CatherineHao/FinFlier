@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>拖动的DIV</title>
+    <style>
+        .draggable {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            position: absolute;
+            cursor: grab;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="draggable" v-draggable="dragOptions">拖动我</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.30"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    dragOptions: {
+                        isDragging: false,
+                        offsetX: 0,
+                        offsetY: 0
+                    }
+                };
+            },
+            directives: {
+                draggable(el, binding) {
+                    const { isDragging, offsetX, offsetY } = binding.value;
+
+                    el.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+
+                    el.addEventListener("mousedown", (event) => {
+                        if (!isDragging) {
+                            isDragging.value = true;
+                            offsetX.value = event.clientX - el.getBoundingClientRect().left;
+                            offsetY.value = event.clientY - el.getBoundingClientRect().top;
+                        }
+
+                        const onMouseMove = (event) => {
+                            if (isDragging.value) {
+                                offsetX.value = event.clientX - el.getBoundingClientRect().left;
+                                offsetY.value = event.clientY - el.getBoundingClientRect().top;
+                            }
+                        };
+
+                        const onMouseUp = () => {
+                            isDragging.value = false;
+                            document.removeEventListener("mousemove", onMouseMove);
+                            document.removeEventListener("mouseup", onMouseUp);
+                        };
+
+                        document.addEventListener("mousemove", onMouseMove);
+                        document.addEventListener("mouseup", onMouseUp);
+                    });
+                }
+            }
+        });
+
+        app.mount("#app");
+    </script>
+</body>
+</html>

@@ -6,13 +6,14 @@
  * @LastEditTime: 2023-08-27 20:46:06
 -->
 <template>
-    <div ref="singleBarSvg" style="height: 100%; width: 100%;">
-        <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" :style="{
+    <div ref="singleBarSvg"
+        :style="{ height: realHeight + 'px', width: realWidth + 'px', 'transform': `translate(${-0 * (realWidth - scaleTag * realWidth) / 2}px, ${-0 * (realHeight - scaleTag * realHeight) / 2}px) scale(${scaleTag})`, 'transition': '0.4s', }">
+        <svg :height="realHeight" :width="realWidth" xmlns="http://www.w3.org/2000/svg" :style="{
             'transition': '0.4s',
             'opacity': isShow == true ? '1' : '0',
-            'transform': `scale(${scaleTag})`
         }">
-            <g id="mainSingleBar_g" :transform="translate(.05 * elWidth, .1 * elHeight)">
+            <g id="mainSingleBar_g"
+                :transform="translate((.05 * elWidth + (realWidth - elWidth) / 2), (.1 * elHeight + (realHeight - elHeight) / 2))">
                 <g v-for="(item, i) in overlayData" :key="'overlay_' + i">
                     <Transition>
                         <g v-if="objectTag[item.objectName] == 1" style="transition: 0.4s;">
@@ -27,9 +28,9 @@
                     </Transition>
                 </g>
                 <g>
-                    <g id="xAxis"></g>
-                    <g id="yAxis"></g>
-                    <g id="axis_name"> 
+                    <g :id="'xAxis' + stateTag"></g>
+                    <g :id="'yAxis' + stateTag"></g>
+                    <g id="axis_name">
                         <text class="title" text-anchor="end"
                             :transform="translate(axisPosition.xAxis[0], axisPosition.xAxis[1])">{{ chart_setting.axis.x }}</text>
                         <text class="title" text-anchor="start"
@@ -84,14 +85,13 @@
                                     stroke-width="3"></path>
                             </g>
                             <g v-if="overlayTag[6] == 1" class="animation-fade">
-                                
-                            <defs>
-                                <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth"
-                                    markerWidth="10" markerHeight="10" orient="auto">
-                                    <path d="M 0 0 L 10 5 L 0 10 z"
-                                        :fill="colorTrans(overlay_setting[overlay_map[6]].currentColor)" />
-                                </marker>
-                            </defs>
+                                <defs>
+                                    <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth"
+                                        markerWidth="10" markerHeight="10" orient="auto">
+                                        <path d="M 0 0 L 10 5 L 0 10 z"
+                                            :fill="colorTrans(overlay_setting[overlay_map[6]].currentColor)" />
+                                    </marker>
+                                </defs>
                                 <path
                                     :d="'M' + (item.trend[0].x + item.transTag * chart_setting.size.width / item.trend[0].length) + ',' + (item.trend[0].y) + 'L' + (item.trend[1].x + item.transTag * chart_setting.size.width / item.trend[1].length) + ',' + item.trend[1].y"
                                     fill="none" :stroke="colorTrans(overlay_setting[overlay_map[6]].currentColor)"
@@ -106,7 +106,7 @@
         <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
             'position': 'absolute',
             'top': `${0 * elHeight}px`,
-            'left': `${item.text.x + item.transTag * chart_setting.size.width / item.text.length + .05 * elWidth - 75}px`,
+            'left': `${item.text.x + item.transTag * chart_setting.size.width / item.text.length + .05 * elWidth - 75 + (realWidth - elWidth) / 2}px`,
             'width': '150px',
             'transition': '0.4s',
             'opacity': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? '1' : '0',
@@ -122,7 +122,7 @@
             <div v-for="(o, oi) in item.label" :key="'oi_' + oi" :style="{
                 'position': 'absolute',
                 'top': `${0 * elHeight}px`,
-                'left': `${o.x + o.transTag * chart_setting.size.width / o.length + .05 * elWidth - 75}px`,
+                'left': `${o.x + o.transTag * chart_setting.size.width / o.length + .05 * elWidth - 75 + (realWidth - elWidth) / 2}px`,
                 'width': '150px',
                 'transition': '0.4s',
                 'opacity': objectTag[item.objectName] == 1 && overlayTag[4] == 1 ? '1' : '0',
@@ -143,9 +143,11 @@ import { axisBottom, axisLeft, extent, scaleLinear, scalePoint, scaleUtc, select
 import { useDataStore } from "@/stores/counter";
 export default {
     name: "singleBar",
-    props: ['rawData', 'chartData', 'defaultTag', 'scaleTag'],
+    props: ['rawData', 'chartData', 'defaultTag', 'scaleTag', 'stateTag'],
     data () {
         return {
+            realHeight: 100,
+            realWidth: 100,
             elHeight: 100,
             elWidth: 100,
             isShow: false,
@@ -175,7 +177,8 @@ export default {
                     x: 'Position',
                     y: "Billions of dollars"
                 }
-            }
+            },
+            drawGraphTag: 0
         };
     },
     methods: {
@@ -306,14 +309,13 @@ export default {
                 const dataStore = useDataStore();
                 dataStore.default_setting.chart_setting = this.chart_setting;
                 dataStore.state_map['state' + dataStore.show_state]['chart_setting'] = this.chart_setting;
-            } else {
-                const dataStore = useDataStore();
-                this.chart_setting = dataStore.defaultTag.chart_setting;
             }
+            // else {
+            //     const dataStore = useDataStore();
+            //     this.chart_setting = dataStore.default_setting.chart_setting;
+            // }
             let width = this.chart_setting.elWidth * .9;
             let height = this.chart_setting.elHeight * .8;
-            let xName = chart_info.chartScale.x.scaleName;
-            let yName = chart_info.chartScale.y.scaleName;
             let xScale = this.scale(data, chart_info.chartScale.x.attributeName, chart_info.chartScale.x.scaleType, [0, width]);
             this.xScale = xScale;
             let yScale = this.scale(data, chart_info.chartScale.y.attributeName[0], chart_info.chartScale.y.scaleType, [height, 0]);
@@ -331,8 +333,8 @@ export default {
                 g.attr("transform", `translate(${0}, 0)`)
                     .call(axisLeft(y).ticks(5).tickSizeOuter(0))
             }
-            select("#xAxis").call(xAxis, xScale, height);
-            select("#yAxis").call(yAxis, yScale);
+            select("#xAxis" + this.stateTag).call(xAxis, xScale, height);
+            select("#yAxis" + this.stateTag).call(yAxis, yScale);
             let barData = new Array();
             for (let i in data) {
                 if (i == 'columns') continue;
@@ -359,35 +361,42 @@ export default {
     },
     created () { },
     mounted () {
-        this.elHeight = this.$refs.singleBarSvg.offsetHeight;
-        this.elWidth = this.$refs.singleBarSvg.offsetWidth;
+        // this.realHeight = this.$refs.singleBarSvg.offsetHeight;
+        // this.realWidth = this.$refs.singleBarSvg.offsetWidth;
+        // this.elHeight = this.$refs.singleBarSvg.offsetHeight;
+        // this.elWidth = this.$refs.singleBarSvg.offsetWidth;
+        this.realHeight = document.getElementById('mainView').offsetHeight;
+        this.realWidth = document.getElementById('mainView').offsetWidth;
+        this.elHeight = document.getElementById('mainView').offsetHeight;
+        this.elWidth = document.getElementById('mainView').offsetWidth;
         if (this.elHeight / 9 * 16 < this.elWidth) {
             this.elWidth = this.elHeight / 9 * 16;
         } else {
             this.elHeight = this.elWidth / 16 * 9;
         }
 
+        // if (this.defaultTag == 1) {
+        this.drawGraphTag = 1;
         this.barData = this.calcBar(this.rawData, this.chartData)
-
+        // }
         // console.log(this.overlayData);
         const dataStore = useDataStore();
-        dataStore.$subscribe((mutations) => {
-            // console.log(mutations.events.key == "overlayTag");
-            // if (mutations.events.key == "overlayTag") {
-            //     console.log(this.overlayTag);
-            this.chart_setting = dataStore.state_map['state0']['chart_setting'];
+        dataStore.$subscribe((mutations, state) => {
+            if (this.defaultTag == 1) {
+                this.chart_setting = dataStore.state_map[this.stateTag]['chart_setting'];
+            }
             // console.log(this.overlayData);
-            this.overlayTag = dataStore.state_map['state0']['overlay_tag'];
+            let selObj = dataStore.selectObject;
             this.overlayData = this.calcOverlay(this.barData, dataStore.graphicalOverlayData, this.chartData.chartScale.x.scaleType);
-            // console.log(dataStore.state_map['state0']['overlay_setting'])
-            this.overlay_setting = dataStore.state_map['state0']['overlay_setting']['object0'];
-            // console.log(this.overlay_setting[this.overlay_map[2]], this.overlay_map[2]);
-
-            // }
-            // if (mutations.events.key == "objectTag") {
+            if (selObj != '') {
+                if (selObj == -1) {
+                    this.overlayTag = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+                } else {
+                    this.overlayTag = dataStore.state_map[this.stateTag]['overlay_setting'][selObj]['overlay_tag'];
+                    this.overlay_setting = dataStore.state_map[this.stateTag]['overlay_setting'][selObj];
+                }
+            }
             this.objectTag = dataStore.objectTag;
-            //     console.log(this.objectTag);
-            // }
         })
         setTimeout(() => this.isShow = !this.isShow, 100);
     },

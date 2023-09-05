@@ -1,0 +1,70 @@
+{
+    "result": "result: [{\"ObjectName\":[\"United Kingdom\"],\"DataName\":\"Billions of dollars\",\"Position\":[{\"Begin\":[0,1],\"End\":[0,1]}],\"Trend\":\"None\",\"Num\":[59.9],\"Text\":\"United Kingdom ($59.9 billion)\"}]\n",
+    "reason": "reason: The largest value in the data is \"59.9\" for the object \"United Kingdom\". Its shortest descriptive phrase is \"United Kingdom ($59.9 billion)\".",
+    "final": [
+        {
+            "OriginText": "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion).",
+            "Position": [
+                {
+                    "Begin": [
+                        "Billions of dollars",
+                        0
+                    ],
+                    "End": [
+                        "Billions of dollars",
+                        0
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": null,
+                    "Text": "None",
+                    "OverTag": 1,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        null
+                    ],
+                    "Text": "United Kingdom",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "United Kingdom ($59.9 billion)",
+                    "Label": [
+                        59.9
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Billions of dollars",
+                                0
+                            ],
+                            "End": [
+                                "Billions of dollars",
+                                0
+                            ]
+                        }
+                    ],
+                    "Line": {
+                        "Begin": [
+                            "Billions of dollars",
+                            0
+                        ],
+                        "End": [
+                            "Billions of dollars",
+                            0
+                        ],
+                        "mean": 59.9,
+                        "max": 59.9,
+                        "min": 59.9
+                    }
+                }
+            ]
+        }
+    ]
+}
