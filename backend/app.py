@@ -45,9 +45,14 @@ data3 = [{'Time':'2017/1/1','Mini- and subcompact size':'0.61','Compact size':'0
 # 判断x轴属于什么类型，{time, category,linear}
 def determine_x_axis_type(input_data):
     x_values = next(iter(input_data[0].values()))
+    first_column_name = list(input_data[0].keys())
     # print(x_values)
     # 检查是否包含数字和日期
-    if re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
+    if 'Time' in first_column_name or 'time' in first_column_name:
+        return 'time'
+    elif re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
+        return 'time'
+    elif re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
         return 'time'
     elif re.match(r'^[-+]?\d*\.?\d+$', x_values): # 正则表达式匹配整数/浮点数
         return 'linear'
