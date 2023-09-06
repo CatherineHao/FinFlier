@@ -212,8 +212,8 @@ def chat_with_gpt(user_info):
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo-16k", # prompt+completion 最大16384 tokens
             messages=[{"role": "system", "content": "You are a helpful assistant."}, # tell AI his role
-                        {"role": "system", "name": "example_user", "content": """data: [{'Position':'United Kingdom','Billions of dollars':59.9},{'Position':'Netherlands','Billions of dollars':43.1},{'Position':'France','Billions of dollars':35.3},{'Position':'Canada','Billions of dollars': 30},{'Position':'Japan','Billions of dollars':29.6}]text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]}question: ["Which contry has the lowest value?"]"""},        # example_1 prompt
-                        {"role": "system", "name": "example_assistant", "content": """result: [{\"ObjectName\":[\"United Kingdom\"],\"DataName\":\"Billions of dollars\",\"Position\":[{\"Begin\":[0,1],\"End\":[0,1]}],\"Trend\":\"None\",\"Num\":[59.9],\"Text\":\"United Kingdom\"}]\n                reason: \"The corresponding value for object 'United Kingdom' is '59.9', which is the highest value among all the countries mentioned in the data.\""}]"""},  # example_1 result
+                        {"role": "system", "name": "example_user", "content": """data: [{'Position':'United Kingdom','Billions of dollars':59.9},{'Position':'Netherlands','Billions of dollars':43.1},{'Position':'France','Billions of dollars':35.3},{'Position':'Canada','Billions of dollars': 30},{'Position':'Japan','Billions of dollars':29.6}]text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."] question: ["Which country has the highest value?"]"""},        # example_1 prompt
+                        {"role": "system", "name": "example_assistant", "content": """result: [{\"ObjectName\":[\"United Kingdom\"],\"DataName\":\"Billions of dollars\",\"Position\":[{\"Begin\":[0,1],\"End\":[0,1]}],\"Trend\":\"None\",\"Num\":[59.9],\"Text\":\"United Kingdom\"}]\n                reason: \"The country with the highest value is the United Kingdom, with a value of 59.9 billion dollars.\""""},  # example_1 result
                         {"role": "user", "content": user_data_text},
                         {"role": "assistant", "content": result_reason},
                         {"role": "user", "content": user_data_text+question}],   # the follow up question
@@ -230,9 +230,9 @@ def chat_with_gpt(user_info):
         reason = reply[start_index:]
 
         data_reason = user_info[:user_info.find("text")] + "text: [" + reason[8:] + "]"
-        print(data_reason)
+        # print(data_reason)
         result_frontend = result_to_frontend(data_reason, result)
-        print(result_frontend)
+        # print(result_frontend)
         final_result = transform_result(result_frontend)
         print(final_result)
         return result, reason, final_result
@@ -511,7 +511,7 @@ if __name__ == '__main__':
                     text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]
                     result: [{"ObjectName":["Netherlands"],"DataName":"Billions of dollars","Position":[{"Begin":[1,1],"End":[1,1]}],"Trend":"None","Num":[43.1],"Text":"The Netherlands ($43.1 billion)"},{"ObjectName":["France"],"DataName":"Billions of dollars","Position":[{"Begin":[2,1],"End":[2,1]}],"Trend":"None","Num":[35.3],"Text":"France ($35.3 billion)"}]
                     reason: "The text 'Netherlands' corresponds to the row 'Netherlands' in data, and its corresponding value is '43.1'. The text 'France' corresponds to the row 'France' in data, and its corresponding value is '35.3' in 'Billions of dollars' column."
-                    question: ["Which contry has the lowest value?"]                
+                    question: ["Which contry has the highest value?"]                
                     label: "following"
                 """
     
