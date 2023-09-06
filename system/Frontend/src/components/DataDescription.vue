@@ -309,7 +309,8 @@ export default {
             // console.log(user_info);
             // if (postTag == 'start')
             dataStore.postQuery({
-                data: user_info
+                data: user_info,
+                label: postTag
             })
             // console.log(dataStore.query_results)
             // console.log(description_data);
@@ -539,8 +540,8 @@ export default {
     mounted () {
         // this.inputText = "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."
         // this.inputText = "There exists a 'head and shoulder' pattern on the Amazon stock moving averages from 1999/09/27 to 2000/02/22.";
-        this.inputText = "The 12-month percentage change in Consumer Price Index for all items increased 4.9 percentage in 2023 April. Consumer Price Index for food rose 7.7 percent in the same month, while consumer prices for energy fell 5.1 percentage.";
-        this.submitText();
+        // this.inputText = "The 12-month percentage change in Consumer Price Index for all items increased 4.9 percentage in 2023 April. Consumer Price Index for food rose 7.7 percent in the same month, while consumer prices for energy fell 5.1 percentage.";
+        // this.submitText();
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations, state) => {
             console.log(mutations.type)
