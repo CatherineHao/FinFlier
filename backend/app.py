@@ -555,7 +555,7 @@ if __name__ == '__main__':
 
 
 
-    user_info = question_1
+    user_info = test_1
     result, reason, final_result = chat_with_gpt(user_info)
     # print(result)
     # print(reason)
