@@ -32,24 +32,26 @@
                     </g>
                 </g>
                 <g>
-                    <g v-for="(o, i) in overlayData" :key="'overlay' + oi">
+                    <g v-for="(o, i) in overlayData" :key="'overlay' + i">
 
                         <Transition>
-                            <g v-if="objectTag[o.objectName] == 1" style="transition: 0.4s;">
+                            <g v-if="objectTag[o.objectName] == 1">
                                 <g v-if="overlayTag[3] == 1">
                                     <circle :r="5" :fill="colorTrans(overlay_setting[overlay_map[3]].currentColor)"
-                                        :cx="o.x" :cy="o.y" style="transition: 0.4s;">
+                                        :cx="o.x" :cy="o.y">
                                     </circle>
                                 </g>
-                                <g v-if="(overlayTag[4] == 1)" style="transition: 0.4s;">
-                                    <path :d="'M' + o.x + ',' + o.y + 'L' + o.x + ',' + (-0.1 * elHeight)" fill="none"
-                                        :stroke="colorTrans(overlay_setting[overlay_map[4]].currentColor)" :stroke-width="2"
-                                        style="transition: 0.4s;">
+                                <g v-if="(overlayTag[4] == 1)">
+                                    <path
+                                        :d="'M' + o.x + ',' + o.y + 'L' + (o.x + position[o.labelPosTag].left) + ',' + (-0.1 * elHeight + 5 + position[o.labelPosTag].top)"
+                                        fill="none" :stroke="colorTrans(overlay_setting[overlay_map[4]].currentColor)"
+                                        :stroke-width="2">
                                     </path>
                                 </g>
-                                <g v-if="(overlayTag[5] == 1)" style="transition: 0.4s;">
-                                    <path :d="'M' + o.x + ',' + o.y + 'L' + o.x + ',' + (-0.1 * elHeight)" fill="none"
-                                        :stroke="colorTrans(overlay_setting[overlay_map[5]].currentColor)"
+                                <g v-if="(overlayTag[5] == 1)">
+                                    <path
+                                        :d="'M' + o.x + ',' + o.y + 'L' + (o.x + position[o.textPosTag].left) + ',' + (-0.1 * elHeight + 5 + position[o.textPosTag].top)"
+                                        fill="none" :stroke="colorTrans(overlay_setting[overlay_map[5]].currentColor)"
                                         :stroke-width="2">
                                     </path>
                                 </g>
@@ -63,33 +65,54 @@
 
         <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
             'position': 'absolute',
-            'top': `${0 * elHeight}px`,
-            'left': `${.05 * elWidth + item.x + (realWidth - elWidth) / 2 - 75}px`,
+            'top': `${0 * elHeight + position[item.labelPosTag].top}px`,
+            'left': `${.05 * elWidth - 75 + item.x + (realWidth - elWidth) / 2 + position[item.labelPosTag].left}px`,
             'width': '150px',
-            'transition': '0.4s',
-            'opacity': (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
-            'padding': '3px',
-            'border': '2px solid',
-            'border-color': (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'white',
-            'border-radius': '10px',
-            'background-color': 'white'
-        }">
-            {{ item.text }}
-        </div>
-        <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
-            'position': 'absolute',
-            'top': `${0 * elHeight}px`,
-            'left': `${.05 * elWidth - 75 + item.x + (realWidth - elWidth) / 2}px`,
-            'width': '150px',
-            'transition': '0.4s',
             'opacity': (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
             'padding': '3px',
             'border': '2px solid',
+            'z-index': (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? 100 : 1,
             'border-color': (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? colorTrans(overlay_setting[overlay_map[4]].currentColor) : 'white',
             'border-radius': '10px',
-            'background-color': 'white'
-        }">
+            'background-color': 'white',
+            'user-select': 'none',
+            'cursor': 'grab'
+        }" @mousedown="startDrag($event, item.labelPosTag)" @mousemove="onDrag($event, item.labelPosTag)"
+            @mouseup="stopDrag()">
             {{ item.label }}
+        </div>
+        <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
+            'position': 'absolute',
+            'top': `${0 * elHeight + position[item.textPosTag].top}px`,
+            'left': `${.05 * elWidth + item.x + (realWidth - elWidth) / 2 - 75 + position[item.textPosTag].left}px`,
+            'width': '150px',
+            'opacity': (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
+            'padding': '3px',
+            'border': '2px solid',
+            'z-index': (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? 100 : 1,
+            'border-color': (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'white',
+            'border-radius': '10px',
+            'background-color': 'white',
+            'user-select': 'none',
+            'cursor': 'grab'
+        }" @mousedown="startDrag($event, item.textPosTag)" @mousemove="onDrag($event, item.textPosTag)"
+            @mouseup="stopDrag()">
+            {{ item.text }}
+        </div>
+        <div :style="{
+            'position': 'absolute',
+            'top': `${80 + position['legend'].top}px`,
+            'left': `${30 + position['legend'].left}px`,
+            'user-select': 'none',
+            'cursor': 'grab',
+            'z-index': 1000
+        }" @mousedown="startDrag($event, 'legend')" @mousemove="onDrag($event, 'legend')" @mouseup="stopDrag()">
+            <div style="display: flex;" v-for="(o, i) in chart_setting.attrName" :key="'legend_' + i">
+                <div
+                    :style="{ 'height': '20px', 'width': '20px', 'background-color': colorTrans(chart_setting.currentColor[o]), 'margin-right': '10px' }">
+                </div>
+                <div>{{ o }}</div>
+            </div>
         </div>
     </div>
 </template>
@@ -117,7 +140,7 @@ export default {
                 yAxis: [0, 0]
             },
             overlay_setting: {},
-            overlay_map: ['color', 'bounding box', 'background', 'marker', 'label', 'text'],
+            overlay_map: ['color', 'bounding box', 'background', 'marker', 'label', 'text', 'trend', 'overall', 'special'],
             chart_setting: {
                 currentColor: {
                     r: 0,
@@ -131,14 +154,40 @@ export default {
                 axis: {
                     x: 'Position',
                     y: "Billions of dollars"
-                }
-            }
+                },
+                attrName: []
+            },
+            isDragging: false,
+            startPosition: { legend: { x: 0, y: 0 } },
+            position: { legend: { left: 0, top: 0 } }
         };
     },
     methods: {
+        startDrag (event, id) {
+            this.isDragging = true;
+            this.startPosition[id].x = event.clientX - this.position[id].left;
+            this.startPosition[id].y = event.clientY - this.position[id].top;
+            // console.log(this.startPosition);
+        },
+        onDrag (event, id) {
+            if (this.isDragging) {
+                // console.log(id)
+                this.position[id].left = event.clientX - this.startPosition[id].x;
+                this.position[id].top = event.clientY - this.startPosition[id].y;
+                // console.log(this.position.left)
+                // console.log(id)
+            }
+        },
+        stopDrag (id) {
+            this.isDragging = false;
+        },
         calcOverlay (nodeData, chartData) {
             // console.log(this.nodeData)
             let over_all = [];
+            let pos_tag = 0;
+            if (Object.keys(this.position).length == 1) {
+                pos_tag = 1;
+            }
             for (let c_i in chartData) {
                 let over_data = chartData[c_i];
                 let position = over_data.Position[0];
@@ -148,11 +197,19 @@ export default {
                         if (nodeData[i].columnIndex == position['Begin'][0] && nodeData[i].rowIndex == position['Begin'][1]) {
                             // console.log(over_data)
                             overlayData = nodeData[i];
+                            overlayData['textPosTag'] = 't' + c_i;
+                            overlayData['labelPosTag'] = 'l' + c_i;
                             overlayData['label'] = over_data.GraphicalOverlay[0].Label[0];
                             overlayData['text'] = over_data.GraphicalOverlay[0].Text;
                             overlayData['objectName'] = over_data['ObjectName'];
                             break;
                         }
+                    }
+                    if (pos_tag) {
+                        this.position[overlayData['textPosTag']] = { left: 0, top: 0 }
+                        this.startPosition[overlayData['textPosTag']] = ({ x: 0, y: 0 });
+                        this.position[overlayData['labelPosTag']] = { left: 0, top: 0 }
+                        this.startPosition[overlayData['labelPosTag']] = ({ x: 0, y: 0 });
                     }
                 }
                 over_all.push(overlayData)
@@ -226,9 +283,12 @@ export default {
                 axis: {
                     x: xName,
                     y: yName
-                }
+                },
+                attrName: chart_info.chartScale.y.attributeName,
+                isLegend: true
             }
-            // console.log(this.chart_setting);
+            // console.log(this.chart_setting.attrName);
+            // console.log(chart_info.chartScale.y.attributeName)
             const dataStore = useDataStore();
             dataStore.default_setting.chart_setting = this.chart_setting;
             dataStore.state_map['state' + dataStore.show_state]['chart_setting'] = this.chart_setting;
@@ -246,7 +306,7 @@ export default {
             // console.log(xScale, yScale);
 
             this.axisPosition = {
-                xAxis: [width, .8* this.elHeight + 30],
+                xAxis: [width, .8 * this.elHeight + 30],
                 yAxis: [-.05 * width, -20]
             }
             // console.log(yScale);
@@ -346,5 +406,4 @@ export default {
 .v-enter-from,
 .v-leave-to {
     opacity: 0;
-}
-</style>
+}</style>

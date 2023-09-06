@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <el-collapse-transition>
-                                <div class="" v-if="isExpand[0] == 1">
+                                <div class="sq_collapse_content" v-if="isExpand[0] == 1">
                                     <div>Theme</div>
                                     <color-picker v-model="currentColor"></color-picker>
                                 </div>
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                             <el-collapse-transition>
-                                <div class="" v-if="isExpand[1] == 1">
+                                <div class="sq_collapse_content" v-if="isExpand[1] == 1">
                                     <component :is="tabs[chartTypeMap[chartType]]" v-model="chartSetting"></component>
                                 </div>
                             </el-collapse-transition>
@@ -582,6 +582,7 @@ h3 span {
     border-bottom: 1px solid rgba(99, 99, 99, 0.3);
     padding: 5px;
     width: 100%;
+    background-color: #F8F8F8;
 }
 
 .sq_collapse_title {
@@ -590,6 +591,7 @@ h3 span {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: #F8F8F8;
     /* display: flex;
     align-items: center; */
 }
@@ -604,5 +606,7 @@ h3 span {
 
 .sq_collapse_content {
     /* padding: 10px 0px 10px 0px; */
+    background-color: white;
+    padding-left: 25px;
 }
 </style>

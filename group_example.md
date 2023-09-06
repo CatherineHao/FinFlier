@@ -98,3 +98,41 @@ result: [{\"ObjectName\":[\"NEVs that were subcompact and below\"],\"DataName\":
 ]
 
 
+# hack需要的对话数据
+# 用户提问：
+text: ["What is the highest sales proportion of compact-size NEVs these years?"]
+label: following
+
+# reason
+"The highest sales proportion of compact-size NEVs since 2017 is 0.54 in 2019."
+# 前端需要的内容
+[{
+    'OriginText': "The highest sales proportion of compact-size NEVs since 2017 is 0.54 in 2019.",
+    'Position': [{'Begin': ['Compact size', 2], 'End': ['Compact size', 2]}],
+    'ConversationInfo:[{
+        'Position': [32,48],
+        'Text': 'compact-size NEVs',
+        'OverTag': 0,
+        'Type': 'ObjectName'
+    },
+    {
+        'Position': [64,67],
+        'Text': '0.54',
+        'OverTag': 1,
+        'Type': 'Num'
+    }],
+    'GraphicalOverlay':[{
+        'Text': 'The highest sales proportion of compact-size NEVs since 2017 is 0.54 in 2019',
+        'Label': [0.54],
+        'Marker': [{'Begin': ['Compact size', 2], 'End': ['Compact size', 2]}],
+        'Line': [{'Begin': ['Compact size', 2], 'End': ['Compact size', 2]}],
+        'mean': 0.54,
+        'max': 0.54,
+        'min': 0.54
+    }]
+}]
+
+
+
+
+

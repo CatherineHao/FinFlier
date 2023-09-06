@@ -52,15 +52,15 @@
                 <div
                     style="height: 95%; width: 33%; border-radius: 5px; border: 1.5px solid rgba(99, 99, 99, .6); align-items: center;display: flex; justify-content: center;">
                     <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
-                        :defaultTag="0" :scaleTag=".35" :stateTag="'state1'"></component>
+                        :defaultTag="0" :scaleTag=".33" :stateTag="'state1'"></component>
                 </div>
                 <div style="height: 95%; width: 33%; border-radius: 5px; border: 1.5px solid rgba(99, 99, 99, .6); align-items: center;display: flex; justify-content: center;">
                     <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
-                        :defaultTag="0" :scaleTag=".35" :stateTag="'state2'"></component>
+                        :defaultTag="0" :scaleTag=".33" :stateTag="'state2'"></component>
                 </div>
                 <div style="height: 95%; width: 33%; border-radius: 5px; border: 1.5px solid rgba(99, 99, 99, .6); align-items: center;display: flex; justify-content: center;">
                     <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
-                        :defaultTag="0" :scaleTag=".35" :stateTag="'state3'"></component>
+                        :defaultTag="0" :scaleTag=".33" :stateTag="'state3'"></component>
                 </div>
 
             </div>
