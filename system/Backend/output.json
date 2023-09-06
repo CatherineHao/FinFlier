@@ -1,231 +1,155 @@
 {
-    "result": "result: [{\"ObjectName\":[\"Consumer Price Index for all items\"],\"DataName\":\"All items\",\"Position\":[{\"Begin\":[51,1],\"End\":[51,1]}],\"Trend\":\"increased\",\"Num\":[4.9],\"Text\":\"The 12-month percentage change in Consumer Price Index for all items increased 4.9 percentage in 2023 April.\"},\n         {\"ObjectName\":[\"Consumer Price Index for food\"],\"DataName\":\"Food\",\"Position\":[{\"Begin\":[51,2],\"End\":[51,2]}],\"Trend\":\"rose\",\"Num\":[7.7],\"Text\":\"Consumer Price Index for food rose 7.7 percent in the same month.\"},\n         {\"ObjectName\":[\"consumer prices for energy\"],\"DataName\":\"Energy\",\"Position\":[{\"Begin\":[51,3],\"End\":[51,3]}],\"Trend\":\"fell\",\"Num\":[-5.1],\"Text\":\"while consumer prices for energy fell 5.1 percentage.\"}]\n",
-    "reason": "reason: The text mentions three objects: \"Consumer Price Index for all items,\" \"Consumer Price Index for food,\" and \"consumer prices for energy.\" These objects correspond to the columns \"All items,\" \"Food,\" and \"Energy\" in the data, respectively. The values for \"All items\" and \"Food\" are 4.9 and 7.7, respectively, indicating an increase. The value for \"Energy\" is -5.1, indicating a decrease.",
+    "result": "result: [{\"ObjectName\":[\"Netherlands\"],\"DataName\":\"Billions of dollars\",\"Position\":[{\"Begin\":[1,1],\"End\":[1,1]}],\"Trend\":\"None\",\"Num\":[43.1],\"Text\":\"The Netherlands ($43.1 billion)\"},\n        {\"ObjectName\":[\"France\"],\"DataName\":\"Billions of dollars\",\"Position\":[{\"Begin\":[2,1],\"End\":[2,1]}],\"Trend\":\"None\",\"Num\":[35.3],\"Text\":\"France ($35.3 billion)\"}]\n",
+    "reason": "reason: The corresponding value for object \"Netherlands\" is \"43.1\", and its shortest descriptive phrase is \"The Netherlands ($43.1 billion)\". The corresponding value for object \"France\" is \"35.3\" and its shortest descriptive phrase is \"France ($35.3 billion)\"",
     "final": [
         {
-            "OriginText": "The 12-month percentage change in Consumer Price Index for all items increased 4.9 percentage in 2023 April. Consumer Price Index for food rose 7.7 percent in the same month, while consumer prices for energy fell 5.1 percentage.",
+            "OriginText": "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion).",
             "Position": [
                 {
                     "Begin": [
-                        "All items",
-                        51
+                        "Billions of dollars",
+                        1
                     ],
                     "End": [
-                        "All items",
-                        51
+                        "Billions of dollars",
+                        1
                     ]
                 }
             ],
             "ConversationInfo": [
                 {
-                    "Position": [
-                        69,
-                        77
-                    ],
-                    "Text": "increased",
+                    "Position": null,
+                    "Text": "None",
                     "OverTag": 1,
                     "Type": "Trend"
                 },
                 {
                     "Position": [
-                        79,
-                        81
+                        122,
+                        125
                     ],
-                    "Text": "4.9",
+                    "Text": "43.1",
                     "OverTag": 1,
                     "Type": "Num"
                 },
                 {
                     "Position": [
                         [
-                            34,
-                            67
+                            108,
+                            118
                         ]
                     ],
-                    "Text": "Consumer Price Index for all items",
+                    "Text": "Netherlands",
                     "OverTag": 0,
                     "Type": "ObjectName"
                 }
             ],
             "GraphicalOverlay": [
                 {
-                    "Text": "The 12-month percentage change in Consumer Price Index for all items increased 4.9 percentage in 2023 April.",
+                    "Text": "The Netherlands ($43.1 billion)",
                     "Label": [
-                        4.9
+                        43.1
                     ],
                     "Marker": [
                         {
                             "Begin": [
-                                "All items",
-                                51
+                                "Billions of dollars",
+                                1
                             ],
                             "End": [
-                                "All items",
-                                51
+                                "Billions of dollars",
+                                1
                             ]
                         }
                     ],
                     "Line": {
                         "Begin": [
-                            "All items",
-                            51
+                            "Billions of dollars",
+                            1
                         ],
                         "End": [
-                            "All items",
-                            51
+                            "Billions of dollars",
+                            1
                         ],
-                        "mean": 4.9,
-                        "max": 4.9,
-                        "min": 4.9
+                        "mean": 43.1,
+                        "max": 43.1,
+                        "min": 43.1
                     }
                 }
             ]
         },
         {
-            "OriginText": "The 12-month percentage change in Consumer Price Index for all items increased 4.9 percentage in 2023 April. Consumer Price Index for food rose 7.7 percent in the same month, while consumer prices for energy fell 5.1 percentage.",
+            "OriginText": "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion).",
             "Position": [
                 {
                     "Begin": [
-                        "Food",
-                        51
+                        "Billions of dollars",
+                        2
                     ],
                     "End": [
-                        "Food",
-                        51
+                        "Billions of dollars",
+                        2
                     ]
                 }
             ],
             "ConversationInfo": [
                 {
-                    "Position": [
-                        139,
-                        142
-                    ],
-                    "Text": "rose",
+                    "Position": null,
+                    "Text": "None",
                     "OverTag": 1,
                     "Type": "Trend"
                 },
                 {
                     "Position": [
-                        144,
-                        146
+                        199,
+                        202
                     ],
-                    "Text": "7.7",
+                    "Text": "35.3",
                     "OverTag": 1,
                     "Type": "Num"
                 },
                 {
                     "Position": [
                         [
-                            109,
-                            137
+                            190,
+                            195
                         ]
                     ],
-                    "Text": "Consumer Price Index for food",
+                    "Text": "France",
                     "OverTag": 0,
                     "Type": "ObjectName"
                 }
             ],
             "GraphicalOverlay": [
                 {
-                    "Text": "Consumer Price Index for food rose 7.7 percent in the same month.",
+                    "Text": "France ($35.3 billion)",
                     "Label": [
-                        7.7
+                        35.3
                     ],
                     "Marker": [
                         {
                             "Begin": [
-                                "Food",
-                                51
+                                "Billions of dollars",
+                                2
                             ],
                             "End": [
-                                "Food",
-                                51
+                                "Billions of dollars",
+                                2
                             ]
                         }
                     ],
                     "Line": {
                         "Begin": [
-                            "Food",
-                            51
+                            "Billions of dollars",
+                            2
                         ],
                         "End": [
-                            "Food",
-                            51
+                            "Billions of dollars",
+                            2
                         ],
-                        "mean": 7.7,
-                        "max": 7.7,
-                        "min": 7.7
-                    }
-                }
-            ]
-        },
-        {
-            "OriginText": "The 12-month percentage change in Consumer Price Index for all items increased 4.9 percentage in 2023 April. Consumer Price Index for food rose 7.7 percent in the same month, while consumer prices for energy fell 5.1 percentage.",
-            "Position": [
-                {
-                    "Begin": [
-                        "Energy",
-                        51
-                    ],
-                    "End": [
-                        "Energy",
-                        51
-                    ]
-                }
-            ],
-            "ConversationInfo": [
-                {
-                    "Position": [
-                        208,
-                        211
-                    ],
-                    "Text": "fell",
-                    "OverTag": 1,
-                    "Type": "Trend"
-                },
-                {
-                    "Position": [
-                        [
-                            181,
-                            206
-                        ]
-                    ],
-                    "Text": "consumer prices for energy",
-                    "OverTag": 0,
-                    "Type": "ObjectName"
-                }
-            ],
-            "GraphicalOverlay": [
-                {
-                    "Text": "while consumer prices for energy fell 5.1 percentage.",
-                    "Label": [
-                        -5.1
-                    ],
-                    "Marker": [
-                        {
-                            "Begin": [
-                                "Energy",
-                                51
-                            ],
-                            "End": [
-                                "Energy",
-                                51
-                            ]
-                        }
-                    ],
-                    "Line": {
-                        "Begin": [
-                            "Energy",
-                            51
-                        ],
-                        "End": [
-                            "Energy",
-                            51
-                        ],
-                        "mean": -5.1,
-                        "max": -5.1,
-                        "min": -5.1
+                        "mean": 35.3,
+                        "max": 35.3,
+                        "min": 35.3
                     }
                 }
             ]
