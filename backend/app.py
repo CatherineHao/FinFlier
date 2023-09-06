@@ -205,14 +205,19 @@ def chat_with_gpt(user_info):
     if "following" in label:
         # user_info 包括 data+text+result+reason+follow_question+label:following
         user_data_text = user_info[:user_info.find("result")]
-        result_reason = user_info[user_info.find("result"):user_info.find("question")]
+        reason_content = user_info[user_info.find("reason")+8:user_info.find("question")].replace("\"", "\'")
+        result_reason = user_info[user_info.find("result"):user_info.find("reason")] + "reason: \"" + reason_content + "\""
+        # print(result_reason)
         question = user_info[user_info.find("question"):user_info.find("label")]
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo-16k", # prompt+completion 最大16384 tokens
-            messages=[{"role": "system", "content": "You are a helpful assistant."}, # 告诉AI他的身份定位是啥 如果不填默认是"You are a helpful assistant."
-                        {"role": "user", "content": user_data_text}, # 用户上传的data+text
-                        {"role": "assistant", "content": result_reason}, # gpt回答的result+reason
-                        {"role": "user", "content": user_data_text+question}], # follow_question
+            messages=[{"role": "system", "content": "You are a helpful assistant."}, # tell AI his role
+                        {"role": "system", "name": "example_user", "content": """data: [{'Position':'United Kingdom','Billions of dollars':59.9},{'Position':'Netherlands','Billions of dollars':43.1},{'Position':'France','Billions of dollars':35.3},{'Position':'Canada','Billions of dollars': 30},{'Position':'Japan','Billions of dollars':29.6}]text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]}question: ["Which contry has the lowest value?"]"""},        # example_1 prompt
+                        {"role": "system", "name": "example_assistant", "content": """result: [{\"ObjectName\":[\"United Kingdom\"],\"DataName\":\"Billions of dollars\",\"Position\":[{\"Begin\":[0,1],\"End\":[0,1]}],\"Trend\":\"None\",\"Num\":[59.9],\"Text\":\"United Kingdom\"}]\n                reason: \"The corresponding value for object 'United Kingdom' is '59.9', which is the highest value among all the countries mentioned in the data.\""}]"""},  # example_1 result
+                        {"role": "user", "content": user_data_text},
+                        {"role": "assistant", "content": result_reason},
+                        {"role": "user", "content": user_data_text+question}],   # the follow up question
+
             max_tokens=2000, # 设置生成的最大token数，可以根据需要调整
             temperature=0.2, # 设置温度,值越小越确认
             #stop = ["\n"],
@@ -225,7 +230,7 @@ def chat_with_gpt(user_info):
         reason = reply[start_index:]
 
         data_reason = user_info[:user_info.find("text")] + "text: [" + reason[8:] + "]"
-        # print(data_reason)
+        print(data_reason)
         result_frontend = result_to_frontend(data_reason, result)
         print(result_frontend)
         final_result = transform_result(result_frontend)
@@ -510,6 +515,19 @@ if __name__ == '__main__':
                     label: "following"
                 """
     
+    question_2 = """data: [{"Position":"United Kingdom","Billions of dollars":59.9},
+                            {"Position":"Netherlands","Billions of dollars":43.1},
+                            {"Position":"France","Billions of dollars":35.3},
+                            {"Position":"Canada","Billions of dollars":30},
+                            {"Position":"Japan","Billions of dollars":29.6}]
+                text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]
+                result: [{"ObjectName":["Netherlands"],"DataName":"Billions of dollars","Position":[{"Begin":[1,1],"End":[1,1]}],"Trend":"None","Num":[43.1],"Text":"The Netherlands ($43.1 billion)"},
+        {"ObjectName":["France"],"DataName":"Billions of dollars","Position":[{"Begin":[2,1],"End":[2,1]}],"Trend":"None","Num":[35.3],"Text":"France ($35.3 billion)"}]
+                reason: The corresponding value for object "Netherlands" is "43.1", and its shortest descriptive phrase is "The Netherlands ($43.1 billion)". The corresponding value for object "France" is "35.3" and its shortest descriptive phrase is "France ($35.3 billion)"
+                question: ["which country has the lowest value?"]
+                label: "following"
+                """
+    
     group_data = """data: [{'Time':'2017/1/1','Mini- and subcompact size':0.61,'Compact size':0.35, 'Midsize to large':0.04},
                             {'Time':'2018/1/1','Mini- and subcompact size':0.49,'Compact size':0.41, 'Midsize to large':0.10},
                             {'Time':'2019/1/1','Mini- and subcompact size':0.33,'Compact size':0.54, 'Midsize to large':0.13},
@@ -555,7 +573,7 @@ if __name__ == '__main__':
 
 
 
-    user_info = test_1
+    user_info = question_2
     result, reason, final_result = chat_with_gpt(user_info)
     # print(result)
     # print(reason)
