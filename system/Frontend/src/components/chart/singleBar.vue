@@ -67,6 +67,7 @@
                             :transform="translate(axisPosition.xAxis[0], axisPosition.xAxis[1])">{{ chart_setting.axis.x }}</text>
                         <text class="title" text-anchor="start"
                             :transform="translate(axisPosition.yAxis[0], axisPosition.yAxis[1])">{{ chart_setting.axis.y }}</text>
+                        <text class="title" style="font-size: 25;" text-anchor="middle" :transform="translate(.8 * elWidth / 2, -40)">{{ chart_setting.title }}</text>
                     </g>
                     <g id="bar">
                         <g v-for="(item, i) in barData" :key="'single_bar_' + i">
@@ -189,7 +190,7 @@
         <div :style="{
             'position': 'absolute',
             'top': `${80 + position['legend'].top}px`,
-            'left': `${30 + position['legend'].left}px`,
+            'right': `${30 - position['legend'].left}px`,
             'user-select': 'none',
             'cursor': 'grab',
             'z-index': 1000
@@ -462,7 +463,8 @@ export default {
                     x: xName,
                     y: yName
                 },
-                isLegend: true
+                isLegend: true,
+                title: 'Title'
             }
             // console.log(this.chart_setting);
             const dataStore = useDataStore();
@@ -559,7 +561,7 @@ export default {
 </script>
 <style>
 .title {
-    font-family: 'operator Mono Lig';
+    font-family: KoHo;
     font-style: oblique;
     font-size: 16px;
 }

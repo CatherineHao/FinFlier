@@ -204,7 +204,7 @@
         <div :style="{
             'position': 'absolute',
             'top': `${80 + position['legend'].top}px`,
-            'left': `${30 + position['legend'].left}px`,
+            'right': `${30 - position['legend'].left}px`,
             'user-select': 'none',
             'cursor': 'grab',
             'z-index': 1000
@@ -506,7 +506,8 @@ export default {
                     x: xName,
                     y: yName
                 },
-                isLegend: true
+                isLegend: true,
+                title: 'Title'
             }
             // console.log(this.chart_setting);
             const dataStore = useDataStore();
@@ -601,7 +602,7 @@ export default {
 
 <style>
 .title {
-    font-family: 'operator Mono Lig';
+    font-family: KoHo;
     font-style: oblique;
     font-size: 16px;
 }

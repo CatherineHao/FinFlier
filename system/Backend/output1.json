@@ -1,9 +1,9 @@
 {
-    "result": "result: [{\"ObjectName\":[\"United Kingdom\"],\"DataName\":\"Billions of dollars\",\"Position\":[{\"Begin\":[0,1],\"End\":[0,1]}],\"Trend\":\"None\",\"Num\":[59.9],\"Text\":\"United Kingdom ($59.9 billion)\"}]\n",
-    "reason": "reason: The largest value in the data is \"59.9\" for the object \"United Kingdom\". Its shortest descriptive phrase is \"United Kingdom ($59.9 billion)\".",
+    "result": "result: [{\"ObjectName\":[\"United Kingdom\"],\"DataName\":\"Billions of dollars\",\"Position\":[{\"Begin\":[0,1],\"End\":[0,1]}],\"Trend\":\"None\",\"Num\":[59.9],\"Text\":\"United Kingdom\"}]\n",
+    "reason": "reason: \"The country with the highest value is the United Kingdom, with a value of 59.9 billion dollars.\"",
     "final": [
         {
-            "OriginText": "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion).",
+            "OriginText": "The country with the highest value is the United Kingdom, with a value of 59.9 billion dollars.",
             "Position": [
                 {
                     "Begin": [
@@ -25,7 +25,19 @@
                 },
                 {
                     "Position": [
-                        null
+                        74,
+                        77
+                    ],
+                    "Text": "59.9",
+                    "OverTag": 1,
+                    "Type": "Num"
+                },
+                {
+                    "Position": [
+                        [
+                            42,
+                            55
+                        ]
                     ],
                     "Text": "United Kingdom",
                     "OverTag": 0,
@@ -34,7 +46,7 @@
             ],
             "GraphicalOverlay": [
                 {
-                    "Text": "United Kingdom ($59.9 billion)",
+                    "Text": "United Kingdom",
                     "Label": [
                         59.9
                     ],

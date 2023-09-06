@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-06-29 10:17:17
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-08-27 19:15:10
+ * @LastEditTime: 2023-09-06 17:18:50
 -->
 <template>
     <div style="height: 100%; width: 100%;">
@@ -48,19 +48,42 @@
             <hr>
             <!-- display: flex; justify-content: space-between; align-items: center; -->
             <div
-                style="height: calc(30% - 0px); width: 100%; background-color: white; display: flex; justify-content: space-between; align-items: center;">
+                style="height: calc(30% - 0px); width: 100%; background-color: white; display: flex; justify-content: space-between; align-items: center; overflow-y: auto;">
+                <div
+                    style="height: 95%; width: 33%; border-radius: 5px; border: 1.5px solid rgba(99, 99, 99, .6); align-items: center;display: flex; justify-content: center; margin: 3px;">
+                    <div class="overlayTag" style="position: absolute; top: 10px; left: 30px;">Marker</div>
+                    <div>
+                        <div style="height:50px;"></div>
+                        <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
+                            :defaultTag="0" :scaleTag=".33" :stateTag="'state1'"></component>
+                    </div>
+                </div>
+                <div
+                    style="height: 95%; width: 33%; border-radius: 5px; border: 1.5px solid rgba(99, 99, 99, .6); align-items: center;display: flex; justify-content: center; margin: 3px;">
+                    <div class="overlayTag" style="position: absolute; top: 10px; left: 30px;">Label</div>
+                    <div>
+                        <div style="height:50px;"></div>
+                        <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
+                            :defaultTag="0" :scaleTag=".33" :stateTag="'state2'"></component>
+                    </div>
+                </div>
+                <div
+                    style="height: 95%; width: 33%; border-radius: 5px; border: 1.5px solid rgba(99, 99, 99, .6); align-items: center;display: flex; justify-content: center; margin: 3px;">
+                    <div class="overlayTag" style="position: absolute; top: 10px; left: 30px;">Highlight</div>
+                    <div>
+                        <div style="height:50px;"></div>
+                        <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
+                            :defaultTag="0" :scaleTag=".33" :stateTag="'state3'"></component>
+                    </div>
+                </div>
                 <div
                     style="height: 95%; width: 33%; border-radius: 5px; border: 1.5px solid rgba(99, 99, 99, .6); align-items: center;display: flex; justify-content: center;">
-                    <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
-                        :defaultTag="0" :scaleTag=".33" :stateTag="'state1'"></component>
-                </div>
-                <div style="height: 95%; width: 33%; border-radius: 5px; border: 1.5px solid rgba(99, 99, 99, .6); align-items: center;display: flex; justify-content: center;">
-                    <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
-                        :defaultTag="0" :scaleTag=".33" :stateTag="'state2'"></component>
-                </div>
-                <div style="height: 95%; width: 33%; border-radius: 5px; border: 1.5px solid rgba(99, 99, 99, .6); align-items: center;display: flex; justify-content: center;">
-                    <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
-                        :defaultTag="0" :scaleTag=".33" :stateTag="'state3'"></component>
+                    <div class="overlayTag" style="position: absolute; top: 10px; left: 30px;">Marker</div>
+                    <div>
+                        <div style="height:50px;"></div>
+                        <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
+                            :defaultTag="0" :scaleTag=".33" :stateTag="'state3'"></component>
+                    </div>
                 </div>
 
             </div>
@@ -149,4 +172,13 @@ export default {
     components: { singleBar, singleLine, multipleBar, multipleLine }
 }
 </script>
-<style scoped></style>
+<style scoped>
+.overlayTag {
+    font-family: KoHo;
+    background-color: rgb(99, 99, 99, .2);
+    border-radius: 20px;
+    padding: 3px 10px 3px 10px;
+    font-weight: 600;
+    font-style: italic;
+}
+</style>

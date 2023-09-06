@@ -420,6 +420,7 @@
 import { useDataStore } from "../stores/counter";
 import ColorPicker from './utils/ColorPicker.vue';
 import singleBarPanel from "./utils/singleBarPanel.vue";
+import multiBarPanel from "./utils/multiBarPanel.vue";
 export default {
     name: "DesignPanel",
     props: [],
@@ -476,7 +477,8 @@ export default {
     },
     components: {
         'color-picker': ColorPicker,
-        'singleBarPanel': singleBarPanel
+        'singleBarPanel': singleBarPanel,
+        'multipleBarPanel': multiBarPanel
     },
     watch: {
         chartSetting: {

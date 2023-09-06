@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-22 14:28:15
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-09-02 01:02:20
+ * @LastEditTime: 2023-09-06 18:19:09
 -->
 <!--
  *                        _oo0oo_
@@ -113,7 +113,7 @@
                                 
                             </div>
                             <div v-else v-loading="item.loading"
-                                style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3); min-height: 160px;">
+                                style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3);">
                                 <div>
 
                                 <svg t="1693451515962" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -158,8 +158,8 @@
                                     @mouseout="o.tag != -1 ? handleOut(o) : ''">{{ o.text }}</span>
                                 <!-- <br>
                                 <br> -->
+                                <div v-if="item.loading != 1 && item_i == 1">
                                 <hr style="margin-top: 10px; margin-bottom: 5px;">
-                                <div v-if="item.loading != 1">
                                     <div style="font-weight: 600;">
                                         Reason:</div>
                                     <div>
@@ -341,7 +341,7 @@ export default {
                 tmp['overlay_tag'] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
                 tmp1['overlay_tag'] = [0, 0, 0, 1, 0, 0, 0, 0, 0];
                 tmp2['overlay_tag'] = [0, 0, 0, 0, 1, 0, 0, 0, 0];
-                tmp3['overlay_tag'] = [0, 0, 0, 0, 0, 1, 0, 0, 0];
+                tmp3['overlay_tag'] = [1, 0, 0, 0, 0, , 0, 0, 0];
                 for (let j in dataStore.type_chart_setting.overlayFormat) {
                     tmp[j] = {};
                     tmp1[j] = {};
@@ -541,6 +541,7 @@ export default {
         // this.inputText = "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."
         // this.inputText = "There exists a 'head and shoulder' pattern on the Amazon stock moving averages from 1999/09/27 to 2000/02/22.";
         // this.inputText = "The 12-month percentage change in Consumer Price Index for all items increased 4.9 percentage in 2023 April. Consumer Price Index for food rose 7.7 percent in the same month, while consumer prices for energy fell 5.1 percentage.";
+        // this.inputText = "In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size.";
         // this.submitText();
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations, state) => {
