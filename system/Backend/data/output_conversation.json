@@ -19,8 +19,10 @@
         "GraphicalOverlay":[{
             "Text": "The highest sales proportion of compact-size NEVs since 2017 is 0.54 in 2019",
             "Label": [0.54],
+            "LabelPos": [{"x": "2019", "y": 0.54, "text": "0.54"}],
+            "transTag": 0,
             "Marker": [{"Begin": ["Compact size", 2], "End": ["Compact size", 2]}],
-            "Line": [{"Begin": ["Compact size", 2], "End": ["Compact size", 2]}],
+            "Line": {"Begin": ["Compact size", 0], "End": ["Compact size", 6], "max": 0.54, "pos": [{"x": "2017", "y": 0.54, "text": "54%"}, {"x": "2023", "y": 0.54, "text": "54%"}]},
             "mean": 0.54,
             "max": 0.54,
             "min": 0.54

@@ -35,12 +35,13 @@
                             :transform="translate(axisPosition.xAxis[0], axisPosition.xAxis[1])">{{ chart_setting.axis.x }}</text>
                         <text class="title" text-anchor="start"
                             :transform="translate(axisPosition.yAxis[0], axisPosition.yAxis[1])">{{ chart_setting.axis.y }}</text>
+                        <text class="title" style="font-size: 25;" text-anchor="middle" :transform="translate(.8 * elWidth / 2, -40)">{{ chart_setting.title }}</text>
                     </g>
                     <g id="bar">
                         <g v-for="(item, i) in barData" :key="'single_bar_' + i">
                             <rect
                                 :x="item.x - (item.length - item.cnt - 1) * chart_setting.size.width / item.length + (item.length - 2) / 2 * chart_setting.size.width / (item.length)"
-                                :y="item.y" :fill="colorTrans(chart_setting.currentColor[item.yName])"
+                                :y="item.y" :fill="overlayTag[0] == 1 ? colorTrans(overlay_setting[overlay_map[0]].currentColor) : colorTrans(chart_setting.currentColor[item.yName])"
                                 :width="chart_setting.size.width / item.length" :height="item.height"></rect>
                         </g>
                     </g>
@@ -51,7 +52,7 @@
                             <g v-if="overlayTag[0] == 1" class="animation-fade">
                                 <rect v-for="(o, oi) in item.selectBar" :key="'oi_' + oi"
                                     :x="o.x - (o.length - o.cnt - 1) * chart_setting.size.width / o.length + (o.length - 2) / 2 * chart_setting.size.width / o.length"
-                                    :y="o.y" :fill="colorTrans(overlay_setting[overlay_map[0]].currentColor)"
+                                    :y="o.y" :fill="colorTrans(chart_setting.currentColor[o.yName])"
                                     :width="chart_setting.size.width / o.length" :height="o.height" opacity="1">
                                 </rect>
                             </g>
@@ -92,6 +93,19 @@
                                             :fill="colorTrans(overlay_setting[overlay_map[6]].currentColor)" />
                                     </marker>
                                 </defs>
+                                <path
+                                    :d="'M' + (item.trend[0].x + item.transTag * chart_setting.size.width / item.trend[0].length) + ',' + (item.trend[0].y) + 'L' + (item.trend[1].x + item.transTag * chart_setting.size.width / item.trend[1].length) + ',' + item.trend[1].y"
+                                    fill="none" :stroke="colorTrans(overlay_setting[overlay_map[6]].currentColor)"
+                                    stroke-width="3" marker-end="url(#triangle)"></path>
+                            </g>
+                            <g v-if="overlayTag[7] == 1" class="animation-fade">
+                                <!-- <defs>
+                                    <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth"
+                                        markerWidth="10" markerHeight="10" orient="auto">
+                                        <path d="M 0 0 L 10 5 L 0 10 z"
+                                            :fill="colorTrans(overlay_setting[overlay_map[7]].currentColor)" />
+                                    </marker>
+                                </defs> -->
                                 <path
                                     :d="'M' + (item.trend[0].x + item.transTag * chart_setting.size.width / item.trend[0].length) + ',' + (item.trend[0].y) + 'L' + (item.trend[1].x + item.transTag * chart_setting.size.width / item.trend[1].length) + ',' + item.trend[1].y"
                                     fill="none" :stroke="colorTrans(overlay_setting[overlay_map[6]].currentColor)"
@@ -143,8 +157,8 @@
         </div>
         <div :style="{
             'position': 'absolute',
-            'top': `${80 + position['legend'].top}px`,
-            'left': `${30 + position['legend'].left}px`,
+            'top': `${50 + position['legend'].top}px`,
+            'right': `${30 - position['legend'].left}px`,
             'user-select': 'none',
             'cursor': 'grab',
             'z-index': 1000
@@ -243,6 +257,7 @@ export default {
                     label: [],
                     text: [],
                     trend: [],
+                    over: [],
                     labelPosTag: 'l' + c_i,
                     textPosTag: 't' + c_i
                 }
@@ -270,6 +285,7 @@ export default {
                 let labelData = [];
                 let textData = [];
                 let trendData = [];
+                let overLineData = [];
                 for (let i in over_data['GraphicalOverlay'][0]['LabelPos']) {
                     let t_d = over_data['GraphicalOverlay'][0]['LabelPos'][i];
                     labelData.push({
@@ -291,19 +307,28 @@ export default {
                 }
                 for (let i in over_data['GraphicalOverlay'][0]['Line']['pos']) {
                     let t_d = over_data['GraphicalOverlay'][0]['Line']['pos'][i];
-                    console.log(this.dataType(t_d.x, scaleType), this.xScale(parseInt(this.dataType(t_d.x, scaleType))));
+                    // console.log(this.dataType(t_d.x, scaleType), this.xScale(parseInt(this.dataType(t_d.x, scaleType))));
                     trendData.push({
                         x: this.xScale(this.dataType(t_d.x, scaleType)),
                         y: this.yScale(t_d.y),
                         text: t_d.text,
                         transTag: parseFloat(over_data['GraphicalOverlay'][0]['transTag']),
                         length: barData[0].length
-                    })
+                    });
+                    overLineData.push({
+                        x: this.xScale(this.dataType(t_d.x, scaleType)),
+                        y: this.yScale(t_d.y),
+                        text: t_d.text,
+                        transTag: parseFloat(over_data['GraphicalOverlay'][0]['transTag']),
+                        length: barData[0].length
+                    });
                 }
                 overlayData.selectBar = selectBar;
+                overlayData.over = overLineData;
                 overlayData.label = labelData;
                 overlayData.text = textData;
                 overlayData.trend = trendData;
+                console.log(over_data['GraphicalOverlay'][0]['Line']['pos'])
                 overall_data.push(overlayData);
             }
             return overall_data;
@@ -365,7 +390,8 @@ export default {
                     y: yName
                 },
                 isLegend: true,
-                attrName: chart_info.chartScale.y.attributeName
+                attrName: chart_info.chartScale.y.attributeName,
+                title: 'Title'
             }
             // console.log(this.chart_setting);
             const dataStore = useDataStore();
@@ -403,7 +429,7 @@ export default {
                 let yLen = chart_info.chartScale.y.attributeName.length;
                 for (let j in chart_info.chartScale.y.attributeName) {
                     let yName = chart_info.chartScale.y.attributeName[j];
-                    console.log(this.dataType(data[i][chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType))
+                    // console.log(this.dataType(data[i][chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType))
                     barData.push({
                         x: xScale(this.dataType(data[i][chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType)),
                         y: yScale(data[i][yName]),
@@ -469,7 +495,7 @@ export default {
 
 <style>
 .title {
-    font-family: 'operator Mono Lig';
+    font-family: KoHo;
     font-style: oblique;
     font-size: 16px;
 }
