@@ -509,6 +509,14 @@ if __name__ == '__main__':
                     question: ["Which contry has the lowest value?"]                
                     label: "following"
                 """
+    question_2 = """data: [{"Position":"United Kingdom","Billions of dollars":59.9},{"Position":"Netherlands","Billions of dollars":43.1},{"Position":"France","Billions of dollars":35.3},{"Position":"Canada","Billions of dollars":30},{"Position":"Japan","Billions of dollars":29.6}]
+                text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."]
+                result: [{"ObjectName":["Netherlands"],"DataName":"Billions of dollars","Position":[{"Begin":[1,1],"End":[1,1]}],"Trend":"None","Num":[43.1],"Text":"The Netherlands ($43.1 billion)"},
+        {"ObjectName":["France"],"DataName":"Billions of dollars","Position":[{"Begin":[2,1],"End":[2,1]}],"Trend":"None","Num":[35.3],"Text":"France ($35.3 billion)"}]
+                reason: The corresponding value for object "Netherlands" is "43.1", and its shortest descriptive phrase is "The Netherlands ($43.1 billion)". The corresponding value for object "France" is "35.3" and its shortest descriptive phrase is "France ($35.3 billion)"
+                question: ["which country has the highest  value"]
+                label: "following"
+"""
     
     group_data = """data: [{'Time':'2017/1/1','Mini- and subcompact size':0.61,'Compact size':0.35, 'Midsize to large':0.04},
                             {'Time':'2018/1/1','Mini- and subcompact size':0.49,'Compact size':0.41, 'Midsize to large':0.10},
@@ -552,10 +560,10 @@ if __name__ == '__main__':
                     text: ["The stock of Goodyear Tire & Rubber company (GT) suffers a year-long 'rounding bottom' pattern from 1990.6.11 to 1991.6.3."]
                     label: "start"
                     """
+ 
 
 
-
-    user_info = question_1
+    user_info = question_2
     result, reason, final_result = chat_with_gpt(user_info)
     # print(result)
     # print(reason)
