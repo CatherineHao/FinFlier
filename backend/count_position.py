@@ -6,7 +6,7 @@ def find_position(text, word):
     else:
         return [index, end_index]
 
-input_text = "In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size."
-input_word = "39%"
+input_text = "The highest sales proportion of compact-size NEVs since 2017 is 0.54 in 2019."
+input_word = "0.54"
 start, end = find_position(input_text, input_word)
-print("First occurrence of '{}' is at index: {} and end at {}".format(input_word, start, end))
+# print("First occurrence of '{}' is at index: {} and end at {}".format(input_word, start, end))

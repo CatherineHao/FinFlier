@@ -42,7 +42,7 @@
     <div style="height: 100%; width: 100%;">
         <div style="font-family: KoHo; text-align: start; font-size: 22px;height: 40px; font-weight: bold;">
 
-            <img src="../assets/img/2.png" width="25" alt=""> &nbsp;Data Description
+            <img src="../assets/img/2.png" width="25" alt=""> &nbsp;Conversation Panel
             <hr>
         </div>
         <div style="height: calc(100% - 40px); widows: 100%;">
@@ -81,44 +81,73 @@
                                     <path
                                         d="M19 4h-4L7.11 16.63 4.5 12 9 4H5L.5 12 5 20h4l7.89-12.63L19.5 12 15 20h4l4.5-8z" />
                                 </svg>
-                                <svg t="1693451515962" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                    xmlns="http://www.w3.org/2000/svg" p-id="6791" width="20" height="20">
-                                    <path
-                                        d="M796.444672 56.889344c37.925888 0 56.88832 18.962432 56.88832 56.88832V512c0 56.889344-199.110656 28.444672-227.555328 85.332992-28.444672 56.889344 0 199.11168 0 227.556352 0 28.443648 0 142.221312-113.777664 142.221312s-113.777664-113.77664-113.777664-142.221312c0-28.444672 28.444672-170.667008 0-227.556352C369.77664 540.444672 170.667008 568.889344 170.667008 512V113.777664c0-37.925888 18.962432-56.88832 56.88832-56.88832h568.889344z m0 227.555328H227.555328v204.99456c10.979328 2.740224 26.42944 5.195776 53.741568 8.83712 6.15424 0.8192 6.15424 0.8192 12.4416 1.664 93.700096 12.649472 131.45088 24.12032 155.3664 71.95136 16.590848 33.181696 20.67968 76.36992 17.878016 132.754432-1.041408 20.963328-2.996224 42.380288-5.925888 67.76832-0.986112 8.546304-4.00896 33.332224-4.355072 36.296704-1.08544 9.288704-1.591296 14.892032-1.591296 16.178176 0 57.38496 12.422144 85.332992 56.889344 85.332992 30.396416 0 42.82368-10.43968 50.661376-34.823168 4.840448-15.059968 6.227968-29.889536 6.227968-50.509824 0-1.286144-0.505856-6.889472-1.591296-16.178176-0.346112-2.96448-3.36896-27.7504-4.355072-36.297728-2.92864-25.387008-4.88448-46.803968-5.925888-67.767296-2.801664-56.384512 1.287168-99.572736 17.878016-132.754432 23.91552-47.83104 61.666304-59.301888 155.3664-71.95136 6.28736-0.8448 6.28736-0.8448 12.4416-1.664 27.311104-3.641344 42.76224-6.096896 53.741568-8.83712v-204.99456z m0-170.667008H227.555328v113.777664h568.889344v-113.77664z"
-                                        fill="#323233" p-id="6792"></path>
-                                </svg>
-                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
-                                    stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2">
-                                    </path>
-                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-                                </svg>
-                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
-                                    stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
-                                    </path>
-                                </svg>
-                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
-                                    stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17">
-                                    </path>
-                                </svg>
 
                             </div>
                         </div>
                         <div style="width: calc(100% - 40px);">
                             <div v-if="item.tag == -1"
-                                style="width: 100%; line-height:1lh; text-align: start; padding-right: 5px; background-color: rgb(173, 216, 230, 0); padding: 8px; border-radius: 5px; border: 1px solid rgba(0, 0, 0, .3); display: flex;">
+                                style="width: 100%; line-height:1lh; text-align: start; padding-right: 5px; background-color: rgb(173, 216, 230, 0); padding: 8px; border-radius: 5px; border: 1px solid rgba(0, 0, 0, .3);">
                                 <!-- <div style="width: 95%;">{{ item.text }}</div> -->
-                                {{ item.text }}
+                                <div style="width: 100%;display: flex;justify-content: flex-end;">
+                                    <svg t="1693450336410" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" p-id="4007" width="20" height="20">
+                                    <path
+                                        d="M853.333333 501.333333c-17.066667 0-32 14.933333-32 32v320c0 6.4-4.266667 10.666667-10.666666 10.666667H170.666667c-6.4 0-10.666667-4.266667-10.666667-10.666667V213.333333c0-6.4 4.266667-10.666667 10.666667-10.666666h320c17.066667 0 32-14.933333 32-32s-14.933333-32-32-32H170.666667c-40.533333 0-74.666667 34.133333-74.666667 74.666666v640c0 40.533333 34.133333 74.666667 74.666667 74.666667h640c40.533333 0 74.666667-34.133333 74.666666-74.666667V533.333333c0-17.066667-14.933333-32-32-32z"
+                                        fill="#666666" p-id="4008"></path>
+                                    <path
+                                        d="M405.333333 484.266667l-32 125.866666c-2.133333 10.666667 0 23.466667 8.533334 29.866667 6.4 6.4 14.933333 8.533333 23.466666 8.533333h8.533334l125.866666-32c6.4-2.133333 10.666667-4.266667 14.933334-8.533333l300.8-300.8c38.4-38.4 38.4-102.4 0-140.8-38.4-38.4-102.4-38.4-140.8 0L413.866667 469.333333c-4.266667 4.266667-6.4 8.533333-8.533334 14.933334z m59.733334 23.466666L761.6 213.333333c12.8-12.8 36.266667-12.8 49.066667 0 12.8 12.8 12.8 36.266667 0 49.066667L516.266667 558.933333l-66.133334 17.066667 14.933334-68.266667z"
+                                        fill="#666666" p-id="4009"></path>
+                                </svg>
+                                &nbsp;
+                                <svg t="1693453733613" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" p-id="8200" width="20" height="20">
+                                    <path
+                                        d="M512 832c-176.448 0-320-143.552-320-320S335.552 192 512 192s320 143.552 320 320-143.552 320-320 320m0-704C300.256 128 128 300.256 128 512s172.256 384 384 384 384-172.256 384-384S723.744 128 512 128"
+                                        fill="#3E3A39" p-id="8201"></path>
+                                    <path
+                                        d="M649.824 361.376a31.968 31.968 0 0 0-45.248 0L505.6 460.352l-98.976-98.976a31.968 31.968 0 1 0-45.248 45.248l98.976 98.976-98.976 98.976a32 32 0 0 0 45.248 45.248l98.976-98.976 98.976 98.976a31.904 31.904 0 0 0 45.248 0 31.968 31.968 0 0 0 0-45.248L550.848 505.6l98.976-98.976a31.968 31.968 0 0 0 0-45.248"
+                                        fill="#3E3A39" p-id="8202"></path>
+                                </svg>
+                                </div>
+                                <div>{{ item.text }}</div>
+                                
                             </div>
-                            <div v-else
-                                style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3);">
+                            <div v-else v-loading="item.loading"
+                                style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3); min-height: 160px;">
+                                <div>
+
+                                <svg t="1693451515962" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" p-id="6791" width="15" height="15">
+                                    <path
+                                        d="M796.444672 56.889344c37.925888 0 56.88832 18.962432 56.88832 56.88832V512c0 56.889344-199.110656 28.444672-227.555328 85.332992-28.444672 56.889344 0 199.11168 0 227.556352 0 28.443648 0 142.221312-113.777664 142.221312s-113.777664-113.77664-113.777664-142.221312c0-28.444672 28.444672-170.667008 0-227.556352C369.77664 540.444672 170.667008 568.889344 170.667008 512V113.777664c0-37.925888 18.962432-56.88832 56.88832-56.88832h568.889344z m0 227.555328H227.555328v204.99456c10.979328 2.740224 26.42944 5.195776 53.741568 8.83712 6.15424 0.8192 6.15424 0.8192 12.4416 1.664 93.700096 12.649472 131.45088 24.12032 155.3664 71.95136 16.590848 33.181696 20.67968 76.36992 17.878016 132.754432-1.041408 20.963328-2.996224 42.380288-5.925888 67.76832-0.986112 8.546304-4.00896 33.332224-4.355072 36.296704-1.08544 9.288704-1.591296 14.892032-1.591296 16.178176 0 57.38496 12.422144 85.332992 56.889344 85.332992 30.396416 0 42.82368-10.43968 50.661376-34.823168 4.840448-15.059968 6.227968-29.889536 6.227968-50.509824 0-1.286144-0.505856-6.889472-1.591296-16.178176-0.346112-2.96448-3.36896-27.7504-4.355072-36.297728-2.92864-25.387008-4.88448-46.803968-5.925888-67.767296-2.801664-56.384512 1.287168-99.572736 17.878016-132.754432 23.91552-47.83104 61.666304-59.301888 155.3664-71.95136 6.28736-0.8448 6.28736-0.8448 12.4416-1.664 27.311104-3.641344 42.76224-6.096896 53.741568-8.83712v-204.99456z m0-170.667008H227.555328v113.777664h568.889344v-113.77664z"
+                                        fill="#323233" p-id="6792"></path>
+                                </svg>
+                                &nbsp;
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                    stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="15" width="15"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2">
+                                    </path>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                                </svg>
+                                &nbsp;
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                    stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="15" width="15"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
+                                    </path>
+                                </svg>
+                                &nbsp;
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                    stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="15" width="15"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17">
+                                    </path>
+                                </svg>
+                                </div>
+                                <div>
                                 <span v-for="(o, i) in item.outputTextGroup" :key="'res_' + i"
                                     :class="{ 'dataObject': o.tag != -1 }" :id="o.id" :style="{
                                         backgroundColor: o.tag == 0 || o.tag == 2 ? o.back_color : 'white',
@@ -127,14 +156,16 @@
                                     }" @click="o.tag != -1 ? hoverObject(o) : ''"
                                     @mouseenter="o.tag != -1 ? handleHover(o) : ''"
                                     @mouseout="o.tag != -1 ? handleOut(o) : ''">{{ o.text }}</span>
-                                <hr>
-                                <div>
+                                <!-- <br>
+                                <br> -->
+                                <hr style="margin-top: 10px; margin-bottom: 5px;">
+                                <div v-if="item.loading != 1">
                                     <div style="font-weight: 600;">
-                                    Reason:</div>
+                                        Reason:</div>
                                     <div>
                                         {{ item.reason }}
                                     </div>
-                                </div>
+                                </div></div>
                             </div>
                         </div>
 
@@ -147,24 +178,7 @@
                                     <path
                                         d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                                 </svg>
-                                <svg t="1693450336410" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                    xmlns="http://www.w3.org/2000/svg" p-id="4007" width="20" height="20">
-                                    <path
-                                        d="M853.333333 501.333333c-17.066667 0-32 14.933333-32 32v320c0 6.4-4.266667 10.666667-10.666666 10.666667H170.666667c-6.4 0-10.666667-4.266667-10.666667-10.666667V213.333333c0-6.4 4.266667-10.666667 10.666667-10.666666h320c17.066667 0 32-14.933333 32-32s-14.933333-32-32-32H170.666667c-40.533333 0-74.666667 34.133333-74.666667 74.666666v640c0 40.533333 34.133333 74.666667 74.666667 74.666667h640c40.533333 0 74.666667-34.133333 74.666666-74.666667V533.333333c0-17.066667-14.933333-32-32-32z"
-                                        fill="#666666" p-id="4008"></path>
-                                    <path
-                                        d="M405.333333 484.266667l-32 125.866666c-2.133333 10.666667 0 23.466667 8.533334 29.866667 6.4 6.4 14.933333 8.533333 23.466666 8.533333h8.533334l125.866666-32c6.4-2.133333 10.666667-4.266667 14.933334-8.533333l300.8-300.8c38.4-38.4 38.4-102.4 0-140.8-38.4-38.4-102.4-38.4-140.8 0L413.866667 469.333333c-4.266667 4.266667-6.4 8.533333-8.533334 14.933334z m59.733334 23.466666L761.6 213.333333c12.8-12.8 36.266667-12.8 49.066667 0 12.8 12.8 12.8 36.266667 0 49.066667L516.266667 558.933333l-66.133334 17.066667 14.933334-68.266667z"
-                                        fill="#666666" p-id="4009"></path>
-                                </svg>
-                                <svg t="1693453733613" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                    xmlns="http://www.w3.org/2000/svg" p-id="8200" width="20" height="20">
-                                    <path
-                                        d="M512 832c-176.448 0-320-143.552-320-320S335.552 192 512 192s320 143.552 320 320-143.552 320-320 320m0-704C300.256 128 128 300.256 128 512s172.256 384 384 384 384-172.256 384-384S723.744 128 512 128"
-                                        fill="#3E3A39" p-id="8201"></path>
-                                    <path
-                                        d="M649.824 361.376a31.968 31.968 0 0 0-45.248 0L505.6 460.352l-98.976-98.976a31.968 31.968 0 1 0-45.248 45.248l98.976 98.976-98.976 98.976a32 32 0 0 0 45.248 45.248l98.976-98.976 98.976 98.976a31.904 31.904 0 0 0 45.248 0 31.968 31.968 0 0 0 0-45.248L550.848 505.6l98.976-98.976a31.968 31.968 0 0 0 0-45.248"
-                                        fill="#3E3A39" p-id="8202"></path>
-                                </svg>
+                                
                             </div>
 
                         </div>
@@ -186,6 +200,7 @@ export default {
         return {
             inputText: '',
             outputText: '',
+            firstInput: '',
             outputTextArray: [],
             textGroup: [],
             objectTag: {},
@@ -202,7 +217,7 @@ export default {
             },
             {
                 "r": 249, "g": 203, "b": 220, "a": 1
-            }]
+            }],
         };
     },
     methods: {
@@ -223,7 +238,7 @@ export default {
             selectAll("#" + o.id).style('border-left-color', 'white');
             selectAll("#" + o.id).style('border-right-color', 'white');
         },
-        async submitText () {
+        submitText () {
             const dataStore = useDataStore();
             let rawData = dataStore.data;
             this.inputText = this.inputText.trim();
@@ -240,6 +255,7 @@ export default {
             let postTag = 'following';
             if (this.postTag == 0) {
                 postTag = 'start'
+                this.firstInput = inputText;
                 this.postTag = 1;
             }
             for (let i = 0; i < rawData.length; ++i) {
@@ -277,17 +293,31 @@ export default {
 
                 return stringify(arr);
             }
+            this.textGroup.push({
+                tag: 1,
+                outputTextGroup: {},
+                reason: '',
+                loading: 1
+            })
             // console.log(rawData[0], stringifyArray([rawData[0]]))
-            user_info = 'data: ' + stringifyArray(rawData) + 'text: ["' + inputText + '"]label: "' + postTag + '"';
+            if (postTag == 'start') {
+                user_info = 'data: ' + stringifyArray(rawData) + 'text: ["' + inputText + '"]label: "' + postTag + '"';
+            } else {
+                user_info = 'data: ' + stringifyArray(rawData) + 'text: ["' + this.firstInput + '"]' + dataStore.query_results[0].result + dataStore.query_results[0].reason + 'question: ["' + inputText + '"]label: "' + postTag + '"';
+                // console.log(user_info);
+            }
             // console.log(user_info);
+            // if (postTag == 'start')
             dataStore.postQuery({
-                data: user_info
+                data: user_info,
+                label: postTag
             })
             // console.log(dataStore.query_results)
             // console.log(description_data);
         },
         gptFeedback (description_data, reason_data) {
             // console.log(reason_data)
+            // console.log(description_data)
             for (let i in description_data) {
                 description_data[i]['ObjectName'] = 'object' + this.objectCnt.toString();
                 description_data[i]['ObjectIndex'] = this.objectCnt;
@@ -307,7 +337,32 @@ export default {
             dataStore.graphicalOverlayData = description_data;
             for (let i in description_data) {
                 // console.log(description_data[i]['ObjectName'])
-                dataStore.state_map.state0.overlay_setting[description_data[i]['ObjectName']] = dataStore.type_chart_setting.overlayFormat;
+                let tmp = {}, tmp1 = {}, tmp2 = {}, tmp3 = {};
+                tmp['overlay_tag'] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+                tmp1['overlay_tag'] = [0, 0, 0, 1, 0, 0, 0, 0, 0];
+                tmp2['overlay_tag'] = [0, 0, 0, 0, 1, 0, 0, 0, 0];
+                tmp3['overlay_tag'] = [0, 0, 0, 0, 0, 1, 0, 0, 0];
+                for (let j in dataStore.type_chart_setting.overlayFormat) {
+                    tmp[j] = {};
+                    tmp1[j] = {};
+                    tmp2[j] = {};
+                    tmp3[j] = {};
+                    
+                    for (let k in dataStore.type_chart_setting.overlayFormat[j]) {
+                        tmp[j][k] = dataStore.type_chart_setting.overlayFormat[j][k];
+                        tmp1[j][k] = dataStore.type_chart_setting.overlayFormat[j][k];
+                        tmp2[j][k] = dataStore.type_chart_setting.overlayFormat[j][k];
+                        tmp3[j][k] = dataStore.type_chart_setting.overlayFormat[j][k];
+                    }
+                }
+                // for (let j in tmp) {
+                //     tmp[j].currentColor = description_data[i]['color'];
+                // }
+                dataStore.state_map.state0.overlay_setting[description_data[i]['ObjectName']] = tmp;
+                dataStore.state_map.state1.overlay_setting[description_data[i]['ObjectName']] = tmp1;
+                dataStore.state_map.state2.overlay_setting[description_data[i]['ObjectName']] = tmp2;
+                dataStore.state_map.state3.overlay_setting[description_data[i]['ObjectName']] = tmp3;
+                // console.log(description_data[i]['ObjectName'], description_data[i]['color'], tmp)
             }
             // console.log(dataStore.state_map.state0.overlay_setting)
             // for (let i in )
@@ -376,12 +431,12 @@ export default {
                 ),
                 tag: -1
             });
-
-            this.textGroup.push({
+            this.textGroup[this.textGroup.length - 1] = {
                 tag: 1,
+                loading: 0,
                 outputTextGroup: outputTextGroup,
                 reason: reason_data.slice(7, reason_data.length)
-            })
+            }
             // console.log(this.textGroup)
             this.$nextTick(() => {
                 this.scrollToBottom();
@@ -423,22 +478,23 @@ export default {
             }
             // console.log(tableTag);
             dataStore.selectTable = tableTag;
-            // console.log(tableTag)
+            console.log(tableTag)
             this.tableTag = tableTag;
             objectTag[o.objectName] = 1;
+            dataStore.selectObject = o.objectName;
             dataStore.objectTag = objectTag;
             this.objectTag = objectTag;
 
-            let tmp = dataStore.type_chart_setting.overlayFormat;
+            // let tmp = dataStore.type_chart_setting.overlayFormat;
 
-            for (let i in tmp) {
-                tmp[i].currentColor = o.rawColor;
-            }
-            // console.log(dataStore.state_map['stage0']['overlay_setting'], o.objectName);
+            // for (let i in tmp) {
+            //     tmp[i].currentColor = o.rawColor;
+            // }
+            // // console.log(dataStore.state_map['stage0']['overlay_setting'], o.objectName);
 
 
-            dataStore.state_map['state0']['overlay_setting'][o.objectName] = tmp;
-            console.log(dataStore.state_map['state0']['overlay_setting']);
+            // dataStore.state_map['state0']['overlay_setting'][o.objectName] = tmp;
+            // console.log(dataStore.state_map['state0']['overlay_setting']);
             // console.log(objectTag, dataStore.objectTag)
         },
         outObject (objectName) {
@@ -450,6 +506,7 @@ export default {
             }
             dataStore.selectTable = this.tableTag;
             dataStore.objectTag = objectTag;
+            dataStore.selectObject = -1
         }
     },
     watch: {
@@ -481,8 +538,10 @@ export default {
     created () {
     },
     mounted () {
-        this.inputText = "In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size."
-        this.submitText();
+        // this.inputText = "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."
+        // this.inputText = "There exists a 'head and shoulder' pattern on the Amazon stock moving averages from 1999/09/27 to 2000/02/22.";
+        // this.inputText = "The 12-month percentage change in Consumer Price Index for all items increased 4.9 percentage in 2023 April. Consumer Price Index for food rose 7.7 percent in the same month, while consumer prices for energy fell 5.1 percentage.";
+        // this.submitText();
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations, state) => {
             console.log(mutations.type)

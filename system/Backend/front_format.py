@@ -1,13 +1,6 @@
 '''
 Description: 
 Author: Qing Shi
-Date: 2023-09-01 22:44:12
-LastEditors: Qing Shi
-LastEditTime: 2023-09-01 22:44:13
-'''
-'''
-Description: 
-Author: Qing Shi
 Date: 2023-09-01 22:43:55
 LastEditors: Qing Shi
 LastEditTime: 2023-09-01 22:43:56
@@ -60,25 +53,26 @@ def transform_conversation_info(conversation_info):
                 "Type": "Trend"
             })
 
-        if num and num_position[0] is not None:
-            for i, n in enumerate(num):
-                if object_pos and num_position and num_position[i]:
-                    if object_pos != [None] and num_position[i][0] > object_pos[0][0] and num_position[i][1] < object_pos[0][1]:
-                        overtag = 2
-                    else: 
+        if num != "None":
+            if num_position[0] is not None:
+                for i, n in enumerate(num):
+                    if object_pos and num_position and num_position[i]:
+                        if object_pos != [None] and num_position[i][0] > object_pos[0][0] and num_position[i][1] < object_pos[0][1]:
+                            overtag = 2
+                        else: 
+                            overtag = 1
+                    else:
                         overtag = 1
-                else:
-                    overtag = 1
 
-                transformed.append({
-                    "Position": num_position[i],
-                    "Text": str(n),
-                    "OverTag": overtag,
-                    "Type": "Num"
-                })
+                    transformed.append({
+                        "Position": num_position[i],
+                        "Text": str(n),
+                        "OverTag": overtag,
+                        "Type": "Num"
+                    })
 
         if object_name[0]:
-            if num and num_position[0] is not None:
+            if num != "None" and num_position[0] is not None:
                 if object_pos != [None] and num_position and num_position[0][0] > object_pos[0][0] and num_position[0][1] < object_pos[0][1]:
 
                     object_pos_1 = [object_pos[0][0], num_position[0][0] - 1]
@@ -99,7 +93,7 @@ def transform_conversation_info(conversation_info):
                     })
 
             else:
-                print('1')
+                # print('1')
                 transformed.append({
                     "Position": object_pos,
                     "Text": object_name[0],
@@ -228,7 +222,7 @@ def line_calculate(user_info_data, begin, end):
     return mean_num, max_num, min_num
 
 if __name__ == '__main__':
-    result_frontend = result_to_frontend(test_info, result)
+    result_frontend = result_to_frontend(user_info, result)
     print(result_frontend)
     # format_new_result = transform_result(result_frontend)
 #     example = [{'OriginText': "China's banks extended CNY 345.9 billion in new yuan loans in July 2023, the least since November of 2009 and well below market forecasts of CNY 800 billion. The value is also much lower than CNY 679 billion a year earlier and CNY 3.05 trillion in June, after a record CNY 15.73 trillion loans in the first half of the year. The reading adds to further evidence of a lacklustre economic recovery in China although July is usually a weak month for financing activities, with banks not in a rush to meet their lending targets at the beginning of the quarter.", 

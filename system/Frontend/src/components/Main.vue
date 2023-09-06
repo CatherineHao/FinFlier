@@ -41,15 +41,28 @@
                     </v-sheet>
                 </v-sheet> -->
             </div>
-            <div style="height: calc(70%); width: 100%;" v-loading="initChart" ref="mainView">
-                <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData" :defaultTag="1" :scaleTag="1"></component>
+            <div style="height: calc(70%); width: 100%;" v-loading="initChart" ref="mainView" id="mainView">
+                <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
+                    :defaultTag="1" :scaleTag="1" :stateTag="'state0'"></component>
             </div>
             <hr>
-            <div style="height: calc(30% - 0px); width: 100%; background-color: white; display: flex; justify-content: space-between; align-items: center;">
-                <div style="height: 90%; width: 32%;">
-
-                <!-- <component :is="tabs[chartData['chartType']]" :rawData="rawData" :chartData="chartData" :defaultTag="0" :scaleTag=".3"></component> -->
+            <!-- display: flex; justify-content: space-between; align-items: center; -->
+            <div
+                style="height: calc(30% - 0px); width: 100%; background-color: white; display: flex; justify-content: space-between; align-items: center;">
+                <div
+                    style="height: 95%; width: 33%; border-radius: 5px; border: 1.5px solid rgba(99, 99, 99, .6); align-items: center;display: flex; justify-content: center;">
+                    <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
+                        :defaultTag="0" :scaleTag=".33" :stateTag="'state1'"></component>
                 </div>
+                <div style="height: 95%; width: 33%; border-radius: 5px; border: 1.5px solid rgba(99, 99, 99, .6); align-items: center;display: flex; justify-content: center;">
+                    <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
+                        :defaultTag="0" :scaleTag=".33" :stateTag="'state2'"></component>
+                </div>
+                <div style="height: 95%; width: 33%; border-radius: 5px; border: 1.5px solid rgba(99, 99, 99, .6); align-items: center;display: flex; justify-content: center;">
+                    <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
+                        :defaultTag="0" :scaleTag=".33" :stateTag="'state3'"></component>
+                </div>
+
             </div>
         </div>
     </div>
@@ -60,7 +73,6 @@ import singleBar from "./chart/singleBar.vue";
 import singleLine from "./chart/singleLine.vue";
 import multipleBar from "./chart/multipleBar.vue";
 import multipleLine from "./chart/multipleLine.vue";
-import chart_data from "../assets/data/chart.json";
 export default {
     name: "DataChart",
     props: [],

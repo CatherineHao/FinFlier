@@ -31,6 +31,7 @@ export const useDataStore = defineStore("dataStore", {
         return {
             msg: "Hello, Vue SQ",
             data: [],
+            changeTag: 0,
             chart_data: null,
             overlayTag: {
                 highlight: {},
@@ -39,12 +40,73 @@ export const useDataStore = defineStore("dataStore", {
             selectTable: null,
             graphicalOverlayData: null,
             objectTag: {},
+            selectObject: '',
             query_results: [],
             show_state: 0,
             objectCnt: 0,
             state_map: {
                 state0: {
                     overlay_tag: [],
+                    chart_setting: {elWidth: 0,
+                        elHeight: 0,
+                        currentColor: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 1
+                        },
+                        size: {
+                            width: 100
+                        },
+                        axis: {
+                            x: 'Position',
+                            y: "Billions of dollars"
+                        }},
+                    overlay_setting: {
+                    }
+                },
+                state1: {
+                    overlay_tag: [0, 0, 0, 1, 0, 0, 0, 0, 0],
+                    chart_setting: {elWidth: 0,
+                        elHeight: 0,
+                        currentColor: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 1
+                        },
+                        size: {
+                            width: 100
+                        },
+                        axis: {
+                            x: 'Position',
+                            y: "Billions of dollars"
+                        }},
+                    overlay_setting: {
+                    }
+                },
+                state2: {
+                    overlay_tag: [0, 1, 0, 0, 0, 0, 0, 0, 0],
+                    chart_setting: {elWidth: 0,
+                        elHeight: 0,
+                        currentColor: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 1
+                        },
+                        size: {
+                            width: 100
+                        },
+                        axis: {
+                            x: 'Position',
+                            y: "Billions of dollars"
+                        }},
+                    overlay_setting: {
+                    }
+                },
+                state3: {
+                    overlay_tag: [0, 0, 1, 0, 0, 0, 0, 0, 0],
                     chart_setting: {elWidth: 0,
                         elHeight: 0,
                         currentColor: {
@@ -85,9 +147,9 @@ export const useDataStore = defineStore("dataStore", {
                 overlayFormat: {
                     color: {
                         currentColor: {
-                            r: 0,
-                            g: 0,
-                            b: 0,
+                            r: 208,
+                            g: 211,
+                            b: 199,
                             a: 1
                         }
                     },
@@ -101,15 +163,15 @@ export const useDataStore = defineStore("dataStore", {
                     },
                     background: {
                         currentColor: {
-                            r: 0,
-                            g: 0,
-                            b: 0,
+                            r: 220,
+                            g: 220,
+                            b: 220,
                             a: 1
                         }
                     },
                     marker: {
                         currentColor: {
-                            r: 0,
+                            r: 255,
                             g: 0,
                             b: 0,
                             a: 1
@@ -117,7 +179,7 @@ export const useDataStore = defineStore("dataStore", {
                     },
                     label: {
                         currentColor: {
-                            r: 0,
+                            r: 255,
                             g: 0,
                             b: 0,
                             a: 1
@@ -125,7 +187,7 @@ export const useDataStore = defineStore("dataStore", {
                     },
                     text: {
                         currentColor: {
-                            r: 0,
+                            r: 255,
                             g: 0,
                             b: 0,
                             a: 1
@@ -134,7 +196,7 @@ export const useDataStore = defineStore("dataStore", {
                     
                     trend: {
                         currentColor: {
-                            r: 0,
+                            r: 255,
                             g: 0,
                             b: 0,
                             a: 1
@@ -142,7 +204,7 @@ export const useDataStore = defineStore("dataStore", {
                     },
                     overall: {
                         currentColor: {
-                            r: 0,
+                            r: 255,
                             g: 0,
                             b: 0,
                             a: 1
@@ -150,7 +212,7 @@ export const useDataStore = defineStore("dataStore", {
                     },
                     special: {
                         currentColor: {
-                            r: 0,
+                            r: 255,
                             g: 0,
                             b: 0,
                             a: 1
