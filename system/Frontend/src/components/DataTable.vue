@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-22 14:28:15
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-08-27 22:01:14
+ * @LastEditTime: 2023-09-07 16:31:15
 -->
 <template>
     <div style="height: 100%;">
@@ -15,10 +15,9 @@
         </div>
         <!-- <v-expand-transition> -->
         <div v-show="expand" style="overflow: auto; height: calc(100% - 40px); width: 100%;">
-            <table style="border-collapse:separate; border-spacing:0px 5px;height: 100%; width: 100%;">
+            <table style="border-collapse:separate; border-spacing:0px 5px;height: 40%; width: 100%;">
                 <thead style="height: 30px; border-radius: 10px;">
-                    <tr style="border-radius: 0px; 
-    box-shadow: 0px 1px 1px 0px #bdbaba;">
+                    <tr style="border-radius: 0px; box-shadow: 0px 1px 1px 0px #bdbaba;">
                         <th style="text-align: center; width: 30px;">
                             id
                         </th>
@@ -32,8 +31,6 @@
                     <tr v-for="(item, i) in td" :key="'td' + i" class="td_tr" style="height: 30px;">
                         <td :style="{
                             'text-align': 'center',
-                            'border-top-left-radius': '5px',
-                            'border-bottom-left-radius': '5px',
                             'transition': '0.4s',
                             'height': '30px'
                         }" :id="'cellR' + i + 'C' + '0'" :ref="'cellR' + i + 'C' + '0'">
@@ -42,8 +39,6 @@
                         <td v-for="(o, oi) in th" :key="'td_' + oi" :id="'cellR' + i + 'C' + (oi + 1)"
                             :ref="'cellR' + i + 'C' + (oi + 1)" :style="{
                                 'text-align': 'center',
-                                'border-top-right-radius': oi == (th.length - 1) ? '5px' : '0px',
-                                'border-bottom-right-radius': oi == (th.length - 1) ? '5px' : '0px',
                                 'transition': '0.4s'
                             }">
                             {{ item[o] }}
@@ -133,6 +128,8 @@ thead tr th {
 .td_tr {
     border-radius: 0px;
     box-shadow: 0px 2px 1px 0px #bdbaba;
+    height: 10px;
+    line-height: 10px;
 }
 
 td {

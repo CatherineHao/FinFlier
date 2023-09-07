@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-26 19:48:52
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-09-07 11:08:01
+ * @LastEditTime: 2023-09-07 19:50:28
 -->
 <template>
     <div ref="singleBarSvg"
@@ -35,13 +35,15 @@
                             :transform="translate(axisPosition.xAxis[0], axisPosition.xAxis[1])">{{ chart_setting.axis.x }}</text>
                         <text class="title" text-anchor="start"
                             :transform="translate(axisPosition.yAxis[0], axisPosition.yAxis[1])">{{ chart_setting.axis.y }}</text>
-                        <text class="title" style="font-size: 25;" text-anchor="middle" :transform="translate(.8 * elWidth / 2, -40)">{{ chart_setting.title }}</text>
+                        <text class="title" style="font-size: 25;" text-anchor="middle"
+                            :transform="translate(.8 * elWidth / 2, -40)">{{ chart_setting.title }}</text>
                     </g>
                     <g id="bar">
                         <g v-for="(item, i) in barData" :key="'single_bar_' + i">
                             <rect
                                 :x="item.x - (item.length - item.cnt - 1) * chart_setting.size.width / item.length + (item.length - 2) / 2 * chart_setting.size.width / (item.length)"
-                                :y="item.y" :fill="overlayTag[0] == 1 ? colorTrans(overlay_setting[overlay_map[0]].currentColor) : colorTrans(chart_setting.currentColor[item.yName])"
+                                :y="item.y"
+                                :fill="overlayTag[0] == 1 ? colorTrans(overlay_setting[overlay_map[0]].currentColor) : colorTrans(chart_setting.currentColor[item.yName])"
                                 :width="chart_setting.size.width / item.length" :height="item.height"></rect>
                         </g>
                     </g>
@@ -341,7 +343,8 @@ export default {
             // console.log(scaleType)
             for (let i in data) {
                 if (i == 'columns') continue;
-                scale_data.push(data[i][scaleName]);
+                let tdata = this.dataType(data[i][scaleName], scaleType);
+                scale_data.push(tdata);
             }
             if (scaleType == 'category') {
                 return scalePoint(scale_data, range).padding(1);
@@ -362,9 +365,9 @@ export default {
             if (scaleType == 'time') {
                 return new Date(data);
             } else {
-                // if (!isNaN(data)) {
-                //     data = parseFloat(data);
-                // }
+                if (!isNaN(data)) {
+                    data = parseFloat(data);
+                }
                 return data;
             }
         },
@@ -417,10 +420,12 @@ export default {
             let xAxis = (g, x, height) => {
                 g.attr("transform", `translate(0, ${height})`)
                     .call(axisBottom(x))
+                    .attr('font-size', 15)
             }
             let yAxis = (g, y) => {
                 g.attr("transform", `translate(${0}, 0)`)
                     .call(axisLeft(y).ticks(5).tickSizeOuter(0))
+                    .attr('font-size', 15)
             }
             select("#xAxis" + this.stateTag).call(xAxis, xScale, height);
             select("#yAxis" + this.stateTag).call(yAxis, yScale);
