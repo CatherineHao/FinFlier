@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-22 14:28:15
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-09-07 19:50:40
+ * @LastEditTime: 2023-09-07 19:51:42
 -->
 <!--
  *                        _oo0oo_
@@ -208,6 +208,7 @@ export default {
             objectCnt: 0,
             store_data: [],
             query_len: 0,
+            chart_type: -1,
             color_map: [{
                 "r": 174, "g": 205, "b": 234, "a": 1
             }, {
@@ -339,6 +340,11 @@ export default {
                 // console.log(description_data[i]['ObjectName'])
                 let tmp = {}, tmp1 = {}, tmp2 = {}, tmp3 = {};
                 tmp['overlay_tag'] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+                if (this.chart_type == 0 || this.chart_type == 2) {
+                    tmp['overlay_tag'][0] = 1;
+                } else if (this.chart_type == 1 || this.chart_type == 3) {
+                    tmp['overlay_tag'][4] = 1;
+                }
                 tmp1['overlay_tag'] = [0, 0, 0, 1, 0, 0, 0, 0, 0];
                 tmp2['overlay_tag'] = [0, 0, 0, 0, 1, 0, 0, 0, 0];
                 tmp3['overlay_tag'] = [1, 0, 0, 0, 0, , 0, 0, 0];
@@ -545,7 +551,10 @@ export default {
         // this.submitText();
         const dataStore = useDataStore();
         dataStore.$subscribe((mutations, state) => {
-            console.log(mutations.type)
+            // console.log(mutations)
+            if (mutations.events.key == 'chart_data') {
+                this.chart_type = dataStore.chart_data.chartType; 
+            }
             if (this.query_len < state.query_results.length) {
                 let info_data = state.query_results[state.query_results.length - 1];
                 this.query_len = state.query_results.length;

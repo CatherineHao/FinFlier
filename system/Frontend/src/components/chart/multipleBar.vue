@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-26 19:48:52
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-09-07 19:50:28
+ * @LastEditTime: 2023-09-07 21:32:13
 -->
 <template>
     <div ref="singleBarSvg"
@@ -73,20 +73,20 @@
                                     stroke="none" opacity="1">
                                 </circle>
                             </g>
-                            <g v-if="overlayTag[4] == 1" class="animation-fade">
+                            <!-- <g v-if="overlayTag[4] == 1" class="animation-fade">
                                 <path v-for="(o, oi) in item.label" :key="'oi_' + oi"
                                     :d="'M' + (o.x + o.transTag * chart_setting.size.width / o.length) + ',' + (o.y) + 'L' + (o.x + o.transTag * chart_setting.size.width / o.length + position[item.labelPosTag + 'l' + oi].left) + ',' + (-.1 * elHeight + position[item.labelPosTag + 'l' + oi].top + 5)"
                                     fill="none" :stroke="colorTrans(overlay_setting[overlay_map[4]].currentColor)"
                                     stroke-width="3">
                                 </path>
-                            </g>
+                            </g> -->
 
-                            <g v-if="overlayTag[5] == 1" class="animation-fade">
+                            <!-- <g v-if="overlayTag[5] == 1" class="animation-fade">
                                 <path
                                     :d="'M' + (item.text.x + item.transTag * chart_setting.size.width / item.text.length) + ',' + (item.text.y) + 'L' + (item.text.x + item.transTag * chart_setting.size.width / item.text.length + position[item.textPosTag].left) + ',' + (-.1 * elHeight + position[item.textPosTag].top + 5)"
                                     fill="none" :stroke="colorTrans(overlay_setting[overlay_map[5]].currentColor)"
                                     stroke-width="3"></path>
-                            </g>
+                            </g> -->
                             <g v-if="overlayTag[6] == 1" class="animation-fade">
                                 <defs>
                                     <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth"
@@ -123,7 +123,7 @@
             'position': 'absolute',
             'top': `${0 * elHeight + position[item.textPosTag].top}px`,
             'left': `${item.text.x + item.transTag * chart_setting.size.width / item.text.length + .05 * elWidth - 75 + (realWidth - elWidth) / 2 + position[item.textPosTag].left}px`,
-            'width': '150px',
+            'width': '280px',
             'opacity': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? '1' : '0',
             'padding': '3px',
             'border': '2px solid',
@@ -131,6 +131,7 @@
             'user-select': 'none',
             'cursor': 'grab',
             'background-color': 'white',
+            'font-size': '18px',
             'z-index': (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? 100 : 1,
             'border-color': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'color',
         }" @mousedown="startDrag($event, item.textPosTag)" @mousemove="onDrag($event, item.textPosTag)"
@@ -150,6 +151,7 @@
                 'background-color': 'white',
                 'user-select': 'none',
                 'cursor': 'grab',
+            'font-size': '18px',
                 'z-index': (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? 100 : 1,
                 'border-color': objectTag[item.objectName] == 1 && overlayTag[4] == 1 ? colorTrans(overlay_setting[overlay_map[4]].currentColor) : 'white',
             }" @mousedown="startDrag($event, item.labelPosTag + 'l' + oi)"

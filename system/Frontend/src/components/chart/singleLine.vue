@@ -167,9 +167,10 @@
             'position': 'absolute',
             'top': `${0 * elHeight + position[item.text.qid].top}px`,
             'left': `${.05 * elWidth - 75 + (realWidth - elWidth) / 2 + item.text.pos.x + position[item.text.qid].left}px`,
-            'width': '150px',
+            'width': '280px',
             'opacity': item.tag != -1 && (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
             'padding': '3px',
+            'font-size': '18px',
             'border': '2px solid',
             'border-color': item.tag != -1 && (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'black',
             'border-radius': '10px',
@@ -184,6 +185,7 @@
         <div v-for="(item, i) in overlayData" :key="'overlay_' + i" style="position: absolute; top: 0px; left: 0px;">
             <div v-for="(d, d_i) in item.label.pos" :key="'dd_' + d_i" :style="{
                 'position': 'absolute',
+            'font-size': '18px',
                 'top': `${0 * elHeight + position[item.label.lid + 'l' + d_i].top}px`,
                 'left': `${d[0] - 75 + .05 * elWidth + (realWidth - elWidth) / 2 + position[item.label.lid + 'l' + d_i].left}px`,
                 'width': '150px',
@@ -500,7 +502,7 @@ export default {
                 currentColor: chart_info.chartColor[chart_info.chartScale.y.attributeName[0]],
                 attrName: chart_info.chartScale.y.attributeName[0],
                 size: {
-                    width: 2
+                    width: 5
                 },
                 axis: {
                     x: xName,
@@ -535,10 +537,12 @@ export default {
             let xAxis = (g, x, height) => {
                 g.attr("transform", `translate(0, ${height})`)
                     .call(axisBottom(x))
+                    .attr('font-size', 15)
             }
             let yAxis = (g, y) => {
                 g.attr("transform", `translate(${0}, 0)`)
                     .call(axisLeft(y).ticks(5).tickSizeOuter(0))
+                    .attr('font-size', 15)
             }
             select("#xAxis" + this.stateTag).call(xAxis, xScale, height);
             select("#yAxis" + this.stateTag).call(yAxis, yScale);

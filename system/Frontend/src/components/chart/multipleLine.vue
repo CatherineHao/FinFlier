@@ -86,7 +86,7 @@
             'position': 'absolute',
             'top': `${0 * elHeight + position[item.textPosTag].top}px`,
             'left': `${.05 * elWidth + item.x + (realWidth - elWidth) / 2 - 75 + position[item.textPosTag].left}px`,
-            'width': '150px',
+            'width': '280px',
             'opacity': (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
             'padding': '3px',
             'border': '2px solid',
@@ -95,6 +95,7 @@
             'border-radius': '10px',
             'background-color': 'white',
             'user-select': 'none',
+            'font-size': '18px',
             'cursor': 'grab'
         }" @mousedown="startDrag($event, item.textPosTag)" @mousemove="onDrag($event, item.textPosTag)"
             @mouseup="stopDrag()">
@@ -106,6 +107,7 @@
             'right': `${30 - position['legend'].left}px`,
             'user-select': 'none',
             'cursor': 'grab',
+            'font-size': '18px',
             'z-index': 1000
         }" @mousedown="startDrag($event, 'legend')" @mousemove="onDrag($event, 'legend')" @mouseup="stopDrag()">
             <div style="display: flex;" v-for="(o, i) in chart_setting.attrName" :key="'legend_' + i">
@@ -315,10 +317,12 @@ export default {
             let xAxis = (g, x, height) => {
                 g.attr("transform", `translate(0, ${height})`)
                     .call(axisBottom(x))
+                    .attr('font-size', 15)
             }
             let yAxis = (g, y) => {
                 g.attr("transform", `translate(${0}, 0)`)
                     .call(axisLeft(y).ticks(5).tickSizeOuter(0))
+                    .attr('font-size', 15)
             }
             select("#xAxis" + this.stateTag).call(xAxis, xScale, height);
             select("#yAxis" + this.stateTag).call(yAxis, yScale);
