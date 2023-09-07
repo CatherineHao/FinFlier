@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-26 19:48:52
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-08-27 20:46:06
+ * @LastEditTime: 2023-09-07 11:08:01
 -->
 <template>
     <div ref="singleBarSvg"
@@ -362,9 +362,9 @@ export default {
             if (scaleType == 'time') {
                 return new Date(data);
             } else {
-                if (!isNaN(data)) {
-                    data = parseFloat(data);
-                }
+                // if (!isNaN(data)) {
+                //     data = parseFloat(data);
+                // }
                 return data;
             }
         },
@@ -406,6 +406,7 @@ export default {
             let height = this.chart_setting.elHeight * .8;
             let xScale = this.scale(data, chart_info.chartScale.x.attributeName, chart_info.chartScale.x.scaleType, [0, width]);
             this.xScale = xScale;
+            console.log(xScale)
             let yScale = this.scale(data, chart_info.chartScale.y.attributeName[0], chart_info.chartScale.y.scaleType, [height, 0]);
             this.yScale = yScale;
             this.axisPosition = {
@@ -429,7 +430,7 @@ export default {
                 let yLen = chart_info.chartScale.y.attributeName.length;
                 for (let j in chart_info.chartScale.y.attributeName) {
                     let yName = chart_info.chartScale.y.attributeName[j];
-                    // console.log(this.dataType(data[i][chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType))
+                    console.log(xScale(this.dataType(data[i][chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType).toString()))
                     barData.push({
                         x: xScale(this.dataType(data[i][chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType)),
                         y: yScale(data[i][yName]),

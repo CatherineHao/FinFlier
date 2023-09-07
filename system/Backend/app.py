@@ -2,7 +2,7 @@
 Description: 
 Author: Qing Shi
 Date: 2022-11-20 19:14:42
-LastEditTime: 2023-09-06 18:18:24
+LastEditTime: 2023-09-07 10:55:50
 '''
 import openai
 from flask import Flask, request, jsonify
@@ -45,7 +45,7 @@ def fetch_basic_chart():
 
 
 # @app.route("get_result", methods = ("GET", "POST"))
-@app.route('/api/test/postQuery/', methods=['POST'])
+@app.route('/api/test/postQuery_real/', methods=['POST'])
 def chat_with_gpt():
     params = request.json
     # print(params)
@@ -350,7 +350,7 @@ reason: "The 'Amazon stock moving averages' corresponds to the column 'price' in
 
 
 
-@app.route('/api/test/postQuery_fake/', methods=['POST'])
+@app.route('/api/test/postQuery/', methods=['POST'])
 def post_query():
     params = request.json
     label = params['label']
@@ -412,8 +412,8 @@ def determine_chart_type(input_data, x_type):
     if x_type == 'time' or x_type == 'linear':
         chart_type += 1
     
-    return chart_type
-    # return 1
+    # return chart_type
+    return 2
 #TODO: backend function 1
 # @app.route('/chart-info', methods=['POST'])
 @app.route('/api/test/fetchBasicChart/', methods=['POST'])
