@@ -7,7 +7,7 @@
 <template>
     <div class="common-layout" style="width: 100%; height: 100vh; background-color: white;">
         <div style="padding-top: 30vh;font-style: italic; font-family: 'operator Mono Lig'; font-size: 50px;">
-            FinCues
+            FinFiler
             <br />
             <!-- <v-btn variant="tonal">
                 Upload Data

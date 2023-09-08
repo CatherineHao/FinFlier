@@ -153,13 +153,14 @@
             'position': 'absolute',
             'top': `${0 * elHeight + position[item.text.qid].top}px`,
             'left': `${item.text.pos.x + .05 * elWidth - 75 + (realWidth - elWidth) / 2 + position[item.text.qid].left}px`,
-            'width': '150px',
+            'width': '280px',
             'opacity': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? '1' : '0',
             'padding': '3px',
             'border': '2px solid',
             'border-radius': '10px',
             'background-color': 'white',
             'user-select': 'none',
+            'font-size': '18px',
             'cursor': 'grab',
             'z-index': (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? 100 : 1,
             'border-color': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'color',
@@ -179,6 +180,7 @@
                 'border-radius': '10px',
                 'background-color': 'white',
                 'user-select': 'none',
+            'font-size': '18px',
                 'cursor': 'grab',
                 'z-index': (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? 100 : 1,
                 'border-color': objectTag[item.objectName] == 1 && overlayTag[4] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'color',
@@ -492,10 +494,12 @@ export default {
             let xAxis = (g, x, height) => {
                 g.attr("transform", `translate(0, ${height})`)
                     .call(axisBottom(x))
+                    .attr('font-size', 15)
             }
             let yAxis = (g, y) => {
                 g.attr("transform", `translate(${0}, 0)`)
                     .call(axisLeft(y).ticks(5).tickSizeOuter(0))
+                    .attr('font-size', 15)
             }
             select("#xAxis" + this.stateTag).call(xAxis, xScale, height);
             select("#yAxis" + this.stateTag).call(yAxis, yScale);
