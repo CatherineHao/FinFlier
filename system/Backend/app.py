@@ -45,6 +45,7 @@ def fetch_basic_chart():
 
 
 # @app.route("get_result", methods = ("GET", "POST"))
+# @app.route('/api/test/postQuery/', methods=['POST'])
 @app.route('/api/test/postQuery_real/', methods=['POST'])
 def chat_with_gpt():
     params = request.json
@@ -348,8 +349,7 @@ result: [{"ObjectName":["Amazon stock moving averages"],"DataName":"price","Posi
 reason: "The 'Amazon stock moving averages' corresponds to the column 'price' in data. The 'triple top' pattern has three discernible peaks at approximatrely the same level, separated by troughs. The pattern in this data is from 2010.04.01 to 2010.05.05 and the three peaks are at about 2010.04.06, 2010.04.18 and 2010.04.27."
 """
 
-
-
+# @app.route('/api/test/postQuery_fake/', methods=['POST'])
 @app.route('/api/test/postQuery/', methods=['POST'])
 def post_query():
     params = request.json
@@ -370,13 +370,31 @@ def determine_x_axis_type(input_data):
     # if list(input_data[0].keys())[0] == 'time' or list(input_data[0].keys())[0] == 'Time':
     #     return 'time'
     # 检查是否包含数字和日期
+    # return 'category'
+    # if re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
+    #     return 'time'
+    # elif re.match(r'^[-+]?\d*\.?\d+$', x_values): # 正则表达式匹配整数/浮点数
+    #     return 'linear'
+    # else:
+    #     return 'category'
     return 'category'
-    if re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
-        return 'time'
-    elif re.match(r'^[-+]?\d*\.?\d+$', x_values): # 正则表达式匹配整数/浮点数
-        return 'linear'
-    else:
-        return 'category'
+    #### time部分
+    # x_values = next(iter(input_data[0].values()))
+    # first_column_name = list(input_data[0].keys())
+    # # print(x_values)
+    # # 检查是否包含数字和日期
+    # if 'Time' in first_column_name or 'time' in first_column_name:
+    #     return 'time'
+    # elif re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
+    #     return 'time'
+    # elif re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
+    #     return 'time'
+    # elif re.match(r'^[-+]?\d*\.?\d+$', x_values): # 正则表达式匹配整数/浮点数
+    #     return 'linear'
+    # else:
+    #     return 'category'
+    ######
+    
     
 
 # 返回x轴名称
@@ -425,6 +443,7 @@ def chart_info():
     num_keys = len(data[0]) - 1 # 统计键数量，对应y的数量
     
     x_type = determine_x_axis_type(data)
+    print(x_type)
     [x_name, x_attribute] = get_x_axis_name(x_type,data)
     y_attribute = list(data[0].keys())[1:]
     chart_type = determine_chart_type(data, x_type)
