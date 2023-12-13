@@ -27,8 +27,8 @@
                     </g>
                     <g id="singleline">
                         <path v-for="(o, i) in lineData" :key="'path' + i" :d="o.path" fill="none"
-                            :stroke="colorTrans(chart_setting.currentColor[o.attr])"
-                            :stroke-width="chart_setting.size.width">
+                            :stroke="o.attr == 'renewables' ? colorTrans(chart_setting.currentColor[o.attr]) : 'grey'"
+                            :stroke-width="o.attr == 'renewables' ? 5:  chart_setting.size.width">
                         </path>
                     </g>
                 </g>
@@ -108,11 +108,13 @@
             'user-select': 'none',
             'cursor': 'grab',
             'font-size': '18px',
-            'z-index': 1000
+            'z-index': 1000,
+            'display': 'flex',
+            'align-items': 'center'
         }" @mousedown="startDrag($event, 'legend')" @mousemove="onDrag($event, 'legend')" @mouseup="stopDrag()">
-            <div style="display: flex;" v-for="(o, i) in chart_setting.attrName" :key="'legend_' + i">
+            <div style="display: flex; align-items: center; margin-right: 5px;" v-for="(o, i) in chart_setting.attrName" :key="'legend_' + i">
                 <div
-                    :style="{ 'height': '20px', 'width': '20px', 'background-color': colorTrans(chart_setting.currentColor[o]), 'margin-right': '10px' }">
+                    :style="{ 'height': '20px', 'width': '20px', 'background-color': colorTrans(chart_setting.currentColor[o]), 'margin-right': '5px' }">
                 </div>
                 <div>{{ o }}</div>
             </div>
@@ -248,7 +250,7 @@ export default {
             if (scaleType == 'linear') {
                 let dataDomain = extent(scale_data, d => parseFloat(d));
                 if (dataDomain[1] < 0) dataDomain[1] = 0;
-                if (dataDomain[0] > 0) dataDomain[0] = 0;
+                // if (dataDomain[0] > 0) dataDomain[0] = 0;
                 // console.log(dataDomain);
                 return scaleLinear(dataDomain, range);
             }
@@ -275,6 +277,7 @@ export default {
             // for (let i of chart_info.chartScale.y.attributeName) {
             //     currentColor.push()
             // }
+            console.log(chart_info.chartColor)
 
             this.chart_setting = {
                 elWidth: this.elWidth,

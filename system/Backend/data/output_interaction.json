@@ -1,0 +1,38 @@
+{
+	"result": "",
+	"reason": [],
+	"final": [
+		{
+			"OriginText": "The 'double bottom' pattern happens on the 'Dow Janes Industrial (.DJI)' from 2015/12/29 to 2016/03/07.",
+			"Position": [{ "Begin": ["Close", 54], "End": ["Close", 100] }],
+			"ConversationInfo": [
+				{
+					"Position": [5, 17],
+					"Text": "double bottom",
+					"OverTag": 3,
+					"Type": "Trend"
+				},
+				{
+					"Position": [[44, 70]],
+					"Text": "Dow Janes Industrial (.DJI)",
+					"OverTag": 0,
+					"Type": "ObjectName"
+				}
+			],
+			"GraphicalOverlay": [
+				{
+					"Text": "The 'double bottom' pattern happens on the 'Dow Janes Industrial (.DJI)' from 2015/12/29 to 2016/03/07",
+					"Label": "None",
+					"Marker": [{ "Begin": ["Close", 54], "End": ["Close", 100] }],
+					"Line": {
+						"Begin": ["Close", 54],
+						"End": ["Close", 100],
+						"mean": 17046.252871287128,
+						"max": 17918.15,
+						"min": 15660.18
+					}
+				}
+			]
+		}
+	]
+}

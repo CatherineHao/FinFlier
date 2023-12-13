@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-22 15:08:37
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-08-29 20:33:06
+ * @LastEditTime: 2023-09-13 23:51:15
 -->
 <template>
     <div class="design_container">
@@ -52,7 +52,21 @@
                         </div>
                         <div class="sq_collapse_item">
                             <div class="sq_collapse_title">
-                                <span class="sq_collapse_text"><svg v-if="chartType == 1 ||  chartType == 3" t="1693879259065" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7748" width="20" height="20"><path d="M888 792H200V168c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v688c0 4.4 3.6 8 8 8h752c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8z" p-id="7749"></path><path d="M305.8 637.7c3.1 3.1 8.1 3.1 11.3 0l138.3-137.6L583 628.5c3.1 3.1 8.2 3.1 11.3 0l275.4-275.3c3.1-3.1 3.1-8.2 0-11.3l-39.6-39.6c-3.1-3.1-8.2-3.1-11.3 0l-230 229.9L461.4 404c-3.1-3.1-8.2-3.1-11.3 0L266.3 586.7c-3.1 3.1-3.1 8.2 0 11.3l39.5 39.7z" p-id="7750"></path></svg><svg v-else t="1693879354394" class="icon" viewBox="0 0 1184 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8865" width="20" height="20"><path d="M365.728 512l0 292.576-146.272 0 0-292.576 146.272 0zM585.152 219.424l0 585.152-146.272 0 0-585.152 146.272 0zM1170.272 877.728l0 73.152-1170.272 0 0-877.728 73.152 0 0 804.576 1097.152 0zM804.576 365.728l0 438.848-146.272 0 0-438.848 146.272 0zM1024 146.272l0 658.272-146.272 0 0-658.272 146.272 0z" p-id="8866"></path></svg>&nbsp;{{ chartTypeMap[chartType] }}</span>
+                                <span class="sq_collapse_text"><svg v-if="chartType == 1 || chartType == 3"
+                                        t="1693879259065" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" p-id="7748" width="20" height="20">
+                                        <path
+                                            d="M888 792H200V168c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v688c0 4.4 3.6 8 8 8h752c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8z"
+                                            p-id="7749"></path>
+                                        <path
+                                            d="M305.8 637.7c3.1 3.1 8.1 3.1 11.3 0l138.3-137.6L583 628.5c3.1 3.1 8.2 3.1 11.3 0l275.4-275.3c3.1-3.1 3.1-8.2 0-11.3l-39.6-39.6c-3.1-3.1-8.2-3.1-11.3 0l-230 229.9L461.4 404c-3.1-3.1-8.2-3.1-11.3 0L266.3 586.7c-3.1 3.1-3.1 8.2 0 11.3l39.5 39.7z"
+                                            p-id="7750"></path>
+                                    </svg><svg v-else t="1693879354394" class="icon" viewBox="0 0 1184 1024" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" p-id="8865" width="20" height="20">
+                                        <path
+                                            d="M365.728 512l0 292.576-146.272 0 0-292.576 146.272 0zM585.152 219.424l0 585.152-146.272 0 0-585.152 146.272 0zM1170.272 877.728l0 73.152-1170.272 0 0-877.728 73.152 0 0 804.576 1097.152 0zM804.576 365.728l0 438.848-146.272 0 0-438.848 146.272 0zM1024 146.272l0 658.272-146.272 0 0-658.272 146.272 0z"
+                                            p-id="8866"></path>
+                                    </svg>&nbsp;{{ chartTypeMap[chartType] }}</span>
                                 <!-- <i style="height: 12px; width: 12px;"> -->
                                 <div style="height: 20px; width: 30px; cursor: pointer; display: flex; justify-content: flex-end
                                 ; align-items: center;" @click="isExpand[1] = !isExpand[1]">
@@ -126,7 +140,7 @@
                                             <path
                                                 d="M170.922667 127.573333a42.666667 42.666667 0 0 0-42.666667 42.666667v170.666667a42.666667 42.666667 0 0 0 42.666667 42.666666h42.666666v256h-42.666666a42.666667 42.666667 0 0 0-42.666667 42.666667v170.666667a42.666667 42.666667 0 0 0 42.666667 42.666666h170.666666a42.666667 42.666667 0 0 0 42.666667-42.666666v-42.666667h256v42.666667a42.666667 42.666667 0 0 0 42.666667 42.666666h170.666666a42.666667 42.666667 0 0 0 42.666667-42.666666v-170.666667a42.666667 42.666667 0 0 0-42.666667-42.666667h-42.666666v-256h42.666666a42.666667 42.666667 0 0 0 42.666667-42.666666v-170.666667a42.666667 42.666667 0 0 0-42.666667-42.666667h-170.666666a42.666667 42.666667 0 0 0-42.666667 42.666667v42.666667h-256v-42.666667a42.666667 42.666667 0 0 0-42.666667-42.666667h-170.666666z m42.666666 85.333334h85.333334v85.333333h-85.333334v-85.333333z m512 0h85.333334v85.333333h-85.333334v-85.333333z m-341.333333 85.333333h256v42.666667a42.666667 42.666667 0 0 0 42.666667 42.666666h42.666666v256h-42.666666a42.666667 42.666667 0 0 0-42.666667 42.666667v42.666667h-256v-42.666667a42.666667 42.666667 0 0 0-42.666667-42.666667h-42.666666v-256h42.666666a42.666667 42.666667 0 0 0 42.666667-42.666666v-42.666667z m-170.666667 426.666667h85.333334v85.333333h-85.333334v-85.333333z m512 0h85.333334v85.333333h-85.333334v-42.666667-42.666666z"
                                                 fill="#000000" p-id="11648"></path>
-                                        </svg>&nbsp;Bounding Box</span>
+                                        </svg>&nbsp;Bounding-box</span>
                                 </div>
                                 <div style="height: 20px; width: 30px; cursor: pointer; display: flex; justify-content: flex-end
                                 ; align-items: center;" @click="overlayExpand[1] = !overlayExpand[1]">
@@ -145,6 +159,14 @@
                                 <div class="sq_collapse_content" v-if="overlayExpand[1] == 1">
                                     <div>Stroke</div>
                                     <color-picker v-model="overlaySetting[overlay_map[1]].currentColor"></color-picker>
+
+                                    <div>
+                                        Stroke-Width
+                                    </div>
+                                    <div>
+                                        <div><input class="widthInput" v-model="s_width" placeholder="Please input" /> px
+                                        </div>
+                                    </div>
                                 </div>
                             </el-collapse-transition>
                         </div>
@@ -245,8 +267,29 @@
                             </div>
                             <el-collapse-transition>
                                 <div class="sq_collapse_content" v-if="overlayExpand[4] == 1">
-                                    <div>Fill</div>
+                                    <div>Stroke</div>
                                     <color-picker v-model="overlaySetting[overlay_map[4]].currentColor"></color-picker>
+                                    <div>
+                                        Stroke-Width
+                                    </div>
+                                    <div>
+                                        <div><input class="widthInput" v-model="s_width" placeholder="Please input" /> px
+                                        </div>
+                                    </div>
+                                    <div>Font</div>
+
+                                    <div style="display: flex; margin-bottom: 5px; align-items: center;">
+                                        <!-- <div style="width: 50px;">Label:</div> -->
+                                        <div style="margin-right: 5px;">
+                                            <ColorPicker_single v-model="f_color"></ColorPicker_single>
+                                        </div>
+                                        <el-select v-model="msg1" style="width: 120px; height: 26px;" class="m-2"
+                                            placeholder="Select" size="large">
+                                            <el-option v-for="item in f_family" :key="item" :label="item" :value="item" />
+                                        </el-select>
+                                        &nbsp;&nbsp;
+                                        <input class="widthInput" v-model="f_size" placeholder="Please input" />&nbsp;px &nbsp;
+                                    </div>
                                 </div>
                             </el-collapse-transition>
                         </div>
@@ -293,8 +336,29 @@
                             </div>
                             <el-collapse-transition>
                                 <div class="sq_collapse_content" v-if="overlayExpand[5] == 1">
-                                    <div>Fill</div>
+                                    <div>Stroke</div>
                                     <color-picker v-model="overlaySetting[overlay_map[5]].currentColor"></color-picker>
+                                    <div>
+                                        Stroke-Width
+                                    </div>
+                                    <div>
+                                        <div><input class="widthInput" v-model="s_width" placeholder="Please input" /> px
+                                        </div>
+                                    </div>
+                                    <div>Font</div>
+
+                                    <div style="display: flex; margin-bottom: 5px; align-items: center;">
+                                        <!-- <div style="width: 50px;">Label:</div> -->
+                                        <div style="margin-right: 5px;">
+                                            <ColorPicker_single v-model="f_color"></ColorPicker_single>
+                                        </div>
+                                        <el-select v-model="msg1" style="width: 120px; height: 26px;" class="m-2"
+                                            placeholder="Select" size="large">
+                                            <el-option v-for="item in f_family" :key="item" :label="item" :value="item" />
+                                        </el-select>
+                                        &nbsp;&nbsp;
+                                        <input class="widthInput" v-model="f_size" placeholder="Please input" />&nbsp;px &nbsp;
+                                    </div>
                                 </div>
                             </el-collapse-transition>
                         </div>
@@ -312,7 +376,7 @@
                                             <path
                                                 d="M115.2 763.562667c-12.501333 0-23.466667-4.693333-32.853333-14.08-18.773333-18.773333-18.773333-48.554667 0-65.749334l283.349333-283.392c18.773333-18.773333 48.554667-18.773333 65.749333 0l137.770667 137.813334 266.112-264.576c18.773333-18.773333 48.554667-18.773333 65.749333 0 18.773333 18.773333 18.773333 48.512 0 65.706666l-297.386666 299.008c-18.816 18.773333-48.554667 18.773333-65.792 0l-137.770667-137.728-250.453333 250.453334a49.493333 49.493333 0 0 1-34.432 12.544z"
                                                 fill="#172B4D" p-id="17660"></path>
-                                        </svg>&nbsp;Trend Line</span>
+                                        </svg>&nbsp;Trend-line</span>
                                 </div>
                                 <div style="height: 20px; width: 30px; cursor: pointer; display: flex; justify-content: flex-end
                                 ; align-items: center;" @click="overlayExpand[6] = !overlayExpand[6]">
@@ -329,8 +393,15 @@
                             </div>
                             <el-collapse-transition>
                                 <div class="sq_collapse_content" v-if="overlayExpand[6] == 1">
-                                    <div>Fill</div>
+                                    <div>Stroke</div>
                                     <color-picker v-model="overlaySetting[overlay_map[6]].currentColor"></color-picker>
+                                    <div>
+                                        Stroke-Width
+                                    </div>
+                                    <div>
+                                        <div><input class="widthInput" v-model="s_width" placeholder="Please input" /> px
+                                        </div>
+                                    </div>
                                 </div>
                             </el-collapse-transition>
                         </div>
@@ -349,7 +420,7 @@
                                             <path class="st0" d="M55.04,49.43c0,0,0,0-48.74,0.03" fill="none" stroke="black"
                                                 stroke-width="5" />
                                         </svg>
-                                        Overall Indicator</span>
+                                        Overall-indicator</span>
                                 </div>
                                 <div style="height: 20px; width: 30px; cursor: pointer; display: flex; justify-content: flex-end
                                 ; align-items: center;" @click="overlayExpand[7] = !overlayExpand[7]">
@@ -386,7 +457,7 @@
                                             <path class="st0" d="M30.64,3.08c0,0,0,0,0.04,52.84" fill="none" stroke="black"
                                                 stroke-width="5" />
                                         </svg>
-                                        Special Time-point</span>
+                                        Special-time-point</span>
                                 </div>
                                 <div style="height: 20px; width: 30px; cursor: pointer; display: flex; justify-content: flex-end
                                 ; align-items: center;" @click="overlayExpand[8] = !overlayExpand[8]">
@@ -420,20 +491,31 @@
 import { useDataStore } from "../stores/counter";
 import ColorPicker from './utils/ColorPicker.vue';
 import singleBarPanel from "./utils/singleBarPanel.vue";
+import singleLinePanel from "./utils/singleLinePanel.vue";
 import multiBarPanel from "./utils/multiBarPanel.vue";
+import multiLinePanel from "./utils/multiLinePanel.vue";
+import ColorPicker_single from "./utils/ColorPicker_single.vue";
 export default {
     name: "DesignPanel",
     props: [],
     data () {
         return {
-            msg1: "Hello, main!",
+            msg1: "Avenir",
             currentColor: { r: 255, g: 30, b: 20, a: 0.5 },
             isExpand: [0, 1],
             overlayExpand: [0, 0, 0, 0, 0, 0, 0, 0, 0],
             overlayTag: [0, 0, 0, 0, 0, 0, 0, 0, 0],
             expand: false,
             chartType: "",
-
+            s_width: 3,
+            f_size: 18,
+            f_color: {
+                r: 0,
+                g: 0,
+                b: 0,
+                a: 1
+            },
+            f_family: ['Avenir'],
             tabs: {
                 'Single bar chart': 'singleBarPanel',
                 'Single line chart': 'singleLinePanel',
@@ -468,9 +550,10 @@ export default {
                 if (selObj == -1) {
                     this.overlayTag = [0, 0, 0, 0, 0, 0, 0, 0, 0];
                 } else {
-                this.overlaySetting = dataStore.state_map['state0']['overlay_setting'][selObj];
+                    this.overlaySetting = dataStore.state_map['state0']['overlay_setting'][selObj];
 
-                this.overlayTag = dataStore.state_map['state0']['overlay_setting'][selObj]['overlay_tag'];}
+                    this.overlayTag = dataStore.state_map['state0']['overlay_setting'][selObj]['overlay_tag'];
+                }
             }
             // }
         })
@@ -478,7 +561,10 @@ export default {
     components: {
         'color-picker': ColorPicker,
         'singleBarPanel': singleBarPanel,
-        'multipleBarPanel': multiBarPanel
+        'singleLinePanel': singleLinePanel,
+        'multipleLinePanel': multiLinePanel,
+        'multipleBarPanel': multiBarPanel,
+        'ColorPicker_single': ColorPicker_single
     },
     watch: {
         chartSetting: {
@@ -513,7 +599,7 @@ export default {
                 let selObj = dataStore.selectObject;
                 // console.log(dataStore.state_map['state0'])
                 if (selObj != -1 && selObj != '')
-                dataStore.state_map['state0']['overlay_setting'][selObj]['overlay_tag'] = newVal;
+                    dataStore.state_map['state0']['overlay_setting'][selObj]['overlay_tag'] = newVal;
             },
             deep: true // 监听嵌套属性的变化
         }
@@ -521,7 +607,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+.el-select .el-input__wrapper {
+    height: 26px;
+}
+
 .design_container {
     text-align: start;
     height: 100%;
@@ -610,5 +700,14 @@ h3 span {
     /* padding: 10px 0px 10px 0px; */
     background-color: white;
     padding-left: 25px;
+}
+
+
+.widthInput {
+    width: 70px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 </style>

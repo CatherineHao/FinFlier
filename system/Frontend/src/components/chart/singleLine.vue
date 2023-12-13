@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-26 19:48:30
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-09-02 21:40:32
+ * @LastEditTime: 2023-09-13 23:52:49
 -->
 <!--
  *                        _oo0oo_
@@ -81,10 +81,13 @@
                     <g :id="'xAxis' + stateTag"></g>
                     <g :id="'yAxis' + stateTag"></g>
                     <g id="axis_name">
-                        <text class="title" text-anchor="end"
+                        <text  font-family="KoHo" font-style="oblique" font-size="22" text-anchor="end"
                             :transform="translate(axisPosition.xAxis[0], axisPosition.xAxis[1])">{{ chart_setting.axis.x }}</text>
-                        <text class="title" text-anchor="start"
+                        <text  font-family="KoHo" font-style="oblique" font-size="22" text-anchor="start"
                             :transform="translate(axisPosition.yAxis[0], axisPosition.yAxis[1])">{{ chart_setting.axis.y }}</text>
+
+                        <text style="font-size: 32px;" text-anchor="middle"  font-family="KoHo" font-style="oblique"
+                            :transform="translate(.8 * elWidth / 2, -40)">{{ chart_setting.title }}</text>
                     </g>
                     <g id="singleline">
                         <path v-for="(o, i) in lineData" :key="'path' + i" :d="o.path" fill="none"
@@ -138,8 +141,13 @@
                                                 :fill="colorTrans(overlay_setting[overlay_map[6]].currentColor)" />
                                         </marker>
                                     </defs>
-                                    <path
+                                    <!-- <path
                                         :d="'M' + o.trend.pos.x1 + ',' + o.trend.pos.y1 + 'L' + o.trend.pos.x2 + ',' + o.trend.pos.y2"
+                                        :stroke-width="2" marker-end="url(#triangle)"
+                                        :stroke="colorTrans(overlay_setting[overlay_map[6]].currentColor)" fill="none">
+                                    </path> -->
+                                    <path
+                                        :d="trendPath"
                                         :stroke-width="2" marker-end="url(#triangle)"
                                         :stroke="colorTrans(overlay_setting[overlay_map[6]].currentColor)" fill="none">
                                     </path>
@@ -166,11 +174,11 @@
         <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
             'position': 'absolute',
             'top': `${0 * elHeight + position[item.text.qid].top}px`,
-            'left': `${.05 * elWidth - 75 + (realWidth - elWidth) / 2 + item.text.pos.x + position[item.text.qid].left}px`,
-            'width': '280px',
+            'left': `${.05 * elWidth - 140 + (realWidth - elWidth) / 2 + item.text.pos.x + position[item.text.qid].left}px`,
+            'width': '350px',
             'opacity': item.tag != -1 && (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? 1 : 0,
             'padding': '3px',
-            'font-size': '18px',
+            'font-size': '22px',
             'border': '2px solid',
             'border-color': item.tag != -1 && (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'black',
             'border-radius': '10px',
@@ -212,8 +220,8 @@
             'z-index': 1000
         }"  @mousedown="startDrag($event, 'legend')" @mousemove="onDrag($event, 'legend')" @mouseup="stopDrag()">
             <div style="display: flex;">
-                <div :style="{'height': '20px', 'width': '20px', 'background-color': colorTrans(chart_setting.currentColor), 'margin-right': '10px' }"></div>
-                <div>{{ chart_setting.attrName }}</div>
+                <div :style="{'height': '24px', 'width': '24px', 'background-color': colorTrans(chart_setting.currentColor), 'margin-right': '10px' }"></div>
+                <div style="font-size: 18px;">{{ chart_setting.attrName }}</div>
             </div>
         </div>
     </div>
@@ -262,7 +270,8 @@ export default {
             drawGraphTag: 0,
             isDragging: false,
             startPosition: { legend: { x: 0, y: 0 } },
-            position: { legend: { left: 0, top: 0 } }
+            position: { legend: { left: 0, top: 0 } },
+            trendPath: ''
         };
     },
     methods: {
@@ -290,9 +299,20 @@ export default {
             if (Object.keys(this.position).length == 1) {
                 pos_tag = 1;
             }
+
             for (let c_i in chartData) {
                 let over_data = chartData[c_i];
                 // console.log(over_data);
+                let trendLineData = [54, 68, 84, 100];
+                // let lineGen = line
+                let pathLine = 'M';
+                for (let i of trendLineData) {
+                    // if (line)
+                    pathLine += lineData[i].pos1[0] + ',' + lineData[i].pos1[1];
+                    if (i != 141) pathLine += 'L';
+                }
+                console.log(pathLine)
+                this.trendPath = pathLine;
                 let position = over_data.Position[0];
                 let overlayData = {
                     'objectName': over_data['ObjectName'],
@@ -479,7 +499,7 @@ export default {
             if (scaleType == 'linear') {
                 let dataDomain = extent(scale_data, d => parseFloat(d));
                 if (dataDomain[1] < 0) dataDomain[1] = 0;
-                if (dataDomain[0] > 0) dataDomain[0] = 0;
+                if (dataDomain[0] > 0) dataDomain[0] = 14000;
                 // console.log(dataDomain);
                 return scaleLinear(dataDomain, range);
             }
@@ -502,7 +522,7 @@ export default {
                 currentColor: chart_info.chartColor[chart_info.chartScale.y.attributeName[0]],
                 attrName: chart_info.chartScale.y.attributeName[0],
                 size: {
-                    width: 5
+                    width: 3
                 },
                 axis: {
                     x: xName,
@@ -530,19 +550,19 @@ export default {
             // console.log(xScale, yScale);
             this.yScale = yScale;
             this.axisPosition = {
-                xAxis: [width, yScale(0) + 30],
+                xAxis: [width, yScale(14000) + 50],
                 yAxis: [-.05 * width, -20]
             }
             // console.log(yScale);
             let xAxis = (g, x, height) => {
                 g.attr("transform", `translate(0, ${height})`)
                     .call(axisBottom(x))
-                    .attr('font-size', 15)
+                    .attr('font-size', 20)
             }
             let yAxis = (g, y) => {
                 g.attr("transform", `translate(${0}, 0)`)
                     .call(axisLeft(y).ticks(5).tickSizeOuter(0))
-                    .attr('font-size', 15)
+                    .attr('font-size', 20)
             }
             select("#xAxis" + this.stateTag).call(xAxis, xScale, height);
             select("#yAxis" + this.stateTag).call(yAxis, yScale);

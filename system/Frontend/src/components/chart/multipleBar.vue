@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-26 19:48:52
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-09-07 21:32:13
+ * @LastEditTime: 2023-12-12 14:45:52
 -->
 <template>
     <div ref="singleBarSvg"
@@ -28,14 +28,14 @@
                     </Transition>
                 </g>
                 <g>
-                    <g :id="'xAxis' + stateTag"></g>
-                    <g :id="'yAxis' + stateTag"></g>
+                    <g :id="'xAxis' + objTag"></g>
+                    <g :id="'yAxis' + objTag"></g>
                     <g id="axis_name">
-                        <text class="title" text-anchor="end"
+                        <text text-anchor="end" font-family="KoHo" font-style="oblique" font-size="22"
                             :transform="translate(axisPosition.xAxis[0], axisPosition.xAxis[1])">{{ chart_setting.axis.x }}</text>
-                        <text class="title" text-anchor="start"
+                        <text text-anchor="start" font-family="KoHo" font-style="oblique" font-size="22"
                             :transform="translate(axisPosition.yAxis[0], axisPosition.yAxis[1])">{{ chart_setting.axis.y }}</text>
-                        <text class="title" style="font-size: 25;" text-anchor="middle"
+                        <text style="font-size: 32px;" text-anchor="middle"  font-family="KoHo" font-style="oblique"
                             :transform="translate(.8 * elWidth / 2, -40)">{{ chart_setting.title }}</text>
                     </g>
                     <g id="bar">
@@ -70,7 +70,7 @@
                                 <circle v-for="(o, oi) in item.selectBar" :key="'oi_' + oi"
                                     :cx="o.x - (o.length - o.cnt - 1) * chart_setting.size.width / o.length + (o.length - 2) / 2 * chart_setting.size.width / o.length + chart_setting.size.width / (2 * o.length)"
                                     :cy="o.y" r="10" :fill="colorTrans(overlay_setting[overlay_map[3]].currentColor)"
-                                    stroke="none" opacity="1">
+                                    stroke="none" :opacity="oi == 0 || oi == 1 || oi == item.selectBar.length - 1 || oi == item.selectBar.length - 2 ? 1 : 0">
                                 </circle>
                             </g>
                             <!-- <g v-if="overlayTag[4] == 1" class="animation-fade">
@@ -123,15 +123,17 @@
             'position': 'absolute',
             'top': `${0 * elHeight + position[item.textPosTag].top}px`,
             'left': `${item.text.x + item.transTag * chart_setting.size.width / item.text.length + .05 * elWidth - 75 + (realWidth - elWidth) / 2 + position[item.textPosTag].left}px`,
-            'width': '280px',
+            'width': '340px',
             'opacity': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? '1' : '0',
             'padding': '3px',
             'border': '2px solid',
             'border-radius': '10px',
             'user-select': 'none',
+            'font-family': 'Arial',
             'cursor': 'grab',
             'background-color': 'white',
-            'font-size': '18px',
+            'font-size': '26px',
+            'text-align': 'justify',
             'z-index': (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? 100 : 1,
             'border-color': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'color',
         }" @mousedown="startDrag($event, item.textPosTag)" @mousemove="onDrag($event, item.textPosTag)"
@@ -148,10 +150,12 @@
                 'padding': '3px',
                 'border': '2px solid',
                 'border-radius': '10px',
+            'text-algin': 'justify',
                 'background-color': 'white',
                 'user-select': 'none',
+            'font-family': 'Arial',
                 'cursor': 'grab',
-            'font-size': '18px',
+            'font-size': '22px',
                 'z-index': (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? 100 : 1,
                 'border-color': objectTag[item.objectName] == 1 && overlayTag[4] == 1 ? colorTrans(overlay_setting[overlay_map[4]].currentColor) : 'white',
             }" @mousedown="startDrag($event, item.labelPosTag + 'l' + oi)"
@@ -164,14 +168,15 @@
             'top': `${50 + position['legend'].top}px`,
             'right': `${30 - position['legend'].left}px`,
             'user-select': 'none',
+            'font-family': 'Arial',
             'cursor': 'grab',
             'z-index': 1000
         }" @mousedown="startDrag($event, 'legend')" @mousemove="onDrag($event, 'legend')" @mouseup="stopDrag()">
             <div style="display: flex;" v-for="(o, i) in chart_setting.attrName" :key="'legend_' + i">
                 <div
-                    :style="{ 'height': '20px', 'width': '20px', 'background-color': colorTrans(chart_setting.currentColor[o]), 'margin-right': '10px' }">
+                    :style="{ 'height': '24px', 'width': '24px', 'background-color': colorTrans(chart_setting.currentColor[o]), 'margin-right': '10px', 'font-size': '20px'}">
                 </div>
-                <div>{{ o }}</div>
+                <div style="font-size: 18px;">{{ o }}</div>
             </div>
         </div>
     </div>
@@ -182,7 +187,7 @@ import { axisBottom, axisLeft, extent, scaleLinear, scalePoint, scaleUtc, select
 import { useDataStore } from "@/stores/counter";
 export default {
     name: "singleBar",
-    props: ['rawData', 'chartData', 'defaultTag', 'scaleTag', 'stateTag'],
+    props: ['rawData', 'chartData', 'defaultTag', 'scaleTag', 'stateTag', 'objTag'],
     data () {
         return {
             realHeight: 100,
@@ -332,7 +337,7 @@ export default {
                 overlayData.label = labelData;
                 overlayData.text = textData;
                 overlayData.trend = trendData;
-                console.log(over_data['GraphicalOverlay'][0]['Line']['pos'])
+                // console.log(over_data['GraphicalOverlay'][0]['Line']['pos'])
                 overall_data.push(overlayData);
             }
             return overall_data;
@@ -411,7 +416,7 @@ export default {
             let height = this.chart_setting.elHeight * .8;
             let xScale = this.scale(data, chart_info.chartScale.x.attributeName, chart_info.chartScale.x.scaleType, [0, width]);
             this.xScale = xScale;
-            console.log(xScale)
+            // console.log(xScale)
             let yScale = this.scale(data, chart_info.chartScale.y.attributeName[0], chart_info.chartScale.y.scaleType, [height, 0]);
             this.yScale = yScale;
             this.axisPosition = {
@@ -422,22 +427,22 @@ export default {
             let xAxis = (g, x, height) => {
                 g.attr("transform", `translate(0, ${height})`)
                     .call(axisBottom(x))
-                    .attr('font-size', 15)
+                    .attr('font-size', 20)
             }
             let yAxis = (g, y) => {
                 g.attr("transform", `translate(${0}, 0)`)
                     .call(axisLeft(y).ticks(5).tickSizeOuter(0))
-                    .attr('font-size', 15)
+                    .attr('font-size', 20)
             }
-            select("#xAxis" + this.stateTag).call(xAxis, xScale, height);
-            select("#yAxis" + this.stateTag).call(yAxis, yScale);
+            select("#xAxis" + this.objTag).call(xAxis, xScale, height);
+            select("#yAxis" + this.objTag).call(yAxis, yScale);
             let barData = new Array();
             for (let i in data) {
                 if (i == 'columns') continue;
                 let yLen = chart_info.chartScale.y.attributeName.length;
                 for (let j in chart_info.chartScale.y.attributeName) {
                     let yName = chart_info.chartScale.y.attributeName[j];
-                    console.log(xScale(this.dataType(data[i][chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType).toString()))
+                    // console.log(xScale(this.dataType(data[i][chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType).toString()))
                     barData.push({
                         x: xScale(this.dataType(data[i][chart_info.chartScale.x.attributeName], chart_info.chartScale.x.scaleType)),
                         y: yScale(data[i][yName]),
@@ -483,7 +488,9 @@ export default {
                 this.chart_setting = dataStore.state_map[this.stateTag]['chart_setting'];
             }
             // console.log(this.overlayData);
-            let selObj = dataStore.selectObject;
+            // let selObj = dataStore.selectObject;
+            let selObj = this.objTag;
+            console.log(selObj)
             this.overlayData = this.calcOverlay(this.barData, dataStore.graphicalOverlayData, this.chartData.chartScale.x.scaleType);
             if (selObj != '') {
                 if (selObj == -1) {
@@ -503,9 +510,7 @@ export default {
 
 <style>
 .title {
-    font-family: KoHo;
-    font-style: oblique;
-    font-size: 16px;
+    /* font-size: 20px; */
 }
 
 /* we will explain what these classes do next! */

@@ -4,7 +4,13 @@
     "final": [{
         "OriginText": "The highest sales proportion of compact-size NEVs since 2017 is 0.54 in 2019.",
         "Position": [{"Begin": ["Compact size", 2], "End": ["Compact size", 2]}],
-        "ConversationInfo":[{
+        "ConversationInfo":[
+        {
+            "Position": [4,10], 
+            "Text": "highest", 
+            "OverTag": 3, 
+            "Type": "Trend"
+        },{
             "Position": [32,48],
             "Text": "compact-size NEVs",
             "OverTag": 0,

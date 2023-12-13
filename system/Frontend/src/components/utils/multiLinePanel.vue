@@ -1,10 +1,3 @@
-<!--
- * @Description: 
- * @Author: Qing Shi
- * @Date: 2023-08-27 21:52:37
- * @LastEditors: Qing Shi
- * @LastEditTime: 2023-09-13 23:55:05
--->
 <template>
     <div>
         <div style="display: flex; margin-top: 5px;">
@@ -12,16 +5,16 @@
             <div><el-checkbox v-model="chartSetting.isLegend" label="" style="height: 14px; margin-top: 4px;" /></div>
         </div>
         <div>
-            <div style="display: flex; margin-bottom: 5px; align-items: center;">
+            <div style="display: flex; margin-bottom: 5px; align-items: center;" v-for="(item, i) in chartSetting.attrName">
                 <div style="width: 50px;">Label:</div>
                 <div style="margin-right: 5px;">
-                    <color-picker v-model="chartSetting.currentColor"></color-picker>
+                    <color-picker v-model="chartSetting.currentColor[item]"></color-picker>
                 </div>
-                <input class="axisInput" style="width: calc(100% - 85px);" v-model="chartSetting.attrName" placeholder="Please input" />
+                <input class="axisInput" style="width: calc(100% - 85px);" v-model="chartSetting.attrName[i]" placeholder="Please input" />
             </div>
         </div>
         <hr>
-        <div>Line</div>
+        <div>Bar Size</div>
         <div>Width: <input class="widthInput" v-model="chartSetting.size.width" placeholder="Please input" /> px</div>
         <hr>
         <div>Title</div>

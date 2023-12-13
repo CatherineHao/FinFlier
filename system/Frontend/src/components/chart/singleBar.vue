@@ -1,4 +1,11 @@
 <!--
+ * @Description: 
+ * @Author: Qing Shi
+ * @Date: 2023-08-22 14:28:15
+ * @LastEditors: Qing Shi
+ * @LastEditTime: 2023-09-13 21:21:20
+-->
+<!--
  *                        _oo0oo_
  *                       o8888888o
  *                       88" . "88
@@ -63,11 +70,14 @@
                     <g :id="'xAxis' + stateTag"></g>
                     <g :id="'yAxis' + stateTag"></g>
                     <g id="axis_name">
-                        <text class="title" text-anchor="end"
+                        <text  font-family="KoHo" font-style="oblique" font-size="22" text-anchor="end"
                             :transform="translate(axisPosition.xAxis[0], axisPosition.xAxis[1])">{{ chart_setting.axis.x }}</text>
-                        <text class="title" text-anchor="start"
+                        <text  font-family="KoHo" font-style="oblique" font-size="22" text-anchor="start"
                             :transform="translate(axisPosition.yAxis[0], axisPosition.yAxis[1])">{{ chart_setting.axis.y }}</text>
-                        <text class="title" style="font-size: 25;" text-anchor="middle" :transform="translate(.8 * elWidth / 2, -40)">{{ chart_setting.title }}</text>
+                        <text  font-family="KoHo" font-style="oblique" font-size="22" style="font-size: 32;" text-anchor="middle" :transform="translate(.8 * elWidth / 2, -40)">
+                            <!-- {{ chart_setting.title }} -->
+                            Foreign direct investment expenditures 
+                        </text>
                     </g>
                     <g id="bar">
                         <g v-for="(item, i) in barData" :key="'single_bar_' + i">
@@ -94,7 +104,7 @@
                                             :x="o.x - chart_setting.size.width / 2" :y="o.y" :fill="'none'"
                                             :width="chart_setting.size.width" :height="o.height"
                                             :stroke="colorTrans(overlay_setting[overlay_map[1]].currentColor)"
-                                            :stroke-width="3" :stroke-dasharray="5.5" opacity="1"></rect>
+                                            :stroke-width="3" :stroke-dasharray="0" opacity="1"></rect>
                                     </g>
                                 </g>
                                 <g>
@@ -152,15 +162,15 @@
         <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
             'position': 'absolute',
             'top': `${0 * elHeight + position[item.text.qid].top}px`,
-            'left': `${item.text.pos.x + .05 * elWidth - 75 + (realWidth - elWidth) / 2 + position[item.text.qid].left}px`,
-            'width': '280px',
+            'left': `${item.text.pos.x + .05 * elWidth - 160 + (realWidth - elWidth) / 2 + position[item.text.qid].left}px`,
+            'width': '320px',
             'opacity': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? '1' : '0',
             'padding': '3px',
             'border': '2px solid',
             'border-radius': '10px',
             'background-color': 'white',
             'user-select': 'none',
-            'font-size': '18px',
+            'font-size': '22px',
             'cursor': 'grab',
             'z-index': (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? 100 : 1,
             'border-color': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'color',
@@ -180,7 +190,7 @@
                 'border-radius': '10px',
                 'background-color': 'white',
                 'user-select': 'none',
-            'font-size': '18px',
+            'font-size': '22px',
                 'cursor': 'grab',
                 'z-index': (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? 100 : 1,
                 'border-color': objectTag[item.objectName] == 1 && overlayTag[4] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'color',
@@ -199,9 +209,9 @@
         }" @mousedown="startDrag($event, 'legend')" @mousemove="onDrag($event, 'legend')" @mouseup="stopDrag()">
             <div style="display: flex;">
                 <div
-                    :style="{ 'height': '20px', 'width': '20px', 'background-color': colorTrans(chart_setting.currentColor), 'margin-right': '10px' }">
+                    :style="{ 'height': '24px', 'width': '24px', 'background-color': colorTrans(chart_setting.currentColor), 'margin-right': '10px' }">
                 </div>
-                <div>{{ chart_setting.attrName }}</div>
+                <div style="font-size: 18px;">{{ chart_setting.attrName }}</div>
             </div>
         </div>
     </div>
@@ -272,7 +282,7 @@ export default {
             this.isDragging = false;
         },
         calcOverlay (barData, chartData) {
-            // console.log(barData, chartData);
+            console.log(barData, chartData);
             let over_all = [];
             let pos_tag = 0;
             if (Object.keys(this.position).length == 1) {
@@ -494,12 +504,12 @@ export default {
             let xAxis = (g, x, height) => {
                 g.attr("transform", `translate(0, ${height})`)
                     .call(axisBottom(x))
-                    .attr('font-size', 15)
+                    .attr('font-size', 20)
             }
             let yAxis = (g, y) => {
                 g.attr("transform", `translate(${0}, 0)`)
                     .call(axisLeft(y).ticks(5).tickSizeOuter(0))
-                    .attr('font-size', 15)
+                    .attr('font-size', 20)
             }
             select("#xAxis" + this.stateTag).call(xAxis, xScale, height);
             select("#yAxis" + this.stateTag).call(yAxis, yScale);

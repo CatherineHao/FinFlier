@@ -23,7 +23,7 @@
                         32
                     ],
                     "Text": "head and shoulder",
-                    "OverTag": 1,
+                    "OverTag": 3,
                     "Type": "Trend"
                 },
                 {
@@ -54,6 +54,7 @@
                             ]
                         }
                     ],
+                    "trendData": [39, 48, 92, 129, 141],
                     "Line": {
                         "Begin": [
                             "Close",
