@@ -1,0 +1,612 @@
+{
+    "result": "",
+    "reason": [
+        {
+            "Name": "Narrative1",
+            "Subject": [
+                "renewables",
+                "renewables"
+            ],
+            "Trend": "the 'increase' trend exists from 112 in ['renewables', 0] to 211 in ['renewables', 6].",
+            "Numerical": "the numerical 211 corresponds to 211 in ['renewables', 6]."
+        },
+        {
+            "Name": "Narrative2",
+            "Subject": [
+                "natural gas",
+                "natural gas"
+            ],
+            "Trend": "the 'minimum' corresponds to 306 in ['natural gas', 0].",
+            "Numerical": "the numerical 408 corresponds to 408 in ['natural gas', 1]."
+        },
+        {
+            "Name": "Narrative3",
+            "Subject": [
+                "liquid",
+                "liquids"
+            ],
+            "Trend": "None.",
+            "Numerical": "the numerical 4 corresponds to 4 in ['liquids', 6]"
+        },
+        {
+            "Name": "Narrative4",
+            "Subject": [
+                "nuclear energy",
+                "nuclear"
+            ],
+            "Trend": "None",
+            "Numerical": "the numerical 3 corresponds to 3 in ['nuclear', 1]."
+        },
+        {
+            "Name": "Narrative5",
+            "Subject": [
+                "natural gas",
+                "natural gas"
+            ],
+            "Trend": "None",
+            "Numerical": "the numerical 438 corresponds to 438 in ['natural gas', 6]."
+        }
+    ],
+    "final": [
+        {
+            "OriginText": "In light of the global shift towards sustainable energy, the Japan Electric Institute has made a forecast for future electricity generation sources. They predict that the renewables will continuously increase and reach 211 billion kilowatt hours in 2040. Meanwhile, natural gas, having reached 408 billion kilowatt hours in 2015, has its minimum value in 2010. The liquid is predicted to reach 4 billion kilowatter hours in 2040. The nuclear energy in Japan, severely impacted by the Fukushima Daiichi nuclear disaster, recorded a production of only 3 billion kilowatt hours in 2015. Currently, due to its reliability and abundance, the most commonly used feedstock for electricity generation is now natural gas, which is expected to reach 438 billion kilowatt hours in 2040. It underscores the pivotal role of natural gas in Japan's energy landscape.",
+            "Position": [
+                {
+                    "Begin": [
+                        "renewables",
+                        0
+                    ],
+                    "End": [
+                        "renewables",
+                        6
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": [
+                        171,
+                        180
+                    ],
+                    "Text": "renewables",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                },
+                {
+                    "Position": [
+                        200,
+                        207
+                    ],
+                    "Text": "increase",
+                    "OverTag": 3,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        219,
+                        221
+                    ],
+                    "Text": "211",
+                    "OverTag": 1,
+                    "Type": "Num"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "the sales proportion of NEVs that were subcompact and below declined to 30%",
+                    "Label": [
+                        "30%",
+                        "61%"
+                    ],
+                    "LabelPos": [
+                        {
+                            "x": "2017",
+                            "y": 0.61,
+                            "text": "61%"
+                        },
+                        {
+                            "x": "2023",
+                            "y": 0.61,
+                            "text": "30%"
+                        }
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Mini- and subcompact size",
+                                0
+                            ],
+                            "End": [
+                                "Mini- and subcompact size",
+                                6
+                            ]
+                        }
+                    ],
+                    "MarkerPos": [
+                        {
+                            "x": "2017",
+                            "y": 0.61,
+                            "t": -1
+                        },
+                        {
+                            "x": 2023,
+                            "y": 0.3,
+                            "t": -1
+                        }
+                    ],
+                    "transTag": -1,
+                    "Line": {
+                        "Begin": [
+                            "Mini- and subcompact size",
+                            0
+                        ],
+                        "End": [
+                            "Mini- and subcompact size",
+                            6
+                        ],
+                        "range": [
+                            0.61,
+                            0.3
+                        ],
+                        "mean": 0.403,
+                        "trans_tag": 1,
+                        "max": 0.61,
+                        "min": 0.30,
+                        "pos": [
+                            {
+                                "x": "2017",
+                                "y": 0.61,
+                                "text": "39%"
+                            },
+                            {
+                                "x": "2023",
+                                "y": 0.3,
+                                "text": "70%"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Meanwhile, natural gas, having reached 408 billion kilowatt hours in 2015, is predicted to consistently remain above 400 billion kilowatter hours. The liquid is predicted to reach 4 billion kilowatter hours in 2040. The nuclear energy in Japan, severely impacted by the Fukushima Daiichi nuclear disaster, recorded a production of only 3 billion kilowatt hours in 2015. Currently, due to its reliability and abundance, the most commonly used feedstock for electricity generation is now natural gas, which is expected to reach 438 billion kilowatt hours in 2040. It underscores the pivotal role of natural gas in Japan's energy landscape.",
+            "Position": [
+                {
+                    "Begin": [
+                        "natural gas",
+                        1
+                    ],
+                    "End": [
+                        "natural gas",
+                        1
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": [
+                        266,
+                        276
+                    ],
+                    "Text": "natural gas",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                },
+                {
+                    "Position": [
+                        294,
+                        296
+                    ],
+                    "Text": "408",
+                    "OverTag": 1,
+                    "Type": "Num"
+                },
+                {
+                    "Position": [
+                        338,
+                        344
+                    ],
+                    "Text": "minimum",
+                    "OverTag": 3,
+                    "Type": "Trend"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "the mix of compact and midsize-to-large NEVs increased to 70% from 39%",
+                    "Label": [
+                        "39%",
+                        "70%"
+                    ],
+                    "LabelPos": [
+                        {
+                            "x": "2017",
+                            "y": 0.39,
+                            "text": "39%"
+                        },
+                        {
+                            "x": "2023",
+                            "y": 0.7,
+                            "text": "70%"
+                        }
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                2,
+                                0
+                            ],
+                            "End": [
+                                3,
+                                6
+                            ]
+                        }
+                    ],
+                    "MarkerPos": [
+                        {
+                            "x": "2017",
+                            "y": 0.35,
+                            "t": 0
+                        },
+                        {
+                            "x": 2023,
+                            "y": 0.3,
+                            "t": 0
+                        },
+                        {
+                            "x": "2017",
+                            "y": 0.04,
+                            "t": 1
+                        },
+                        {
+                            "x": 2023,
+                            "y": 0.4,
+                            "t": 1
+                        }
+                    ],
+                    "transTag": 0.5,
+                    "Line": {
+                        "Begin": [
+                            "Midsize to large",
+                            0
+                        ],
+                        "End": [
+                            "Midsize to large",
+                            6
+                        ],
+                        "trans_tag": 2,
+                        "range": [
+                            0.39,
+                            0.7
+                        ],
+                        "mean": 0.597,
+                        "max": 0.70,
+                        "min": 0.39,
+                        "pos": [
+                            {
+                                "x": "2017",
+                                "y": 0.39,
+                                "text": "39%"
+                            },
+                            {
+                                "x": "2023",
+                                "y": 0.7,
+                                "text": "70%"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "In light of the global shift towards sustainable energy, the Japan Electric Institute has made a forecast for future electricity generation sources. They predict that the renewables will continuously increase and reach 211 billion kilowatt hours in 2040. Meanwhile, natural gas, having reached 408 billion kilowatt hours in 2015, is predicted to consistently remain above 400 billion kilowatter hours. The liquid is predicted to reach 4 billion kilowatter hours in 2040. The nuclear energy in Japan, severely impacted by the Fukushima Daiichi nuclear disaster, recorded a production of only 3 billion kilowatt hours in 2015. Currently, due to its reliability and abundance, the most commonly used feedstock for electricity generation is now natural gas, which is expected to reach 438 billion kilowatt hours in 2040. It underscores the pivotal role of natural gas in Japan's energy landscape.",
+            "Position": [
+                {
+                    "Begin": [
+                        "liquids",
+                        6
+                    ],
+                    "End": [
+                        "liquids",
+                        6
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": [
+                        365,
+                        370
+                    ],
+                    "Text": "liquid",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                },
+                {
+                    "Position": [
+                        394,
+                        394
+                    ],
+                    "Text": "4",
+                    "OverTag": 1,
+                    "Type": "Num"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "the mix of compact and midsize-to-large NEVs increased to 70% from 39%",
+                    "Label": [
+                        "40%"
+                    ],
+                    "LabelPos": [
+                        {
+                            "x": "2023",
+                            "y": 0.4,
+                            "text": "40%"
+                        }
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                2,
+                                0
+                            ],
+                            "End": [
+                                3,
+                                6
+                            ]
+                        }
+                    ],
+                    "MarkerPos": [
+                        {
+                            "x": "2023",
+                            "y": 0.4,
+                            "t": 1
+                        }
+                    ],
+                    "transTag": 1,
+                    "Line": {
+                        "Begin": [
+                            "Midsize to large",
+                            0
+                        ],
+                        "End": [
+                            "Midsize to large",
+                            6
+                        ],
+                        "trans_tag": 1,
+                        "range": [
+                            0.39,
+                            0.7
+                        ],
+                        "mean": 0.597,
+                        "max": 0.70,
+                        "min": 0.39,
+                        "pos": [
+                            {
+                                "x": "2017",
+                                "y": 0.4,
+                                "text": "40%"
+                            },
+                            {
+                                "x": "2023",
+                                "y": 0.4,
+                                "text": "40%"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "In light of the global shift towards sustainable energy, the Japan Electric Institute has made a forecast for future electricity generation sources. They predict that the renewables will continuously increase and reach 211 billion kilowatt hours in 2040. Meanwhile, natural gas, having reached 408 billion kilowatt hours in 2015, is predicted to consistently remain above 400 billion kilowatter hours. The liquid is predicted to reach 4 billion kilowatter hours in 2040. The nuclear energy in Japan, severely impacted by the Fukushima Daiichi nuclear disaster, recorded a production of only 3 billion kilowatt hours in 2015. Currently, due to its reliability and abundance, the most commonly used feedstock for electricity generation is now natural gas, which is expected to reach 438 billion kilowatt hours in 2040. It underscores the pivotal role of natural gas in Japan's energy landscape.",
+            "Position": [
+                {
+                    "Begin": [
+                        "nuclear",
+                        1
+                    ],
+                    "End": [
+                        "nuclear",
+                        1
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": [
+                        434,
+                        447
+                    ],
+                    "Text": "nuclear energy",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                },
+                {
+                    "Position": [
+                        550,
+                        550
+                    ],
+                    "Text": "3",
+                    "OverTag": 1,
+                    "Type": "Num"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "the mix of compact and midsize-to-large NEVs increased to 70% from 39%",
+                    "Label": [
+                        "30%"
+                    ],
+                    "LabelPos": [
+                        {
+                            "x": "2023",
+                            "y": 0.30,
+                            "text": "30%"
+                        }
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                2,
+                                0
+                            ],
+                            "End": [
+                                3,
+                                6
+                            ]
+                        }
+                    ],
+                    "MarkerPos": [
+                        {
+                            "x": 2023,
+                            "y": 0.3,
+                            "t": -1
+                        },
+                        {
+                            "x": 2023,
+                            "y": 0.3,
+                            "t": 0
+                        }
+                    ],
+                    "transTag": -0.5,
+                    "Line": {
+                        "Begin": [
+                            "Midsize to large",
+                            0
+                        ],
+                        "End": [
+                            "Midsize to large",
+                            6
+                        ],
+                        "trans_tag": 1,
+                        "range": [
+                            0.39,
+                            0.7
+                        ],
+                        "mean": 0.597,
+                        "max": 0.70,
+                        "min": 0.39,
+                        "pos": [
+                            {
+                                "x": "2017",
+                                "y": 0.39,
+                                "text": "39%"
+                            },
+                            {
+                                "x": "2023",
+                                "y": 0.7,
+                                "text": "70%"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "In light of the global shift towards sustainable energy, the Japan Electric Institute has made a forecast for future electricity generation sources. They predict that the renewables will continuously increase and reach 211 billion kilowatt hours in 2040. Meanwhile, natural gas, having reached 408 billion kilowatt hours in 2015, is predicted to consistently remain above 400 billion kilowatter hours. The liquid is predicted to reach 4 billion kilowatter hours in 2040. The nuclear energy in Japan, severely impacted by the Fukushima Daiichi nuclear disaster, recorded a production of only 3 billion kilowatt hours in 2015. Currently, due to its reliability and abundance, the most commonly used feedstock for electricity generation is now natural gas, which is expected to reach 438 billion kilowatt hours in 2040. It underscores the pivotal role of natural gas in Japan's energy landscape.",
+            "Position": [
+                {
+                    "Begin": [
+                        "natural gas",
+                        6
+                    ],
+                    "End": [
+                        "natural gas",
+                        6
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": [
+                        700,
+                        710
+                    ],
+                    "Text": "natural gas",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                },
+                {
+                    "Position": [
+                        740,
+                        742
+                    ],
+                    "Text": "438",
+                    "OverTag": 1,
+                    "Type": "Num"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "the mix of compact and midsize-to-large NEVs increased to 70% from 39%",
+                    "Label": [
+                        "30%"
+                    ],
+                    "LabelPos": [
+                        {
+                            "x": "2023",
+                            "y": 0.30,
+                            "text": "30%"
+                        }
+                    ],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                2,
+                                0
+                            ],
+                            "End": [
+                                3,
+                                6
+                            ]
+                        }
+                    ],
+                    "MarkerPos": [
+                        {
+                            "x": 2023,
+                            "y": 0.3,
+                            "t": -1
+                        },
+                        {
+                            "x": 2023,
+                            "y": 0.3,
+                            "t": 0
+                        }
+                    ],
+                    "transTag": -0.5,
+                    "Line": {
+                        "Begin": [
+                            "Midsize to large",
+                            0
+                        ],
+                        "End": [
+                            "Midsize to large",
+                            6
+                        ],
+                        "trans_tag": 1,
+                        "range": [
+                            0.39,
+                            0.7
+                        ],
+                        "mean": 0.597,
+                        "max": 0.70,
+                        "min": 0.39,
+                        "pos": [
+                            {
+                                "x": "2017",
+                                "y": 0.39,
+                                "text": "39%"
+                            },
+                            {
+                                "x": "2023",
+                                "y": 0.7,
+                                "text": "70%"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

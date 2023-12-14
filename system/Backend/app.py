@@ -354,7 +354,8 @@ reason: "The 'Amazon stock moving averages' corresponds to the column 'price' in
 def post_query():
     params = request.json
     label = params['label']
-    file_path = '{}/data/output_group.json'.format(FILE_ABS_PATH)
+    # file_path = '{}/data/output_group.json'.format(FILE_ABS_PATH)
+    file_path = '{}/data/output_multiLineData.json'.format(FILE_ABS_PATH)
     if label == 'following': 
         file_path = '{}/data/output_conversation.json'.format(FILE_ABS_PATH)
     data = read_json(file_path)
@@ -377,7 +378,8 @@ def determine_x_axis_type(input_data):
     #     return 'linear'
     # else:
     #     return 'category'
-    return 'category'
+    # return 'category'
+    return 'time'
 # <<<<<<< Updated upstream
 #     #### time部分
 #     # x_values = next(iter(input_data[0].values()))
@@ -442,7 +444,7 @@ def determine_chart_type(input_data, x_type):
         chart_type += 1
     
     # return chart_type
-    return 2
+    return 3
 #TODO: backend function 1
 # @app.route('/chart-info', methods=['POST'])
 @app.route('/api/test/fetchBasicChart/', methods=['POST'])
