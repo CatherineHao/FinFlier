@@ -25,17 +25,18 @@
         </div>
         <div style="height: calc(100% - 40px); width: 100%;">
 
-            <div style="height: calc(70%); width: 100%;" v-loading="initChart" ref="mainView" id="mainView"><div class="overlayTag" style="position: absolute; top: 0px; left: 0px;">
-                        {{ 'Narrative ' + (parseInt(selObj.slice(-1)) + 1) }}</div>
+            <div style="height: calc(70%); width: 100%;" v-loading="initChart" ref="mainView" id="mainView"><div class="overlayTag" style="position: absolute; top: 0px; left: 0px; background-color: rgb(99, 99, 99, .2);">
+                        {{ typeof selObj != 'string' || selObj == '' ? 'Raw' : 'Narrative ' + (1 + parseInt(selObj.slice(-1))) }}</div>
                 <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
                     :defaultTag="1" :scaleTag="1" :stateTag="'state0'" :objTag="selObj"></component>
             </div>
             <hr>
             <!-- display: flex; justify-content: space-between; align-items: center; -->
-            <div style="height: calc(30% - 0px); width: 100%; background-color: white; overflow-y: auto; display: flex;">
+            <div ref="narrative_gallery" style="height: calc(30% - 0px); width: 100%; background-color: white; overflow-y: auto; display: flex;">
                 <div v-for="(nar, nar_i) in narrative_num" :key="'nar' + nar_i"
                     style="height: 98%; width: 33%; border-radius: 5px; border: 1.5px solid rgba(99, 99, 99, .6); align-items: center; display: flex; justify-content: center; margin: 3px;">
-                    <div class="overlayTag" style="position: absolute; top: 10px; left: 10px;">
+                    <div class="overlayTag" :style="{'position': 'absolute', 'top': '5px', 'left': '10px', backgroundColor: selObj == 'object' + nar_i ? '#2f5597' : 'rgb(99, 99, 99, .2)', color: selObj == 'object' + nar_i ? 'white' : 'black'}">
+                    
                         {{ 'Narrative ' + (nar_i + 1) }}</div>
                     <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData" style="margin-top: 60px;"
                         :defaultTag="1" :scaleTag=".33" :stateTag="'state0'" :objTag="'object' + (nar_i)"></component>
@@ -106,7 +107,12 @@ export default {
             }
             this.narrative_num = dataStore.narrative_num;
             this.selObj = dataStore.selectObject;
-            console.log(this.selObj)
+            // console.log(this.selObj, typeof(this.selObj))
+            if (!(typeof (this.selObj)== 'string' && this.selObj == '')) {
+                let nar_cnt = parseInt(this.selObj.slice(-1));
+                this.$refs.narrative_gallery.scrollLeft = (nar_cnt) * this.$refs.narrative_gallery.offsetWidth / 3;
+                console.log((nar_cnt - 1) * this.$refs.narrative_gallery.offWidth / 3, nar_cnt)
+            }
         })
     },
     watch: {
@@ -132,8 +138,8 @@ export default {
 </script>
 
 <style scoped>.overlayTag {
-    font-family: KoHo;
-    background-color: rgb(99, 99, 99, .2);
+    /* font-family: KoHo; */
+    /* background-color: rgb(99, 99, 99, .2); */
     border-radius: 10px;
     padding: 3px 10px 3px 10px;
     font-weight: 600;

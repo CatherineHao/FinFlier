@@ -66,14 +66,13 @@
                     </div>
                 </div>
             </div> -->
-            <div ref="scrollableDiv"
-                style="position: absolute; top: 0px; height: calc(100% - 40px); width: 100%;">
+            <div ref="scrollableDiv" style="position: absolute; top: 0px; height: calc(100% - 40px); width: 100%;">
                 <div v-for="(item, item_i) in textGroup" :key="'group_' + item_i" :id="'group_' + item_i" :style="{
-                    'transition': '1s', 'padding-top': '5px', 'padding-bottom': '5px', 'opacity': 1
+                    'transition': '1s', 'padding-top': '0px', 'padding-bottom': '5px', 'opacity': 1, 'height': item.special_tag == 0 ? '70%' : 'auto'
                 }">
-                    <div v-if="item.special_tag == 0" style="width: 100%; display: flex;">
+                    <div v-if="item.special_tag == 0" style="width: 100%; height: 100%; display: flex;">
                         <div v-loading="item.loading"
-                            style="width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3);">
+                            style="height: 100%; width: 100%; line-height:1lh; text-align: start; padding: 8px; background-color: rgb(173, 216, 230, 0); border-radius:5px; min-height: 40px; border: 1px solid rgba(0, 0, 0, .3);">
                             <div style="display: flex; justify-content: space-between">
                                 <div>
                                     <svg t="1693451515962" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -109,84 +108,88 @@
                                 </div>
                                 <div>
                                     <span
-                                        style="background-color: rgba(174, 205, 234, 0.4); border-bottom: 0px; padding: 3px;"
+                                        style="background-color: #e8f5e9; border-bottom: 0px; padding: 3px; color: #38c075;"
                                         class="dataObject">
                                         Subject
                                     </span>
                                     &nbsp;&nbsp;&nbsp;
-                                    <span class="dataObject" style="border-bottom: 3px solid rgb(174, 205, 234);">
+                                    <span class="dataObject" style="border-bottom: 3px solid #e8f5e9; color: #38c075;">
                                         Numerical
                                     </span>
                                     &nbsp;&nbsp;&nbsp;
-                                    <span class="dataObject" style="border: 3px solid rgb(174, 205, 234); padding: 3px;">
+                                    <span class="dataObject" style="border: 3px solid #e8f5e9; padding: 3px; color: #38c075">
                                         Trend
                                     </span>
 
                                 </div>
 
                             </div>
-                            <div>
+                            <div style="height: 55%;">
                                 <!-- ,
                                             'border-bottom': o.tag == 2 || o.tag == 1 ? '3px solid ' + o.color : '0px', -->
 
                                 <div style="font-weight: 600;">
                                     Narrative:</div>
-                                <span v-for="(o, i) in item.outputTextGroup" :key="'res_' + i" >
-                                <span v-if="o.pos_tag == 0" style="background-color: #2f5597; color: white; padding: 2px 5px 2px 5px; border-radius: 3px;">{{ parseInt(o.pos_cnt) + 1 }}</span>
-                                <span v-if="o.pos_tag == 0" >&nbsp;</span>
-                                <span :class="{ 'dataObject': o.tag != -1 }" :id="o.id" :style="{
-                                        backgroundColor: o.tag == 0 || o.tag == 2 ? o.back_color : 'white',
-                                        'border-bottom': o.tag == 3 || o.tag == 1 ? '3px solid ' + o.color : '0px',
-                                        'border-top': o.tag == 3 ? '3px solid ' + o.color : '0px',
-                                        'border-left': o.tag == 3 ? '3px solid ' + o.color : '0px',
-                                        'border-right': o.tag == 3 ? '3px solid ' + o.color : '0px',
-                                        color: o.tag == -1 ? 'black' : '#38c075'
-                                    }" @click="o.tag != -1 ? hoverObject(o) : ''"
-                                    @mouseenter="o.tag != -1 ? handleHover(o) : ''"
-                                    @mouseout="o.tag != -1 ? handleOut(o) : ''">{{ o.text }}</span></span>
+                                <div style="overflow-y: auto; height: calc(100% - 24px);">
+                                    <span v-for="(o, i) in item.outputTextGroup" :key="'res_' + i">
+                                        <span v-if="o.pos_tag == 0"
+                                            style="background-color: #2f5597; color: white; padding: 2px 5px 2px 5px; border-radius: 3px;">{{ parseInt(o.pos_cnt) + 1 }}</span>
+                                        <span v-if="o.pos_tag == 0">&nbsp;</span>
+                                        <span :class="{ 'dataObject': o.tag != -1 }" :id="o.id" :style="{
+                                            backgroundColor: o.tag == 0 || o.tag == 2 ? o.back_color : 'white',
+                                            'border-bottom': o.tag == 3 || o.tag == 1 ? '3px solid ' + o.color : '0px',
+                                            'border-top': o.tag == 3 ? '3px solid ' + o.color : '0px',
+                                            'border-left': o.tag == 3 ? '3px solid ' + o.color : '0px',
+                                            'border-right': o.tag == 3 ? '3px solid ' + o.color : '0px',
+                                            color: o.tag == -1 ? 'black' : '#38c075'
+                                        }" @click="o.tag != -1 ? hoverObject(o) : ''"
+                                            @mouseenter="o.tag != -1 ? handleHover(o) : ''"
+                                            @mouseout="o.tag != -1 ? handleOut(o) : ''">{{ o.text }}</span></span>
+                                </div>
                                 <!-- <br>
                                 <br> -->
-                                <div>
+                                
+                            </div>
+                            <div style="height: 30%;">
                                     <hr style="margin-top: 10px; margin-bottom: 5px;">
                                     <div style="font-weight: 600;">
                                         Reason:</div>
-                                    <div style=" margin-left: 0em;">
+                                    <div style=" margin-left: 0em; overflow-y: auto; height: calc(100%);">
                                         <!-- {{ item.reason }} -->
                                         <div v-for="(r_item, r_i) in item.reason" :key="'reason' + r_i">
                                             <div style="text-decoration: underline;">
                                                 {{ (r_item.Name).slice(0, 9) + ' ' + (r_item.Name.slice(9, r_item.Name.length)) }}:
                                             </div>
                                             <ul>
-                                            <li style="margin-left: 1em;">
-                                                Subject:
-                                                <span>
-                                                    "{{ r_item.Subject[0] }}"
-                                                    &rarr;
-                                                    "{{ r_item.Subject[1] }}"
-                                                </span>
-                                            </li>
-                                            <li style="margin-left: 1em;">
-                                                Trend:
-                                                <span>
-                                                    {{ r_item.Trend }}
-                                                </span>
-                                            </li>
-                                            <li style="margin-left: 1em;">
-                                                Numerical:
-                                                <span>
-                                                    {{ r_item.Numerical }}
-                                                </span>
-                                            </li>
+                                                <li style="margin-left: 1em;">
+                                                    Subject:
+                                                    <span>
+                                                        "{{ r_item.Subject[0] }}"
+                                                        &rarr;
+                                                        "{{ r_item.Subject[1] }}"
+                                                    </span>
+                                                </li>
+                                                <li style="margin-left: 1em;">
+                                                    Trend:
+                                                    <span>
+                                                        {{ r_item.Trend }}
+                                                    </span>
+                                                </li>
+                                                <li style="margin-left: 1em;">
+                                                    Numerical:
+                                                    <span>
+                                                        {{ r_item.Numerical }}
+                                                    </span>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                         <!-- <hr style="margin-top: 5px; margin-bottom: 5px;"> -->
                     </div>
-                    <hr v-if="item.special_tag == 0" style="margin-top: 10px; margin-bottom: 0px;">
-                    <div v-if="item.special_tag != 0" style="width: 100%; display: flex;  overflow-y: auto;">
+                    <hr v-if="item.special_tag == 0" style="margin-top: 10px; margin-bottom: 10px;">
+                    <div v-if="item.special_tag != 0" style="width: 100%; display: flex;  overflow-y: auto; margin-top: 10px;">
                         <div v-if="item.tag == 1" style=" width: 40px; padding-top: 3px; padding-left: 0px;">
                             <div
                                 style="background-color: rgb(91, 155, 255); width: 35px; height: 35px; border-radius: 6px; padding: 4px;">
@@ -263,6 +266,20 @@
                                     </svg>
                                 </div>
                                 <div>
+                                    <span v-for="(o, i) in item.outputTextGroup" :key="'res_' + i">
+                                        <span v-if="o.pos_tag == 0"
+                                            style="background-color: #2f5597; color: white; padding: 2px 5px 2px 5px; border-radius: 3px;">{{ parseInt(o.pos_cnt) + 1 }}</span>
+                                        <span v-if="o.pos_tag == 0">&nbsp;</span>
+                                        <span :class="{ 'dataObject': o.tag != -1 }" :id="o.id" :style="{
+                                            backgroundColor: o.tag == 0 || o.tag == 2 ? o.back_color : 'white',
+                                            'border-bottom': o.tag == 3 || o.tag == 1 ? '3px solid ' + o.color : '0px',
+                                            'border-top': o.tag == 3 ? '3px solid ' + o.color : '0px',
+                                            'border-left': o.tag == 3 ? '3px solid ' + o.color : '0px',
+                                            'border-right': o.tag == 3 ? '3px solid ' + o.color : '0px',
+                                            color: o.tag == -1 ? 'black' : '#38c075'
+                                        }" @click="o.tag != -1 ? hoverObject(o) : ''"
+                                            @mouseenter="o.tag != -1 ? handleHover(o) : ''"
+                                            @mouseout="o.tag != -1 ? handleOut(o) : ''">{{ o.text }}</span></span>
                                     <!-- <span v-for="(o, i) in item.outputTextGroup" :key="'res_' + i"
                                         :class="{ 'dataObject': o.tag != -1 }" :id="o.id" :style="{
                                             backgroundColor: o.tag == 0 || o.tag == 2 ? o.back_color : 'white',
@@ -476,10 +493,13 @@ export default {
             // const dataStore = useDataStore();
             // let overlay_set = d
             const dataStore = useDataStore();
-            dataStore.graphicalOverlayData = description_data;
-            let narrative_cnt = 0;
+            let tmpOverlayData = dataStore.graphicalOverlayData == null ? [] : dataStore.graphicalOverlayData;
             for (let i in description_data) {
-                narrative_cnt++;
+                tmpOverlayData.push(description_data[i]);
+            }
+            dataStore.graphicalOverlayData = tmpOverlayData;
+            // console.log(description_data);
+            for (let i in description_data) {
                 // console.log(description_data[i]['ObjectName'])
                 let tmp = {}, tmp1 = {}, tmp2 = {}, tmp3 = {};
                 tmp['overlay_tag'] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -488,6 +508,7 @@ export default {
                 // } else if (this.chart_type == 1 || this.chart_type == 3) {
                 //     tmp['overlay_tag'][4] = 1;
                 // }
+                if (description_data.length > 1){
                 if (i == 0 || i == 1) {
                     tmp['overlay_tag'][0] = 1;
                     tmp['overlay_tag'][3] = 1;
@@ -505,7 +526,12 @@ export default {
                     tmp['overlay_tag'][3] = 1;
                     tmp['overlay_tag'][4] = 1;
                     // tmp['overlay_tag'][5] = 1;
-                    
+                }} else {
+                    tmp['overlay_tag'][0] = 1;
+                    tmp['overlay_tag'][4] = 1;
+                    tmp['overlay_tag'][5] = 1;
+                    tmp['overlay_tag'][7] = 1;
+
                 }
                 tmp1['overlay_tag'] = [0, 0, 0, 1, 0, 0, 0, 0, 0];
                 tmp2['overlay_tag'] = [0, 0, 0, 0, 0, 1, 0, 0, 0];
@@ -532,9 +558,10 @@ export default {
                 dataStore.state_map.state3.overlay_setting[description_data[i]['ObjectName']] = tmp3;
                 // console.log(description_data[i]['ObjectName'], description_data[i]['color'], tmp)
             }
-            dataStore.narrative_num = narrative_cnt;
+            let narrative_cnt = dataStore.narrative_num;
             console.log(dataStore.state_map.state0)
             // for (let i in )
+
             for (let i in description_data) {
                 let pos = [];
                 let pos_tag = 0;
@@ -579,7 +606,7 @@ export default {
                     // console.log(description_data[i].color)
                     outputTextGroup.push({
                         pos_tag: pos_tag,
-                        pos_cnt: i,
+                        pos_cnt: narrative_cnt,
                         id: description_data[i]['ObjectName'],
                         objectName: description_data[i]['ObjectName'],
                         text: s,
@@ -593,7 +620,9 @@ export default {
                     startPos = endPos;
                     pos_tag = 1;
                 }
+                    narrative_cnt++;
             }
+            dataStore.narrative_num = narrative_cnt;
             // outputTextGroup.push({
             //     tag: 
             // })

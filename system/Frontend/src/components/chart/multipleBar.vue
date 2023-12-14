@@ -361,6 +361,7 @@ export default {
             dataStore.positionData = this.position;
             dataStore.startPositionData = this.startPosition;
             dataStore.calcOverlayTag = 1;
+            console.log(overall_data)
             return overall_data;
         },
         translate (x, y) {
