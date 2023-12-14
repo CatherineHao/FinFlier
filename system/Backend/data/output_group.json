@@ -1,14 +1,21 @@
 {
     "result": "",
-    "reason": [
-        {"Name":"Narrative1",
-        "Subject":["subcompact and below", "Mini- and subcompact"],
-        "Trend": "the 'declined' trend exists from 0.61 in ['Mini- and subcompact', 0] to 0.30 in ['Mini- and subcompact', 6].",
-        "Numerical": "the numerical 30% corresponds to 0.3 in ['Mini- and subcompact', 6], and 61% corresponds to 0.61 in ['Mini- and subcompact', 0]."},
-        {"Name":"Narrative2",
-        "Subject":["the mix of compact and midsize-to-large", "Compact size and Midsize to large"],
-        "Trend": "the 'increased' trend exists from the sum of 0.35 and 0.04 in row 0 to the sum of 0.3 and 0.4 in row 6.",
-        "Numerical": "the numerical 70% corresponds to the sum of 0.3 and 0.4 in row 6, and 39% corresponds to the sum of 0.35 and 0.04 in row 0."}],
+    "reason": [{"Name":"Narrative1",
+    "Subject":["subcompact and below", "Mini- and subcompact"],
+    "Trend": "the 'declined' trend exists from 0.61 in ['Mini- and subcompact', 0] to 0.30 in ['Mini- and subcompact', 6].",
+    "Numerical": "the numerical 30% corresponds to 0.3 in ['Mini- and subcompact', 6], and 61% corresponds to 0.61 in ['Mini- and subcompact', 0]."},
+   {"Name":"Narrative2",
+    "Subject":["the mix of compact and midsize-to-large NEVs", "Compact size and Midsize to large"],
+    "Trend": "the 'increased' trend exists from the sum of 0.3 and 0.4 in row 6 to the sum of 0.35 and 0.04 in row 0.",
+    "Numerical": "the numerical 70% corresponds to the sum of 0.3 and 0.4 in row 6, and 39% corresponds to the sum of 0.35 and 0.04 in row 0."},
+   {"Name":"Narrative3",
+    "Subject":["midsize-to-large NEVs", "Midsize to large"],
+    "Trend": "the 'highest' corresponds to the value 0.4 in ['Midsize to large', 6].",
+    "Numerical": "the numerical 40% corresponds to 0.4 in ['Midsize to large', 6]."},
+   {"Name":"Narrative4",
+    "Subject":["both the subcompact and compact NEVs", "Mini- and subcompact and Compact size"],
+    "Trend": "None",
+    "Numerical": "the numerical 30% corresponds to 0.3 in ['Mini- and subcompact', 6] and 0.3 in ['Compact size', 6]."}],
     "final": [
         {
             "OriginText": "The New Energy Vehicle (NEV) market has undergone significant changes in recent years. In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size. The midsize-to-large NEVs achieved the highest sales proportion of 40% in 2023, indicating a significant shift in consumer preference towards to larger, more feature-rich NEVs. At the same time, both the subcompact and compact NEVs hit the sales proportion of 30%.",
@@ -44,8 +51,9 @@
                 "Label": ["30%", "61%"], 
                 "LabelPos": [{"x": "2017", "y": 0.61, "text": "61%"}, {"x": "2023", "y": 0.61, "text": "30%"}],
                 "Marker": [{"Begin": ["Mini- and subcompact size", 0], "End": ["Mini- and subcompact size", 6]}], 
+                "MarkerPos": [{"x": "2017", "y": 0.61, "t": -1}, {"x": 2023, "y": 0.3, "t": -1}], 
                 "transTag": -1,
-                "Line": {"Begin": ["Mini- and subcompact size", 0], "End": ["Mini- and subcompact size", 6], "range": [0.61, 0.3], "mean": 0.403, "max": 0.61, "min": 0.30, "pos": [{"x": "2017", "y": 0.61, "text": "39%"}, {"x": "2023", "y": 0.3, "text": "70%"}]}}]
+                "Line": {"Begin": ["Mini- and subcompact size", 0], "End": ["Mini- and subcompact size", 6], "range": [0.61, 0.3], "mean": 0.403, "trans_tag": 1, "max": 0.61, "min": 0.30, "pos": [{"x": "2017", "y": 0.61, "text": "39%"}, {"x": "2023", "y": 0.3, "text": "70%"}]}}]
         },
         {
             "OriginText": "In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size.",
@@ -81,12 +89,13 @@
                 "Label": ["39%", "70%"], 
                 "LabelPos": [{"x": "2017", "y": 0.39, "text": "39%"}, {"x": "2023", "y": 0.7, "text": "70%"}],
                 "Marker": [{"Begin": [2, 0], "End": [3, 6]}],
+                "MarkerPos": [{"x": "2017", "y": 0.35, "t": 0}, {"x": 2023, "y": 0.3, "t": 0},{"x": "2017", "y": 0.04, "t": 1}, {"x": 2023, "y": 0.4, "t": 1}],
                 "transTag": 0.5,
-                "Line": {"Begin": ["Midsize to large", 0], "End": ["Midsize to large", 6], "trans_tag": 1, "range": [0.39, 0.7], "mean": 0.597, "max": 0.70, "min": 0.39, "pos": [{"x": "2017", "y": 0.39, "text": "39%"}, {"x": "2023", "y": 0.7, "text": "70%"}]}}]
+                "Line": {"Begin": ["Midsize to large", 0], "End": ["Midsize to large", 6], "trans_tag": 2, "range": [0.39, 0.7], "mean": 0.597, "max": 0.70, "min": 0.39, "pos": [{"x": "2017", "y": 0.39, "text": "39%"}, {"x": "2023", "y": 0.7, "text": "70%"}]}}]
         },
         {
             "OriginText": "In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size.",
-            "Position": [{"Begin": ["Compact size", 0], "End": ["Compact size", 6]}, {"Begin": ["Midsize to large", 0], "End": ["Midsize to large", 6]}],
+            "Position": [{"Begin": ["Midsize to large", 6], "End": ["Midsize to large", 6]}],
             "ConversationInfo": [
                 {
                     "Position": [361,381], 
@@ -109,15 +118,16 @@
             "GraphicalOverlay": 
             [{
                 "Text": "the mix of compact and midsize-to-large NEVs increased to 70% from 39%", 
-                "Label": ["39%", "70%"], 
-                "LabelPos": [{"x": "2017", "y": 0.39, "text": "39%"}, {"x": "2023", "y": 0.7, "text": "70%"}],
+                "Label": ["40%"], 
+                "LabelPos": [{"x": "2023", "y": 0.4, "text": "40%"}],
                 "Marker": [{"Begin": [2, 0], "End": [3, 6]}],
-                "transTag": 0.5,
-                "Line": {"Begin": ["Midsize to large", 0], "End": ["Midsize to large", 6], "trans_tag": 1, "range": [0.39, 0.7], "mean": 0.597, "max": 0.70, "min": 0.39, "pos": [{"x": "2017", "y": 0.39, "text": "39%"}, {"x": "2023", "y": 0.7, "text": "70%"}]}}]
+                "MarkerPos": [{"x": "2023", "y": 0.4, "t": 1}],
+                "transTag": 1,
+                "Line": {"Begin": ["Midsize to large", 0], "End": ["Midsize to large", 6], "trans_tag": 1, "range": [0.39, 0.7], "mean": 0.597, "max": 0.70, "min": 0.39, "pos": [{"x": "2017", "y": 0.4, "text": "40%"}, {"x": "2023", "y": 0.4, "text": "40%"}]}}]
         },
         {
             "OriginText": "In 2023, the sales proportion of NEVs that were subcompact and below declined to 30%, from 61% in 2017. During the same periods of comparison, the mix of compact and midsize-to-large NEVs increased to 70% from 39%, reflecting the upgrade trend in terms of vehicle size.",
-            "Position": [{"Begin": ["Compact size", 0], "End": ["Compact size", 6]}, {"Begin": ["Midsize to large", 0], "End": ["Midsize to large", 6]}],
+            "Position": [{"Begin": ["Compact size", 6], "End": ["Compact size", 6]}, {"Begin": ["Mini- and subcompact size", 6], "End": ["Mini- and subcompact size", 6]}],
             "ConversationInfo": [
                 {
                     "Position": [552,587], 
@@ -134,10 +144,11 @@
             "GraphicalOverlay": 
             [{
                 "Text": "the mix of compact and midsize-to-large NEVs increased to 70% from 39%", 
-                "Label": ["39%", "70%"], 
-                "LabelPos": [{"x": "2017", "y": 0.39, "text": "39%"}, {"x": "2023", "y": 0.7, "text": "70%"}],
+                "Label": ["30%"], 
+                "LabelPos": [{"x": "2023", "y": 0.30, "text": "30%"}],
                 "Marker": [{"Begin": [2, 0], "End": [3, 6]}],
-                "transTag": 0.5,
+                "MarkerPos": [{"x": 2023, "y": 0.3, "t": -1}, {"x": 2023, "y": 0.3, "t": 0}],
+                "transTag": -0.5,
                 "Line": {"Begin": ["Midsize to large", 0], "End": ["Midsize to large", 6], "trans_tag": 1, "range": [0.39, 0.7], "mean": 0.597, "max": 0.70, "min": 0.39, "pos": [{"x": "2017", "y": 0.39, "text": "39%"}, {"x": "2023", "y": 0.7, "text": "70%"}]}}]
         }
     ]

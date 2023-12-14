@@ -378,33 +378,33 @@ def determine_x_axis_type(input_data):
     # else:
     #     return 'category'
     return 'category'
-<<<<<<< Updated upstream
-    #### time部分
-    # x_values = next(iter(input_data[0].values()))
-    # first_column_name = list(input_data[0].keys())
-    # # print(x_values)
-    # # 检查是否包含数字和日期
-    # if 'Time' in first_column_name or 'time' in first_column_name:
-    #     return 'time'
-    # elif re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
-    #     return 'time'
-    # elif re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
-    #     return 'time'
-    # elif re.match(r'^[-+]?\d*\.?\d+$', x_values): # 正则表达式匹配整数/浮点数
-    #     return 'linear'
-    # else:
-    #     return 'category'
-    ######
+# <<<<<<< Updated upstream
+#     #### time部分
+#     # x_values = next(iter(input_data[0].values()))
+#     # first_column_name = list(input_data[0].keys())
+#     # # print(x_values)
+#     # # 检查是否包含数字和日期
+#     # if 'Time' in first_column_name or 'time' in first_column_name:
+#     #     return 'time'
+#     # elif re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
+#     #     return 'time'
+#     # elif re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
+#     #     return 'time'
+#     # elif re.match(r'^[-+]?\d*\.?\d+$', x_values): # 正则表达式匹配整数/浮点数
+#     #     return 'linear'
+#     # else:
+#     #     return 'category'
+#     ######
     
-=======
-    # return 'time'
-    if re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
-        return 'time'
-    elif re.match(r'^[-+]?\d*\.?\d+$', x_values): # 正则表达式匹配整数/浮点数
-        return 'linear'
-    else:
-        return 'category'
->>>>>>> Stashed changes
+# =======
+#     # return 'time'
+#     if re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
+#         return 'time'
+#     elif re.match(r'^[-+]?\d*\.?\d+$', x_values): # 正则表达式匹配整数/浮点数
+#         return 'linear'
+#     else:
+#         return 'category'
+# >>>>>>> Stashed changes
     
 
 # 返回x轴名称

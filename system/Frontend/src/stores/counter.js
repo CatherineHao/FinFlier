@@ -32,6 +32,7 @@ export const useDataStore = defineStore("dataStore", {
             msg: "Hello, Vue SQ",
             data: [],
             changeTag: 0,
+            timeChange: 0,
             chart_data: null,
             narrative_num: 0,
             overlayTag: {

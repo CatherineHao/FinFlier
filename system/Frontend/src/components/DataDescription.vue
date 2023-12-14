@@ -483,10 +483,29 @@ export default {
                 // console.log(description_data[i]['ObjectName'])
                 let tmp = {}, tmp1 = {}, tmp2 = {}, tmp3 = {};
                 tmp['overlay_tag'] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-                if (this.chart_type == 0 || this.chart_type == 2) {
+                // if (this.chart_type == 0 || this.chart_type == 2) {
+                //     tmp['overlay_tag'][0] = 1;
+                // } else if (this.chart_type == 1 || this.chart_type == 3) {
+                //     tmp['overlay_tag'][4] = 1;
+                // }
+                if (i == 0 || i == 1) {
                     tmp['overlay_tag'][0] = 1;
-                } else if (this.chart_type == 1 || this.chart_type == 3) {
+                    tmp['overlay_tag'][3] = 1;
                     tmp['overlay_tag'][4] = 1;
+                    tmp['overlay_tag'][5] = 1;
+                    tmp['overlay_tag'][6] = 1;
+                } else if (i == 2) {
+
+                    tmp['overlay_tag'][0] = 1;
+                    tmp['overlay_tag'][3] = 1;
+                    tmp['overlay_tag'][4] = 1;
+                    tmp['overlay_tag'][7] = 1;
+                } else if (i == 3) {
+                    tmp['overlay_tag'][0] = 1;
+                    tmp['overlay_tag'][3] = 1;
+                    tmp['overlay_tag'][4] = 1;
+                    // tmp['overlay_tag'][5] = 1;
+                    
                 }
                 tmp1['overlay_tag'] = [0, 0, 0, 1, 0, 0, 0, 0, 0];
                 tmp2['overlay_tag'] = [0, 0, 0, 0, 0, 1, 0, 0, 0];
