@@ -68,9 +68,8 @@
                             </g>
                             <g v-if="overlayTag[3] == 1" class="animation-fade">
                                 <circle v-for="(o, oi) in item.markerPos" :key="'oi_' + oi"
-                                    :cx="o.x + o.transTag * chart_setting.size.width / o.length"
-                                    :cy="o.y" r="10" :fill="colorTrans(overlay_setting[overlay_map[3]].currentColor)"
-                                    stroke="none"
+                                    :cx="o.x + o.transTag * chart_setting.size.width / o.length" :cy="o.y" r="10"
+                                    :fill="colorTrans(overlay_setting[overlay_map[3]].currentColor)" stroke="none"
                                     :opacity="1">
                                 </circle>
                             </g>
@@ -357,6 +356,11 @@ export default {
                 // console.log(over_data['GraphicalOverlay'][0]['Line']['pos'])
                 overall_data.push(overlayData);
             }
+            const dataStore = useDataStore();
+            dataStore.overallData = overall_data;
+            dataStore.positionData = this.position;
+            dataStore.startPositionData = this.startPosition;
+            dataStore.calcOverlayTag = 1;
             return overall_data;
         },
         translate (x, y) {
@@ -509,11 +513,18 @@ export default {
         if (this.defaultTag == 1) {
             this.chart_setting = dataStore.state_map[this.stateTag]['chart_setting'];
         }
+        // if (dataStore.calcOverlayTag == 1) {
+        //     this.startPosition = dataStore.startPositionData;
+        //     this.position = dataStore.positionData;
+        //     this.overlayData = dataStore.overallData;
+        // } else {
+            this.overlayData = this.calcOverlay(this.barData, dataStore.graphicalOverlayData, this.chartData.chartScale.x.scaleType);
+            // console.log('overlay data', dataStore.graphicalOverlayData)
+        // }
+        console.log('overlay data', this.overlayData)
         // console.log(this.overlayData);
         // let selObj = dataStore.selectObject;
         // console.log(selObj);
-        this.overlayData = this.calcOverlay(this.barData, dataStore.graphicalOverlayData, this.chartData.chartScale.x.scaleType);
-        // console.log('overlay data', dataStore.graphicalOverlayData)
         if (selObj != '') {
             if (selObj == -1) {
                 this.overlayTag = [0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -532,8 +543,15 @@ export default {
             }
             // console.log(this.overlayData);
             // let selObj = dataStore.selectObject;
+            let selObj = this.objTag;
             // console.log(selObj);
-            this.overlayData = this.calcOverlay(this.barData, dataStore.graphicalOverlayData, this.chartData.chartScale.x.scaleType);
+            // this.overlayData = this.calcOverlay(this.barData, dataStore.graphicalOverlayData, this.chartData.chartScale.x.scaleType);
+
+            if (dataStore.calcOverlayTag == 1) {
+                this.startPosition = dataStore.startPositionData;
+                this.position = dataStore.positionData;
+                this.overlayData = dataStore.overallData;
+            }
             // console.log('overlay data', dataStore.graphicalOverlayData)
             if (selObj != '') {
                 if (selObj == -1) {

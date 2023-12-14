@@ -25,7 +25,8 @@
         </div>
         <div style="height: calc(100% - 40px); width: 100%;">
 
-            <div style="height: calc(70%); width: 100%;" v-loading="initChart" ref="mainView" id="mainView">
+            <div style="height: calc(70%); width: 100%;" v-loading="initChart" ref="mainView" id="mainView"><div class="overlayTag" style="position: absolute; top: 0px; left: 0px;">
+                        {{ 'Narrative ' + (parseInt(selObj.slice(-1)) + 1) }}</div>
                 <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData"
                     :defaultTag="1" :scaleTag="1" :stateTag="'state0'" :objTag="selObj"></component>
             </div>
@@ -34,10 +35,10 @@
             <div style="height: calc(30% - 0px); width: 100%; background-color: white; overflow-y: auto; display: flex;">
                 <div v-for="(nar, nar_i) in narrative_num" :key="'nar' + nar_i"
                     style="height: 98%; width: 33%; border-radius: 5px; border: 1.5px solid rgba(99, 99, 99, .6); align-items: center; display: flex; justify-content: center; margin: 3px;">
-                    <div class="overlayTag" style="position: absolute; top: 10px; left: 30px;">
+                    <div class="overlayTag" style="position: absolute; top: 10px; left: 10px;">
                         {{ 'Narrative ' + (nar_i + 1) }}</div>
                     <component :is="tabs[chartType[chartData['chartType']]]" :rawData="rawData" :chartData="chartData" style="margin-top: 60px;"
-                        :defaultTag="0" :scaleTag=".33" :stateTag="'state0'" :objTag="'object' + (nar_i)"></component>
+                        :defaultTag="1" :scaleTag=".33" :stateTag="'state0'" :objTag="'object' + (nar_i)"></component>
                 </div>
             </div>
         </div>
@@ -105,6 +106,7 @@ export default {
             }
             this.narrative_num = dataStore.narrative_num;
             this.selObj = dataStore.selectObject;
+            console.log(this.selObj)
         })
     },
     watch: {

@@ -97,15 +97,15 @@
                         <div class="sq_collapse_item">
                             <div class="sq_collapse_title">
                                 <div style="display: flex;">
-                                    <div style="padding-top: 1.5px; height: 10px;"><el-checkbox v-model="overlayTag[0]"
-                                            label="" style="height: 14px; margin-top: 0px;" /> &nbsp;</div>
+                                    <div style="padding-top: 1.5px; height: 10px;"><el-checkbox 
+                                            label="" style="height: 14px; margin-top: 0px;" v-model="overlayTag[0]"/> &nbsp;</div>
                                     <span class="sq_collapse_text"><svg t="1693753704635" class="icon"
                                             viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
                                             p-id="12736" width="20" height="20">
                                             <path
                                                 d="M766.4 744.3c43.7 0 79.4-36.2 79.4-80.5 0-53.5-79.4-140.8-79.4-140.8S687 610.3 687 663.8c0 44.3 35.7 80.5 79.4 80.5zM389.3 700.2c7.1 7.1 18.6 7.1 25.6 0l256.1-256c7.1-7.1 7.1-18.6 0-25.6l-256-256c-0.6-0.6-1.3-1.2-2-1.7l-78.2-78.2c-3.5-3.5-9.3-3.5-12.8 0l-48 48c-3.5 3.5-3.5 9.3 0 12.8l67.2 67.2-207.8 207.9c-7.1 7.1-7.1 18.6 0 25.6l255.9 256z m12.9-448.6l178.9 178.9H223.4l178.8-178.9zM904 816H120c-4.4 0-8 3.6-8 8v80c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-80c0-4.4-3.6-8-8-8z"
                                                 p-id="12737"></path>
-                                        </svg>&nbsp;Highlight</span>
+                                        </svg>&nbsp;Highlight {{ overlayTag[0] }}</span>
                                 </div>
                                 <div style="height: 20px; width: 30px; cursor: pointer; display: flex; justify-content: flex-end
                                 ; align-items: center;" @click="overlayExpand[0] = !overlayExpand[0]">
@@ -495,6 +495,7 @@ import singleLinePanel from "./utils/singleLinePanel.vue";
 import multiBarPanel from "./utils/multiBarPanel.vue";
 import multiLinePanel from "./utils/multiLinePanel.vue";
 import ColorPicker_single from "./utils/ColorPicker_single.vue";
+import { flatGroup } from "d3";
 export default {
     name: "DesignPanel",
     props: [],
@@ -515,6 +516,7 @@ export default {
                 b: 0,
                 a: 1
             },
+            testTag: true,
             f_family: ['Avenir'],
             tabs: {
                 'Single bar chart': 'singleBarPanel',
@@ -585,7 +587,12 @@ export default {
         overlayTag: {
             handler (newVal, oldVal) {
                 // const dataStore = useDataStore();
-                // console.log(newVal)
+                console.log(newVal)
+                for (let i in this.overlayTag) {
+                    if (this.overlayTag[i] == 1) {
+                        this.overlayTag[i] = true;
+                    }
+                }
                 for (let i in newVal) {
                     // if (newVal[i] != oldVal[i]) {
                     if (newVal[i] == 1) {
@@ -598,6 +605,9 @@ export default {
                 const dataStore = useDataStore();
                 let selObj = dataStore.selectObject;
                 // console.log(dataStore.state_map['state0'])
+                // this.overlayTag = newVal;
+                this.testTag = !this.testTag;
+                console.log(this.testTag)
                 if (selObj != -1 && selObj != '')
                     dataStore.state_map['state0']['overlay_setting'][selObj]['overlay_tag'] = newVal;
             },

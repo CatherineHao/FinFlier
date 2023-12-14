@@ -33,6 +33,10 @@ export const useDataStore = defineStore("dataStore", {
             data: [],
             changeTag: 0,
             timeChange: 0,
+            calcOverlayTag: 0,
+            overallData: [],
+            positionData: {},
+            startPositionData: {},
             chart_data: null,
             narrative_num: 0,
             overlayTag: {
