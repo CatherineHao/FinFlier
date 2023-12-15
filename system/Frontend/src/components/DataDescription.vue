@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-22 14:28:15
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-12-12 15:10:53
+ * @LastEditTime: 2023-12-15 14:59:59
 -->
 <!--
  *                        _oo0oo_
@@ -124,7 +124,7 @@
                                 </div>
 
                             </div>
-                            <div style="height: 55%;">
+                            <div style="height: calc(55% - 20px)">
                                 <!-- ,
                                             'border-bottom': o.tag == 2 || o.tag == 1 ? '3px solid ' + o.color : '0px', -->
 
@@ -150,11 +150,11 @@
                                 <br> -->
                                 
                             </div>
-                            <div style="height: 30%;">
+                            <div style="height: calc(45% - 20px)">
                                     <hr style="margin-top: 10px; margin-bottom: 5px;">
                                     <div style="font-weight: 600;">
                                         Reason:</div>
-                                    <div style=" margin-left: 0em; overflow-y: auto; height: calc(100%);">
+                                    <div style=" margin-left: 0em; overflow-y: auto; height: calc(100% - 24px);">
                                         <!-- {{ item.reason }} -->
                                         <div v-for="(r_item, r_i) in item.reason" :key="'reason' + r_i">
                                             <div style="text-decoration: underline;">
@@ -509,30 +509,24 @@ export default {
                 //     tmp['overlay_tag'][4] = 1;
                 // }
                 if (description_data.length > 1){
-                if (i == 0 || i == 1) {
+                if (i == 0) {
                     tmp['overlay_tag'][0] = 1;
                     tmp['overlay_tag'][3] = 1;
                     tmp['overlay_tag'][4] = 1;
                     tmp['overlay_tag'][5] = 1;
                     tmp['overlay_tag'][6] = 1;
-                } else if (i == 2) {
+                } else if (i == 1) {
 
                     tmp['overlay_tag'][0] = 1;
                     tmp['overlay_tag'][3] = 1;
                     tmp['overlay_tag'][4] = 1;
                     tmp['overlay_tag'][7] = 1;
-                } else if (i == 3) {
+                } else {
                     tmp['overlay_tag'][0] = 1;
                     tmp['overlay_tag'][3] = 1;
                     tmp['overlay_tag'][4] = 1;
                     // tmp['overlay_tag'][5] = 1;
-                }} else {
-                    tmp['overlay_tag'][0] = 1;
-                    tmp['overlay_tag'][4] = 1;
-                    tmp['overlay_tag'][5] = 1;
-                    tmp['overlay_tag'][7] = 1;
-
-                }
+                }}
                 tmp1['overlay_tag'] = [0, 0, 0, 1, 0, 0, 0, 0, 0];
                 tmp2['overlay_tag'] = [0, 0, 0, 0, 0, 1, 0, 0, 0];
                 tmp3['overlay_tag'] = [1, 0, 0, 0, 0, 0, 0, 0, 0];

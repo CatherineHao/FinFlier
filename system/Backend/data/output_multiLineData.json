@@ -93,75 +93,33 @@
             ],
             "GraphicalOverlay": [
                 {
-                    "Text": "the sales proportion of NEVs that were subcompact and below declined to 30%",
-                    "Label": [
-                        "30%",
-                        "61%"
-                    ],
+                    "Highlight": "renewables",
+                    "Text": "the renewables will continuously increase.",
                     "LabelPos": [
                         {
-                            "x": "2017",
-                            "y": 0.61,
-                            "text": "61%"
-                        },
-                        {
-                            "x": "2023",
-                            "y": 0.61,
-                            "text": "30%"
-                        }
-                    ],
-                    "Marker": [
-                        {
-                            "Begin": [
-                                "Mini- and subcompact size",
-                                0
-                            ],
-                            "End": [
-                                "Mini- and subcompact size",
-                                6
-                            ]
+                            "x": "2040",
+                            "y": 211,
+                            "text": "211"
                         }
                     ],
                     "MarkerPos": [
                         {
-                            "x": "2017",
-                            "y": 0.61,
-                            "t": -1
-                        },
-                        {
-                            "x": 2023,
-                            "y": 0.3,
-                            "t": -1
+                            "x": "2040",
+                            "y": 211,
+                            "t": 0
                         }
                     ],
-                    "transTag": -1,
                     "Line": {
-                        "Begin": [
-                            "Mini- and subcompact size",
-                            0
-                        ],
-                        "End": [
-                            "Mini- and subcompact size",
-                            6
-                        ],
-                        "range": [
-                            0.61,
-                            0.3
-                        ],
-                        "mean": 0.403,
-                        "trans_tag": 1,
-                        "max": 0.61,
-                        "min": 0.30,
                         "pos": [
                             {
-                                "x": "2017",
-                                "y": 0.61,
-                                "text": "39%"
+                                "x": "2010",
+                                "y": 112,
+                                "text": "112"
                             },
                             {
-                                "x": "2023",
-                                "y": 0.3,
-                                "text": "70%"
+                                "x": "2040",
+                                "y": 211,
+                                "text": "211"
                             }
                         ]
                     }
@@ -213,85 +171,33 @@
             ],
             "GraphicalOverlay": [
                 {
-                    "Text": "the mix of compact and midsize-to-large NEVs increased to 70% from 39%",
-                    "Label": [
-                        "39%",
-                        "70%"
-                    ],
+                    "Highlight": "natural gas",
+                    "Text": "",
                     "LabelPos": [
                         {
-                            "x": "2017",
-                            "y": 0.39,
-                            "text": "39%"
-                        },
-                        {
-                            "x": "2023",
-                            "y": 0.7,
-                            "text": "70%"
-                        }
-                    ],
-                    "Marker": [
-                        {
-                            "Begin": [
-                                2,
-                                0
-                            ],
-                            "End": [
-                                3,
-                                6
-                            ]
+                            "x": "2015",
+                            "y": 408,
+                            "text": "408"
                         }
                     ],
                     "MarkerPos": [
                         {
-                            "x": "2017",
-                            "y": 0.35,
+                            "x": "2015",
+                            "y": 408,
                             "t": 0
-                        },
-                        {
-                            "x": 2023,
-                            "y": 0.3,
-                            "t": 0
-                        },
-                        {
-                            "x": "2017",
-                            "y": 0.04,
-                            "t": 1
-                        },
-                        {
-                            "x": 2023,
-                            "y": 0.4,
-                            "t": 1
                         }
                     ],
-                    "transTag": 0.5,
                     "Line": {
-                        "Begin": [
-                            "Midsize to large",
-                            0
-                        ],
-                        "End": [
-                            "Midsize to large",
-                            6
-                        ],
-                        "trans_tag": 2,
-                        "range": [
-                            0.39,
-                            0.7
-                        ],
-                        "mean": 0.597,
-                        "max": 0.70,
-                        "min": 0.39,
                         "pos": [
                             {
-                                "x": "2017",
-                                "y": 0.39,
-                                "text": "39%"
+                                "x": "2010",
+                                "y": 306,
+                                "text": "112"
                             },
                             {
-                                "x": "2023",
-                                "y": 0.7,
-                                "text": "70%"
+                                "x": "2040",
+                                "y": 306,
+                                "text": "211"
                             }
                         ]
                     }
@@ -334,64 +240,33 @@
             ],
             "GraphicalOverlay": [
                 {
-                    "Text": "the mix of compact and midsize-to-large NEVs increased to 70% from 39%",
-                    "Label": [
-                        "40%"
-                    ],
+                    "Highlight": "liquids",
+                    "Text": "",
                     "LabelPos": [
                         {
-                            "x": "2023",
-                            "y": 0.4,
-                            "text": "40%"
-                        }
-                    ],
-                    "Marker": [
-                        {
-                            "Begin": [
-                                2,
-                                0
-                            ],
-                            "End": [
-                                3,
-                                6
-                            ]
+                            "x": "2040",
+                            "y": 4,
+                            "text": "4"
                         }
                     ],
                     "MarkerPos": [
                         {
-                            "x": "2023",
-                            "y": 0.4,
-                            "t": 1
+                            "x": "2040",
+                            "y": 4,
+                            "t": 0
                         }
                     ],
-                    "transTag": 1,
                     "Line": {
-                        "Begin": [
-                            "Midsize to large",
-                            0
-                        ],
-                        "End": [
-                            "Midsize to large",
-                            6
-                        ],
-                        "trans_tag": 1,
-                        "range": [
-                            0.39,
-                            0.7
-                        ],
-                        "mean": 0.597,
-                        "max": 0.70,
-                        "min": 0.39,
                         "pos": [
                             {
-                                "x": "2017",
-                                "y": 0.4,
-                                "text": "40%"
+                                "x": "2010",
+                                "y": 112,
+                                "text": "112"
                             },
                             {
-                                "x": "2023",
-                                "y": 0.4,
-                                "text": "40%"
+                                "x": "2040",
+                                "y": 211,
+                                "text": "211"
                             }
                         ]
                     }
@@ -434,69 +309,33 @@
             ],
             "GraphicalOverlay": [
                 {
-                    "Text": "the mix of compact and midsize-to-large NEVs increased to 70% from 39%",
-                    "Label": [
-                        "30%"
-                    ],
+                    "Highlight": "nuclear",
+                    "Text": "",
                     "LabelPos": [
                         {
-                            "x": "2023",
-                            "y": 0.30,
-                            "text": "30%"
-                        }
-                    ],
-                    "Marker": [
-                        {
-                            "Begin": [
-                                2,
-                                0
-                            ],
-                            "End": [
-                                3,
-                                6
-                            ]
+                            "x": "2015",
+                            "y": 3,
+                            "text": "3"
                         }
                     ],
                     "MarkerPos": [
                         {
-                            "x": 2023,
-                            "y": 0.3,
-                            "t": -1
-                        },
-                        {
-                            "x": 2023,
-                            "y": 0.3,
+                            "x": "2015",
+                            "y": 3,
                             "t": 0
                         }
                     ],
-                    "transTag": -0.5,
                     "Line": {
-                        "Begin": [
-                            "Midsize to large",
-                            0
-                        ],
-                        "End": [
-                            "Midsize to large",
-                            6
-                        ],
-                        "trans_tag": 1,
-                        "range": [
-                            0.39,
-                            0.7
-                        ],
-                        "mean": 0.597,
-                        "max": 0.70,
-                        "min": 0.39,
                         "pos": [
                             {
-                                "x": "2017",
-                                "y": 0.39,
-                                "text": "39%"
+                                "x": "2010",
+                                "y": 112,
+                                "text": "112"
                             },
                             {
-                                "x": "2023",
-                                "y": 0.7,
-                                "text": "70%"
+                                "x": "2040",
+                                "y": 211,
+                                "text": "211"
                             }
                         ]
                     }
@@ -539,69 +378,33 @@
             ],
             "GraphicalOverlay": [
                 {
-                    "Text": "the mix of compact and midsize-to-large NEVs increased to 70% from 39%",
-                    "Label": [
-                        "30%"
-                    ],
+                    "Highlight": "natural gas",
+                    "Text": "",
                     "LabelPos": [
                         {
-                            "x": "2023",
-                            "y": 0.30,
-                            "text": "30%"
-                        }
-                    ],
-                    "Marker": [
-                        {
-                            "Begin": [
-                                2,
-                                0
-                            ],
-                            "End": [
-                                3,
-                                6
-                            ]
+                            "x": "2040",
+                            "y": 438,
+                            "text": "438"
                         }
                     ],
                     "MarkerPos": [
                         {
-                            "x": 2023,
-                            "y": 0.3,
-                            "t": -1
-                        },
-                        {
-                            "x": 2023,
-                            "y": 0.3,
+                            "x": "2040",
+                            "y": 438,
                             "t": 0
                         }
                     ],
-                    "transTag": -0.5,
                     "Line": {
-                        "Begin": [
-                            "Midsize to large",
-                            0
-                        ],
-                        "End": [
-                            "Midsize to large",
-                            6
-                        ],
-                        "trans_tag": 1,
-                        "range": [
-                            0.39,
-                            0.7
-                        ],
-                        "mean": 0.597,
-                        "max": 0.70,
-                        "min": 0.39,
                         "pos": [
                             {
-                                "x": "2017",
-                                "y": 0.39,
-                                "text": "39%"
+                                "x": "2010",
+                                "y": 112,
+                                "text": "112"
                             },
                             {
-                                "x": "2023",
-                                "y": 0.7,
-                                "text": "70%"
+                                "x": "2040",
+                                "y": 211,
+                                "text": "211"
                             }
                         ]
                     }

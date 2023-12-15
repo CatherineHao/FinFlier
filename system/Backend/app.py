@@ -2,7 +2,7 @@
 Description: 
 Author: Qing Shi
 Date: 2022-11-20 19:14:42
-LastEditTime: 2023-12-01 16:03:41
+LastEditTime: 2023-12-15 15:15:11
 '''
 import openai
 from flask import Flask, request, jsonify
@@ -378,8 +378,8 @@ def determine_x_axis_type(input_data):
     #     return 'linear'
     # else:
     #     return 'category'
-    # return 'category'
-    return 'time'
+    return 'linear'
+    # return 'time'
 # <<<<<<< Updated upstream
 #     #### time部分
 #     # x_values = next(iter(input_data[0].values()))
@@ -422,6 +422,8 @@ def get_x_axis_name(x_type, data):
     else:
         x_name = 'Value'
     # x_name = 'Time'
+    # print(x_attribute)
+    # x_type = 'category'
     return [x_name, x_attribute]
 
 """
