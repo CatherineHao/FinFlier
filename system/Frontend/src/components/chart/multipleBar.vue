@@ -1,9 +1,9 @@
 <!--
- * @Description: 
+ * @Description: Multiple Bar Component
  * @Author: Qing Shi
  * @Date: 2023-08-26 19:48:52
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-12-12 14:45:52
+ * @LastEditTime: 2023-12-19 13:55:37
 -->
 <template>
     <div ref="singleBarSvg"

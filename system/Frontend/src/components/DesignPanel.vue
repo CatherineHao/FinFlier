@@ -1,9 +1,9 @@
 <!--
- * @Description: 
+ * @Description: Design Panel
  * @Author: Qing Shi
  * @Date: 2023-08-22 15:08:37
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-09-13 23:51:15
+ * @LastEditTime: 2023-12-19 13:57:58
 -->
 <template>
     <div class="design_container">

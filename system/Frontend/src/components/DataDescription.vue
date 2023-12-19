@@ -1,9 +1,9 @@
 <!--
- * @Description: 
+ * @Description: Narrative Panel
  * @Author: Qing Shi
  * @Date: 2023-08-22 14:28:15
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-12-15 14:59:59
+ * @LastEditTime: 2023-12-19 13:56:08
 -->
 <!--
  *                        _oo0oo_
