@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-22 14:28:15
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-12-29 09:12:57
+ * @LastEditTime: 2023-12-29 09:15:50
 -->
 <!--
  *                        _oo0oo_
@@ -108,7 +108,7 @@
                                 </div>
                                 <div>
                                     <span
-                                        style="background-color: rgba(255, 128, 2, .4); border-bottom: 0px; padding: 3px; color: #FF8002;"
+                                        style="background-color: rgba(255, 128, 2, .2); border-bottom: 0px; padding: 3px; color: #FF8002;"
                                         class="dataObject">
                                         Subject
                                     </span>
@@ -609,7 +609,7 @@ export default {
                         rawColor: description_data[i].color,
                         color: this.colorTrans(description_data[i].color),
                         color_g: ["rgb(255, 128, 2)", '#008080', 'rgb(255, 128, 2)', '#993399'],
-                        back_color: pos[k].tag == 2 ? this.colorTrans(bak_color) : 'rgba(255, 128, 2, 0.4)',
+                        back_color: pos[k].tag == 2 ? this.colorTrans(bak_color) : 'rgba(255, 128, 2, 0.2)',
                     });
 
                     startPos = endPos;
