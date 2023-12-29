@@ -3,7 +3,7 @@
  * @Author: Qing Shi
  * @Date: 2023-08-22 14:28:15
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-12-19 13:56:08
+ * @LastEditTime: 2023-12-29 09:12:57
 -->
 <!--
  *                        _oo0oo_
@@ -108,16 +108,16 @@
                                 </div>
                                 <div>
                                     <span
-                                        style="background-color: #e8f5e9; border-bottom: 0px; padding: 3px; color: #38c075;"
+                                        style="background-color: rgba(255, 128, 2, .4); border-bottom: 0px; padding: 3px; color: #FF8002;"
                                         class="dataObject">
                                         Subject
                                     </span>
                                     &nbsp;&nbsp;&nbsp;
-                                    <span class="dataObject" style="border-bottom: 3px solid #e8f5e9; color: #38c075;">
+                                    <span class="dataObject" style="border-bottom: 3px solid #993399; color: #993399;">
                                         Numerical
                                     </span>
                                     &nbsp;&nbsp;&nbsp;
-                                    <span class="dataObject" style="border: 3px solid #e8f5e9; padding: 3px; color: #38c075">
+                                    <span class="dataObject" style="border: 3px solid #008080; padding: 3px; color: #008080">
                                         Trend
                                     </span>
 
@@ -137,11 +137,11 @@
                                         <span v-if="o.pos_tag == 0">&nbsp;</span>
                                         <span :class="{ 'dataObject': o.tag != -1 }" :id="o.id" :style="{
                                             backgroundColor: o.tag == 0 || o.tag == 2 ? o.back_color : 'white',
-                                            'border-bottom': o.tag == 3 || o.tag == 1 ? '3px solid ' + o.color : '0px',
-                                            'border-top': o.tag == 3 ? '3px solid ' + o.color : '0px',
-                                            'border-left': o.tag == 3 ? '3px solid ' + o.color : '0px',
-                                            'border-right': o.tag == 3 ? '3px solid ' + o.color : '0px',
-                                            color: o.tag == -1 ? 'black' : '#38c075'
+                                            'border-bottom': o.tag == 3 || o.tag == 1 ? '3px solid ' + o.color_g[o.tag] : '0px',
+                                            'border-top': o.tag == 3 ? '3px solid ' + o.color_g[o.tag] : '0px',
+                                            'border-left': o.tag == 3 ? '3px solid ' + o.color_g[o.tag] : '0px',
+                                            'border-right': o.tag == 3 ? '3px solid ' + o.color_g[o.tag] : '0px',
+                                            color: o.tag == -1 ? 'black' : o.color_g[o.tag]
                                         }" @click="o.tag != -1 ? hoverObject(o) : ''"
                                             @mouseenter="o.tag != -1 ? handleHover(o) : ''"
                                             @mouseout="o.tag != -1 ? handleOut(o) : ''">{{ o.text }}</span></span>
@@ -272,11 +272,11 @@
                                         <span v-if="o.pos_tag == 0">&nbsp;</span>
                                         <span :class="{ 'dataObject': o.tag != -1 }" :id="o.id" :style="{
                                             backgroundColor: o.tag == 0 || o.tag == 2 ? o.back_color : 'white',
-                                            'border-bottom': o.tag == 3 || o.tag == 1 ? '3px solid ' + o.color : '0px',
-                                            'border-top': o.tag == 3 ? '3px solid ' + o.color : '0px',
-                                            'border-left': o.tag == 3 ? '3px solid ' + o.color : '0px',
-                                            'border-right': o.tag == 3 ? '3px solid ' + o.color : '0px',
-                                            color: o.tag == -1 ? 'black' : '#38c075'
+                                            'border-bottom': o.tag == 3 || o.tag == 1 ? '3px solid ' + o.color_g[o.tag] : '0px',
+                                            'border-top': o.tag == 3 ? '3px solid ' + o.color_g[o.tag] : '0px',
+                                            'border-left': o.tag == 3 ? '3px solid ' + o.color_g[o.tag] : '0px',
+                                            'border-right': o.tag == 3 ? '3px solid ' + o.color_g[o.tag] : '0px',
+                                            color: o.tag == -1 ? 'black' : o.color_g[o.tag]
                                         }" @click="o.tag != -1 ? hoverObject(o) : ''"
                                             @mouseenter="o.tag != -1 ? handleHover(o) : ''"
                                             @mouseout="o.tag != -1 ? handleOut(o) : ''">{{ o.text }}</span></span>
@@ -608,7 +608,8 @@ export default {
                         position: description_data[i]['Position'],
                         rawColor: description_data[i].color,
                         color: this.colorTrans(description_data[i].color),
-                        back_color: this.colorTrans(bak_color)
+                        color_g: ["rgb(255, 128, 2)", '#008080', 'rgb(255, 128, 2)', '#993399'],
+                        back_color: pos[k].tag == 2 ? this.colorTrans(bak_color) : 'rgba(255, 128, 2, 0.4)',
                     });
 
                     startPos = endPos;
