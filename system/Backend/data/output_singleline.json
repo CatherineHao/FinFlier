@@ -1,0 +1,75 @@
+{
+    "result": "result: [{\"ObjectName\":[\"Amazon stock\"],\"DataName\":\"Close\",\"Position\":[{\"Begin\":[39,1],\"End\":[141,1]}],\"Trend\":\"head and shoulder\",\"Num\":\"None\",\"Text\":\"There exists a 'head and shoulder' pattern on the Amazon stock moving averages from 1999/09/27 to 2000/02/22\"}]\n",
+    "reason": "reason: The text indicates the presence of a \"head and shoulder\" pattern in the Amazon stock moving averages. The corresponding data is in the \"Close\" column, and the pattern occurs from the row with date \"1999/09/27\" to the row with date \"2000/02/22\".",
+    "final": [
+        {
+            "OriginText": "There exists a 'head and shoulder' pattern on the Amazon stock moving averages from 1999/09/27 to 2000/02/22.",
+            "Position": [
+                {
+                    "Begin": [
+                        "Close",
+                        39
+                    ],
+                    "End": [
+                        "Close",
+                        141
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": [
+                        16,
+                        32
+                    ],
+                    "Text": "head and shoulder",
+                    "OverTag": 3,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        [
+                            50,
+                            61
+                        ]
+                    ],
+                    "Text": "Amazon stock",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Text": "There exists a 'head and shoulder' pattern on the Amazon stock moving averages from 1999/09/27 to 2000/02/22",
+                    "Label": ["head and shoulder"],
+                    "Marker": [
+                        {
+                            "Begin": [
+                                "Close",
+                                39
+                            ],
+                            "End": [
+                                "Close",
+                                141
+                            ]
+                        }
+                    ],
+                    "trendData": [39, 48, 92, 129, 141],
+                    "Line": {
+                        "Begin": [
+                            "Close",
+                            39
+                        ],
+                        "End": [
+                            "Close",
+                            141
+                        ],
+                        "mean": 3.8995904174757285,
+                        "max": 5.334375,
+                        "min": 3.084375
+                    }
+                }
+            ]
+        }
+    ]
+}

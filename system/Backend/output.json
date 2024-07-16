@@ -1,155 +1,82 @@
 {
-    "result": "result: [{\"ObjectName\":[\"Netherlands\"],\"DataName\":\"Billions of dollars\",\"Position\":[{\"Begin\":[1,1],\"End\":[1,1]}],\"Trend\":\"None\",\"Num\":[43.1],\"Text\":\"The Netherlands ($43.1 billion)\"},\n        {\"ObjectName\":[\"France\"],\"DataName\":\"Billions of dollars\",\"Position\":[{\"Begin\":[2,1],\"End\":[2,1]}],\"Trend\":\"None\",\"Num\":[35.3],\"Text\":\"France ($35.3 billion)\"}]\n",
-    "reason": "reason: The corresponding value for object \"Netherlands\" is \"43.1\", and its shortest descriptive phrase is \"The Netherlands ($43.1 billion)\". The corresponding value for object \"France\" is \"35.3\" and its shortest descriptive phrase is \"France ($35.3 billion)\"",
+    "result": "result: [{\"ObjectName\":[\"renewables\"],\"DataName\":\"renewables\",\"Position\":[{\"Begin\":[6,3],\"End\":[6,3]}],\"Trend\":\"increase\",\"Num\":[211],\"Text\":\"the renewables will continuously increase and reach 211 billion kilowatt hours in 2040\"}]\n",
+    "reason": "reason: The text mentions \"renewables\" and its corresponding value in the data is 211. The descriptive phrase in the text is \"the renewables will continuously increase and reach 211 billion kilowatt hours in 2040\".",
     "final": [
         {
-            "OriginText": "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion).",
+            "OriginText": "The Japan Electric Institute has made a forecast for future electricity generation sources, predicting that the renewables will continuously increase and reach 211 billion kilowatt hours in 2040.",
             "Position": [
                 {
                     "Begin": [
-                        "Billions of dollars",
-                        1
+                        "renewables",
+                        6
                     ],
                     "End": [
-                        "Billions of dollars",
-                        1
+                        "renewables",
+                        6
                     ]
                 }
             ],
             "ConversationInfo": [
                 {
-                    "Position": null,
-                    "Text": "None",
+                    "Position": [
+                        141,
+                        148
+                    ],
+                    "Text": "increase",
                     "OverTag": 1,
                     "Type": "Trend"
                 },
                 {
                     "Position": [
-                        122,
-                        125
+                        160,
+                        162
                     ],
-                    "Text": "43.1",
+                    "Text": "211",
                     "OverTag": 1,
                     "Type": "Num"
                 },
                 {
                     "Position": [
                         [
-                            108,
-                            118
+                            112,
+                            121
                         ]
                     ],
-                    "Text": "Netherlands",
+                    "Text": "renewables",
                     "OverTag": 0,
                     "Type": "ObjectName"
                 }
             ],
             "GraphicalOverlay": [
                 {
-                    "Text": "The Netherlands ($43.1 billion)",
+                    "Text": "the renewables will continuously increase and reach 211 billion kilowatt hours in 2040",
                     "Label": [
-                        43.1
+                        211
                     ],
                     "Marker": [
                         {
                             "Begin": [
-                                "Billions of dollars",
-                                1
+                                "renewables",
+                                6
                             ],
                             "End": [
-                                "Billions of dollars",
-                                1
+                                "renewables",
+                                6
                             ]
                         }
                     ],
                     "Line": {
                         "Begin": [
-                            "Billions of dollars",
-                            1
+                            "renewables",
+                            6
                         ],
                         "End": [
-                            "Billions of dollars",
-                            1
+                            "renewables",
+                            6
                         ],
-                        "mean": 43.1,
-                        "max": 43.1,
-                        "min": 43.1
-                    }
-                }
-            ]
-        },
-        {
-            "OriginText": "Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion).",
-            "Position": [
-                {
-                    "Begin": [
-                        "Billions of dollars",
-                        2
-                    ],
-                    "End": [
-                        "Billions of dollars",
-                        2
-                    ]
-                }
-            ],
-            "ConversationInfo": [
-                {
-                    "Position": null,
-                    "Text": "None",
-                    "OverTag": 1,
-                    "Type": "Trend"
-                },
-                {
-                    "Position": [
-                        199,
-                        202
-                    ],
-                    "Text": "35.3",
-                    "OverTag": 1,
-                    "Type": "Num"
-                },
-                {
-                    "Position": [
-                        [
-                            190,
-                            195
-                        ]
-                    ],
-                    "Text": "France",
-                    "OverTag": 0,
-                    "Type": "ObjectName"
-                }
-            ],
-            "GraphicalOverlay": [
-                {
-                    "Text": "France ($35.3 billion)",
-                    "Label": [
-                        35.3
-                    ],
-                    "Marker": [
-                        {
-                            "Begin": [
-                                "Billions of dollars",
-                                2
-                            ],
-                            "End": [
-                                "Billions of dollars",
-                                2
-                            ]
-                        }
-                    ],
-                    "Line": {
-                        "Begin": [
-                            "Billions of dollars",
-                            2
-                        ],
-                        "End": [
-                            "Billions of dollars",
-                            2
-                        ],
-                        "mean": 35.3,
-                        "max": 35.3,
-                        "min": 35.3
+                        "mean": 211.0,
+                        "max": 211,
+                        "min": 211
                     }
                 }
             ]

@@ -3,27 +3,50 @@
  * @Author: Qing Shi
  * @Date: 2023-08-27 21:52:37
  * @LastEditors: Qing Shi
- * @LastEditTime: 2023-08-27 21:52:37
+ * @LastEditTime: 2023-09-13 23:55:05
 -->
 <template>
     <div>
-        <div>Fill</div>
-        <color-picker v-model="chartSetting.currentColor"></color-picker>
-        <div>Size</div>
+        <div style="display: flex; margin-top: 5px;">
+            <div style="margin-right: 10px;">Legend</div>
+            <div><el-checkbox v-model="chartSetting.isLegend" label="" style="height: 14px; margin-top: 4px;" /></div>
+        </div>
+        <div>
+            <div style="display: flex; margin-bottom: 5px; align-items: center;">
+                <div style="width: 50px;">Label:</div>
+                <div style="margin-right: 5px;">
+                    <color-picker v-model="chartSetting.currentColor"></color-picker>
+                </div>
+                <input class="axisInput" style="width: calc(100% - 85px);" v-model="chartSetting.attrName" placeholder="Please input" />
+            </div>
+        </div>
+        <hr>
+        <div>Line</div>
         <div>Width: <input class="widthInput" v-model="chartSetting.size.width" placeholder="Please input" /> px</div>
-        <div>Axis</div>
+        <hr>
+        <div>Title</div>
         <div style="display: flex;">
-            <div style="width: 20px;">X:</div>
+            <div style="width: 50px;">Label:</div>
+            <input class="axisInput" v-model="chartSetting.title" placeholder="Please input" />
+        </div>
+        <div>X Axis</div>
+        <div style="display: flex;">
+            <div style="width: 50px;">Label:</div>
             <input class="axisInput" v-model="chartSetting.axis.x" placeholder="Please input" />
         </div>
+        <div>Y Axis</div>
         <div style="display: flex; margin-top: 5px;">
-            <div style="width: 20px;">Y:</div>
+            <div style="width: 50px;">Label:</div>
             <input class="axisInput" v-model="chartSetting.axis.y" placeholder="Please input" />
         </div>
+        <!-- <div style="display: flex; margin-top: 5px;">
+            <div style="margin-right: 10px;">Legend</div>
+            <div><el-checkbox v-model="chartSetting.isLegend" label="" style="height: 14px; margin-top: 0px;" /></div>
+        </div> -->
     </div>
 </template>
 <script>
-import ColorPicker from './ColorPicker.vue';
+import ColorPicker from './ColorPicker_single.vue';
 export default {
     name: "singleBarPanel",
     props: {
@@ -31,6 +54,7 @@ export default {
     },
     data () {
         return {
+            // isLegend: true÷÷,
             chartSetting: {
                 currentColor: {
                     r: 0,
@@ -44,7 +68,9 @@ export default {
                 axis: {
                     x: 'Position',
                     y: "Billions of dollars"
-                }
+                },
+                isLegend: 1,
+                yName: 'aaaa'
             }
         };
     },
@@ -84,6 +110,10 @@ export default {
     font-size: 14px;
 }
 
+hr {
+    margin-top: 5px;
+}
+
 .widthInput {
     width: 60px;
     border: 1px solid #ccc;
@@ -93,10 +123,10 @@ export default {
 }
 
 .axisInput {
-    width: calc(100% - 30px);
+    width: calc(100% - 60px);
     border: 1px solid #ccc;
     border-radius: 5px;
     padding-left: 3px;
     padding-right: 3px;
-
-}</style>
+}
+</style>

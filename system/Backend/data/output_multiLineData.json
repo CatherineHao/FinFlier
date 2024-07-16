@@ -1,0 +1,415 @@
+{
+    "result": "",
+    "reason": [
+        {
+            "Name": "Narrative1",
+            "Subject": [
+                "renewables",
+                "renewables"
+            ],
+            "Trend": "the 'increase' trend exists from 112 in ['renewables', 0] to 211 in ['renewables', 6].",
+            "Numerical": "the numerical 211 corresponds to 211 in ['renewables', 6]."
+        },
+        {
+            "Name": "Narrative2",
+            "Subject": [
+                "natural gas",
+                "natural gas"
+            ],
+            "Trend": "the 'minimum' corresponds to 306 in ['natural gas', 0].",
+            "Numerical": "the numerical 408 corresponds to 408 in ['natural gas', 1]."
+        },
+        {
+            "Name": "Narrative3",
+            "Subject": [
+                "liquid",
+                "liquids"
+            ],
+            "Trend": "None.",
+            "Numerical": "the numerical 4 corresponds to 4 in ['liquids', 6]"
+        },
+        {
+            "Name": "Narrative4",
+            "Subject": [
+                "nuclear energy",
+                "nuclear"
+            ],
+            "Trend": "None",
+            "Numerical": "the numerical 3 corresponds to 3 in ['nuclear', 1]."
+        },
+        {
+            "Name": "Narrative5",
+            "Subject": [
+                "natural gas",
+                "natural gas"
+            ],
+            "Trend": "None",
+            "Numerical": "the numerical 438 corresponds to 438 in ['natural gas', 6]."
+        }
+    ],
+    "final": [
+        {
+            "OriginText": "In light of the global shift towards sustainable energy, the Japan Electric Institute has made a forecast for future electricity generation sources. They predict that the renewables will continuously increase and reach 211 billion kilowatt hours in 2040. Meanwhile, natural gas, having reached 408 billion kilowatt hours in 2015, has its minimum value in 2010. The liquid is predicted to reach 4 billion kilowatter hours in 2040. The nuclear energy in Japan, severely impacted by the Fukushima Daiichi nuclear disaster, recorded a production of only 3 billion kilowatt hours in 2015. Currently, due to its reliability and abundance, the most commonly used feedstock for electricity generation is now natural gas, which is expected to reach 438 billion kilowatt hours in 2040. It underscores the pivotal role of natural gas in Japan's energy landscape.",
+            "Position": [
+                {
+                    "Begin": [
+                        "renewables",
+                        0
+                    ],
+                    "End": [
+                        "renewables",
+                        6
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": [
+                        171,
+                        180
+                    ],
+                    "Text": "renewables",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                },
+                {
+                    "Position": [
+                        200,
+                        207
+                    ],
+                    "Text": "increase",
+                    "OverTag": 3,
+                    "Type": "Trend"
+                },
+                {
+                    "Position": [
+                        219,
+                        221
+                    ],
+                    "Text": "211",
+                    "OverTag": 1,
+                    "Type": "Num"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Highlight": "renewables",
+                    "Text": "the renewables will continuously increase.",
+                    "LabelPos": [
+                        {
+                            "x": "2040",
+                            "y": 211,
+                            "text": "211"
+                        }
+                    ],
+                    "MarkerPos": [
+                        {
+                            "x": "2040",
+                            "y": 211,
+                            "t": 0
+                        }
+                    ],
+                    "Line": {
+                        "pos": [
+                            {
+                                "x": "2010",
+                                "y": 112,
+                                "text": "112"
+                            },
+                            {
+                                "x": "2040",
+                                "y": 211,
+                                "text": "211"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "Meanwhile, natural gas, having reached 408 billion kilowatt hours in 2015, is predicted to consistently remain above 400 billion kilowatter hours. The liquid is predicted to reach 4 billion kilowatter hours in 2040. The nuclear energy in Japan, severely impacted by the Fukushima Daiichi nuclear disaster, recorded a production of only 3 billion kilowatt hours in 2015. Currently, due to its reliability and abundance, the most commonly used feedstock for electricity generation is now natural gas, which is expected to reach 438 billion kilowatt hours in 2040. It underscores the pivotal role of natural gas in Japan's energy landscape.",
+            "Position": [
+                {
+                    "Begin": [
+                        "natural gas",
+                        1
+                    ],
+                    "End": [
+                        "natural gas",
+                        1
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": [
+                        266,
+                        276
+                    ],
+                    "Text": "natural gas",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                },
+                {
+                    "Position": [
+                        294,
+                        296
+                    ],
+                    "Text": "408",
+                    "OverTag": 1,
+                    "Type": "Num"
+                },
+                {
+                    "Position": [
+                        338,
+                        344
+                    ],
+                    "Text": "minimum",
+                    "OverTag": 3,
+                    "Type": "Trend"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Highlight": "natural gas",
+                    "Text": "",
+                    "LabelPos": [
+                        {
+                            "x": "2015",
+                            "y": 408,
+                            "text": "408"
+                        }
+                    ],
+                    "MarkerPos": [
+                        {
+                            "x": "2015",
+                            "y": 408,
+                            "t": 0
+                        }
+                    ],
+                    "Line": {
+                        "pos": [
+                            {
+                                "x": "2010",
+                                "y": 306,
+                                "text": "112"
+                            },
+                            {
+                                "x": "2040",
+                                "y": 306,
+                                "text": "211"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "In light of the global shift towards sustainable energy, the Japan Electric Institute has made a forecast for future electricity generation sources. They predict that the renewables will continuously increase and reach 211 billion kilowatt hours in 2040. Meanwhile, natural gas, having reached 408 billion kilowatt hours in 2015, is predicted to consistently remain above 400 billion kilowatter hours. The liquid is predicted to reach 4 billion kilowatter hours in 2040. The nuclear energy in Japan, severely impacted by the Fukushima Daiichi nuclear disaster, recorded a production of only 3 billion kilowatt hours in 2015. Currently, due to its reliability and abundance, the most commonly used feedstock for electricity generation is now natural gas, which is expected to reach 438 billion kilowatt hours in 2040. It underscores the pivotal role of natural gas in Japan's energy landscape.",
+            "Position": [
+                {
+                    "Begin": [
+                        "liquids",
+                        6
+                    ],
+                    "End": [
+                        "liquids",
+                        6
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": [
+                        365,
+                        370
+                    ],
+                    "Text": "liquid",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                },
+                {
+                    "Position": [
+                        394,
+                        394
+                    ],
+                    "Text": "4",
+                    "OverTag": 1,
+                    "Type": "Num"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Highlight": "liquids",
+                    "Text": "",
+                    "LabelPos": [
+                        {
+                            "x": "2040",
+                            "y": 4,
+                            "text": "4"
+                        }
+                    ],
+                    "MarkerPos": [
+                        {
+                            "x": "2040",
+                            "y": 4,
+                            "t": 0
+                        }
+                    ],
+                    "Line": {
+                        "pos": [
+                            {
+                                "x": "2010",
+                                "y": 112,
+                                "text": "112"
+                            },
+                            {
+                                "x": "2040",
+                                "y": 211,
+                                "text": "211"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "In light of the global shift towards sustainable energy, the Japan Electric Institute has made a forecast for future electricity generation sources. They predict that the renewables will continuously increase and reach 211 billion kilowatt hours in 2040. Meanwhile, natural gas, having reached 408 billion kilowatt hours in 2015, is predicted to consistently remain above 400 billion kilowatter hours. The liquid is predicted to reach 4 billion kilowatter hours in 2040. The nuclear energy in Japan, severely impacted by the Fukushima Daiichi nuclear disaster, recorded a production of only 3 billion kilowatt hours in 2015. Currently, due to its reliability and abundance, the most commonly used feedstock for electricity generation is now natural gas, which is expected to reach 438 billion kilowatt hours in 2040. It underscores the pivotal role of natural gas in Japan's energy landscape.",
+            "Position": [
+                {
+                    "Begin": [
+                        "nuclear",
+                        1
+                    ],
+                    "End": [
+                        "nuclear",
+                        1
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": [
+                        434,
+                        447
+                    ],
+                    "Text": "nuclear energy",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                },
+                {
+                    "Position": [
+                        550,
+                        550
+                    ],
+                    "Text": "3",
+                    "OverTag": 1,
+                    "Type": "Num"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Highlight": "nuclear",
+                    "Text": "",
+                    "LabelPos": [
+                        {
+                            "x": "2015",
+                            "y": 3,
+                            "text": "3"
+                        }
+                    ],
+                    "MarkerPos": [
+                        {
+                            "x": "2015",
+                            "y": 3,
+                            "t": 0
+                        }
+                    ],
+                    "Line": {
+                        "pos": [
+                            {
+                                "x": "2010",
+                                "y": 112,
+                                "text": "112"
+                            },
+                            {
+                                "x": "2040",
+                                "y": 211,
+                                "text": "211"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "OriginText": "In light of the global shift towards sustainable energy, the Japan Electric Institute has made a forecast for future electricity generation sources. They predict that the renewables will continuously increase and reach 211 billion kilowatt hours in 2040. Meanwhile, natural gas, having reached 408 billion kilowatt hours in 2015, is predicted to consistently remain above 400 billion kilowatter hours. The liquid is predicted to reach 4 billion kilowatter hours in 2040. The nuclear energy in Japan, severely impacted by the Fukushima Daiichi nuclear disaster, recorded a production of only 3 billion kilowatt hours in 2015. Currently, due to its reliability and abundance, the most commonly used feedstock for electricity generation is now natural gas, which is expected to reach 438 billion kilowatt hours in 2040. It underscores the pivotal role of natural gas in Japan's energy landscape.",
+            "Position": [
+                {
+                    "Begin": [
+                        "natural gas",
+                        6
+                    ],
+                    "End": [
+                        "natural gas",
+                        6
+                    ]
+                }
+            ],
+            "ConversationInfo": [
+                {
+                    "Position": [
+                        700,
+                        710
+                    ],
+                    "Text": "natural gas",
+                    "OverTag": 0,
+                    "Type": "ObjectName"
+                },
+                {
+                    "Position": [
+                        740,
+                        742
+                    ],
+                    "Text": "438",
+                    "OverTag": 1,
+                    "Type": "Num"
+                }
+            ],
+            "GraphicalOverlay": [
+                {
+                    "Highlight": "natural gas",
+                    "Text": "",
+                    "LabelPos": [
+                        {
+                            "x": "2040",
+                            "y": 438,
+                            "text": "438"
+                        }
+                    ],
+                    "MarkerPos": [
+                        {
+                            "x": "2040",
+                            "y": 438,
+                            "t": 0
+                        }
+                    ],
+                    "Line": {
+                        "pos": [
+                            {
+                                "x": "2010",
+                                "y": 112,
+                                "text": "112"
+                            },
+                            {
+                                "x": "2040",
+                                "y": 211,
+                                "text": "211"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

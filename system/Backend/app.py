@@ -2,7 +2,7 @@
 Description: 
 Author: Qing Shi
 Date: 2022-11-20 19:14:42
-LastEditTime: 2023-09-02 21:38:03
+LastEditTime: 2023-12-15 15:15:11
 '''
 import openai
 from flask import Flask, request, jsonify
@@ -11,6 +11,7 @@ import json
 import os
 import re
 from front_format import result_to_frontend, transform_result
+import time
 
 FILE_ABS_PATH = os.path.dirname(__file__)
 
@@ -44,7 +45,8 @@ def fetch_basic_chart():
 
 
 # @app.route("get_result", methods = ("GET", "POST"))
-@app.route('/api/test/postQuery/', methods=['POST'])
+# @app.route('/api/test/postQuery/', methods=['POST'])
+@app.route('/api/test/postQuery_real/', methods=['POST'])
 def chat_with_gpt():
     params = request.json
     # print(params)
@@ -75,7 +77,7 @@ def chat_with_gpt():
             # model="gpt-4-32k",
             # messages=[{"role": "user", "content": 'Translate the following English text to French: "Have a nice day!"'}], # 测试一下把英语翻译成法语
             messages=[{"role": "user", "content": t_request}],
-            max_tokens=2000, # 设置生成的最大token数，可以根据需要调整
+            max_tokens=500, # 设置生成的最大token数，可以根据需要调整
             temperature=0.4, # 设置温度,值越小越确认
             #stop = ["\n"],
             stop=None,
@@ -99,14 +101,19 @@ def chat_with_gpt():
     if "following" in label:
         # user_info 包括 data+text+result+reason+follow_question+label:following
         user_data_text = user_info[:user_info.find("result")]
-        result_reason = user_info[user_info.find("result"):user_info.find("question")]
+        reason_content = user_info[user_info.find("reason")+8:user_info.find("question")].replace("\"", "\'")
+        result_reason = user_info[user_info.find("result"):user_info.find("reason")] + "reason: \"" + reason_content + "\""
+        # print(result_reason)
         question = user_info[user_info.find("question"):user_info.find("label")]
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo-16k", # prompt+completion 最大16384 tokens
-            messages=[{"role": "system", "content": "You are a helpful assistant."}, # 告诉AI他的身份定位是啥 如果不填默认是"You are a helpful assistant."
-                        {"role": "user", "content": user_data_text}, # 用户上传的data+text
-                        {"role": "assistant", "content": result_reason}, # gpt回答的result+reason
-                        {"role": "user", "content": user_data_text+question}], # follow_question
+            messages=[{"role": "system", "content": "You are a helpful assistant."}, # tell AI his role
+                        {"role": "system", "name": "example_user", "content": """data: [{'Position':'United Kingdom','Billions of dollars':59.9},{'Position':'Netherlands','Billions of dollars':43.1},{'Position':'France','Billions of dollars':35.3},{'Position':'Canada','Billions of dollars': 30},{'Position':'Japan','Billions of dollars':29.6}]text: ["Investment by British investors accounted for 18 percent of new foreign direct investment expenditures. The Netherlands ($43.1 billion) was the second-largest investing country, followed by France ($35.3 billion)."] question: ["Which country has the highest value?"]"""},        # example_1 prompt
+                        {"role": "system", "name": "example_assistant", "content": """result: [{\"ObjectName\":[\"United Kingdom\"],\"DataName\":\"Billions of dollars\",\"Position\":[{\"Begin\":[0,1],\"End\":[0,1]}],\"Trend\":\"None\",\"Num\":[59.9],\"Text\":\"United Kingdom\"}]\n                reason: \"The country with the highest value is the United Kingdom, with a value of 59.9 billion dollars.\""""},  # example_1 result
+                        {"role": "user", "content": user_data_text},
+                        {"role": "assistant", "content": result_reason},
+                        {"role": "user", "content": user_data_text+question}],   # the follow up question
+
             max_tokens=2000, # 设置生成的最大token数，可以根据需要调整
             temperature=0.2, # 设置温度,值越小越确认
             #stop = ["\n"],
@@ -117,14 +124,55 @@ def chat_with_gpt():
         start_index = reply.find('reason:')
         result = reply[0:start_index]
         reason = reply[start_index:]
-        result_frontend = result_to_frontend(user_data_text, result)
+
+        data_reason = user_info[:user_info.find("text")] + "text: [" + reason[8:] + "]"
+        # print(data_reason)
+        result_frontend = result_to_frontend(data_reason, result)
+        # print(result_frontend)
         final_result = transform_result(result_frontend)
+        print(final_result)
+        # return result, reason, final_result
         output_file_path = 'output1.json'
         data = {"result":result, "reason": reason, "final": final_result}
         with open(output_file_path, 'w') as file:
             json.dump(data, file, indent=4)
             print("Saved to", output_file_path)
         return {"result":result, "reason": reason, "final": final_result}
+
+
+    # if "following" in label:
+    #     # user_info 包括 data+text+result+reason+follow_question+label:following
+    #     user_data_text = user_info[:user_info.find("result")]
+    #     result_reason = user_info[user_info.find("result"):user_info.find("question")]
+    #     question = user_info[user_info.find("question"):user_info.find("label")]
+    #     response = openai.ChatCompletion.create(
+    #         model="gpt-3.5-turbo-16k", # prompt+completion 最大16384 tokens
+    #         messages=[{"role": "system", "content": "You are a helpful assistant."}, # 告诉AI他的身份定位是啥 如果不填默认是"You are a helpful assistant."
+    #                     {"role": "user", "content": user_data_text}, # 用户上传的data+text
+    #                     {"role": "assistant", "content": result_reason}, # gpt回答的result+reason
+    #                     {"role": "user", "content": user_data_text+question}], # follow_question
+    #         max_tokens=500, # 设置生成的最大token数，可以根据需要调整
+    #         temperature=0.2, # 设置温度,值越小越确认
+    #         #stop = ["\n"],
+    #         stop=None,
+    #     )
+    #     print(response)
+    #     reply = response['choices'][0]['message']['content']
+    #     start_index = reply.find('reason:')
+    #     result = reply[0:start_index]
+    #     reason = reply[start_index:]
+    #     # result_frontend = result_to_frontend(user_data_text, result)
+    #     data_reason = user_info[:user_info.find("text")] + "text: [" + reason[8:] + "]"
+    #     # print(data_reason)
+    #     result_frontend = result_to_frontend(data_reason, result)
+    #     print(result_frontend)
+    #     final_result = transform_result(result_frontend)
+    #     output_file_path = 'output1.json'
+    #     data = {"result":result, "reason": reason, "final": final_result}
+    #     with open(output_file_path, 'w') as file:
+    #         json.dump(data, file, indent=4)
+    #         print("Saved to", output_file_path)
+    #     return {"result":result, "reason": reason, "final": final_result}
 
 
    
@@ -240,6 +288,10 @@ text: ["The British economy expanded 0.2% on quarter in Q2 2023, following a 0.1
 result: [{"ObjectName":["The British economy"],"DataName":"GDP Growth Rate","Position":[{"Begin":[7,1],"End":[6,1]}],"Trend":"expanded","Num":[0.2,0.1],"Text":"The British economy expanded 0.2% on quarter in Q2 2023, following a 0.1% growth in Q1"}]
 reason: "The column 'GDP Growth Rate' corresponds to 'The British economy' in the text. The '0.2% on quarter in Q2 2023' corresponds to row '2023 Q2' and the '0.1% growth in Q1' corresponds to row '2023 Q1'."
 
+data: [{'Time': '2019-Jan', 'All items': 1.6, 'Food': 1.6, 'Energy': -4.8, 'Shelter': 3.2}, {'Time': '2019-Feb', 'All items': 1.5, 'Food': 2.0, 'Energy': -5.0, 'Shelter': 3.4}, {'Time': '2019-Mar', 'All items': 1.9, 'Food': 2.1, 'Energy': -0.4, 'Shelter': 3.4}, {'Time': '2019-Apr', 'All items': 2.0, 'Food': 1.8, 'Energy': 1.7, 'Shelter': 3.4}, {'Time': '2019-May', 'All items': 1.8, 'Food': 2.0, 'Energy': -0.5, 'Shelter': 3.3}, {'Time': '2019-Jun', 'All items': 1.6, 'Food': 1.9, 'Energy': -3.4, 'Shelter': 3.5}, {'Time': '2019-Jul', 'All items': 1.8, 'Food': 1.8, 'Energy': -2.0, 'Shelter': 3.5}, {'Time': '2019-Aug', 'All items': 1.7, 'Food': 1.7, 'Energy': -4.4, 'Shelter': 3.4}, {'Time': '2019-Sep', 'All items': 1.7, 'Food': 1.8, 'Energy': -4.8, 'Shelter': 3.5}, {'Time': '2019-Oct', 'All items': 1.8, 'Food': 2.1, 'Energy': -4.2, 'Shelter': 3.3}, {'Time': '2019-Nov', 'All items': 2.1, 'Food': 2.0, 'Energy': -0.6, 'Shelter': 3.3}, {'Time': '2019-Dec', 'All items': 2.3, 'Food': 1.8, 'Energy': 3.4, 'Shelter': 3.2}, {'Time': '2020-Jan', 'All items': 2.5, 'Food': 1.8, 'Energy': 6.2, 'Shelter': 3.3}, {'Time': '2020-Feb', 'All items': 2.3, 'Food': 1.8, 'Energy': 2.8, 'Shelter': 3.3}, {'Time': '2020-Mar', 'All items': 1.5, 'Food': 1.9, 'Energy': -5.7, 'Shelter': 3.0}, {'Time': '2020-Apr', 'All items': 0.3, 'Food': 3.5, 'Energy': -17.7, 'Shelter': 2.6}, {'Time': '2020-May', 'All items': 0.1, 'Food': 4.0, 'Energy': -18.9, 'Shelter': 2.5}, {'Time': '2020-Jun', 'All items': 0.6, 'Food': 4.5, 'Energy': -12.6, 'Shelter': 2.4}, {'Time': '2020-Jul', 'All items': 1.0, 'Food': 4.1, 'Energy': -11.2, 'Shelter': 2.3}, {'Time': '2020-Aug', 'All items': 1.3, 'Food': 4.1, 'Energy': -9.0, 'Shelter': 2.3}, {'Time': '2020-Sep', 'All items': 1.4, 'Food': 3.9, 'Energy': -7.7, 'Shelter': 2.0}, {'Time': '2020-Oct', 'All items': 1.2, 'Food': 3.9, 'Energy': -9.2, 'Shelter': 2.0}, {'Time': '2020-Nov', 'All items': 1.2, 'Food': 3.7, 'Energy': -9.4, 'Shelter': 1.9}, {'Time': '2020-Dec', 'All items': 1.4, 'Food': 3.9, 'Energy': -7.0, 'Shelter': 1.8}, {'Time': '2021-Jan', 'All items': 1.4, 'Food': 3.8, 'Energy': -3.6, 'Shelter': 1.6}, {'Time': '2021-Feb', 'All items': 1.7, 'Food': 3.6, 'Energy': 2.4, 'Shelter': 1.5}, {'Time': '2021-Mar', 'All items': 2.6, 'Food': 3.5, 'Energy': 13.2, 'Shelter': 1.7}, {'Time': '2021-Apr', 'All items': 4.2, 'Food': 2.4, 'Energy': 25.1, 'Shelter': 2.1}, {'Time': '2021-May', 'All items': 5.0, 'Food': 2.2, 'Energy': 28.5, 'Shelter': 2.2}, {'Time': '2021-Jun', 'All items': 5.4, 'Food': 2.4, 'Energy': 24.5, 'Shelter': 2.6}, {'Time': '2021-Jul', 'All items': 5.4, 'Food': 3.4, 'Energy': 23.8, 'Shelter': 2.8}, {'Time': '2021-Aug', 'All items': 5.3, 'Food': 3.7, 'Energy': 25.0, 'Shelter': 2.8}, {'Time': '2021-Sep', 'All items': 5.4, 'Food': 4.6, 'Energy': 24.8, 'Shelter': 3.2}, {'Time': '2021-Oct', 'All items': 6.2, 'Food': 5.3, 'Energy': 30.0, 'Shelter': 3.5}, {'Time': '2021-Nov', 'All items': 6.8, 'Food': 6.1, 'Energy': 33.3, 'Shelter': 3.8}, {'Time': '2021-Dec', 'All items': 7.0, 'Food': 6.3, 'Energy': 29.3, 'Shelter': 4.1}, {'Time': '2022-Jan', 'All items': 7.5, 'Food': 7.0, 'Energy': 27.0, 'Shelter': 4.4}, {'Time': '2022-Feb', 'All items': 7.9, 'Food': 7.9, 'Energy': 25.6, 'Shelter': 4.7}, {'Time': '2022-Mar', 'All items': 8.5, 'Food': 8.8, 'Energy': 32.0, 'Shelter': 5.0}, {'Time': '2022-Apr', 'All items': 8.3, 'Food': 9.4, 'Energy': 30.3, 'Shelter': 5.1}, {'Time': '2022-May', 'All items': 8.6, 'Food': 10.1, 'Energy': 34.6, 'Shelter': 5.5}, {'Time': '2022-Jun', 'All items': 9.1, 'Food': 10.4, 'Energy': 41.6, 'Shelter': 5.6}, {'Time': '2022-Jul', 'All items': 8.5, 'Food': 10.9, 'Energy': 32.9, 'Shelter': 5.7}, {'Time': '2022-Aug', 'All items': 8.3, 'Food': 11.4, 'Energy': 23.8, 'Shelter': 6.2}, {'Time': '2022-Sep', 'All items': 8.2, 'Food': 11.2, 'Energy': 19.8, 'Shelter': 6.6}, {'Time': '2022-Oct', 'All items': 7.7, 'Food': 10.9, 'Energy': 17.6, 'Shelter': 6.9}, {'Time': '2022-Nov', 'All items': 7.1, 'Food': 10.6, 'Energy': 13.1, 'Shelter': 7.1}, {'Time': '2022-Dec', 'All items': 6.5, 'Food': 10.4, 'Energy': 7.3, 'Shelter': 7.5}, {'Time': '2023-Jan', 'All items': 6.4, 'Food': 10.1, 'Energy': 8.7, 'Shelter': 7.9}, {'Time': '2023-Feb', 'All items': 6.0, 'Food': 9.5, 'Energy': 5.2, 'Shelter': 8.1}, {'Time': '2023-Mar', 'All items': 5.0, 'Food': 8.5, 'Energy': -6.4, 'Shelter': 8.2}, {'Time': '2023-Apr', 'All items': 4.9, 'Food': 7.7, 'Energy': -5.1, 'Shelter': 8.1}]
+text: ["The 12-month percentage change in Consumer Price Index for all items increased 4.9 percentage in 2023 April. Consumer Price Index for food rose 7.7 percent in the same month, while consumer prices for energy fell 5.1 percentage."]
+result: [{"ObjectName": ["Consumer Price Index for all items"], "DataName": "All items","Position": [{"Begin": [51, 1],"End": [51, 1]}],"Trend": "increased”,”Num": [4.9],"Text": "The 12-month percentage change in Consumer Price Index for all items increased 4.9 percentage in 2023 April."},{"ObjectName": ["Consumer Price Index for food"],"DataName": "Food","Position": [{ "Begin": [51, 2],"End": [51, 2]}],"Trend": "rose","Num": [7.7],"Text": "Consumer Price Index for food rose 7.7 percent in the same month."},{"ObjectName": ["consumer prices for energy"],"DataName": "Energy","Position": [{"Begin": [51, 3],"End": [51, 3]}],”Trend": "fell","Num": [-5.1],"Text": "while consumer prices for energy fell 5.1 percentage."}]
+reason: "The text 'consumer price index for all items' corresponds to the column 'All items' in data and the test '2023 April' corresponds to the row '2023-Apr' in data. The test 'fell 5.1 percentage'  refer to '-5.1' in data."
 
 data: [{'Time': 2012, 'Launches': 46, 'Liquidations': 14, 'Active': 271}, 
         {'Time': 2013, 'Launches': 50, 'Liquidations': 18, 'Active': 303}, 
@@ -263,9 +315,9 @@ reason: "There are three objects in data and text: active funds, liquidated fund
 # 5个超级长的head and shoulder/cup with handle/double top/triple top/rounding bottom，全部放进prompt共2w3token。
 head_and_shoulder = """
 data: [{'Date': '1999/8/2', 'Close': 2.35}, {'Date': '1999/8/3', 'Close': 2.371875}, {'Date': '1999/8/4', 'Close': 2.210938}, {'Date': '1999/8/5', 'Close': 2.43125}, {'Date': '1999/8/6', 'Close': 2.239063}, {'Date': '1999/8/9', 'Close': 2.1375}, {'Date': '1999/8/10', 'Close': 2.275}, {'Date': '1999/8/11', 'Close': 2.273438}, {'Date': '1999/8/12', 'Close': 2.29375}, {'Date': '1999/8/13', 'Close': 2.435938}, {'Date': '1999/8/16', 'Close': 2.457813}, {'Date': '1999/8/17', 'Close': 2.73125}, {'Date': '1999/8/18', 'Close': 2.828125}, {'Date': '1999/8/19', 'Close': 2.653125}, {'Date': '1999/8/20', 'Close': 2.835938}, {'Date': '1999/8/23', 'Close': 2.959375}, {'Date': '1999/8/24', 'Close': 3.001563}, {'Date': '1999/8/25', 'Close': 3.321875}, {'Date': '1999/8/26', 'Close': 3.214063}, {'Date': '1999/8/27', 'Close': 3.2125}, {'Date': '1999/8/30', 'Close': 2.98125}, {'Date': '1999/8/31', 'Close': 3.109375}, {'Date': '1999/9/1', 'Close': 2.976563}, {'Date': '1999/9/2', 'Close': 3.003125}, {'Date': '1999/9/3', 'Close': 3.121875}, {'Date': '1999/9/7', 'Close': 3.146875}, {'Date': '1999/9/8', 'Close': 3.071875}, {'Date': '1999/9/9', 'Close': 3.18125}, {'Date': '1999/9/10', 'Close': 3.325}, {'Date': '1999/9/13', 'Close': 3.165625}, {'Date': '1999/9/14', 'Close': 3.3}, {'Date': '1999/9/15', 'Close': 3.278125}, {'Date': '1999/9/16', 'Close': 3.2625}, {'Date': '1999/9/17', 'Close': 3.190625}, {'Date': '1999/9/20', 'Close': 3.1375}, {'Date': '1999/9/21', 'Close': 3.1125}, {'Date': '1999/9/22', 'Close': 3.3}, {'Date': '1999/9/23', 'Close': 3.1125}, {'Date': '1999/9/24', 'Close': 3.25}, {'Date': '1999/9/27', 'Close': 3.128125}, {'Date': '1999/9/28', 'Close': 3.29375}, {'Date': '1999/9/29', 'Close': 4.0375}, {'Date': '1999/9/30', 'Close': 3.996875}, {'Date': '1999/10/1', 'Close': 3.8625}, {'Date': '1999/10/4', 'Close': 3.853125}, {'Date': '1999/10/5', 'Close': 3.921875}, {'Date': '1999/10/6', 'Close': 4.121875}, {'Date': '1999/10/7', 'Close': 4.365625}, {'Date': '1999/10/8', 'Close': 4.4625}, {'Date': '1999/10/11', 'Close': 4.41875}, {'Date': '1999/10/12', 'Close': 4.246875}, {'Date': '1999/10/13', 'Close': 3.996875}, {'Date': '1999/10/14', 'Close': 3.979688}, {'Date': '1999/10/15', 'Close': 3.753125}, {'Date': '1999/10/18', 'Close': 3.703125}, {'Date': '1999/10/19', 'Close': 3.83125}, {'Date': '1999/10/20', 'Close': 4.025}, {'Date': '1999/10/21', 'Close': 4.0375}, {'Date': '1999/10/22', 'Close': 3.93125}, {'Date': '1999/10/25', 'Close': 4.1375}, {'Date': '1999/10/26', 'Close': 4.0625}, {'Date': '1999/10/27', 'Close': 3.796875}, {'Date': '1999/10/28', 'Close': 3.55}, {'Date': '1999/10/29', 'Close': 3.53125}, {'Date': '1999/11/1', 'Close': 3.45625}, {'Date': '1999/11/2', 'Close': 3.321875}, {'Date': '1999/11/3', 'Close': 3.290625}, {'Date': '1999/11/4', 'Close': 3.153125}, {'Date': '1999/11/5', 'Close': 3.246875}, {'Date': '1999/11/8', 'Close': 3.9}, {'Date': '1999/11/9', 'Close': 3.540625}, {'Date': '1999/11/10', 'Close': 3.6}, {'Date': '1999/11/11', 'Close': 3.65}, {'Date': '1999/11/12', 'Close': 3.746875}, {'Date': '1999/11/15', 'Close': 3.675}, {'Date': '1999/11/16', 'Close': 3.946875}, {'Date': '1999/11/17', 'Close': 3.825}, {'Date': '1999/11/18', 'Close': 3.896875}, {'Date': '1999/11/19', 'Close': 3.896875}, {'Date': '1999/11/22', 'Close': 4.025}, {'Date': '1999/11/23', 'Close': 4.0875}, {'Date': '1999/11/24', 'Close': 4.3625}, {'Date': '1999/11/26', 'Close': 4.65625}, {'Date': '1999/11/29', 'Close': 4.521875}, {'Date': '1999/11/30', 'Close': 4.253125}, {'Date': '1999/12/1', 'Close': 4.25}, {'Date': '1999/12/2', 'Close': 4.453125}, {'Date': '1999/12/3', 'Close': 4.328125}, {'Date': '1999/12/6', 'Close': 4.3875}, {'Date': '1999/12/7', 'Close': 4.303125}, {'Date': '1999/12/8', 'Close': 4.428125}, {'Date': '1999/12/9', 'Close': 5.18125}, {'Date': '1999/12/10', 'Close': 5.334375}, {'Date': '1999/12/13', 'Close': 5.125}, {'Date': '1999/12/14', 'Close': 4.78125}, {'Date': '1999/12/15', 'Close': 4.825}, {'Date': '1999/12/16', 'Close': 4.74375}, {'Date': '1999/12/17', 'Close': 4.703125}, {'Date': '1999/12/20', 'Close': 4.85}, {'Date': '1999/12/21', 'Close': 4.99375}, {'Date': '1999/12/22', 'Close': 4.884375}, {'Date': '1999/12/23', 'Close': 4.5}, {'Date': '1999/12/27', 'Close': 4.05625}, {'Date': '1999/12/28', 'Close': 4.115625}, {'Date': '1999/12/29', 'Close': 4.175}, {'Date': '1999/12/30', 'Close': 3.953125}, {'Date': '1999/12/31', 'Close': 3.80625}, {'Date': '2000/1/3', 'Close': 4.46875}, {'Date': '2000/1/4', 'Close': 4.096875}, {'Date': '2000/1/5', 'Close': 3.4875}, {'Date': '2000/1/6', 'Close': 3.278125}, {'Date': '2000/1/7', 'Close': 3.478125}, {'Date': '2000/1/10', 'Close': 3.459375}, {'Date': '2000/1/11', 'Close': 3.3375}, {'Date': '2000/1/12', 'Close': 3.178125}, {'Date': '2000/1/13', 'Close': 3.296875}, {'Date': '2000/1/14', 'Close': 3.2125}, {'Date': '2000/1/18', 'Close': 3.20625}, {'Date': '2000/1/19', 'Close': 3.340625}, {'Date': '2000/1/20', 'Close': 3.2375}, {'Date': '2000/1/21', 'Close': 3.103125}, {'Date': '2000/1/24', 'Close': 3.50625}, {'Date': '2000/1/25', 'Close': 3.4625}, {'Date': '2000/1/26', 'Close': 3.240625}, {'Date': '2000/1/27', 'Close': 3.346875}, {'Date': '2000/1/28', 'Close': 3.084375}, {'Date': '2000/1/31', 'Close': 3.228125}, {'Date': '2000/2/1', 'Close': 3.371875}, {'Date': '2000/2/2', 'Close': 3.471875}, {'Date': '2000/2/3', 'Close': 4.209375}, {'Date': '2000/2/4', 'Close': 3.928125}, {'Date': '2000/2/7', 'Close': 3.75}, {'Date': '2000/2/8', 'Close': 4.15625}, {'Date': '2000/2/9', 'Close': 4.0125}, {'Date': '2000/2/10', 'Close': 3.809375}, {'Date': '2000/2/11', 'Close': 3.809375}, {'Date': '2000/2/14', 'Close': 3.721875}, {'Date': '2000/2/15', 'Close': 3.690625}, {'Date': '2000/2/16', 'Close': 3.534375}, {'Date': '2000/2/17', 'Close': 3.45}, {'Date': '2000/2/18', 'Close': 3.2375}, {'Date': '2000/2/22', 'Close': 3.178125}, {'Date': '2000/2/23', 'Close': 3.521875}, {'Date': '2000/2/24', 'Close': 3.421875}, {'Date': '2000/2/25', 'Close': 3.45625}, {'Date': '2000/2/28', 'Close': 3.2875}, {'Date': '2000/2/29', 'Close': 3.44375}, {'Date': '2000/3/1', 'Close': 3.29375}, {'Date': '2000/3/2', 'Close': 3.128125}, {'Date': '2000/3/3', 'Close': 3.125}, {'Date': '2000/3/6', 'Close': 3.196875}, {'Date': '2000/3/7', 'Close': 3.175}, {'Date': '2000/3/8', 'Close': 3.18125}, {'Date': '2000/3/9', 'Close': 3.440625}, {'Date': '2000/3/10', 'Close': 3.34375}, {'Date': '2000/3/13', 'Close': 3.265625}, {'Date': '2000/3/14', 'Close': 3.28125}, {'Date': '2000/3/15', 'Close': 3.1875}, {'Date': '2000/3/16', 'Close': 3.3125}, {'Date': '2000/3/17', 'Close': 3.240625}, {'Date': '2000/3/20', 'Close': 3.209375}, {'Date': '2000/3/21', 'Close': 3.61875}, {'Date': '2000/3/22', 'Close': 3.534375}, {'Date': '2000/3/23', 'Close': 3.384375}, {'Date': '2000/3/24', 'Close': 3.634375}, {'Date': '2000/3/27', 'Close': 3.65625}, {'Date': '2000/3/28', 'Close': 3.50625}, {'Date': '2000/3/29', 'Close': 3.3125}, {'Date': '2000/3/30', 'Close': 3.325}, {'Date': '2000/3/31', 'Close': 3.35}, {'Date': '2000/4/3', 'Close': 3.178125}, {'Date': '2000/4/4', 'Close': 3.196875}, {'Date': '2000/4/5', 'Close': 3.109375}, {'Date': '2000/4/6', 'Close': 3.2125}, {'Date': '2000/4/7', 'Close': 3.378125}, {'Date': '2000/4/10', 'Close': 3.16875}, {'Date': '2000/4/11', 'Close': 3.16875}, {'Date': '2000/4/12', 'Close': 2.81875}, {'Date': '2000/4/13', 'Close': 2.4}, {'Date': '2000/4/14', 'Close': 2.34375}, {'Date': '2000/4/17', 'Close': 2.353125}, {'Date': '2000/4/18', 'Close': 2.746875}, {'Date': '2000/4/19', 'Close': 2.671875}, {'Date': '2000/4/20', 'Close': 2.61875}, {'Date': '2000/4/24', 'Close': 2.490625}, {'Date': '2000/4/25', 'Close': 2.621875}, {'Date': '2000/4/26', 'Close': 2.675}, {'Date': '2000/4/27', 'Close': 2.64375}, {'Date': '2000/4/28', 'Close': 2.759375}, {'Date': '2000/5/1', 'Close': 2.996875}, {'Date': '2000/5/2', 'Close': 2.80625}, {'Date': '2000/5/3', 'Close': 2.70625}, {'Date': '2000/5/4', 'Close': 2.753125}, {'Date': '2000/5/5', 'Close': 2.925}, {'Date': '2000/5/8', 'Close': 2.800781}, {'Date': '2000/5/9', 'Close': 2.8125}, {'Date': '2000/5/10', 'Close': 2.665625}, {'Date': '2000/5/11', 'Close': 2.74375}, {'Date': '2000/5/12', 'Close': 2.6875}, {'Date': '2000/5/15', 'Close': 2.803125}, {'Date': '2000/5/16', 'Close': 2.953125}, {'Date': '2000/5/17', 'Close': 3.05}, {'Date': '2000/5/18', 'Close': 2.76875}, {'Date': '2000/5/19', 'Close': 2.63125}, {'Date': '2000/5/22', 'Close': 2.59375}, {'Date': '2000/5/23', 'Close': 2.334375}, {'Date': '2000/5/24', 'Close': 2.428125}, {'Date': '2000/5/25', 'Close': 2.275}, {'Date': '2000/5/26', 'Close': 2.325}, {'Date': '2000/5/30', 'Close': 2.5875}, {'Date': '2000/5/31', 'Close': 2.415625}]
-text: ["There exists a 'head and shoulder' pattern on the Amazon stock moving averages from 1999/09/27 to 2000/02/22."]
-result: [{"ObjectName":["Amazon stock"],"DataName":"Close","Position":[{"Begin":[39,1],"End":[141,1]}],"Trend":"head and shoulder","Num":"None","Text":"a "head and shoulder" pattern on the Amazon stock moving averages from 1999/09/27 to 2000/02/22"}]
-reason: "The 'Amazon stock' in text corresponds to the 'Close' column in data. The "head and shoulder" pattern consists of three rises and falls from three localized highs. The high point in the center is higher than the other two. This pattern is around from '1999/09/27' to '2000/02/22' and the middle high point exist on '1999/12/09'."
+text: ["There exists a 'head and shoulder' pattern on the Amazon stock moving averages from 1999/09/27 to 2000/02/22. On December 10th, the price per share reached 5.334375."]
+result: [{"ObjectName":["Amazon stock"],"DataName":"Close","Position":[{"Begin":[39,1],"EndIndex":[141,1]}],"Trend":"Head and shoulder","Num":"None","Text":"a 'head and shoulder' pattern on the Amazon stock moving averages from 1999/09/27 to 2000/02/22"},{"ObjectName":["Amazon stock"],"DataName":"Close","Position":[{"Begin":[92,1],"EndIndex":[92,1]}],"Trend":"Head and shoulder","Num":"None","Text":"On December 10th, the price per share reached 5.334375."}]
+reason: "The 'Amazon stock' in text corresponds to the 'Close' column in data. The 'head and shoulder' pattern consists of three rises and falls from three localized highs. The high point in the center is higher than the other two. This pattern is around from '1999/09/27' to '2000/02/22' and the middle high point exist on '1999/12/10'. The highest point has the price of 5.334375.  "
 """
 
 cup_and_handle = """
@@ -297,14 +349,18 @@ result: [{"ObjectName":["Amazon stock moving averages"],"DataName":"price","Posi
 reason: "The 'Amazon stock moving averages' corresponds to the column 'price' in data. The 'triple top' pattern has three discernible peaks at approximatrely the same level, separated by troughs. The pattern in this data is from 2010.04.01 to 2010.05.05 and the three peaks are at about 2010.04.06, 2010.04.18 and 2010.04.27."
 """
 
-
-
-@app.route('/api/test/postQuery_fake/', methods=['POST'])
+# @app.route('/api/test/postQuery_fake/', methods=['POST'])
+@app.route('/api/test/postQuery/', methods=['POST'])
 def post_query():
     params = request.json
-    file_path = '{}/output.json'.format(FILE_ABS_PATH)
+    label = params['label']
+    # file_path = '{}/data/output_group.json'.format(FILE_ABS_PATH)
+    file_path = '{}/data/output_multiLineData.json'.format(FILE_ABS_PATH)
+    if label == 'following': 
+        file_path = '{}/data/output_conversation.json'.format(FILE_ABS_PATH)
     data = read_json(file_path)
     print(data)
+    time.sleep(1)
     return jsonify(data)
 
 
@@ -316,12 +372,41 @@ def determine_x_axis_type(input_data):
     #     return 'time'
     # 检查是否包含数字和日期
     # return 'category'
-    if re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
-        return 'time'
-    elif re.match(r'^[-+]?\d*\.?\d+$', x_values): # 正则表达式匹配整数/浮点数
-        return 'linear'
-    else:
-        return 'category'
+    # if re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
+    #     return 'time'
+    # elif re.match(r'^[-+]?\d*\.?\d+$', x_values): # 正则表达式匹配整数/浮点数
+    #     return 'linear'
+    # else:
+    #     return 'category'
+    return 'linear'
+    # return 'time'
+# <<<<<<< Updated upstream
+#     #### time部分
+#     # x_values = next(iter(input_data[0].values()))
+#     # first_column_name = list(input_data[0].keys())
+#     # # print(x_values)
+#     # # 检查是否包含数字和日期
+#     # if 'Time' in first_column_name or 'time' in first_column_name:
+#     #     return 'time'
+#     # elif re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
+#     #     return 'time'
+#     # elif re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
+#     #     return 'time'
+#     # elif re.match(r'^[-+]?\d*\.?\d+$', x_values): # 正则表达式匹配整数/浮点数
+#     #     return 'linear'
+#     # else:
+#     #     return 'category'
+#     ######
+    
+# =======
+#     # return 'time'
+#     if re.match(r'\d{4}/(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])', x_values): 
+#         return 'time'
+#     elif re.match(r'^[-+]?\d*\.?\d+$', x_values): # 正则表达式匹配整数/浮点数
+#         return 'linear'
+#     else:
+#         return 'category'
+# >>>>>>> Stashed changes
     
 
 # 返回x轴名称
@@ -335,7 +420,10 @@ def get_x_axis_name(x_type, data):
     elif x_type == 'linear':
         x_name =  list(data[0].keys())[0]
     else:
-        x_name = ' '
+        x_name = 'Value'
+    # x_name = 'Time'
+    # print(x_attribute)
+    # x_type = 'category'
     return [x_name, x_attribute]
 
 """
@@ -370,6 +458,7 @@ def chart_info():
     num_keys = len(data[0]) - 1 # 统计键数量，对应y的数量
     
     x_type = determine_x_axis_type(data)
+    print(x_type)
     [x_name, x_attribute] = get_x_axis_name(x_type,data)
     y_attribute = list(data[0].keys())[1:]
     chart_type = determine_chart_type(data, x_type)
@@ -386,21 +475,35 @@ def chart_info():
             },
             "y": {
                 "scaleType": 'linear',
-                "scaleName": ' ', # 给一个列名
+                "scaleName": 'Value', # 给一个列名
                 "attributeName": y_attribute
             }
         }
     }
     result['chartColor'] = {}
+    # color_hunt = [{
+    #             "r": 228, "g": 148, "b": 68, "a": 1
+    #         }, {
+    #             "r": 168, "g": 124, "b": 159, "a": 1
+    #         }, {
+    #             "r": 133, "g": 182, "b": 178, "a": 1
+    #         },
+    #         {
+    #             "r": 106, "g": 159, "b": 88, "a": 1
+    #         }]
+
     color_hunt = [{
-                "r": 228, "g": 148, "b": 68, "a": 1
+                "r": 98, "g": 185, "b": 156, "a": 1
             }, {
-                "r": 168, "g": 124, "b": 159, "a": 1
+                "r": 247, "g": 132, "b": 94, "a": 1
             }, {
-                "r": 133, "g": 182, "b": 178, "a": 1
+                "r": 131, "g": 149, "b": 193, "a": 1
             },
             {
-                "r": 106, "g": 159, "b": 88, "a": 1
+                "r": 224, "g": 129, "b": 185, "a": 1
+            },
+            {
+                "r": 0, "g": 0, "b": 0, "a": 1
             }]
     cnt = 0
     for y in y_attribute:

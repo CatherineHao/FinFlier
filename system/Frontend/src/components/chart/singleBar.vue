@@ -1,6 +1,39 @@
 <!--
  * @Description: 
  * @Author: Qing Shi
+ * @Date: 2023-08-22 14:28:15
+ * @LastEditors: Qing Shi
+ * @LastEditTime: 2023-09-13 21:21:20
+-->
+<!--
+ *                        _oo0oo_
+ *                       o8888888o
+ *                       88" . "88
+ *                       (| -_- |)
+ *                       0\  =  /0
+ *                     ___/`---'\___
+ *                   .' \\|     |// '.
+ *                  / \\|||  :  |||// \
+ *                 / _||||| -:- |||||- \
+ *                |   | \\\  - /// |   |
+ *                | \_|  ''\---/''  |_/ |
+ *                \  .-\__  '-'  ___/-. /
+ *              ___'. .'  /--.--\  `. .'___
+ *           ."" '<  `.___\_<|>_/___.' >' "".
+ *          | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+ *          \  \ `_.   \_ __\ /__ _/   .-` /  /
+ *      =====`-.____`.___ \_____/___.-`___.-'=====
+ *                        `=---='
+ * 
+ * 
+ *      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * 
+ *            佛祖保佑     永不宕机     永无BUG
+ -->
+
+<!--
+ * @Description: 
+ * @Author: Qing Shi
  * @Date: 2023-07-10 13:45:50
  * @LastEditors: Qing Shi
  * @LastEditTime: 2023-09-02 21:40:58
@@ -37,16 +70,20 @@
                     <g :id="'xAxis' + stateTag"></g>
                     <g :id="'yAxis' + stateTag"></g>
                     <g id="axis_name">
-                        <text class="title" text-anchor="end"
+                        <text  font-family="KoHo" font-style="oblique" font-size="22" text-anchor="end"
                             :transform="translate(axisPosition.xAxis[0], axisPosition.xAxis[1])">{{ chart_setting.axis.x }}</text>
-                        <text class="title" text-anchor="start"
+                        <text  font-family="KoHo" font-style="oblique" font-size="22" text-anchor="start"
                             :transform="translate(axisPosition.yAxis[0], axisPosition.yAxis[1])">{{ chart_setting.axis.y }}</text>
+                        <text  font-family="KoHo" font-style="oblique" font-size="22" style="font-size: 32;" text-anchor="middle" :transform="translate(.8 * elWidth / 2, -40)">
+                            <!-- {{ chart_setting.title }} -->
+                            Foreign direct investment expenditures 
+                        </text>
                     </g>
                     <g id="bar">
                         <g v-for="(item, i) in barData" :key="'single_bar_' + i">
                             <rect :x="item.x - chart_setting.size.width / 2" :y="item.y"
-                                :fill="overlayTag[0] == 1 ? colorTrans(overlay_setting[overlay_map[0]].currentColor) : colorTrans(chart_setting.currentColor)" :width="chart_setting.size.width"
-                                :height="item.height"></rect>
+                                :fill="overlayTag[0] == 1 ? colorTrans(overlay_setting[overlay_map[0]].currentColor) : colorTrans(chart_setting.currentColor)"
+                                :width="chart_setting.size.width" :height="item.height"></rect>
                         </g>
                     </g>
                 </g>
@@ -59,15 +96,15 @@
                                     <g v-if="overlayTag[0] == 1">
                                         <rect v-for="(o, oi) in item.color.rectInfo" :key="'oi_' + oi"
                                             :x="o.x - chart_setting.size.width / 2" :y="o.y"
-                                            :fill="colorTrans(chart_setting.currentColor)"
-                                            :width="chart_setting.size.width" :height="o.height" opacity="1"></rect>
+                                            :fill="colorTrans(chart_setting.currentColor)" :width="chart_setting.size.width"
+                                            :height="o.height" opacity="1"></rect>
                                     </g>
                                     <g v-if="overlayTag[1] == 1">
                                         <rect v-for="(o, oi) in item.bounding_box.rectInfo" :key="'oi_' + oi"
                                             :x="o.x - chart_setting.size.width / 2" :y="o.y" :fill="'none'"
                                             :width="chart_setting.size.width" :height="o.height"
                                             :stroke="colorTrans(overlay_setting[overlay_map[1]].currentColor)"
-                                            :stroke-width="3" :stroke-dasharray="5.5" opacity="1"></rect>
+                                            :stroke-width="3" :stroke-dasharray="0" opacity="1"></rect>
                                     </g>
                                 </g>
                                 <g>
@@ -77,13 +114,13 @@
                                     </g>
                                     <g v-if="overlayTag[4] == 1">
                                         <path v-for="(o, oi) in item.label.pos" :key="'oi_' + oi"
-                                            :d="'M' + o.x + ',' + (o.y) + 'L' + o.x + ',' + -.1*elHeight" fill="none"
-                                            :stroke="colorTrans(overlay_setting[overlay_map[4]].currentColor)"
+                                            :d="'M' + o.x + ',' + (o.y) + 'L' + (o.x + position[item.label.lid + 'l' + oi].left) + ',' + (-.1 * elHeight + position[item.label.lid + 'l' + oi].top + 5)"
+                                            fill="none" :stroke="colorTrans(overlay_setting[overlay_map[4]].currentColor)"
                                             stroke-width="3"></path>
                                     </g>
                                     <g v-if="overlayTag[5] == 1">
                                         <path v-if="item.text.lineTag == 1"
-                                            :d="'M' + item.text.pos.x + ',' + (item.text.pos.y) + 'L' + item.text.pos.x + ',' + -.1*elHeight"
+                                            :d="'M' + (item.text.pos.x) + ',' + (item.text.pos.y) + 'L' + (item.text.pos.x + position[item.text.qid].left) + ',' + (-.1 * elHeight + position[item.text.qid].top + 5)"
                                             fill="none" :stroke="colorTrans(overlay_setting[overlay_map[5]].currentColor)"
                                             stroke-width="3"></path>
                                     </g>
@@ -124,34 +161,57 @@
         </svg>
         <div v-for="(item, i) in overlayData" :key="'overlay_' + i" :style="{
             'position': 'absolute',
-            'top': `${0 * elHeight}px`,
-            'left': `${item.text.pos.x +.05 * elWidth - 75 + (realWidth - elWidth) / 2 }px`,
-            'width': '150px',
-            'transition': '0.4s',
+            'top': `${0 * elHeight + position[item.text.qid].top}px`,
+            'left': `${item.text.pos.x + .05 * elWidth - 160 + (realWidth - elWidth) / 2 + position[item.text.qid].left}px`,
+            'width': '320px',
             'opacity': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? '1' : '0',
             'padding': '3px',
             'border': '2px solid',
             'border-radius': '10px',
             'background-color': 'white',
+            'user-select': 'none',
+            'font-size': '22px',
+            'cursor': 'grab',
+            'z-index': (overlayTag[5] == 1) && objectTag[item.objectName] == 1 ? 100 : 1,
             'border-color': objectTag[item.objectName] == 1 && overlayTag[5] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'color',
-        }">
+        }" @mousedown="startDrag($event, item.text.qid)" @mousemove="onDrag($event, item.text.qid)"
+            @mouseup="stopDrag(item.text.qid)">
             {{ item.text.text }}
         </div>
         <div v-for="(item, i) in overlayData" :key="'overlay_' + i" style="position: absolute; top: 0px; left: 0px;">
             <div v-for="(o, oi) in item.label.pos" :key="'oi_' + oi" :style="{
                 'position': 'absolute',
-                'top': `${0 * elHeight}px`,
-                'left': `${o.x + .05 * elWidth - 75 + (realWidth - elWidth) / 2 }px`,
+                'top': `${0 * elHeight + position[item.label.lid + 'l' + oi].top}px`,
+                'left': `${o.x + .05 * elWidth - 75 + (realWidth - elWidth) / 2 + position[item.label.lid + 'l' + oi].left}px`,
                 'width': '150px',
-                'transition': '0.4s',
                 'opacity': objectTag[item.objectName] == 1 && overlayTag[4] == 1 ? '1' : '0',
                 'padding': '3px',
                 'border': '2px solid',
                 'border-radius': '10px',
                 'background-color': 'white',
+                'user-select': 'none',
+            'font-size': '22px',
+                'cursor': 'grab',
+                'z-index': (overlayTag[4] == 1) && objectTag[item.objectName] == 1 ? 100 : 1,
                 'border-color': objectTag[item.objectName] == 1 && overlayTag[4] == 1 ? colorTrans(overlay_setting[overlay_map[5]].currentColor) : 'color',
-            }">
+            }" @mousedown="startDrag($event, item.label.lid + 'l' + oi)"
+                @mousemove="onDrag($event, item.label.lid + 'l' + oi)" @mouseup="stopDrag()">
                 {{ item.label.text[oi] }}
+            </div>
+        </div>
+        <div :style="{
+            'position': 'absolute',
+            'top': `${80 + position['legend'].top}px`,
+            'right': `${30 - position['legend'].left}px`,
+            'user-select': 'none',
+            'cursor': 'grab',
+            'z-index': 1000
+        }" @mousedown="startDrag($event, 'legend')" @mousemove="onDrag($event, 'legend')" @mouseup="stopDrag()">
+            <div style="display: flex;">
+                <div
+                    :style="{ 'height': '24px', 'width': '24px', 'background-color': colorTrans(chart_setting.currentColor), 'margin-right': '10px' }">
+                </div>
+                <div style="font-size: 18px;">{{ chart_setting.attrName }}</div>
             </div>
         </div>
     </div>
@@ -195,14 +255,39 @@ export default {
                 axis: {
                     x: 'Position',
                     y: "Billions of dollars"
-                }
-            }
+                },
+                isLegend: 1
+            },
+            isDragging: false,
+            startPosition: { legend: { x: 0, y: 0 } },
+            position: { legend: { left: 0, top: 0 } }
         };
     },
     methods: {
+        startDrag (event, id) {
+            this.isDragging = true;
+            this.startPosition[id].x = event.clientX - this.position[id].left;
+            this.startPosition[id].y = event.clientY - this.position[id].top;
+            // console.log(this.startPosition);
+        },
+        onDrag (event, id) {
+            if (this.isDragging) {
+                this.position[id].left = event.clientX - this.startPosition[id].x;
+                this.position[id].top = event.clientY - this.startPosition[id].y;
+                // console.log(this.position.left)
+                // console.log(id)
+            }
+        },
+        stopDrag (id) {
+            this.isDragging = false;
+        },
         calcOverlay (barData, chartData) {
-            // console.log(barData, chartData);
+            console.log(barData, chartData);
             let over_all = [];
+            let pos_tag = 0;
+            if (Object.keys(this.position).length == 1) {
+                pos_tag = 1;
+            }
             for (let c_i in chartData) {
                 let over_data = chartData[c_i];
                 // console.log(over_data);
@@ -222,8 +307,8 @@ export default {
                         rectInfo: null
                     },
                     'marker': { tag: 1, pos: [] },
-                    'label': { tag: 1, pos: [], text: [] },
-                    'text': { tag: 1, lineTag: 1, pos: [], text: '' },
+                    'label': { tag: 1, pos: [], text: [], qid: [], lid: 'l' + c_i },
+                    'text': { tag: 1, lineTag: 1, pos: [], text: '', qid: 't' + c_i },
                     'trend': { tag: -1, pos: [] },
                     'overall': { tag: -1, pos: [] },
                     'special': { tag: 1, pos: [] }
@@ -240,12 +325,27 @@ export default {
                     overlayData.label.pos = [pos];
                     overlayData.text.pos = pos;
                     overlayData.marker.pos = [pos];
+                    if (pos_tag) {
+                        this.position[overlayData.label.lid + 'l0'] = { left: 0, top: 0 }
+                        this.position[overlayData.text.qid] = { left: 0, top: 0 }
+                        this.startPosition[overlayData.label.lid + 'l0'] = ({ x: 0, y: 0 });
+                        this.startPosition[overlayData.text.qid] = ({ x: 0, y: 0 });
+                    }
+                    console.log(this.position);
                     overlayData.background.rectInfo = [rectInfo];
                     overlayData.color.rectInfo = [rectInfo];
                     overlayData["bounding_box"].rectInfo = [rectInfo];
                 } else {
                     let pos = [];
                     let rectInfo = [];
+                    if (pos_tag) {
+                        this.position[overlayData.label.lid + 'l0'] = { left: 0, top: 0 }
+                        this.position[overlayData.text.qid] = { left: 0, top: 0 }
+                        this.startPosition[overlayData.label.lid + 'l0'] = ({ x: 0, y: 0 });
+                        this.startPosition[overlayData.text.qid] = ({ x: 0, y: 0 });
+                        this.position[overlayData.label.lid + 'l1'] = { left: 0, top: 0 }
+                        this.startPosition[overlayData.label.lid + 'l1'] = ({ x: 0, y: 0 });
+                    }
                     let begin_pos = parseInt(position['Begin'][1]);
                     let end_pos = parseInt(position['End'][1])
                     for (let i = begin_pos; i <= end_pos; ++i) {
@@ -300,7 +400,7 @@ export default {
                 };
 
 
-                console.log(overlayData);
+                // console.log(overlayData);
                 // overlayData.marker.tag = 1;
                 // for (let i = parseInt(position['Begin'][1]); i <= parseInt(position['End'][1]); ++i) {
                 //     let cnt = i;
@@ -367,13 +467,16 @@ export default {
                 elWidth: this.elWidth,
                 elHeight: this.elHeight,
                 currentColor: chart_info.chartColor[chart_info.chartScale.y.attributeName[0]],
+                attrName: chart_info.chartScale.y.attributeName[0],
                 size: {
                     width: (width / data.length > 20) ? .5 * (width / data.length) : (width / data.length)
                 },
                 axis: {
                     x: xName,
                     y: yName
-                }
+                },
+                isLegend: true,
+                title: 'Title'
             }
             // console.log(this.chart_setting);
             const dataStore = useDataStore();
@@ -401,10 +504,12 @@ export default {
             let xAxis = (g, x, height) => {
                 g.attr("transform", `translate(0, ${height})`)
                     .call(axisBottom(x))
+                    .attr('font-size', 20)
             }
             let yAxis = (g, y) => {
                 g.attr("transform", `translate(${0}, 0)`)
                     .call(axisLeft(y).ticks(5).tickSizeOuter(0))
+                    .attr('font-size', 20)
             }
             select("#xAxis" + this.stateTag).call(xAxis, xScale, height);
             select("#yAxis" + this.stateTag).call(yAxis, yScale);
@@ -454,10 +559,11 @@ export default {
             this.overlayData = this.calcOverlay(this.barData, dataStore.graphicalOverlayData);
             if (selObj != '') {
                 if (selObj == -1) {
-                this.overlayTag = [0, 0, 0, 0 ,0,0,0,0,0];
+                    this.overlayTag = [0, 0, 0, 0, 0, 0, 0, 0, 0];
                 } else {
-                this.overlay_setting = dataStore.state_map[this.stateTag]['overlay_setting'][selObj];
-                this.overlayTag = dataStore.state_map[this.stateTag]['overlay_setting'][selObj]['overlay_tag'];}
+                    this.overlay_setting = dataStore.state_map[this.stateTag]['overlay_setting'][selObj];
+                    this.overlayTag = dataStore.state_map[this.stateTag]['overlay_setting'][selObj]['overlay_tag'];
+                }
             }
             // console.log(dataStore.state_map['state0']['overlay_setting'])
             this.objectTag = dataStore.objectTag;
@@ -469,7 +575,7 @@ export default {
 </script>
 <style>
 .title {
-    font-family: 'operator Mono Lig';
+    font-family: KoHo;
     font-style: oblique;
     font-size: 16px;
 }
