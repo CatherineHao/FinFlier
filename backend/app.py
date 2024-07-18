@@ -1,10 +1,3 @@
-'''
-Author: CatherineHao 1512769550@qq.com
-Date: 2023-07-12 21:37:31
-LastEditors: Qing Shi
-LastEditTime: 2023-09-02 00:59:24
-Authorization: Bearer "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"
-'''
 import json
 import os
 import re
