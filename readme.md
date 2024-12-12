@@ -1,21 +1,27 @@
-<!--
- * @Author: Qing Shi
- * @LastEditTime: 2023-06-07 16:09:27
--->
-# Read Me
-<<<<<<< Updated upstream
+# FinFlier: Automating Graphical Overlays for Financial Visualizations with Knowledge-Grounding Large Language Model
 
-# environment
+This repository contains the code of the paper [FinFlier: Automating Graphical Overlays for Financial Visualizations with Knowledge-Grounding Large Language Model](https://arxiv.org/html/2412.06821v1) by Jianing Hao, Manling Yang, Qing Shi, Yuzhe Jiang, Guang Zhang, and Wei Zeng.
+
+---
+# Environment
+```
 openai-0.27.4
 openpyxl-3.0.10
 flask-2.2.2
-=======
-let's dance!
-
-
-
-
-
-
 flask_cors=4.0.0
->>>>>>> Stashed changes
+```
+
+---
+# Cication
+
+```
+@ARTICLE{hao2024finflier,
+  author={Hao, Jianing and Yang, Manling and Shi, Qing and Jiang, Yuzhe and Zhang, Guang and Zeng, Wei},
+  journal={IEEE Transactions on Visualization and Computer Graphics}, 
+  title={FinFlier: Automating Graphical Overlays for Financial Visualizations With Knowledge-Grounding Large Language Model}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={1-17},
+  doi={10.1109/TVCG.2024.3514138}}
+```
