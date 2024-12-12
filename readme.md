@@ -12,7 +12,7 @@ flask_cors=4.0.0
 ```
 
 ---
-# Cication
+# Citation
 
 ```
 @ARTICLE{hao2024finflier,
