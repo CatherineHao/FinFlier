@@ -1,6 +1,6 @@
 <div align="center">
 
-### FinFlier: Automating Graphical Overlays for Financial Visualizations with Knowledge-Grounding Large Language Model
+# FinFlier: Automating Graphical Overlays for Financial Visualizations with Knowledge-Grounding Large Language Model
 </div>
 
 
