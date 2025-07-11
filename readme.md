@@ -29,6 +29,7 @@ The corpus of 1,752 layered charts include:
 - 287 from 242 TVCG papers
 
 The statistic results of graphical overlays for each source is available in `./Corpus Statistic Results`
+
 The origin layered chart for each source is located in `./Layered Chart Corpus`
 
 
