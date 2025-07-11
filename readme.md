@@ -16,6 +16,7 @@
 ---
 ### Layered Chart Corpus
 The corpus of 1,752 layered charts include:
+
 **Financial domain:**
 - 613 charts from the Economist (2018-2023)
 - 381 charts from Financial Times (2018-2023)
